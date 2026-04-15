@@ -20,9 +20,9 @@ NC='\033[0m' # No Color
 print_banner() {
     echo -e "${BLUE}"
     echo "╔════════════════════════════════════════════════════════════════╗"
-    echo "║  PQC Hybrid Certificate Library - Build Script               ║"
-    echo "║  Version: $LIBRARY_VERSION                                    ║"
-    echo "║  Status: Production-Ready (v1.0.0-BETA)                      ║"
+    echo "║  PQC Hybrid Certificate Library - Build Script                 ║"
+    echo "║  Version: $LIBRARY_VERSION                                     ║"
+    echo "║  Status: Production-Ready (v1.0.0-BETA)                        ║"
     echo "╚════════════════════════════════════════════════════════════════╝"
     echo -e "${NC}"
 }

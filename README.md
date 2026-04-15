@@ -1,4 +1,4 @@
-# 📦 PQC Hybrid Certificates Library
+# pqc-migration-kit 
 
 **Versão**: 1.0.0-BETA  
 **Data**: April 14, 2026  
@@ -7,15 +7,13 @@
 
 ---
 
-## 🎯 Visão Geral
-
-Biblioteca Java de **nível produção** para criptografia pós-quântica híbrida com certificados X.509 v3. Combina algoritmos **clássicos resistidos (RSA, ECDSA)** com algoritmos **quântico-resistentes (ML-DSA, ML-KEM, SLH-DSA, Falcon)** para criar certificados digitais com segurança dual.
+## Visão Geral
 
 **Objetivo**: Migração segura e gradual para criptografia pós-quântica sem abandonar compatibilidade com infraestrutura existente.
 
 ---
 
-## ✨ Características Principais
+## Características Principais
 
 | Feature | Descrição |
 |---------|-----------|
@@ -30,7 +28,7 @@ Biblioteca Java de **nível produção** para criptografia pós-quântica híbri
 
 ---
 
-## 🏗️ Arquitetura da Biblioteca
+## Arquitetura da Biblioteca
 
 ```
 src/main/java/com/pqc/hybrid/core/
@@ -92,7 +90,7 @@ src/main/java/com/pqc/hybrid/core/
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Adicione ao Maven (`pom.xml`)
 
@@ -169,7 +167,7 @@ System.out.println("Válido até: " + cert.getNotAfter());
 
 ---
 
-## 📚 API Reference - Módulos Principais
+## API Reference - Módulos Principais
 
 ### 🔑 Módulo: Geração de Chaves (`com.pqc.hybrid.core.keygen`)
 
@@ -222,7 +220,7 @@ String getLabel()  // "ECDSA + ML-DSA-65"
 
 ---
 
-### ✍️ Módulo: Assinatura Digital (`com.pqc.hybrid.core.signature`)
+### Módulo: Assinatura Digital (`com.pqc.hybrid.core.signature`)
 
 #### `HybridSignatureManager`
 
@@ -276,7 +274,7 @@ long getSignatureTime()
 
 ---
 
-### 🏛️ Módulo: Certificados X.509 (`com.pqc.hybrid.core.certificate`)
+### Módulo: Certificados X.509 (`com.pqc.hybrid.core.certificate`)
 
 #### `HybridX509CertificateBuilder`
 
@@ -416,7 +414,7 @@ public static final String OID_SUBJECT_ALT_PUBLIC_KEY_INFO = "2.5.29.72"
 
 ---
 
-### ⚙️ Módulo: Configuração (`com.pqc.hybrid.core.config`)
+### Módulo: Configuração (`com.pqc.hybrid.core.config`)
 
 #### `ClassicalAlgorithm` (Enum)
 
@@ -543,7 +541,7 @@ HybridCertificateConfig config = HybridCertificateConfig.builder()
 
 ---
 
-### 🆔 Módulo: Registry de OIDs (`com.pqc.hybrid.core.common.oid`)
+### Módulo: Registry de OIDs (`com.pqc.hybrid.core.common.oid`)
 
 #### `AlgorithmOIDRegistry`
 
@@ -611,7 +609,7 @@ String oid = AlgorithmOIDRegistry.getOID("ML-DSA-65");
 
 ---
 
-### ❌ Módulo: Exceções (`com.pqc.hybrid.core.exception`)
+### Módulo: Exceções (`com.pqc.hybrid.core.exception`)
 
 Hierarquia de exceções:
 
@@ -738,7 +736,7 @@ HybridKeyPair keyPair = api.generateHybridKeyPair(128);  // mínimo
 
 ---
 
-## 📝 Exemplos Completos
+## Exemplos Completos
 
 ### Exemplo 1: Gerar Certificado Completo
 
@@ -837,7 +835,7 @@ public class ValidateCertificateExample {
 
 ---
 
-## 🧪 Testes
+## Testes
 
 A biblioteca inclui testes unitários com JUnit 5:
 
@@ -864,14 +862,11 @@ src/test/java/com/pqc/hybrid/core/
 
 ---
 
-## 🔗 Documentação Relacionada
+## Documentação Relacionada
 
 - [RFC 5280: X.509 Digital Certificates](https://tools.ietf.org/html/rfc5280)
 - [NIST PQC Standardization](https://csrc.nist.gov/projects/post-quantum-cryptography/post-quantum-cryptography-standardization)
-- [NIST FIPS 203 (ML-KEM)](https://csrc.nist.gov/publications/fips/203/)
-- [NIST FIPS 204 (ML-DSA)](https://csrc.nist.gov/publications/fips/204/)
-- [NIST FIPS 205 (SLH-DSA)](https://csrc.nist.gov/publications/fips/205/)
-- [BouncyCastle Documentation](https://www.bouncycastle.org/specifications.html)
+- [BouncyCastle Documentation](https://downloads.bouncycastle.org/java/docs/PQC-Almanac.pdf)
 
 ---
 
