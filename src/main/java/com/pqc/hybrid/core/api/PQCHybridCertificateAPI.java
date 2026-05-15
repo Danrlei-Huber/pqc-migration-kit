@@ -11,6 +11,8 @@ import com.pqc.hybrid.core.signature.DualSignatureValidator;
 import com.pqc.hybrid.core.certificate.HybridX509CertificateBuilder;
 import com.pqc.hybrid.core.certificate.HybridCertificateValidator;
 import com.pqc.hybrid.core.certificate.CertificateSigningRequestBuilder;
+import com.pqc.hybrid.core.certificate.HybridCertificateValidator;
+import com.pqc.hybrid.core.model.HybridCertificateInfo;
 import com.pqc.hybrid.core.exception.PQCHybridException;
 import com.pqc.hybrid.core.exception.CertificateException;
 import com.pqc.hybrid.core.exception.InvalidSignatureException;
@@ -190,7 +192,7 @@ public final class PQCHybridCertificateAPI {
      * @return the generated X509Certificate
      * @throws CertificateException if certificate generation fails
      */
-    public X509Certificate generateHybridCertificate(HybridCertificateConfig config, HybridKeyPair keyPair) 
+    public X509Certificate generateHybridCertificate(HybridCertificateConfig config, HybridKeyPair keyPair)
             throws CertificateException {
         ensureInitialized();
         Objects.requireNonNull(config, "Config cannot be null");
@@ -198,6 +200,39 @@ public final class PQCHybridCertificateAPI {
 
         HybridX509CertificateBuilder builder = new HybridX509CertificateBuilder(config, keyPair);
         return builder.build();
+    }
+
+    public X509Certificate generateHybridCertificateWithPQCExtensions(HybridCertificateConfig config,
+                                                                      HybridKeyPair keyPair,
+                                                                      boolean includePQCExtensions)
+            throws CertificateException {
+        ensureInitialized();
+        Objects.requireNonNull(config, "Config cannot be null");
+        Objects.requireNonNull(keyPair, "Key pair cannot be null");
+
+        HybridX509CertificateBuilder builder = new HybridX509CertificateBuilder(config, keyPair)
+                .withPQCExtensions(includePQCExtensions);
+        return builder.build();
+    }
+
+    public HybridCertificateInfo getCertificateInfo(X509Certificate certificate, HybridKeyPair keyPair) {
+        ensureInitialized();
+        Objects.requireNonNull(certificate, "Certificate cannot be null");
+        return HybridCertificateValidator.extractCertificateInfo(certificate, keyPair);
+    }
+
+    public boolean validatePQCExtensions(X509Certificate certificate) {
+        ensureInitialized();
+        Objects.requireNonNull(certificate, "Certificate cannot be null");
+        return HybridCertificateValidator.validatePQCExtensions(certificate);
+    }
+
+    public boolean validatePQCSignature(X509Certificate certificate, HybridKeyPair keyPair)
+            throws InvalidSignatureException {
+        ensureInitialized();
+        Objects.requireNonNull(certificate, "Certificate cannot be null");
+        Objects.requireNonNull(keyPair, "Key pair cannot be null");
+        return HybridCertificateValidator.validatePQCSignature(certificate, keyPair);
     }
 
     /**

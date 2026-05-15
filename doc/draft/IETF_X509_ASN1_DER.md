@@ -196,3 +196,61 @@ Organizations embedding composite keys in X.509-focused libraries may need to re
 2. Deserialize into component keys
 3. Wrap each component in its own SubjectPublicKeyInfo structure
 4. Use standard library interfaces with component AlgorithmIdentifiers
+
+## Hybrid PQC Extensions Implementation
+
+### Implemented Extensions
+
+This library implements the following X.509 v3 extensions for hybrid PQC certificates:
+
+| OID | Extension | Description |
+|-----|-----------|-------------|
+| 2.5.29.62 | altSignatureAlgorithm | PQC algorithm identifier |
+| 2.5.29.63 | altSignatureValue | PQC signature over TBSCertificate |
+| 2.5.29.72 | subjectAltPublicKeyInfo | PQC public key in SubjectPublicKeyInfo format |
+
+### ASN.1 Structure
+
+```asn1
+PQCExtensions ::= SEQUENCE {
+    altSignatureAlgorithm  AlgorithmIdentifier,
+    altSignatureValue       BIT STRING,
+    subjectAltPublicKeyInfo SubjectPublicKeyInfo
+}
+```
+
+### DER Encoding Examples
+
+**altSignatureAlgorithm (ML-DSA-65)**:
+```
+30 0B 06 09 60 86 48 01 65 03 04 03 12
+```
+- `30 0B` - SEQUENCE, 11 bytes
+- `06 09` - OID, 9 bytes
+- `60 86 48 01 65 03 04 03 12` - OID for ML-DSA-65
+
+### Implementation Classes
+
+| Class | Purpose |
+|-------|---------|
+| `PQCExtensionsStructure` | ASN.1 structure for PQC extensions |
+| `HybridX509CertificateBuilder` | Certificate builder with PQC support |
+| `HybridCertificateValidator` | Validates PQC extensions |
+| `HybridCertificateInfo` | Model for extracted certificate info |
+
+### Usage Example
+
+```java
+// Build certificate with PQC extensions
+X509Certificate cert = HybridX509CertificateBuilder.builder(config, keyPair)
+    .withPQCExtensions(true)
+    .build();
+
+// Validate PQC extensions
+boolean valid = HybridCertificateValidator.validatePQCExtensions(certificate);
+
+// Extract PQC info
+String pqcOID = HybridCertificateValidator.extractPQCAlgorithmOID(certificate);
+byte[] pqcSig = HybridCertificateValidator.extractPQCSignature(certificate);
+byte[] pqcKey = HybridCertificateValidator.extractPQCPublicKey(certificate);
+```

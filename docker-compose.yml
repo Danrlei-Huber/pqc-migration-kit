@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  openssl-test:
+    image: ubuntu:22.04
+    container_name: pqc-openssl-test
+    privileged: true
+    environment:
+      - OPENSSL_VERSION=3.0.13
+    volumes:
+      - ./src/test/resources/openssl:/certs:rw
+      - ./tmp:/tmp:rw
+    command: >
+      bash -c "
+        apt-get update &&
+        apt-get install -y wget build-essential checkinstall zlib1g-dev &&
+        wget https://www.openssl.org/source/openssl-${OPENSSL_VERSION}.tar.gz &&
+        tar -xzf openssl-${OPENSSL_VERSION}.tar.gz &&
+        cd openssl-${OPENSSL_VERSION} &&
+        ./Configure linux-x86_64 no-shared no-async --prefix=/opt/openssl-${OPENSSL_VERSION} &&
+        make -j$(nproc) &&
+        make install_sw &&
+        ln -sf /opt/openssl-${OPENSSL_VERSION}/bin/openssl /usr/local/bin/openssl &&
+        echo 'OpenSSL ${OPENSSL_VERSION} instalado com sucesso' &&
+        tail -f /dev/null
+      "
+    healthcheck:
+      test: ["CMD", "openssl", "version"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

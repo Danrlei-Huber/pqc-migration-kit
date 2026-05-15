@@ -1,29 +1,22 @@
 package com.pqc.hybrid.core.certificate;
 
-import org.bouncycastle.asn1.ASN1Integer;
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
+import org.bouncycastle.asn1.ASN1OctetString;
+import org.bouncycastle.asn1.ASN1Sequence;
 import org.bouncycastle.asn1.DEROctetString;
+import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.asn1.x509.Extension;
+import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
+
+import com.pqc.hybrid.core.certificate.asn1.PQCExtensionsStructure;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-/**
- * Manager for custom X.509 extensions used in hybrid PQC certificates.
- * 
- * Manages creation and serialization of hybrid certificate extensions:
- * - Alternative Signature Algorithm (OID 2.5.29.62)
- * - Alternative Signature Value (OID 2.5.29.63)
- * - Subject Alternative Public Key Info (OID 2.5.29.72)
- *
- * @author PQC Hybrid Team
- * @version 1.0.0-BETA
- */
 public final class X509ExtensionManager {
 
-    // OIDs for hybrid certificate extensions
     private static final String ALT_SIGNATURE_ALGORITHM_OID = "2.5.29.62";
     private static final String ALT_SIGNATURE_VALUE_OID = "2.5.29.63";
     private static final String SUBJECT_ALT_PUBKEY_INFO_OID = "2.5.29.72";
@@ -60,16 +53,73 @@ public final class X509ExtensionManager {
     public void addAltSignatureAlgorithmExtension(String algorithmOID, boolean critical) {
         Objects.requireNonNull(algorithmOID, "Algorithm OID cannot be null");
         try {
-            // Create extension with OID value
+            AlgorithmIdentifier algId = new AlgorithmIdentifier(new ASN1ObjectIdentifier(algorithmOID));
             Extension ext = new Extension(
                     new ASN1ObjectIdentifier(ALT_SIGNATURE_ALGORITHM_OID),
                     critical,
-                    new DEROctetString(new ASN1ObjectIdentifier(algorithmOID).getEncoded())
+                    algId.getEncoded()
             );
             extensions.put(ALT_SIGNATURE_ALGORITHM_OID, ext);
         } catch (IOException e) {
             throw new RuntimeException("Failed to create alternative signature algorithm extension", e);
         }
+    }
+
+    public void addPQCExtensions(AlgorithmIdentifier pqcAlgorithm, byte[] pqcSignature, 
+                                  byte[] pqcPublicKeyBytes, boolean critical) {
+        Objects.requireNonNull(pqcAlgorithm, "PQC AlgorithmIdentifier cannot be null");
+        Objects.requireNonNull(pqcSignature, "PQC signature bytes cannot be null");
+        Objects.requireNonNull(pqcPublicKeyBytes, "PQC public key bytes cannot be null");
+
+        try {
+            byte[] algEncoded = pqcAlgorithm.getEncoded();
+            Extension altSigAlgExt = new Extension(
+                    new ASN1ObjectIdentifier(ALT_SIGNATURE_ALGORITHM_OID),
+                    critical,
+                    algEncoded
+            );
+            extensions.put(ALT_SIGNATURE_ALGORITHM_OID, altSigAlgExt);
+
+            byte[] signatureEncoded = new org.bouncycastle.asn1.DERBitString(pqcSignature).getEncoded();
+            Extension altSigValExt = new Extension(
+                    new ASN1ObjectIdentifier(ALT_SIGNATURE_VALUE_OID),
+                    critical,
+                    signatureEncoded
+            );
+            extensions.put(ALT_SIGNATURE_VALUE_OID, altSigValExt);
+
+            SubjectPublicKeyInfo spki = new SubjectPublicKeyInfo(pqcAlgorithm, pqcPublicKeyBytes);
+            byte[] spkiEncoded = spki.getEncoded();
+            Extension altPubKeyExt = new Extension(
+                    new ASN1ObjectIdentifier(SUBJECT_ALT_PUBKEY_INFO_OID),
+                    critical,
+                    new DEROctetString(spkiEncoded)
+            );
+            extensions.put(SUBJECT_ALT_PUBKEY_INFO_OID, altPubKeyExt);
+
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to create PQC extensions", e);
+        }
+    }
+
+    public PQCExtensionsStructure buildPQCExtensionsStructure() throws IOException {
+        Extension altSigAlg = extensions.get(ALT_SIGNATURE_ALGORITHM_OID);
+        Extension altSigVal = extensions.get(ALT_SIGNATURE_VALUE_OID);
+        Extension altPubKey = extensions.get(SUBJECT_ALT_PUBKEY_INFO_OID);
+
+        if (altSigAlg == null || altSigVal == null || altPubKey == null) {
+            return null;
+        }
+
+        AlgorithmIdentifier algId = AlgorithmIdentifier.getInstance(
+                ASN1Sequence.getInstance(altSigAlg.getParsedValue())
+        );
+        byte[] sigBytes = ((org.bouncycastle.asn1.DERBitString) altSigVal.getParsedValue()).getOctets();
+        SubjectPublicKeyInfo spki = SubjectPublicKeyInfo.getInstance(
+                ASN1OctetString.getInstance(altPubKey.getParsedValue()).getOctets()
+        );
+
+        return new PQCExtensionsStructure(algId, sigBytes, spki);
     }
 
     /**
