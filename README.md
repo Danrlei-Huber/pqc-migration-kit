@@ -3,7 +3,7 @@
 **Versão**: 1.0.0-BETA  
 **Data**: April 14, 2026  
 **Linguagem**: Java 21  
-**Framework**: BouncyCastle 1.77+  
+**Framework**: BouncyCastle 1.84  
 
 ---
 
@@ -34,26 +34,27 @@
 src/main/java/com/pqc/hybrid/core/
 │
 ├── api/                          [Ponto de Entrada]
-│   └── PQCHybridCertificateAPI   ← Start here!
+│   ├── PQCHybridCertificateAPI   ← Start here!
+│   └── HybridSignatureStrategy   ← Interface de estratégia de assinatura
 │
 ├── keygen/                       [Geração de Chaves]
 │   ├── HybridKeyGenerator        ← Gera pares clássicos + PQC
-│   ├── HybridKeyPair             ← Record com ambas chaves
-│   ├── EncapsulationResult       ← Resultado KEM
-│   └── KeyEncapsulationWrapper   ← Wrapper para ML-KEM
+│   └── HybridKeyPair             ← Par com ambas as chaves
 │
 ├── signature/                    [Assinatura Digital]
-│   ├── HybridSignatureManager    ← Assina dual (classic + PQC)
-│   ├── HybridSignaturePair       ← Record com ambas assinaturas
-│   ├── DualSignatureValidator    ← Valida ambas assinaturas
-│   └── HybridVerifier            ← Verifica assinaturas dual
+│   ├── HybridSignatureManager    ← Assina dual (clássico + PQC)
+│   ├── HybridSignaturePair       ← Par com ambas as assinaturas
+│   ├── DualSignatureStrategy     ← Estratégia Catalyst (produção)
+│   └── DualSignatureValidator    ← Valida ambas as assinaturas
 │
 ├── certificate/                  [Certificados X.509]
-│   ├── HybridX509CertificateBuilder    ← Constrói certs hybrid
-│   ├── HybridCertificateValidator      ← Valida certs com ambas sigs
+│   ├── HybridX509CertificateBuilder     ← Constrói certs híbridos
+│   ├── HybridCertificateValidator       ← Valida certs (clássico + PQC)
+│   ├── HybridCertificateAuthority       ← CA: createRoot / issueCertificate
 │   ├── CertificateSigningRequestBuilder ← Cria PKCS#10 CSRs
+│   ├── HybridSigner                     ← Par de ContentSigner (Layer 1)
 │   ├── X509ExtensionManager             ← Gerencia extensões
-│   └── HybridCertificateValidator       ← Validação completa
+│   └── asn1/PQCExtensionsStructure      ← Estrutura ASN.1 das extensões
 │
 ├── config/                       [Configuração]
 │   ├── ClassicalAlgorithm        ← Enum: RSA-2048, ECDSA-P256, etc
@@ -62,16 +63,12 @@ src/main/java/com/pqc/hybrid/core/
 │   ├── HybridCertificateConfig   ← Config builder para certs
 │   └── CryptographicProviderFactory ← Inicializa BouncyCastle
 │
-├── common/                       [Utilitários]
-│   ├── oid/
-│   │   ├── AlgorithmOIDRegistry  ← Mapeia OIDs → algoritmos
-│   │   └── OIDUtils              ← Helpers para OIDs
-│   ├── encoding/
-│   │   ├── PEMEncoder            ← Serializa para PEM
-│   │   └── DEREncoder            ← Serializa para DER
-│   └── validation/
-│       ├── InputValidator        ← Valida inputs
-│       └── RFC5280Validator      ← Valida X.509 v3 RFC 5280
+├── common/oid/                   [OIDs]
+│   └── AlgorithmOIDRegistry      ← Mapeia OIDs ↔ algoritmos
+│
+├── model/                        [Modelos de Dados]
+│   ├── HybridCertificateInfo     ← Metadados extraídos do certificado
+│   └── EncapsulationResult       ← Resultado de encapsulação KEM
 │
 ├── exception/                    [Exceções]
 │   ├── PQCHybridException        ← Base
@@ -81,12 +78,30 @@ src/main/java/com/pqc/hybrid/core/
 │   ├── AlgorithmNotSupportedException ← Algoritmo não suportado
 │   └── EncapsulationException    ← Erro em KEM
 │
-├── model/                        [Modelos de Dados]
-│   └── EncapsulationResult       ← Resultado de encapsulação KEM
-│
 └── util/                         [Ferramentas]
-    └── (utilitários específicos)
+    ├── printer/                  ← Pretty-printers (cert/chave/assinatura)
+    └── export/                   ← Exportação PEM/DER
 ```
+
+> **Nota:** o fluxo de produção usa o modelo **Catalyst** (assinatura alternativa
+> ITU-T X.509, extensões `2.5.29.72/73/74`) via `DualSignatureStrategy`. Veja
+> [Componentes Experimentais](#componentes-experimentais) para o que ainda não é estável.
+
+---
+
+## Componentes Experimentais
+
+Os itens abaixo **não fazem parte do escopo estável** desta versão. Estão presentes
+no repositório como trabalho futuro / exploração, **não estão ligados** ao
+`PQCHybridCertificateAPI` (cujo fluxo de produção é o Catalyst/`DualSignatureStrategy`),
+e são **excluídos do gate de cobertura**:
+
+| Componente | Pacote | Situação |
+|------------|--------|----------|
+| Assinatura **Composite** (`CompositeSigner`/`Verifier`/`SignatureStrategy`, `CompositeKeyGenerator`, chaves Composite, `CompositeAlgorithm`, `PreHashFunction`, `MessageRepresentativeBuilder`) | `config`, `keygen`, `signature` | Implementa `draft-ietf-lamps-pq-composite-sigs`; funcional em testes, mas paralelo ao caminho Catalyst e não plugado na API. |
+| **ML-KEM** (`MLKEMEncapsulator`/`MLKEMDecapsulator`, `KeyEncapsulationWrapper`) | `kem.ml_kem`, `keygen` | Placeholder; encapsulamento/decapsulamento não finalizados. |
+| Wrappers **ML-DSA** (`MLDSASigner`/`MLDSAVerifier`) | `signature.ml_dsa` | Não usados pelo caminho ativo (que assina via BouncyCastle direto). |
+| **Migração** (`LegacyCertificateMigrator`) | `migration` | Esqueleto; o parsing/migração real de certificados legados não está implementado. |
 
 ---
 
@@ -407,8 +422,8 @@ public void clearAllExtensions()
 **OIDs de Extensões Híbridas**:
 
 ```java
-public static final String OID_ALT_SIGNATURE_ALGORITHM = "2.5.29.62"
-public static final String OID_ALT_SIGNATURE_VALUE = "2.5.29.63"
+public static final String OID_ALT_SIGNATURE_ALGORITHM = "2.5.29.73"
+public static final String OID_ALT_SIGNATURE_VALUE = "2.5.29.74"
 public static final String OID_SUBJECT_ALT_PUBLIC_KEY_INFO = "2.5.29.72"
 ```
 
@@ -560,9 +575,9 @@ String OID_ML_KEM_512 = "2.16.840.1.101.3.4.4.1"
 String OID_ML_KEM_768 = "2.16.840.1.101.3.4.4.2"
 String OID_ML_KEM_1024 = "2.16.840.1.101.3.4.4.3"
 
-// X.509 Hybrid Extensions
-String OID_ALT_SIGNATURE_ALGORITHM = "2.5.29.62"
-String OID_ALT_SIGNATURE_VALUE = "2.5.29.63"
+// X.509 Hybrid Extensions (ITU-T X.509 (2019) alternative-signature OIDs)
+String OID_ALT_SIGNATURE_ALGORITHM = "2.5.29.73"
+String OID_ALT_SIGNATURE_VALUE = "2.5.29.74"
 String OID_SUBJECT_ALT_PUBLIC_KEY_INFO = "2.5.29.72"
 ```
 
