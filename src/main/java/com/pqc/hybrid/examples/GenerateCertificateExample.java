@@ -76,7 +76,6 @@ public class GenerateCertificateExample {
                 .withSubjectDN("CN=secure.example.com,O=Example Organization,C=BR")
                 .withIssuerDN("CN=Example CA,O=Example Organization,C=BR")
                 .withValidityDays(365)
-                .withSerialNumber(1)
                 .build();
             System.out.println("   Subject DN: " + config.getSubjectDN());
             System.out.println("   Issuer DN:  " + config.getIssuerDN());

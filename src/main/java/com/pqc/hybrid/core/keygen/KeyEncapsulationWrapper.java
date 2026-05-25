@@ -4,6 +4,7 @@ import com.pqc.hybrid.core.config.CryptographicProviderFactory;
 import com.pqc.hybrid.core.config.PQCAlgorithm;
 import com.pqc.hybrid.core.exception.EncapsulationException;
 import com.pqc.hybrid.core.exception.PQCHybridException;
+import com.pqc.hybrid.core.model.EncapsulationResult;
 
 import java.security.KeyPairGenerator;
 import java.security.KeyPair;

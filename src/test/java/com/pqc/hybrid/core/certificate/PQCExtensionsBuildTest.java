@@ -55,7 +55,7 @@ class PQCExtensionsBuildTest extends BaseTest {
                 .withSubjectDN("CN=test.example.com,O=Test,C=US")
                 .withIssuerDN("CN=Test CA,O=Test,C=US")
                 .withValidityDays(365)
-                .withSerialNumber(1)
+                .withSerialNumber(java.math.BigInteger.ONE)
                 .withAlgorithmPair(HybridAlgorithmPair.recommended(192))
                 .build();
 
@@ -85,7 +85,7 @@ class PQCExtensionsBuildTest extends BaseTest {
                 .withSubjectDN("CN=test.example.com")
                 .withIssuerDN("CN=Test CA")
                 .withValidityDays(365)
-                .withSerialNumber(2)
+                .withSerialNumber(java.math.BigInteger.TWO)
                 .withAlgorithmPair(HybridAlgorithmPair.recommended(192))
                 .build();
 
@@ -96,13 +96,17 @@ class PQCExtensionsBuildTest extends BaseTest {
         boolean valid = HybridCertificateValidator.validatePQCExtensions(certificate);
         assertThat(valid).isTrue();
         
-        byte[] algExt = certificate.getExtensionValue("2.5.29.62");
-        byte[] sigExt = certificate.getExtensionValue("2.5.29.63");
+        byte[] algExt = certificate.getExtensionValue("2.5.29.73");
+        byte[] sigExt = certificate.getExtensionValue("2.5.29.74");
         byte[] keyExt = certificate.getExtensionValue("2.5.29.72");
-        
+
         assertThat(algExt).isNotNull();
         assertThat(sigExt).isNotNull();
         assertThat(keyExt).isNotNull();
+
+        // The legacy (non-standard) OIDs must no longer be present.
+        assertThat(certificate.getExtensionValue("2.5.29.62")).isNull();
+        assertThat(certificate.getExtensionValue("2.5.29.63")).isNull();
     }
 
     @Test
@@ -121,7 +125,7 @@ class PQCExtensionsBuildTest extends BaseTest {
                 .withSubjectDN("CN=test.example.com")
                 .withIssuerDN("CN=Test CA")
                 .withValidityDays(365)
-                .withSerialNumber(3)
+                .withSerialNumber(java.math.BigInteger.valueOf(3))
                 .withAlgorithmPair(HybridAlgorithmPair.recommended(128))
                 .build();
 
@@ -150,7 +154,7 @@ class PQCExtensionsBuildTest extends BaseTest {
                 .withSubjectDN("CN=test.example.com")
                 .withIssuerDN("CN=Test CA")
                 .withValidityDays(365)
-                .withSerialNumber(4)
+                .withSerialNumber(java.math.BigInteger.valueOf(4))
                 .withAlgorithmPair(HybridAlgorithmPair.recommended(192))
                 .build();
 
@@ -180,7 +184,7 @@ class PQCExtensionsBuildTest extends BaseTest {
                 .withSubjectDN("CN=test.example.com")
                 .withIssuerDN("CN=Test CA")
                 .withValidityDays(365)
-                .withSerialNumber(5)
+                .withSerialNumber(java.math.BigInteger.valueOf(5))
                 .withAlgorithmPair(HybridAlgorithmPair.recommended(128))
                 .build();
 
@@ -189,10 +193,13 @@ class PQCExtensionsBuildTest extends BaseTest {
                 .build();
 
         HybridCertificateValidator.ValidationResult result =
-                HybridCertificateValidator.validateComprehensive(certificate, null);
+                HybridCertificateValidator.validateComprehensive(certificate, null, keyPair);
 
-        assertThat(result.isAllValid()).isTrue();
         assertThat(result.isPqcExtensionsValid()).isTrue();
+        assertThat(result.isPublicKeyValid()).isTrue();
+        assertThat(result.isDnsValid()).isTrue();
+        // The PQC alternative signature must verify over the reconstructed pre-TBS.
+        assertThat(result.isPqcSignatureValid()).isTrue();
     }
 
     @Test
@@ -216,14 +223,14 @@ class PQCExtensionsBuildTest extends BaseTest {
                 .withSubjectDN("CN=fuzzed.example.com")
                 .withIssuerDN("CN=fuzzed-CA")
                 .withValidityDays(365)
-                .withSerialNumber(66)
+                .withSerialNumber(java.math.BigInteger.valueOf(66))
                 .withAlgorithmPair(HybridAlgorithmPair.recommended(128)).build();
         X509Certificate certificate = HybridX509CertificateBuilder.builder(config, keyPair)
                 .withPQCExtensions(true)
                 .build();
 
         // Corrompe a extensão: pega o valor da OID altSignatureValue e altera um byte
-        byte[] sigExt = certificate.getExtensionValue("2.5.29.63");
+        byte[] sigExt = certificate.getExtensionValue("2.5.29.74");
         assertThat(sigExt).isNotNull();
         // Simula corrupção (exclui primeiro byte do valor DER, tornando ASN.1 inválido)
         byte[] malformed = new byte[sigExt.length - 1];
@@ -233,6 +240,43 @@ class PQCExtensionsBuildTest extends BaseTest {
         org.assertj.core.api.Assertions.assertThatThrownBy(() ->
                 com.pqc.hybrid.core.certificate.asn1.PQCExtensionsStructure.parse(malformed)
         ).isInstanceOf(Exception.class);
+    }
+
+    @Test
+    @DisplayName("Should reject PQC alternative signature verified with the wrong key")
+    void shouldRejectPQCSignatureWithWrongKey() throws Exception {
+        KeyPair pqcKp = generateMLDSAKeyPair();
+        KeyPair ecKp = generateECKeyPair("secp256r1");
+
+        HybridKeyPair keyPair = new HybridKeyPair(
+                ecKp.getPublic(), ecKp.getPrivate(),
+                pqcKp.getPublic(), pqcKp.getPrivate(),
+                CLASSICAL_ALGORITHM, PQC_ALGORITHM
+        );
+
+        HybridCertificateConfig config = HybridCertificateConfig.builder()
+                .withSubjectDN("CN=wrongkey.example.com")
+                .withIssuerDN("CN=wrongkey.example.com")
+                .withValidityDays(365)
+                .withSerialNumber(java.math.BigInteger.valueOf(77))
+                .withAlgorithmPair(HybridAlgorithmPair.recommended(128))
+                .build();
+
+        X509Certificate certificate = HybridX509CertificateBuilder.builder(config, keyPair)
+                .withPQCExtensions(true)
+                .build();
+
+        // A different alternative (PQC) key of the same algorithm must NOT verify the
+        // alternative signature — proving it is cryptographically checked, not just present.
+        KeyPair otherPqc = generateMLDSAKeyPair();
+        HybridKeyPair wrongKeyPair = new HybridKeyPair(
+                ecKp.getPublic(), ecKp.getPrivate(),
+                otherPqc.getPublic(), otherPqc.getPrivate(),
+                CLASSICAL_ALGORITHM, PQC_ALGORITHM
+        );
+
+        boolean valid = HybridCertificateValidator.validatePQCSignature(certificate, wrongKeyPair);
+        assertThat(valid).isFalse();
     }
 
     @Test
@@ -251,7 +295,7 @@ class PQCExtensionsBuildTest extends BaseTest {
                 .withSubjectDN("CN=self.signed.example.com")
                 .withIssuerDN("CN=self.signed.example.com")
                 .withValidityDays(365)
-                .withSerialNumber(6)
+                .withSerialNumber(java.math.BigInteger.valueOf(6))
                 .withAlgorithmPair(HybridAlgorithmPair.recommended(128))
                 .build();
 

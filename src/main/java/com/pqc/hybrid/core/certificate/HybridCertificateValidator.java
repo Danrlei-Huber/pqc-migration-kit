@@ -10,32 +10,47 @@ import com.pqc.hybrid.core.model.HybridCertificateInfo;
 import com.pqc.hybrid.core.signature.HybridSignatureManager;
 import com.pqc.hybrid.core.signature.HybridSignaturePair;
 
+import org.bouncycastle.asn1.ASN1BitString;
+import org.bouncycastle.asn1.ASN1Encoding;
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import org.bouncycastle.asn1.ASN1OctetString;
+import org.bouncycastle.asn1.DERBitString;
 import org.bouncycastle.asn1.x509.Extension;
+import org.bouncycastle.asn1.x509.Extensions;
+import org.bouncycastle.asn1.x509.ExtensionsGenerator;
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
+import org.bouncycastle.asn1.x509.TBSCertificate;
+import org.bouncycastle.asn1.x509.V3TBSCertificateGenerator;
+import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
 
 import java.io.IOException;
 import java.security.Provider;
 import java.security.PublicKey;
 import java.security.Signature;
 import java.security.SignatureException;
+import java.security.cert.CertPath;
+import java.security.cert.CertPathValidator;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateFactory;
+import java.security.cert.PKIXCertPathChecker;
+import java.security.cert.PKIXParameters;
+import java.security.cert.TrustAnchor;
 import java.security.cert.X509Certificate;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.logging.Logger;
 
 public final class HybridCertificateValidator {
 
     private static final Logger logger = Logger.getLogger(HybridCertificateValidator.class.getName());
-
-    private static final String OID_ALT_SIGNATURE_ALGORITHM = "2.5.29.62";
-    private static final String OID_ALT_SIGNATURE_VALUE = "2.5.29.63";
-    private static final String OID_SUBJECT_ALT_PUBKEY_INFO = "2.5.29.72";
 
     private HybridCertificateValidator() {
         throw new AssertionError("Cannot instantiate HybridCertificateValidator");
@@ -124,9 +139,9 @@ public final class HybridCertificateValidator {
         try {
             Map<String, Extension> pqcExtensions = extractPQCExtensions(certificate);
 
-            boolean hasAlg = pqcExtensions.containsKey(OID_ALT_SIGNATURE_ALGORITHM);
-            boolean hasSig = pqcExtensions.containsKey(OID_ALT_SIGNATURE_VALUE);
-            boolean hasKey = pqcExtensions.containsKey(OID_SUBJECT_ALT_PUBKEY_INFO);
+            boolean hasAlg = pqcExtensions.containsKey(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_ALGORITHM);
+            boolean hasSig = pqcExtensions.containsKey(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_VALUE);
+            boolean hasKey = pqcExtensions.containsKey(AlgorithmOIDRegistry.OID_SUBJECT_ALT_PUBLIC_KEY_INFO);
 
             boolean valid = hasAlg && hasSig && hasKey;
             logger.fine("PQC extensions present - alg=" + hasAlg + ", sig=" + hasSig + ", key=" + hasKey);
@@ -143,9 +158,9 @@ public final class HybridCertificateValidator {
 
         try {
             for (String oid : certificate.getCriticalExtensionOIDs()) {
-                if (oid.equals(OID_ALT_SIGNATURE_ALGORITHM) ||
-                    oid.equals(OID_ALT_SIGNATURE_VALUE) ||
-                    oid.equals(OID_SUBJECT_ALT_PUBKEY_INFO)) {
+                if (oid.equals(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_ALGORITHM) ||
+                    oid.equals(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_VALUE) ||
+                    oid.equals(AlgorithmOIDRegistry.OID_SUBJECT_ALT_PUBLIC_KEY_INFO)) {
                     byte[] extValue = certificate.getExtensionValue(oid);
                     if (extValue != null) {
                         Extension ext = new Extension(
@@ -159,9 +174,9 @@ public final class HybridCertificateValidator {
             }
 
             for (String oid : certificate.getNonCriticalExtensionOIDs()) {
-                if (oid.equals(OID_ALT_SIGNATURE_ALGORITHM) ||
-                    oid.equals(OID_ALT_SIGNATURE_VALUE) ||
-                    oid.equals(OID_SUBJECT_ALT_PUBKEY_INFO)) {
+                if (oid.equals(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_ALGORITHM) ||
+                    oid.equals(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_VALUE) ||
+                    oid.equals(AlgorithmOIDRegistry.OID_SUBJECT_ALT_PUBLIC_KEY_INFO)) {
                     if (!extensions.containsKey(oid)) {
                         byte[] extValue = certificate.getExtensionValue(oid);
                         if (extValue != null) {
@@ -185,7 +200,7 @@ public final class HybridCertificateValidator {
     public static String extractPQCAlgorithmOID(X509Certificate certificate) {
         Objects.requireNonNull(certificate, "Certificate cannot be null");
         try {
-            byte[] extValue = certificate.getExtensionValue(OID_ALT_SIGNATURE_ALGORITHM);
+            byte[] extValue = certificate.getExtensionValue(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_ALGORITHM);
             if (extValue == null) {
                 return null;
             }
@@ -203,7 +218,7 @@ public final class HybridCertificateValidator {
     public static byte[] extractPQCSignature(X509Certificate certificate) {
         Objects.requireNonNull(certificate, "Certificate cannot be null");
         try {
-            byte[] extValue = certificate.getExtensionValue(OID_ALT_SIGNATURE_VALUE);
+            byte[] extValue = certificate.getExtensionValue(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_VALUE);
             if (extValue == null) {
                 return null;
             }
@@ -221,7 +236,7 @@ public final class HybridCertificateValidator {
     public static byte[] extractPQCPublicKey(X509Certificate certificate) {
         Objects.requireNonNull(certificate, "Certificate cannot be null");
         try {
-            byte[] extValue = certificate.getExtensionValue(OID_SUBJECT_ALT_PUBKEY_INFO);
+            byte[] extValue = certificate.getExtensionValue(AlgorithmOIDRegistry.OID_SUBJECT_ALT_PUBLIC_KEY_INFO);
             if (extValue == null) {
                 return null;
             }
@@ -239,33 +254,121 @@ public final class HybridCertificateValidator {
             throws InvalidSignatureException {
         Objects.requireNonNull(certificate, "Certificate cannot be null");
         Objects.requireNonNull(keyPair, "Key pair cannot be null");
+        // For a self-signed certificate the alternative signature is verified against the
+        // subject's own PQC public key.
+        return verifyAltSignature(certificate, keyPair.getPQCPublicKey());
+    }
+
+    /**
+     * Verifies a certificate's alternative (PQC) signature against the issuer's alternative
+     * public key. The signature is checked over the reconstructed pre-TBS (see
+     * {@link #reconstructPreTBS(X509Certificate)}), using the algorithm declared in the
+     * certificate's {@code altSignatureAlgorithm} (2.5.29.73) extension.
+     *
+     * @param certificate        the certificate whose alternative signature is verified
+     * @param issuerAltPublicKey the issuer's alternative (PQC) public key (the subject's own
+     *                           key for a self-signed certificate)
+     * @return true if the alternative signature is valid
+     */
+    public static boolean verifyAltSignature(X509Certificate certificate, PublicKey issuerAltPublicKey)
+            throws InvalidSignatureException {
+        Objects.requireNonNull(certificate, "Certificate cannot be null");
+        Objects.requireNonNull(issuerAltPublicKey, "Issuer alternative public key cannot be null");
 
         try {
-            byte[] tbsCertificate = certificate.getTBSCertificate();
             byte[] pqcSignature = extractPQCSignature(certificate);
-
             if (pqcSignature == null) {
                 logger.warning("PQC signature not found in certificate extensions");
                 return false;
             }
 
-            String algorithm = keyPair.getPQCAlgorithm();
+            String oid = extractPQCAlgorithmOID(certificate);
+            String algorithm = AlgorithmOIDRegistry.getAlgorithmName(oid);
+            if (algorithm == null) {
+                algorithm = oid; // fall back to the raw OID
+            }
+
+            byte[] preTbs = reconstructPreTBS(certificate);
+
             CryptographicProviderFactory.initialize();
             Provider provider = CryptographicProviderFactory.getProvider();
 
             Signature sig = Signature.getInstance(algorithm, provider);
-            sig.initVerify(keyPair.getPQCPublicKey());
-            sig.update(tbsCertificate);
+            sig.initVerify(issuerAltPublicKey);
+            sig.update(preTbs);
             boolean valid = sig.verify(pqcSignature);
 
-            logger.fine("PQC signature verification result: " + valid);
+            logger.fine("PQC alternative signature verification result: " + valid);
             return valid;
 
         } catch (InvalidSignatureException e) {
             throw e;
         } catch (Exception e) {
-            throw new InvalidSignatureException("PQC signature verification failed", e);
+            throw new InvalidSignatureException("PQC alternative signature verification failed", e);
         }
+    }
+
+    /**
+     * Extracts the alternative (PQC) public key from a certificate's
+     * {@code subjectAltPublicKeyInfo} (2.5.29.72) extension as a usable {@link PublicKey}.
+     *
+     * @return the decoded public key, or {@code null} if the extension is absent or invalid
+     */
+    public static PublicKey extractAltPublicKey(X509Certificate certificate) {
+        Objects.requireNonNull(certificate, "Certificate cannot be null");
+        try {
+            byte[] extValue = certificate.getExtensionValue(AlgorithmOIDRegistry.OID_SUBJECT_ALT_PUBLIC_KEY_INFO);
+            if (extValue == null) {
+                return null;
+            }
+            ASN1OctetString octetStr = ASN1OctetString.getInstance(extValue);
+            SubjectPublicKeyInfo spki = SubjectPublicKeyInfo.getInstance(octetStr.getOctets());
+            CryptographicProviderFactory.initialize();
+            return new JcaPEMKeyConverter().setProvider("BC").getPublicKey(spki);
+        } catch (Exception e) {
+            logger.warning("Failed to extract alternative public key: " + e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Reconstructs the pre-TBS certificate over which the alternative (PQC) signature is
+     * computed in the ITU-T X.509 (2019) model. This is the TBSCertificate with the
+     * {@code signature} AlgorithmIdentifier field omitted and the {@code altSignatureValue}
+     * (2.5.29.74) extension removed — exactly what BouncyCastle's native
+     * {@code build(primary, true, altSigner)} signs via
+     * {@link V3TBSCertificateGenerator#generatePreTBSCertificate()}.
+     */
+    private static byte[] reconstructPreTBS(X509Certificate certificate) throws Exception {
+        TBSCertificate tbs = TBSCertificate.getInstance(certificate.getTBSCertificate());
+
+        ExtensionsGenerator extGen = new ExtensionsGenerator();
+        extGen.addExtensions(tbs.getExtensions());
+        extGen.removeExtension(Extension.altSignatureValue);
+        Extensions preExtensions = extGen.generate();
+
+        V3TBSCertificateGenerator tbsGen = new V3TBSCertificateGenerator();
+        // NOTE: the signature field is intentionally NOT set — generatePreTBSCertificate()
+        // omits it (and rejects the structure if it is present).
+        tbsGen.setSerialNumber(tbs.getSerialNumber());
+        tbsGen.setIssuer(tbs.getIssuer());
+        tbsGen.setStartDate(tbs.getStartDate());
+        tbsGen.setEndDate(tbs.getEndDate());
+        tbsGen.setSubject(tbs.getSubject());
+        tbsGen.setSubjectPublicKeyInfo(tbs.getSubjectPublicKeyInfo());
+
+        ASN1BitString issuerUniqueId = tbs.getIssuerUniqueId();
+        if (issuerUniqueId != null) {
+            tbsGen.setIssuerUniqueID(new DERBitString(issuerUniqueId.getBytes(), issuerUniqueId.getPadBits()));
+        }
+        ASN1BitString subjectUniqueId = tbs.getSubjectUniqueId();
+        if (subjectUniqueId != null) {
+            tbsGen.setSubjectUniqueID(new DERBitString(subjectUniqueId.getBytes(), subjectUniqueId.getPadBits()));
+        }
+
+        tbsGen.setExtensions(preExtensions);
+
+        return tbsGen.generatePreTBSCertificate().getEncoded(ASN1Encoding.DER);
     }
 
     public static HybridCertificateInfo extractCertificateInfo(X509Certificate certificate,
@@ -309,9 +412,9 @@ public final class HybridCertificateValidator {
 
     private static PQCExtensionsStructure buildPQCExtensionsFromExtMap(Map<String, Extension> exts)
             throws IOException {
-        Extension altAlg = exts.get(OID_ALT_SIGNATURE_ALGORITHM);
-        Extension altSig = exts.get(OID_ALT_SIGNATURE_VALUE);
-        Extension altKey = exts.get(OID_SUBJECT_ALT_PUBKEY_INFO);
+        Extension altAlg = exts.get(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_ALGORITHM);
+        Extension altSig = exts.get(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_VALUE);
+        Extension altKey = exts.get(AlgorithmOIDRegistry.OID_SUBJECT_ALT_PUBLIC_KEY_INFO);
 
         if (altAlg == null || altSig == null || altKey == null) {
             return null;
@@ -367,11 +470,131 @@ public final class HybridCertificateValidator {
                 logger.warning("PQC signature validation error: " + e.getMessage());
                 builder.pqcSignatureValid(false);
             }
+        } else if (hasPQCExts) {
+            builder.pqcSignatureValid(false);
         } else {
             builder.pqcSignatureValid(true);
         }
 
         return builder.build();
+    }
+
+    /**
+     * Validates a full hybrid certificate chain in both dimensions.
+     *
+     * <p>The chain must be ordered leaf → … → root, where the last element is the
+     * (self-signed) trust anchor. The classical dimension is validated with the JDK's PKIX
+     * {@link CertPathValidator}; the post-quantum dimension is validated by walking each link
+     * and verifying its alternative signature against the issuer's alternative public key.
+     *
+     * @param chain the ordered certificate chain (leaf first, root last)
+     * @return a {@link HybridChainValidationResult} with both dimensions' outcomes
+     */
+    public static HybridChainValidationResult validateHybridChain(List<X509Certificate> chain) {
+        Objects.requireNonNull(chain, "Chain cannot be null");
+        if (chain.isEmpty()) {
+            throw new IllegalArgumentException("Certificate chain cannot be empty");
+        }
+        boolean classicalValid = validateClassicalChain(chain);
+        boolean pqcValid = validateAltSignatureChain(chain);
+        logger.fine("Hybrid chain validation: classical=" + classicalValid + ", pqc=" + pqcValid);
+        return new HybridChainValidationResult(classicalValid, pqcValid);
+    }
+
+    private static boolean validateClassicalChain(List<X509Certificate> chain) {
+        try {
+            CryptographicProviderFactory.initialize();
+            X509Certificate root = chain.get(chain.size() - 1);
+
+            // The PKIX CertPath excludes the trust anchor (root).
+            List<X509Certificate> path = new ArrayList<>(chain.subList(0, chain.size() - 1));
+            if (path.isEmpty()) {
+                // Single self-signed certificate: verify its classical signature directly.
+                root.verify(root.getPublicKey(), "BC");
+                return true;
+            }
+
+            CertificateFactory cf = CertificateFactory.getInstance("X.509", "BC");
+            CertPath certPath = cf.generateCertPath(path);
+
+            PKIXParameters params = new PKIXParameters(Set.of(new TrustAnchor(root, null)));
+            params.setRevocationEnabled(false);
+            // The Catalyst alt-signature extensions are marked critical; tell PKIX they are handled.
+            params.addCertPathChecker(new HybridExtensionChecker());
+
+            CertPathValidator validator = CertPathValidator.getInstance("PKIX", "BC");
+            validator.validate(certPath, params);
+            return true;
+        } catch (Exception e) {
+            logger.warning("Classical chain validation failed: " + e.getMessage());
+            return false;
+        }
+    }
+
+    private static boolean validateAltSignatureChain(List<X509Certificate> chain) {
+        try {
+            for (int i = 0; i < chain.size(); i++) {
+                X509Certificate cert = chain.get(i);
+                X509Certificate issuer = (i + 1 < chain.size()) ? chain.get(i + 1) : cert; // root self-issues
+                PublicKey issuerAltKey = extractAltPublicKey(issuer);
+                if (issuerAltKey == null) {
+                    logger.warning("Missing alternative public key for issuer at chain index " + i);
+                    return false;
+                }
+                if (!verifyAltSignature(cert, issuerAltKey)) {
+                    logger.warning("Alternative (PQC) signature invalid at chain index " + i);
+                    return false;
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            logger.warning("PQC chain validation failed: " + e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Outcome of a hybrid chain validation: classical (PKIX) and post-quantum dimensions.
+     */
+    public record HybridChainValidationResult(boolean classicalValid, boolean pqcValid) {
+        /** @return true only if both the classical and the PQC dimensions are valid. */
+        public boolean isValid() {
+            return classicalValid && pqcValid;
+        }
+    }
+
+    /**
+     * PKIX extension checker that marks the Catalyst alternative-signature extensions
+     * (altSignatureAlgorithm/altSignatureValue) as handled, so PKIX does not reject them as
+     * unrecognised critical extensions.
+     */
+    private static final class HybridExtensionChecker extends PKIXCertPathChecker {
+        private static final Set<String> SUPPORTED = Set.of(
+                AlgorithmOIDRegistry.OID_ALT_SIGNATURE_ALGORITHM,
+                AlgorithmOIDRegistry.OID_ALT_SIGNATURE_VALUE,
+                AlgorithmOIDRegistry.OID_SUBJECT_ALT_PUBLIC_KEY_INFO);
+
+        @Override
+        public void init(boolean forward) {
+            // stateless
+        }
+
+        @Override
+        public boolean isForwardCheckingSupported() {
+            return true;
+        }
+
+        @Override
+        public Set<String> getSupportedExtensions() {
+            return SUPPORTED;
+        }
+
+        @Override
+        public void check(Certificate cert, Collection<String> unresolvedCritExts) {
+            if (unresolvedCritExts != null) {
+                unresolvedCritExts.removeAll(SUPPORTED);
+            }
+        }
     }
 
     public static class ValidationResult {

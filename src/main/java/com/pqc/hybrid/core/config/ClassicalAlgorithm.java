@@ -14,17 +14,17 @@ public enum ClassicalAlgorithm {
      * RSA (Rivest-Shamir-Adleman) with 2048-bit keys.
      * OID: 1.2.840.113549.1.1.1
      */
-    RSA_2048("RSA", 2048, "1.2.840.113549.1.1.1", "RSA/ECB/PKCS1Padding", 128),
+    RSA_2048("RSA", 2048, "1.2.840.113549.1.1.1", "SHA256withRSA", 128),
     
     /**
      * RSA with 3072-bit keys.
      */
-    RSA_3072("RSA", 3072, "1.2.840.113549.1.1.1", "RSA/ECB/PKCS1Padding", 128),
+    RSA_3072("RSA", 3072, "1.2.840.113549.1.1.1", "SHA256withRSA", 128),
     
     /**
      * RSA with 4096-bit keys.
      */
-    RSA_4096("RSA", 4096, "1.2.840.113549.1.1.1", "RSA/ECB/PKCS1Padding", 256),
+    RSA_4096("RSA", 4096, "1.2.840.113549.1.1.1", "SHA512withRSA", 256),
 
     /**
      * ECDSA (Elliptic Curve Digital Signature Algorithm) with P-256 curve.
@@ -128,5 +128,23 @@ public enum ClassicalAlgorithm {
         return java.util.Arrays.stream(values())
                 .filter(algo -> algo.oid.equals(oid))
                 .toArray(ClassicalAlgorithm[]::new);
+    }
+
+    /**
+     * Gets the Java Signature algorithm name for a given classical algorithm name.
+     * <p>
+     * Example: for algorithm name "RSA" with key size 2048, returns "SHA256withRSA".
+     *
+     * @param algorithmName the classical algorithm name (e.g., "RSA", "ECDSA")
+     * @return the signature algorithm name (e.g., "SHA256withRSA")
+     * @throws IllegalArgumentException if no matching algorithm is found
+     */
+    public static String getSignatureAlgorithmForName(String algorithmName) {
+        for (ClassicalAlgorithm algo : values()) {
+            if (algo.algorithmName.equalsIgnoreCase(algorithmName)) {
+                return algo.signatureAlgorithm;
+            }
+        }
+        throw new IllegalArgumentException("Unknown classical algorithm: " + algorithmName);
     }
 }

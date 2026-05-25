@@ -1,5 +1,7 @@
 package com.pqc.hybrid.core.config;
 
+import com.pqc.hybrid.core.common.oid.AlgorithmOIDRegistry;
+
 /**
  * Enumeration of supported Post-Quantum Cryptography (PQC) algorithms.
  * These are lattice-based, hash-based, and other quantum-resistant algorithms
@@ -15,30 +17,28 @@ public enum PQCAlgorithm {
      * Formerly known as Kyber. Standard NIST PQC for key establishment.
      * OID: 2.16.840.1.114027.8.1.1
      */
-    ML_KEM_512("ML-KEM-512", "2.16.840.1.114027.8.1.1", 256, 768),
-    ML_KEM_768("ML-KEM-768", "2.16.840.1.114027.8.1.2", 192, 1088),
-    ML_KEM_1024("ML-KEM-1024", "2.16.840.1.114027.8.1.3", 256, 1568),
+    ML_KEM_512("ML-KEM-512", AlgorithmOIDRegistry.OID_ML_KEM_512, 256, 768),
+    ML_KEM_768("ML-KEM-768", AlgorithmOIDRegistry.OID_ML_KEM_768, 192, 1088),
+    ML_KEM_1024("ML-KEM-1024", AlgorithmOIDRegistry.OID_ML_KEM_1024, 256, 1568),
 
     /**
      * ML-DSA (Module-Lattice-Based Digital Signature Algorithm)
-     * Formerly known as Dilithium. Standard NIST PQC for digital signatures.
-     * OID: 2.16.840.1.114027.8.3
+     * NIST FIPS 204 OIDs: 2.16.840.1.101.3.4.3.x
      */
-    ML_DSA_44("ML-DSA-44", "2.16.840.1.114027.8.3.1", 128, 2420),
-    ML_DSA_65("ML-DSA-65", "2.16.840.1.114027.8.3.2", 192, 3293),
-    ML_DSA_87("ML-DSA-87", "2.16.840.1.114027.8.3.3", 256, 4595),
+    ML_DSA_44("ML-DSA-44", AlgorithmOIDRegistry.OID_ML_DSA_44, 128, 1312),
+    ML_DSA_65("ML-DSA-65", AlgorithmOIDRegistry.OID_ML_DSA_65, 192, 1952),
+    ML_DSA_87("ML-DSA-87", AlgorithmOIDRegistry.OID_ML_DSA_87, 256, 2592),
 
     /**
      * SLH-DSA (Stateless Hash-Based Digital Signature Algorithm)
-     * Based on SPHINCS+. NIST standardized hash-based signature.
-     * OID: 2.16.840.1.114027.8.5
+     * NIST FIPS 205 OIDs: 2.16.840.1.101.3.4.3.x
      */
-    SLH_DSA_SHA2_128S("SLH-DSA-SHA2-128s", "2.16.840.1.114027.8.5.1", 128, 2144),
-    SLH_DSA_SHA2_128F("SLH-DSA-SHA2-128f", "2.16.840.1.114027.8.5.2", 128, 4784),
-    SLH_DSA_SHA2_192S("SLH-DSA-SHA2-192s", "2.16.840.1.114027.8.5.3", 192, 3104),
-    SLH_DSA_SHA2_192F("SLH-DSA-SHA2-192f", "2.16.840.1.114027.8.5.4", 192, 7036),
-    SLH_DSA_SHA2_256S("SLH-DSA-SHA2-256s", "2.16.840.1.114027.8.5.5", 256, 4784),
-    SLH_DSA_SHA2_256F("SLH-DSA-SHA2-256f", "2.16.840.1.114027.8.5.6", 256, 9076),
+    SLH_DSA_SHA2_128S("SLH-DSA-SHA2-128s", AlgorithmOIDRegistry.OID_SLH_DSA_SHA2_128S, 128, 2144),
+    SLH_DSA_SHA2_128F("SLH-DSA-SHA2-128f", AlgorithmOIDRegistry.OID_SLH_DSA_SHA2_128F, 128, 4784),
+    SLH_DSA_SHA2_192S("SLH-DSA-SHA2-192s", AlgorithmOIDRegistry.OID_SLH_DSA_SHA2_192S, 192, 3104),
+    SLH_DSA_SHA2_192F("SLH-DSA-SHA2-192f", AlgorithmOIDRegistry.OID_SLH_DSA_SHA2_192F, 192, 7036),
+    SLH_DSA_SHA2_256S("SLH-DSA-SHA2-256s", AlgorithmOIDRegistry.OID_SLH_DSA_SHA2_256S, 256, 4784),
+    SLH_DSA_SHA2_256F("SLH-DSA-SHA2-256f", AlgorithmOIDRegistry.OID_SLH_DSA_SHA2_256F, 256, 9076),
 
     /**
      * Falcon (Fast-Fourier Lattice-based Compact Signatures over NTRU)

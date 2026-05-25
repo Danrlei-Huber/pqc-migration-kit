@@ -9,6 +9,7 @@ import org.bouncycastle.asn1.x509.Extension;
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 
 import com.pqc.hybrid.core.certificate.asn1.PQCExtensionsStructure;
+import com.pqc.hybrid.core.common.oid.AlgorithmOIDRegistry;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,9 +18,9 @@ import java.util.Objects;
 
 public final class X509ExtensionManager {
 
-    private static final String ALT_SIGNATURE_ALGORITHM_OID = "2.5.29.62";
-    private static final String ALT_SIGNATURE_VALUE_OID = "2.5.29.63";
-    private static final String SUBJECT_ALT_PUBKEY_INFO_OID = "2.5.29.72";
+    private static final String ALT_SIGNATURE_ALGORITHM_OID = AlgorithmOIDRegistry.OID_ALT_SIGNATURE_ALGORITHM;
+    private static final String ALT_SIGNATURE_VALUE_OID = AlgorithmOIDRegistry.OID_ALT_SIGNATURE_VALUE;
+    private static final String SUBJECT_ALT_PUBKEY_INFO_OID = AlgorithmOIDRegistry.OID_SUBJECT_ALT_PUBLIC_KEY_INFO;
 
     private final Map<String, Extension> extensions = new HashMap<>();
 

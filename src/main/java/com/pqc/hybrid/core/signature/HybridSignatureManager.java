@@ -187,13 +187,7 @@ public final class HybridSignatureManager {
      * Maps classical algorithm name to Java Signature algorithm format.
      */
     private static String getClassicalSignatureAlgorithmName(String classicalAlgo) {
-        // Simplified mapping - in production would use enum
-        if (classicalAlgo.startsWith("RSA")) {
-            return "SHA256withRSA";
-        } else if (classicalAlgo.startsWith("ECDSA")) {
-            return "SHA256withECDSA";
-        }
-        throw new IllegalArgumentException("Unknown classical algorithm: " + classicalAlgo);
+        return ClassicalAlgorithm.getSignatureAlgorithmForName(classicalAlgo);
     }
 
     /**
@@ -201,11 +195,10 @@ public final class HybridSignatureManager {
      */
     private static byte[] hashData(byte[] data) {
         try {
-            java.security.MessageDigest md = java.security.MessageDigest.getInstance("SHA-256");
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance("SHA-256", "BC");
             return md.digest(data);
         } catch (Exception e) {
-            logger.warning("Failed to hash data: " + e.getMessage());
-            return null;
+            throw new PQCHybridException("Failed to hash data", e);
         }
     }
 }

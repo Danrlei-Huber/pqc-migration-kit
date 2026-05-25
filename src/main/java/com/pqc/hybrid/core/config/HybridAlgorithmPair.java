@@ -111,7 +111,6 @@ public record HybridAlgorithmPair(ClassicalAlgorithm classicalAlgorithm, PQCAlgo
     public static HybridAlgorithmPair[] allRecommended() {
         return new HybridAlgorithmPair[]{
                 new HybridAlgorithmPair(ClassicalAlgorithm.ECDSA_P256, PQCAlgorithm.ML_DSA_44),
-                new HybridAlgorithmPair(ClassicalAlgorithm.ECDSA_P256, PQCAlgorithm.ML_KEM_512),
                 new HybridAlgorithmPair(ClassicalAlgorithm.ECDSA_P384, PQCAlgorithm.ML_DSA_65),
                 new HybridAlgorithmPair(ClassicalAlgorithm.ECDSA_P521, PQCAlgorithm.ML_DSA_87),
                 new HybridAlgorithmPair(ClassicalAlgorithm.RSA_2048, PQCAlgorithm.ML_DSA_44),

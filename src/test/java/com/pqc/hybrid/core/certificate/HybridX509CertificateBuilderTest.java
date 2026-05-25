@@ -29,7 +29,7 @@ class HybridX509CertificateBuilderTest extends BaseTest {
                 .withSubjectDN("CN=Test Certificate")
                 .withIssuerDN("CN=Test Certificate")
                 .withValidityDays(365)
-                .withSerialNumber(1)
+                .withSerialNumber(java.math.BigInteger.ONE)
                 .withAlgorithmPair(new HybridAlgorithmPair(ClassicalAlgorithm.RSA_2048, PQCAlgorithm.ML_DSA_65))
                 .build();
 
@@ -53,7 +53,7 @@ class HybridX509CertificateBuilderTest extends BaseTest {
                 .withSubjectDN("CN=Test Certificate No PQC")
                 .withIssuerDN("CN=Test Certificate No PQC")
                 .withValidityDays(365)
-                .withSerialNumber(1)
+                .withSerialNumber(java.math.BigInteger.ONE)
                 .withAlgorithmPair(new HybridAlgorithmPair(ClassicalAlgorithm.ECDSA_P256, PQCAlgorithm.FALCON_512))
                 .build();
 
@@ -75,7 +75,7 @@ class HybridX509CertificateBuilderTest extends BaseTest {
                 .withSubjectDN("CN=Test Certificate")
                 .withIssuerDN("CN=Test Certificate")
                 .withValidityDays(365)
-                .withSerialNumber(1)
+                .withSerialNumber(java.math.BigInteger.ONE)
                 .withAlgorithmPair(new HybridAlgorithmPair(ClassicalAlgorithm.RSA_2048, PQCAlgorithm.ML_DSA_65))
                 .build();
 
@@ -93,7 +93,7 @@ class HybridX509CertificateBuilderTest extends BaseTest {
                 .withSubjectDN(null)
                 .withIssuerDN("CN=Test Certificate")
                 .withValidityDays(365)
-                .withSerialNumber(1)
+                .withSerialNumber(java.math.BigInteger.ONE)
                 .withAlgorithmPair(new HybridAlgorithmPair(ClassicalAlgorithm.RSA_2048, PQCAlgorithm.ML_DSA_65))
                 .build())
                 .isInstanceOf(NullPointerException.class)

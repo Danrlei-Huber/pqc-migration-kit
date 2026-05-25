@@ -199,13 +199,4 @@ public final class HybridKeyGenerator {
 
         logger.fine("Hybrid key pair validation passed: " + keyPair.getLabel());
     }
-
-    // Helper class for secure random
-    static final class SecureRandom {
-        private static final java.security.SecureRandom instance = new java.security.SecureRandom();
-
-        public static java.security.SecureRandom getInstance() {
-            return instance;
-        }
-    }
 }

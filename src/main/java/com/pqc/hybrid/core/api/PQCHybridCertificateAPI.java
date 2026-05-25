@@ -7,18 +7,23 @@ import com.pqc.hybrid.core.keygen.HybridKeyGenerator;
 import com.pqc.hybrid.core.keygen.HybridKeyPair;
 import com.pqc.hybrid.core.signature.HybridSignatureManager;
 import com.pqc.hybrid.core.signature.HybridSignaturePair;
+import com.pqc.hybrid.core.signature.DualSignatureStrategy;
 import com.pqc.hybrid.core.signature.DualSignatureValidator;
+import com.pqc.hybrid.core.config.CompositeAlgorithm;
 import com.pqc.hybrid.core.certificate.HybridX509CertificateBuilder;
 import com.pqc.hybrid.core.certificate.HybridCertificateValidator;
 import com.pqc.hybrid.core.certificate.CertificateSigningRequestBuilder;
-import com.pqc.hybrid.core.certificate.HybridCertificateValidator;
+import com.pqc.hybrid.core.certificate.HybridCertificateAuthority;
+import com.pqc.hybrid.core.certificate.HybridSigner;
 import com.pqc.hybrid.core.model.HybridCertificateInfo;
 import com.pqc.hybrid.core.exception.PQCHybridException;
 import com.pqc.hybrid.core.exception.CertificateException;
 import com.pqc.hybrid.core.exception.InvalidSignatureException;
 
 import javax.security.auth.x500.X500Principal;
+import java.security.PublicKey;
 import java.security.cert.X509Certificate;
+import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -67,12 +72,43 @@ public final class PQCHybridCertificateAPI {
     private static final Logger logger = Logger.getLogger(PQCHybridCertificateAPI.class.getName());
     private static final String VERSION = "1.0.0-BETA";
     private boolean initialized = false;
+    private HybridSignatureStrategy strategy;
 
     /**
-     * Creates a new PQCHybridCertificateAPI instance.
+     * Creates a new PQCHybridCertificateAPI instance with the Dual signature strategy.
      * Call initialize() before using the API.
      */
     public PQCHybridCertificateAPI() {
+        this.strategy = new DualSignatureStrategy();
+    }
+
+    /**
+     * Creates a new PQCHybridCertificateAPI instance with a specific signature strategy.
+     * Call initialize() before using the API.
+     *
+     * @param strategy the hybrid signature strategy to use
+     */
+    public PQCHybridCertificateAPI(HybridSignatureStrategy strategy) {
+        this.strategy = Objects.requireNonNull(strategy, "Strategy cannot be null");
+    }
+
+    /**
+     * Sets the hybrid signature strategy to use for signing, verification,
+     * key generation, and certificate operations.
+     *
+     * @param strategy the hybrid signature strategy
+     */
+    public void setSignatureStrategy(HybridSignatureStrategy strategy) {
+        this.strategy = Objects.requireNonNull(strategy, "Strategy cannot be null");
+    }
+
+    /**
+     * Gets the current hybrid signature strategy.
+     *
+     * @return the current strategy
+     */
+    public HybridSignatureStrategy getSignatureStrategy() {
+        return strategy;
     }
 
     /**
@@ -139,30 +175,95 @@ public final class PQCHybridCertificateAPI {
     }
 
     /**
-     * Signs data with both classical and PQC algorithms.
+     * Generates a hybrid key pair using the configured signature strategy.
+     *
+     * @param securityLevelBits the desired security level (128, 192, or 256)
+     * @return the generated HybridKeyPair
+     * @throws PQCHybridException if generation fails
+     */
+    public HybridKeyPair generateHybridKeyPairWithStrategy(int securityLevelBits) throws PQCHybridException {
+        ensureInitialized();
+        return strategy.generateKeyPair(securityLevelBits);
+    }
+
+    /**
+     * Signs data using the configured signature strategy.
      *
      * @param data the data to sign
      * @param keyPair the hybrid key pair
-     * @return the hybrid signature pair
+     * @return the signature bytes
      * @throws PQCHybridException if signing fails
      */
-    public HybridSignaturePair signData(byte[] data, HybridKeyPair keyPair) 
+    public byte[] signData(byte[] data, HybridKeyPair keyPair) 
             throws PQCHybridException {
         ensureInitialized();
         Objects.requireNonNull(data, "Data cannot be null");
         Objects.requireNonNull(keyPair, "Key pair cannot be null");
-        return HybridSignatureManager.sign(data, keyPair);
+        return strategy.signData(data, keyPair);
     }
 
     /**
-     * Verifies a hybrid signature. Both classical and PQC signatures must be valid.
+     * Signs data with a context parameter using the configured signature strategy.
+     *
+     * @param data the data to sign
+     * @param keyPair the hybrid key pair
+     * @param ctx the context (max 255 bytes, empty by default)
+     * @return the signature bytes
+     * @throws PQCHybridException if signing fails
+     */
+    public byte[] signData(byte[] data, HybridKeyPair keyPair, byte[] ctx) 
+            throws PQCHybridException {
+        ensureInitialized();
+        Objects.requireNonNull(data, "Data cannot be null");
+        Objects.requireNonNull(keyPair, "Key pair cannot be null");
+        return strategy.signData(data, keyPair, ctx);
+    }
+
+    /**
+     * Verifies a hybrid signature using the configured strategy.
      *
      * @param data the original data
-     * @param signature the hybrid signature to verify
+     * @param signature the signature bytes to verify
      * @param keyPair the hybrid key pair (public keys used for verification)
-     * @return true if both signatures are valid, false otherwise
+     * @return true if the signature is valid
      * @throws InvalidSignatureException if verification fails unexpectedly
      */
+    public boolean verifySignature(byte[] data, byte[] signature, HybridKeyPair keyPair) 
+            throws InvalidSignatureException {
+        ensureInitialized();
+        Objects.requireNonNull(data, "Data cannot be null");
+        Objects.requireNonNull(signature, "Signature cannot be null");
+        Objects.requireNonNull(keyPair, "Key pair cannot be null");
+        return strategy.verifySignature(data, signature, keyPair);
+    }
+
+    /**
+     * Verifies a hybrid signature with a context parameter using the configured strategy.
+     *
+     * @param data the original data
+     * @param signature the signature bytes to verify
+     * @param keyPair the hybrid key pair (public keys used for verification)
+     * @param ctx the context (must match the context used during signing)
+     * @return true if the signature is valid
+     * @throws InvalidSignatureException if verification fails unexpectedly
+     */
+    public boolean verifySignature(byte[] data, byte[] signature, HybridKeyPair keyPair, byte[] ctx) 
+            throws InvalidSignatureException {
+        ensureInitialized();
+        Objects.requireNonNull(data, "Data cannot be null");
+        Objects.requireNonNull(signature, "Signature cannot be null");
+        Objects.requireNonNull(keyPair, "Key pair cannot be null");
+        return strategy.verifySignature(data, signature, keyPair, ctx);
+    }
+
+    /**
+     * Verifies a hybrid signature against the original data.
+     * Both classical and PQC signatures must be valid.
+     *
+     * @deprecated Use {@link #verifySignature(byte[], byte[], HybridKeyPair)} instead.
+     *             This method is kept for backward compatibility.
+     */
+    @Deprecated
     public boolean verifySignature(byte[] data, HybridSignaturePair signature, HybridKeyPair keyPair) 
             throws InvalidSignatureException {
         ensureInitialized();
@@ -185,7 +286,7 @@ public final class PQCHybridCertificateAPI {
     }
 
     /**
-     * Generates a hybrid X.509 certificate.
+     * Generates a hybrid X.509 certificate using the configured signature strategy.
      *
      * @param config the certificate configuration
      * @param keyPair the hybrid key pair
@@ -197,9 +298,7 @@ public final class PQCHybridCertificateAPI {
         ensureInitialized();
         Objects.requireNonNull(config, "Config cannot be null");
         Objects.requireNonNull(keyPair, "Key pair cannot be null");
-
-        HybridX509CertificateBuilder builder = new HybridX509CertificateBuilder(config, keyPair);
-        return builder.build();
+        return strategy.buildCertificate(config, keyPair);
     }
 
     public X509Certificate generateHybridCertificateWithPQCExtensions(HybridCertificateConfig config,
@@ -213,6 +312,35 @@ public final class PQCHybridCertificateAPI {
         HybridX509CertificateBuilder builder = new HybridX509CertificateBuilder(config, keyPair)
                 .withPQCExtensions(includePQCExtensions);
         return builder.build();
+    }
+
+    /**
+     * Layer 1 (signer-agnostic) certificate generation: builds a hybrid X.509 certificate from the
+     * subject's public keys and an externally-supplied {@link HybridSigner}. The signers may be
+     * HSM/token-backed (e.g. CZERTAINLY {@code TokenContentSigner}), KMS-backed, or in-memory — no
+     * private key needs to live in this JVM.
+     *
+     * @param config                    the certificate configuration (DNs, validity, serial, flags)
+     * @param subjectClassicalPublicKey the subject's classical public key
+     * @param subjectPqcPublicKey       the subject's PQC public key (may be {@code null} only for a
+     *                                  classical-only {@code issuerSigner})
+     * @param issuerSigner              the issuer's signer(s); classical-only when its PQC signer is null
+     * @param issuerCertificate         the issuer's certificate (issuer DN + AKI); {@code null} => self-signed
+     * @return the generated X509Certificate
+     * @throws CertificateException if certificate generation fails
+     */
+    public X509Certificate generateHybridCertificate(HybridCertificateConfig config,
+                                                     PublicKey subjectClassicalPublicKey,
+                                                     PublicKey subjectPqcPublicKey,
+                                                     HybridSigner issuerSigner,
+                                                     X509Certificate issuerCertificate)
+            throws CertificateException {
+        ensureInitialized();
+        Objects.requireNonNull(config, "Config cannot be null");
+        Objects.requireNonNull(subjectClassicalPublicKey, "Subject classical public key cannot be null");
+        Objects.requireNonNull(issuerSigner, "Issuer signer cannot be null");
+        return HybridX509CertificateBuilder.build(config, subjectClassicalPublicKey, subjectPqcPublicKey,
+                issuerSigner, issuerCertificate);
     }
 
     public HybridCertificateInfo getCertificateInfo(X509Certificate certificate, HybridKeyPair keyPair) {
@@ -263,9 +391,35 @@ public final class PQCHybridCertificateAPI {
         Objects.requireNonNull(subjectDN, "Subject DN cannot be null");
         Objects.requireNonNull(keyPair, "Key pair cannot be null");
 
-        CertificateSigningRequestBuilder builder = 
+        CertificateSigningRequestBuilder builder =
                 new CertificateSigningRequestBuilder(subjectDN, keyPair);
         return builder.build();
+    }
+
+    /**
+     * Layer 1 (signer-agnostic) CSR generation: builds a hybrid PKCS#10 CSR from the subject's
+     * public keys and an externally-supplied {@link HybridSigner}. The signers may be HSM/token/KMS
+     * backed or in-memory. A classical-only CSR is produced when {@code signer.pqc()} is {@code null}.
+     *
+     * @param subjectDN                 the subject Distinguished Name
+     * @param subjectClassicalPublicKey the subject's classical public key
+     * @param subjectPqcPublicKey       the subject's PQC public key (may be {@code null} only for a
+     *                                  classical-only signer)
+     * @param signer                    the subject's signer(s)
+     * @return the PKCS10CertificationRequest
+     * @throws CertificateException if CSR generation fails
+     */
+    public org.bouncycastle.pkcs.PKCS10CertificationRequest generateCertificateSigningRequest(
+            String subjectDN,
+            PublicKey subjectClassicalPublicKey,
+            PublicKey subjectPqcPublicKey,
+            HybridSigner signer) throws CertificateException {
+        ensureInitialized();
+        Objects.requireNonNull(subjectDN, "Subject DN cannot be null");
+        Objects.requireNonNull(subjectClassicalPublicKey, "Subject classical public key cannot be null");
+        Objects.requireNonNull(signer, "Signer cannot be null");
+        return CertificateSigningRequestBuilder.build(subjectDN, subjectClassicalPublicKey,
+                subjectPqcPublicKey, signer);
     }
 
     /**
@@ -281,12 +435,14 @@ public final class PQCHybridCertificateAPI {
      * @param issuerDN the issuer Distinguished Name
      * @param validityDays the certificate validity period
      * @return the complete certificate (ready to use)
-     * @throws Exception if any step fails
+     * @throws PQCHybridException if key generation or signing fails
+     * @throws CertificateException if certificate construction or validation fails
      */
-    public X509Certificate generateCompleteHybridCertificate(int securityLevel, 
-                                                              String subjectDN,
-                                                              String issuerDN,
-                                                              long validityDays) throws Exception {
+    public X509Certificate generateCompleteHybridCertificate(int securityLevel,
+                                                               String subjectDN,
+                                                               String issuerDN,
+                                                               long validityDays)
+            throws PQCHybridException, CertificateException {
         ensureInitialized();
 
         logger.info("Starting complete hybrid certificate generation workflow");
@@ -314,6 +470,56 @@ public final class PQCHybridCertificateAPI {
         logger.info("Certificate validation: " + result);
 
         return certificate;
+    }
+
+    /**
+     * Creates a self-signed hybrid root Certificate Authority.
+     *
+     * @param config    the root CA certificate configuration (should be marked as a CA via
+     *                  {@code asCertificateAuthority(true)})
+     * @param caKeyPair the root CA's hybrid key pair
+     * @return a ready-to-use {@link HybridCertificateAuthority}
+     * @throws CertificateException if the root certificate cannot be built
+     */
+    public HybridCertificateAuthority createRootCA(HybridCertificateConfig config, HybridKeyPair caKeyPair)
+            throws CertificateException {
+        ensureInitialized();
+        Objects.requireNonNull(config, "Config cannot be null");
+        Objects.requireNonNull(caKeyPair, "CA key pair cannot be null");
+        return HybridCertificateAuthority.createRoot(config, caKeyPair);
+    }
+
+    /**
+     * Issues a hybrid certificate (sub-CA or end-entity) signed by the given CA.
+     *
+     * @param ca             the issuing Certificate Authority
+     * @param subjectConfig  the subject certificate configuration
+     * @param subjectKeyPair the subject's hybrid key pair (only public keys are used)
+     * @return the issued X.509 certificate
+     * @throws CertificateException if the certificate cannot be built
+     */
+    public X509Certificate issueCertificate(HybridCertificateAuthority ca,
+                                            HybridCertificateConfig subjectConfig,
+                                            HybridKeyPair subjectKeyPair) throws CertificateException {
+        ensureInitialized();
+        Objects.requireNonNull(ca, "CA cannot be null");
+        Objects.requireNonNull(subjectConfig, "Subject config cannot be null");
+        Objects.requireNonNull(subjectKeyPair, "Subject key pair cannot be null");
+        return ca.issueCertificate(subjectConfig, subjectKeyPair);
+    }
+
+    /**
+     * Validates a full hybrid certificate chain (ordered leaf → … → root) in both the
+     * classical (PKIX) and post-quantum dimensions.
+     *
+     * @param chain the ordered certificate chain (leaf first, self-signed root last)
+     * @return the chain validation result
+     */
+    public HybridCertificateValidator.HybridChainValidationResult validateCertificateChain(
+            List<X509Certificate> chain) {
+        ensureInitialized();
+        Objects.requireNonNull(chain, "Chain cannot be null");
+        return HybridCertificateValidator.validateHybridChain(chain);
     }
 
     /**

@@ -2,7 +2,6 @@ package com.pqc.hybrid.examples;
 
 import com.pqc.hybrid.core.api.PQCHybridCertificateAPI;
 import com.pqc.hybrid.core.keygen.HybridKeyPair;
-import com.pqc.hybrid.core.signature.HybridSignaturePair;
 import com.pqc.hybrid.core.exception.PQCHybridException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -51,24 +50,17 @@ public class SignAndVerifyExample {
             System.out.println("   Data size: " + data.length + " bytes");
 
             long startTime = System.currentTimeMillis();
-            HybridSignaturePair signature = api.signData(data, keyPair);
+            byte[] signature = api.signData(data, keyPair);
             long endTime = System.currentTimeMillis();
             
-            System.out.println("   ✅ Signatures generated:");
-            System.out.println("      Classical Signature: " + signature.getClassicalSignatureSize() + " bytes");
-            System.out.println("      PQC Signature: " + signature.getPQCSignatureSize() + " bytes");
-            System.out.println("      Total: " + (signature.getClassicalSignatureSize() + signature.getPQCSignatureSize()) + " bytes");
+            System.out.println("   ✅ Signature generated: " + signature.length + " bytes");
             System.out.println("      Signing time: " + (endTime - startTime) + " ms");
             System.out.println();
 
-            // Display signature samples (Base64 encoded)
-            System.out.println("   Classical Signature (Base64, first 80 chars):");
-            String classicalB64 = Base64.getEncoder().encodeToString(signature.getClassicalSignature());
-            System.out.println("      " + classicalB64.substring(0, Math.min(80, classicalB64.length())) + "...");
-
-            System.out.println("   PQC Signature (Base64, first 80 chars):");
-            String pqcB64 = Base64.getEncoder().encodeToString(signature.getPQCSignature());
-            System.out.println("      " + pqcB64.substring(0, Math.min(80, pqcB64.length())) + "...");
+            // Display signature sample (Base64 encoded)
+            System.out.println("   Signature (Base64, first 80 chars):");
+            String sigB64 = Base64.getEncoder().encodeToString(signature);
+            System.out.println("      " + sigB64.substring(0, Math.min(80, sigB64.length())) + "...");
             System.out.println();
 
             // ═══════════════════════════════════════════════════════════════════════════
@@ -103,23 +95,16 @@ public class SignAndVerifyExample {
             // Step 5: Detect Corrupted Signature
             // ═══════════════════════════════════════════════════════════════════════════
             System.out.println("🔍 Step 5: Detect Corrupted Signature...");
-            byte[] corruptedSignatureBytes = signature.getClassicalSignature().clone();
-            if (corruptedSignatureBytes.length > 0) {
-                corruptedSignatureBytes[0] ^= 0xFF;  // Flip bits in first byte
+            byte[] corruptedSig = signature.clone();
+            if (corruptedSig.length > 0) {
+                corruptedSig[0] ^= 0xFF;  // Flip bits in first byte
             }
-            HybridSignaturePair corruptedSignature = new HybridSignaturePair(
-                corruptedSignatureBytes,
-                signature.getPQCSignature(),
-                signature.getClassicalAlgorithm(),
-                signature.getPQCAlgorithm(),
-                signature.getMessageHash()
-            );
 
             startTime = System.currentTimeMillis();
-            boolean isCorruptedValid = api.verifySignature(data, corruptedSignature, keyPair);
+            boolean isCorruptedValid = api.verifySignature(data, corruptedSig, keyPair);
             endTime = System.currentTimeMillis();
 
-            System.out.println("   Note: Modified classical signature, PQC remains intact");
+            System.out.println("   Note: Modified first byte of signature");
             System.out.println("   Verification result: " + (isCorruptedValid ? "✅ VALID" : "❌ INVALID (CORRUPTION DETECTED)"));
             System.out.println("   Verification time: " + (endTime - startTime) + " ms");
             System.out.println();

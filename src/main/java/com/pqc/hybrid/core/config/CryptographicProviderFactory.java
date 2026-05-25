@@ -90,11 +90,12 @@ public final class CryptographicProviderFactory {
         Objects.requireNonNull(algorithm, "Algorithm name cannot be null");
         ensureInitialized();
         
-        // Use the provider's service to check if algorithm is available
         Provider provider = getProvider();
         return provider.getService("Signature", algorithm) != null
                 || provider.getService("KeyPairGenerator", algorithm) != null
-                || provider.getService("KeyGenerator", algorithm) != null;
+                || provider.getService("KeyGenerator", algorithm) != null
+                || provider.getService("Cipher", algorithm) != null
+                || provider.getService("KEM", algorithm) != null;
     }
 
     /**
@@ -106,9 +107,9 @@ public final class CryptographicProviderFactory {
         ensureInitialized();
 
         String[] requiredAlgorithms = {
-                "ML-KEMKeyGen",
-                "ML-KEMEncapsulate",
-                "ML-KEMDecapsulate",
+                "ML-KEM-512",
+                "ML-KEM-768",
+                "ML-KEM-1024",
                 "ML-DSA-44",
                 "ML-DSA-65",
                 "ML-DSA-87",

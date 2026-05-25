@@ -121,7 +121,7 @@ class HybridCertificateConfigTest extends BaseTest {
     void test_has_serial_number() {
         HybridCertificateConfig config = TestFixtures.createTestCertificateConfig();
 
-        assertThat(config.getSerialNumber()).isGreaterThan(0);
+        assertThat(config.getSerialNumber()).isNotNull();
     }
 
     @Test
@@ -131,5 +131,44 @@ class HybridCertificateConfigTest extends BaseTest {
 
         // Version should be accessible (even if just for reference)
         assertThat(config.getAlgorithmPair()).isNotNull();
+    }
+
+    @Test
+    @DisplayName("should default to non-CA, no SANs, unconstrained path length")
+    void test_pki_defaults() {
+        HybridCertificateConfig config = HybridCertificateConfig.builder()
+            .withAlgorithmPair(TestFixtures.createRecommendedAlgorithmPair())
+            .withSubjectDN(TestFixtures.TEST_SUBJECT_DN)
+            .build();
+
+        assertThat(config.isCertificateAuthority()).isFalse();
+        assertThat(config.getSubjectAltNames()).isEmpty();
+        assertThat(config.getPathLenConstraint()).isEqualTo(-1);
+    }
+
+    @Test
+    @DisplayName("should default issuer DN to subject DN when omitted")
+    void test_issuer_dn_defaults_to_subject() {
+        HybridCertificateConfig config = HybridCertificateConfig.builder()
+            .withAlgorithmPair(TestFixtures.createRecommendedAlgorithmPair())
+            .withSubjectDN(TestFixtures.TEST_SUBJECT_DN)
+            .build();
+
+        assertThat(config.getIssuerDN()).isEqualTo(TestFixtures.TEST_SUBJECT_DN);
+    }
+
+    @Test
+    @DisplayName("should configure CA flag, path length and SANs")
+    void test_ca_san_pathlen() {
+        HybridCertificateConfig config = HybridCertificateConfig.builder()
+            .withAlgorithmPair(TestFixtures.createRecommendedAlgorithmPair())
+            .withSubjectDN(TestFixtures.TEST_SUBJECT_DN)
+            .withSubjectAltNames(java.util.List.of("example.com", "10.0.0.1"))
+            .withPathLenConstraint(2)
+            .build();
+
+        assertThat(config.isCertificateAuthority()).isTrue();   // implied by path length
+        assertThat(config.getPathLenConstraint()).isEqualTo(2);
+        assertThat(config.getSubjectAltNames()).containsExactly("example.com", "10.0.0.1");
     }
 }

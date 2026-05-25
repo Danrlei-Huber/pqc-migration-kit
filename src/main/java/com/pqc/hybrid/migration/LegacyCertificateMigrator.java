@@ -1,19 +1,16 @@
 package com.pqc.hybrid.migration;
 
 import com.pqc.hybrid.core.api.PQCHybridCertificateAPI;
-import com.pqc.hybrid.core.config.ClassicalAlgorithm;
-import com.pqc.hybrid.core.config.HybridCertificateConfig;
-import com.pqc.hybrid.core.config.PQCAlgorithm;
-import com.pqc.hybrid.core.keygen.HybridKeyGenerator;
-import com.pqc.hybrid.core.model.HybridCertificateInfo;
-import com.pqc.hybrid.core.util.printer.HybridCertificateInspector;
 
 /**
- * Implementation of the MigrationService for converting legacy certificates to hybrid PQC certificates.
- * 
- * This class uses the existing PQC Hybrid Library components to perform the migration.
- * 
- * @author PQC Hybrid Team
+ * <b>EXPERIMENTAL / PLACEHOLDER.</b> Skeleton {@link MigrationService} for
+ * converting legacy certificates into hybrid PQC certificates.
+ *
+ * <p>The migration logic is <b>not implemented</b>: {@link #migrateToHybrid}
+ * returns a placeholder result (empty certificate bytes) and the validation
+ * methods return canned values. It exists to define the migration API shape and
+ * is excluded from the coverage gate. Out of scope for the current release.
+ *
  * @version 1.0.0-BETA
  */
 public class LegacyCertificateMigrator implements MigrationService {
@@ -31,56 +28,13 @@ public class LegacyCertificateMigrator implements MigrationService {
         long startTime = System.currentTimeMillis();
 
         try {
-            // Step 1: Parse the legacy certificate (simplified for now)
-            // In a real implementation, we would use BouncyCastle to parse the certificate
-            // For now, we assume the legacyCertificate is a valid X.509 certificate in PEM or DER format.
+            // PLACEHOLDER: real migration is not implemented. A full implementation
+            // would (1) parse the legacy X.509 cert, (2) extract subject/issuer/
+            // validity, (3) generate a hybrid key pair per the config, and
+            // (4) build and dual-sign a new hybrid certificate.
+            Thread.sleep(100); // simulate processing time
 
-            // Step 2: Extract information from the legacy certificate (simplified)
-            // We would normally extract subject, issuer, validity period, public key, etc.
-            // For this example, we'll use dummy values.
-
-            // Step 3: Generate a hybrid key pair (classical + PQC)
-            // Note: The existing HybridKeyGenerator generates a hybrid key pair (classical and PQC)
-            // but we need to specify the algorithms.
-            // We'll use the algorithms from the migration config.
-
-            // TODO: Implement actual legacy certificate parsing and information extraction
-            // For now, we simulate by generating a new hybrid key pair and building a certificate
-            // with some dummy data.
-
-            // Generate hybrid key pair
-            // Note: The existing HybridKeyGenerator.generateHybridKeyPair() method does not exist.
-            // We have to generate classical and PQC key pairs separately and combine them.
-            // Looking at the existing code, we have:
-            //   HybridKeyGenerator.generateClassicalKeyPair(ClassicalAlgorithm)
-            //   and for PQC, we have separate key generators in the kem and signature packages.
-
-            // Since we don't have a direct hybrid key pair generator, we'll create a note that
-            // this is a simplified implementation and in a real scenario we would use the
-            // appropriate key generators.
-
-            // For the purpose of this task, we will create a mock hybrid certificate
-            // using the existing API's certificate building capabilities.
-
-            // We'll use the PQCHybridCertificateAPI to build a certificate.
-            // However, note that the API expects certain parameters.
-
-            // Given the complexity and time, we will create a placeholder implementation
-            // that demonstrates the structure but does not perform actual migration.
-            // In a real implementation, we would:
-            //   1. Parse the legacy certificate to get subject, issuer, validity, etc.
-            //   2. Generate a new key pair (classical and PQC) based on the config.
-            //   3. Build a new X.509 certificate with the legacy information and new keys.
-            //   4. Sign the certificate with both the classical and PQC private keys.
-
-            // For now, we return a mock result to show the structure.
-
-            // Simulate processing time
-            Thread.sleep(100);
-
-            // In a real implementation, we would set the hybridCertificate to the actual bytes.
-            // For now, we set it to null to indicate that this is a placeholder.
-            result.setHybridCertificate(new byte[0]); // Empty byte array as placeholder
+            result.setHybridCertificate(new byte[0]); // placeholder output
             result.setSuccess(true);
             result.setWarnings(java.util.List.of("This is a placeholder implementation. Real migration logic not implemented."));
             

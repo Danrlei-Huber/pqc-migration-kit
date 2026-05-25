@@ -12,13 +12,15 @@ import org.bouncycastle.asn1.DERSequence;
 import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 
+import com.pqc.hybrid.core.common.oid.AlgorithmOIDRegistry;
+
 import java.io.IOException;
 
 public class PQCExtensionsStructure extends ASN1Object {
 
-    public static final String OID_ALT_SIGNATURE_ALGORITHM = "2.5.29.62";
-    public static final String OID_ALT_SIGNATURE_VALUE = "2.5.29.63";
-    public static final String OID_SUBJECT_ALT_PUBLIC_KEY_INFO = "2.5.29.72";
+    public static final String OID_ALT_SIGNATURE_ALGORITHM = AlgorithmOIDRegistry.OID_ALT_SIGNATURE_ALGORITHM;
+    public static final String OID_ALT_SIGNATURE_VALUE = AlgorithmOIDRegistry.OID_ALT_SIGNATURE_VALUE;
+    public static final String OID_SUBJECT_ALT_PUBLIC_KEY_INFO = AlgorithmOIDRegistry.OID_SUBJECT_ALT_PUBLIC_KEY_INFO;
 
     private final AlgorithmIdentifier altSignatureAlgorithm;
     private final byte[] altSignatureValue;

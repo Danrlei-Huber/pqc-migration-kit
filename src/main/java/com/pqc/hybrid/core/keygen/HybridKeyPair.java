@@ -2,7 +2,9 @@ package com.pqc.hybrid.core.keygen;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Objects;
+import javax.security.auth.Destroyable;
 
 /**
  * Represents a hybrid cryptographic key pair combining classical and PQC keys.
@@ -104,6 +106,45 @@ public final class HybridKeyPair {
      */
     public String getLabel() {
         return String.format("%s + %s", classicalAlgorithm, pqcAlgorithm);
+    }
+
+    /**
+     * Attempts to destroy private key material by calling destroy() on
+     * keys that implement {@link Destroyable}.
+     * After calling this method, the key pair instance should be discarded.
+     */
+    public void destroy() {
+        destroyPrivateKey(classicalPrivateKey);
+        destroyPrivateKey(pqcPrivateKey);
+    }
+
+    private static void destroyPrivateKey(PrivateKey key) {
+        if (key instanceof Destroyable d) {
+            try {
+                d.destroy();
+            } catch (Exception e) {
+                // Ignore - best-effort destruction
+            }
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof HybridKeyPair that)) return false;
+        return classicalAlgorithm.equals(that.classicalAlgorithm)
+                && pqcAlgorithm.equals(that.pqcAlgorithm)
+                && classicalPublicKey.equals(that.classicalPublicKey)
+                && pqcPublicKey.equals(that.pqcPublicKey);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = classicalAlgorithm.hashCode();
+        result = 31 * result + pqcAlgorithm.hashCode();
+        result = 31 * result + classicalPublicKey.hashCode();
+        result = 31 * result + pqcPublicKey.hashCode();
+        return result;
     }
 
     @Override
