@@ -1,3 +1,14 @@
+> ⚠️ **Material de referência — não é a documentação deste projeto.**
+>
+> Este documento é um **estudo da plataforma externa CZERTAINLY** (gerenciamento de ciclo de vida de
+> certificados, open-source), feito como pesquisa de apoio ao TCC. Foi usado como **base de
+> referência, não seguido à risca**, e **pode conter imprecisões do material original**. Ele **não
+> descreve** o código deste repositório — `pqc-migration-kit` é uma biblioteca Java de certificados
+> X.509 híbridos (sem Spring/REST/banco). Para o projeto real, veja o
+> [README do repositório](../../README.md) e o `MODULE_DOC.md`.
+
+---
+
 # Conectores e Providers - Arquitetura de Integração CZERTAINLY-Core
 
 ## 1. Visão Geral: Connector Architecture

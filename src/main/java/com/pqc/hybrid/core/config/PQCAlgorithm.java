@@ -17,7 +17,7 @@ public enum PQCAlgorithm {
      * Formerly known as Kyber. Standard NIST PQC for key establishment.
      * OID: 2.16.840.1.114027.8.1.1
      */
-    ML_KEM_512("ML-KEM-512", AlgorithmOIDRegistry.OID_ML_KEM_512, 256, 768),
+    ML_KEM_512("ML-KEM-512", AlgorithmOIDRegistry.OID_ML_KEM_512, 128, 768),
     ML_KEM_768("ML-KEM-768", AlgorithmOIDRegistry.OID_ML_KEM_768, 192, 1088),
     ML_KEM_1024("ML-KEM-1024", AlgorithmOIDRegistry.OID_ML_KEM_1024, 256, 1568),
 

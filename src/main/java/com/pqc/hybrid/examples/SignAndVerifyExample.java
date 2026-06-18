@@ -96,15 +96,25 @@ public class SignAndVerifyExample {
             // ═══════════════════════════════════════════════════════════════════════════
             System.out.println("🔍 Step 5: Detect Corrupted Signature...");
             byte[] corruptedSig = signature.clone();
+            // Corrupt a byte inside the PQC signature payload (last byte) rather than the
+            // 4-byte length-prefix framing, so verification rejects it gracefully (returns
+            // false) instead of failing to parse the envelope.
             if (corruptedSig.length > 0) {
-                corruptedSig[0] ^= 0xFF;  // Flip bits in first byte
+                corruptedSig[corruptedSig.length - 1] ^= 0xFF;
             }
 
             startTime = System.currentTimeMillis();
-            boolean isCorruptedValid = api.verifySignature(data, corruptedSig, keyPair);
+            boolean isCorruptedValid;
+            try {
+                isCorruptedValid = api.verifySignature(data, corruptedSig, keyPair);
+            } catch (PQCHybridException e) {
+                // A corrupted envelope may also fail to parse; that is equally a detection.
+                isCorruptedValid = false;
+                System.out.println("   (envelope rejected during parsing: " + e.getMessage() + ")");
+            }
             endTime = System.currentTimeMillis();
 
-            System.out.println("   Note: Modified first byte of signature");
+            System.out.println("   Note: Modified last byte of signature");
             System.out.println("   Verification result: " + (isCorruptedValid ? "✅ VALID" : "❌ INVALID (CORRUPTION DETECTED)"));
             System.out.println("   Verification time: " + (endTime - startTime) + " ms");
             System.out.println();

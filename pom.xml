@@ -210,7 +210,6 @@
                                      production (Catalyst/DualSignature) path -->
                                 <exclude>**/kem/ml_kem/**</exclude>
                                 <exclude>**/keygen/KeyEncapsulationWrapper.*</exclude>
-                                <exclude>**/signature/ml_dsa/**</exclude>
                                 <exclude>**/migration/**</exclude>
                             </excludes>
                             <outputDirectory>target/jacoco-report</outputDirectory>

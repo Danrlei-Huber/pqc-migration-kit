@@ -5,7 +5,10 @@ import com.pqc.hybrid.core.config.ClassicalAlgorithm;
 import com.pqc.hybrid.core.keygen.HybridKeyPair;
 import com.pqc.hybrid.core.exception.PQCHybridException;
 import com.pqc.hybrid.core.exception.InvalidSignatureException;
+import com.pqc.hybrid.core.signature.ml_dsa.MLDSASigner;
+import com.pqc.hybrid.core.signature.ml_dsa.MLDSAVerifier;
 
+import java.security.MessageDigest;
 import java.security.Provider;
 import java.security.Signature;
 import java.util.Objects;
@@ -55,8 +58,8 @@ public final class HybridSignatureManager {
             // Sign with classical algorithm
             byte[] classicalSignature = signWithClassical(data, keyPair, provider);
 
-            // Sign with PQC algorithm
-            byte[] pqcSignature = signWithPQC(data, keyPair, provider);
+            // Sign with PQC algorithm (ML-DSA)
+            byte[] pqcSignature = signWithPQC(data, keyPair);
 
             HybridSignaturePair signaturePair = new HybridSignaturePair(
                     classicalSignature,
@@ -69,6 +72,8 @@ public final class HybridSignatureManager {
             logger.info("Signed data with hybrid signature: " + signaturePair.getLabel());
             return signaturePair;
 
+        } catch (PQCHybridException e) {
+            throw e;
         } catch (Exception e) {
             throw new PQCHybridException("Hybrid signature generation failed", e);
         }
@@ -97,8 +102,8 @@ public final class HybridSignatureManager {
             // Verify classical signature
             boolean classicalValid = verifyClassical(data, signaturePair, keyPair, provider);
 
-            // Verify PQC signature
-            boolean pqcValid = verifyPQC(data, signaturePair, keyPair, provider);
+            // Verify PQC signature (ML-DSA)
+            boolean pqcValid = verifyPQC(data, signaturePair, keyPair);
 
             // Both must be valid for hybrid signature to pass
             boolean result = classicalValid && pqcValid;
@@ -148,15 +153,10 @@ public final class HybridSignatureManager {
     }
 
     /**
-     * Internal method to sign with PQC algorithm.
+     * Internal method to sign with the PQC algorithm (ML-DSA), delegating to {@link MLDSASigner}.
      */
-    private static byte[] signWithPQC(byte[] data, HybridKeyPair keyPair, Provider provider) 
-            throws Exception {
-        String algorithm = keyPair.getPQCAlgorithm();
-        Signature sig = Signature.getInstance(algorithm, provider);
-        sig.initSign(keyPair.getPQCPrivateKey());
-        sig.update(data);
-        return sig.sign();
+    private static byte[] signWithPQC(byte[] data, HybridKeyPair keyPair) {
+        return MLDSASigner.sign(data, keyPair.getPQCPrivateKey(), keyPair.getPQCAlgorithm());
     }
 
     /**
@@ -172,15 +172,12 @@ public final class HybridSignatureManager {
     }
 
     /**
-     * Internal method to verify PQC signature.
+     * Internal method to verify the PQC signature (ML-DSA), delegating to {@link MLDSAVerifier}.
      */
     private static boolean verifyPQC(byte[] data, HybridSignaturePair signaturePair,
-                                     HybridKeyPair keyPair, Provider provider) throws Exception {
-        String algorithm = signaturePair.getPQCAlgorithm();
-        Signature sig = Signature.getInstance(algorithm, provider);
-        sig.initVerify(keyPair.getPQCPublicKey());
-        sig.update(data);
-        return sig.verify(signaturePair.getPQCSignature());
+                                     HybridKeyPair keyPair) {
+        return MLDSAVerifier.verify(data, signaturePair.getPQCSignature(),
+                keyPair.getPQCPublicKey(), signaturePair.getPQCAlgorithm());
     }
 
     /**
@@ -195,7 +192,7 @@ public final class HybridSignatureManager {
      */
     private static byte[] hashData(byte[] data) {
         try {
-            java.security.MessageDigest md = java.security.MessageDigest.getInstance("SHA-256", "BC");
+            MessageDigest md = MessageDigest.getInstance("SHA-256", "BC");
             return md.digest(data);
         } catch (Exception e) {
             throw new PQCHybridException("Failed to hash data", e);

@@ -9,7 +9,6 @@ import com.pqc.hybrid.core.signature.HybridSignatureManager;
 import com.pqc.hybrid.core.signature.HybridSignaturePair;
 import com.pqc.hybrid.core.signature.DualSignatureStrategy;
 import com.pqc.hybrid.core.signature.DualSignatureValidator;
-import com.pqc.hybrid.core.config.CompositeAlgorithm;
 import com.pqc.hybrid.core.certificate.HybridX509CertificateBuilder;
 import com.pqc.hybrid.core.certificate.HybridCertificateValidator;
 import com.pqc.hybrid.core.certificate.CertificateSigningRequestBuilder;
@@ -19,6 +18,8 @@ import com.pqc.hybrid.core.model.HybridCertificateInfo;
 import com.pqc.hybrid.core.exception.PQCHybridException;
 import com.pqc.hybrid.core.exception.CertificateException;
 import com.pqc.hybrid.core.exception.InvalidSignatureException;
+
+import org.bouncycastle.pkcs.PKCS10CertificationRequest;
 
 import javax.security.auth.x500.X500Principal;
 import java.security.PublicKey;
@@ -37,10 +38,10 @@ import java.util.logging.Logger;
  * - Building hybrid X.509 certificates
  * - Creating Certificate Signing Requests (CSRs)
  *
- * All operations use BouncyCastle 1.77+ with NIST-standardized PQC algorithms.
+ * All operations use BouncyCastle 1.84 with NIST-standardized PQC algorithms.
  *
- * Example Usage:
- * ```java
+ * <p>Example usage:
+ * <pre>{@code
  * // Initialize the library
  * PQCHybridCertificateAPI api = new PQCHybridCertificateAPI();
  * api.initialize();
@@ -50,7 +51,7 @@ import java.util.logging.Logger;
  *
  * // Sign data with both classical and PQC algorithms
  * byte[] data = "Important message".getBytes();
- * HybridSignaturePair signature = api.signData(data, keyPair);
+ * byte[] signature = api.signData(data, keyPair);
  *
  * // Verify the hybrid signature
  * boolean isValid = api.verifySignature(data, signature, keyPair);
@@ -62,7 +63,7 @@ import java.util.logging.Logger;
  *     .withIssuerDN("CN=Example CA,O=Example,C=US")
  *     .build();
  * X509Certificate cert = api.generateHybridCertificate(config, keyPair);
- * ```
+ * }</pre>
  *
  * @author PQC Hybrid Team
  * @version 1.0.0-BETA
@@ -370,8 +371,8 @@ public final class PQCHybridCertificateAPI {
      * @param issuerPublicKey the issuer's public key (null for self-signed)
      * @return validation result with detailed information
      */
-    public HybridCertificateValidator.ValidationResult validateCertificate(X509Certificate certificate, 
-                                                                           java.security.PublicKey issuerPublicKey) {
+    public HybridCertificateValidator.ValidationResult validateCertificate(X509Certificate certificate,
+                                                                           PublicKey issuerPublicKey) {
         ensureInitialized();
         Objects.requireNonNull(certificate, "Certificate cannot be null");
         return HybridCertificateValidator.validateComprehensive(certificate, issuerPublicKey);
@@ -385,7 +386,7 @@ public final class PQCHybridCertificateAPI {
      * @return the PKCS10CertificationRequest
      * @throws CertificateException if CSR generation fails
      */
-    public org.bouncycastle.pkcs.PKCS10CertificationRequest generateCertificateSigningRequest(
+    public PKCS10CertificationRequest generateCertificateSigningRequest(
             String subjectDN, HybridKeyPair keyPair) throws CertificateException {
         ensureInitialized();
         Objects.requireNonNull(subjectDN, "Subject DN cannot be null");
@@ -409,7 +410,7 @@ public final class PQCHybridCertificateAPI {
      * @return the PKCS10CertificationRequest
      * @throws CertificateException if CSR generation fails
      */
-    public org.bouncycastle.pkcs.PKCS10CertificationRequest generateCertificateSigningRequest(
+    public PKCS10CertificationRequest generateCertificateSigningRequest(
             String subjectDN,
             PublicKey subjectClassicalPublicKey,
             PublicKey subjectPqcPublicKey,
@@ -535,7 +536,7 @@ public final class PQCHybridCertificateAPI {
      * Gets the library version information.
      */
     public static String getLibraryInfo() {
-        return String.format("PQC Hybrid Certificates Library v%s (BouncyCastle 1.77+, Java 21+)", VERSION);
+        return String.format("PQC Hybrid Certificates Library v%s (BouncyCastle 1.84, Java 21+)", VERSION);
     }
 
     @Override

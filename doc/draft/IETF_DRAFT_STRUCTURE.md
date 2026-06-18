@@ -1,3 +1,13 @@
+> 📄 **Material de referência (IETF) — não é a documentação deste projeto.**
+>
+> Anotações sobre o draft **draft-ietf-lamps-pq-composite-sigs-18** (assinaturas *Composite* ML-DSA),
+> usado como **ponto de partida do TCC, não seguido à risca**. Descreve o modelo **Composite**, que
+> nesta biblioteca é o caminho **experimental, não ligado à API** — o caminho ativo de certificados
+> usa o modelo **Catalyst** (alt-signature, OIDs 2.5.29.72/.73/.74). Para o projeto real, veja o
+> [README do repositório](../../README.md).
+
+---
+
 # IETF Draft Structure: Composite ML-DSA
 
 ## Status

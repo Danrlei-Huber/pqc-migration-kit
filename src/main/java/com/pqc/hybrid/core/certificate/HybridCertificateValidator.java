@@ -7,14 +7,14 @@ import com.pqc.hybrid.core.exception.CertificateException;
 import com.pqc.hybrid.core.exception.InvalidSignatureException;
 import com.pqc.hybrid.core.keygen.HybridKeyPair;
 import com.pqc.hybrid.core.model.HybridCertificateInfo;
-import com.pqc.hybrid.core.signature.HybridSignatureManager;
-import com.pqc.hybrid.core.signature.HybridSignaturePair;
+import com.pqc.hybrid.core.signature.ml_dsa.MLDSAVerifier;
 
 import org.bouncycastle.asn1.ASN1BitString;
 import org.bouncycastle.asn1.ASN1Encoding;
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import org.bouncycastle.asn1.ASN1OctetString;
 import org.bouncycastle.asn1.DERBitString;
+import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.asn1.x509.Extension;
 import org.bouncycastle.asn1.x509.Extensions;
 import org.bouncycastle.asn1.x509.ExtensionsGenerator;
@@ -24,9 +24,7 @@ import org.bouncycastle.asn1.x509.V3TBSCertificateGenerator;
 import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
 
 import java.io.IOException;
-import java.security.Provider;
 import java.security.PublicKey;
-import java.security.Signature;
 import java.security.SignatureException;
 import java.security.cert.CertPath;
 import java.security.cert.CertPathValidator;
@@ -73,8 +71,8 @@ public final class HybridCertificateValidator {
 
     public static boolean validateDNs(X509Certificate certificate) {
         Objects.requireNonNull(certificate, "Certificate cannot be null");
-        String subjectDN = certificate.getSubjectDN().getName();
-        String issuerDN = certificate.getIssuerDN().getName();
+        String subjectDN = certificate.getSubjectX500Principal().getName();
+        String issuerDN = certificate.getIssuerX500Principal().getName();
         boolean valid = subjectDN != null && !subjectDN.isEmpty()
                      && issuerDN != null && !issuerDN.isEmpty();
         if (valid) {
@@ -157,44 +155,42 @@ public final class HybridCertificateValidator {
         Map<String, Extension> extensions = new HashMap<>();
 
         try {
-            for (String oid : certificate.getCriticalExtensionOIDs()) {
-                if (oid.equals(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_ALGORITHM) ||
-                    oid.equals(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_VALUE) ||
-                    oid.equals(AlgorithmOIDRegistry.OID_SUBJECT_ALT_PUBLIC_KEY_INFO)) {
-                    byte[] extValue = certificate.getExtensionValue(oid);
-                    if (extValue != null) {
-                        Extension ext = new Extension(
-                                new ASN1ObjectIdentifier(oid),
-                                true,
-                                extValue
-                        );
-                        extensions.put(oid, ext);
-                    }
-                }
-            }
-
-            for (String oid : certificate.getNonCriticalExtensionOIDs()) {
-                if (oid.equals(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_ALGORITHM) ||
-                    oid.equals(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_VALUE) ||
-                    oid.equals(AlgorithmOIDRegistry.OID_SUBJECT_ALT_PUBLIC_KEY_INFO)) {
-                    if (!extensions.containsKey(oid)) {
-                        byte[] extValue = certificate.getExtensionValue(oid);
-                        if (extValue != null) {
-                            Extension ext = new Extension(
-                                    new ASN1ObjectIdentifier(oid),
-                                    false,
-                                    extValue
-                            );
-                            extensions.put(oid, ext);
-                        }
-                    }
-                }
-            }
+            collectPQCExtensions(certificate, certificate.getCriticalExtensionOIDs(), true, extensions);
+            collectPQCExtensions(certificate, certificate.getNonCriticalExtensionOIDs(), false, extensions);
         } catch (Exception e) {
             logger.warning("Error extracting PQC extensions: " + e.getMessage());
         }
 
         return extensions;
+    }
+
+    /**
+     * Collects the Catalyst alternative-signature extensions found in {@code oids} into
+     * {@code target}, tagging each with the given criticality. Extensions already present in
+     * {@code target} are left untouched, so a critical entry takes precedence over a
+     * non-critical one with the same OID.
+     */
+    private static void collectPQCExtensions(X509Certificate certificate, Set<String> oids,
+                                             boolean critical, Map<String, Extension> target) {
+        if (oids == null) {
+            return;
+        }
+        for (String oid : oids) {
+            if (!isPQCExtensionOid(oid) || target.containsKey(oid)) {
+                continue;
+            }
+            byte[] extValue = certificate.getExtensionValue(oid);
+            if (extValue != null) {
+                target.put(oid, new Extension(new ASN1ObjectIdentifier(oid), critical, extValue));
+            }
+        }
+    }
+
+    /** @return true if {@code oid} is one of the three Catalyst alternative-signature extension OIDs. */
+    private static boolean isPQCExtensionOid(String oid) {
+        return AlgorithmOIDRegistry.OID_ALT_SIGNATURE_ALGORITHM.equals(oid)
+                || AlgorithmOIDRegistry.OID_ALT_SIGNATURE_VALUE.equals(oid)
+                || AlgorithmOIDRegistry.OID_SUBJECT_ALT_PUBLIC_KEY_INFO.equals(oid);
     }
 
     public static String extractPQCAlgorithmOID(X509Certificate certificate) {
@@ -204,10 +200,8 @@ public final class HybridCertificateValidator {
             if (extValue == null) {
                 return null;
             }
-            org.bouncycastle.asn1.ASN1OctetString octetStr = 
-                org.bouncycastle.asn1.ASN1OctetString.getInstance(extValue);
-            org.bouncycastle.asn1.x509.AlgorithmIdentifier algId = 
-                org.bouncycastle.asn1.x509.AlgorithmIdentifier.getInstance(octetStr.getOctets());
+            ASN1OctetString octetStr = ASN1OctetString.getInstance(extValue);
+            AlgorithmIdentifier algId = AlgorithmIdentifier.getInstance(octetStr.getOctets());
             return algId.getAlgorithm().getId();
         } catch (Exception e) {
             logger.warning("Failed to extract PQC algorithm OID: " + e.getMessage());
@@ -222,10 +216,8 @@ public final class HybridCertificateValidator {
             if (extValue == null) {
                 return null;
             }
-            org.bouncycastle.asn1.ASN1OctetString octetStr = 
-                org.bouncycastle.asn1.ASN1OctetString.getInstance(extValue);
-            org.bouncycastle.asn1.ASN1BitString bitString = 
-                org.bouncycastle.asn1.DERBitString.getInstance(octetStr.getOctets());
+            ASN1OctetString octetStr = ASN1OctetString.getInstance(extValue);
+            ASN1BitString bitString = DERBitString.getInstance(octetStr.getOctets());
             return bitString.getOctets();
         } catch (Exception e) {
             logger.warning("Failed to extract PQC signature: " + e.getMessage());
@@ -240,8 +232,7 @@ public final class HybridCertificateValidator {
             if (extValue == null) {
                 return null;
             }
-            org.bouncycastle.asn1.ASN1OctetString octetStr = 
-                org.bouncycastle.asn1.ASN1OctetString.getInstance(extValue);
+            ASN1OctetString octetStr = ASN1OctetString.getInstance(extValue);
             SubjectPublicKeyInfo spki = SubjectPublicKeyInfo.getInstance(octetStr.getOctets());
             return spki.getPublicKeyData().getBytes();
         } catch (Exception e) {
@@ -290,13 +281,7 @@ public final class HybridCertificateValidator {
 
             byte[] preTbs = reconstructPreTBS(certificate);
 
-            CryptographicProviderFactory.initialize();
-            Provider provider = CryptographicProviderFactory.getProvider();
-
-            Signature sig = Signature.getInstance(algorithm, provider);
-            sig.initVerify(issuerAltPublicKey);
-            sig.update(preTbs);
-            boolean valid = sig.verify(pqcSignature);
+            boolean valid = MLDSAVerifier.verify(preTbs, pqcSignature, issuerAltPublicKey, algorithm);
 
             logger.fine("PQC alternative signature verification result: " + valid);
             return valid;
@@ -420,10 +405,9 @@ public final class HybridCertificateValidator {
             return null;
         }
 
-        org.bouncycastle.asn1.x509.AlgorithmIdentifier algId =
-                org.bouncycastle.asn1.x509.AlgorithmIdentifier.getInstance(altAlg.getParsedValue());
+        AlgorithmIdentifier algId = AlgorithmIdentifier.getInstance(altAlg.getParsedValue());
 
-        byte[] sigBytes = ((org.bouncycastle.asn1.DERBitString) altSig.getParsedValue()).getOctets();
+        byte[] sigBytes = ((DERBitString) altSig.getParsedValue()).getOctets();
 
         byte[] spkiBytes = ASN1OctetString.getInstance(altKey.getParsedValue()).getOctets();
         SubjectPublicKeyInfo spki = SubjectPublicKeyInfo.getInstance(spkiBytes);

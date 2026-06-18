@@ -180,5 +180,5 @@ This document outlines the phased approach to implementing the five key improvem
 - [IETF Drafts](../doc/draft/) - Reference specifications
 
 ---
-*Last Updated: $(date +'%B %d, %Y')*
-*Planning Phase Complete - Ready for Implementation*
+*Last Updated: April 14, 2026 (original plan); revised May 25, 2026.*
+*Planning Phase Complete — Implementation partially done (JaCoCo gate ≥75% met; benchmark scaffolding present; OpenSSL interop and RFC tracker not implemented).*

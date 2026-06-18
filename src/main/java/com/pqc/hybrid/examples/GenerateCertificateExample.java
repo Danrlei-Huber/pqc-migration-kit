@@ -105,7 +105,13 @@ public class GenerateCertificateExample {
             System.out.println("   Valid Until: " + certificate.getNotAfter());
             System.out.println("   Signature Algorithm: " + certificate.getSigAlgName());
             System.out.println("   Public Key Algorithm: " + certificate.getPublicKey().getAlgorithm());
-            System.out.println("   Extensions Count: " + certificate.getExtensionValue("2.5.29.14")); // subjectKeyIdentifier
+            int criticalExt = certificate.getCriticalExtensionOIDs() == null ? 0 : certificate.getCriticalExtensionOIDs().size();
+            int nonCriticalExt = certificate.getNonCriticalExtensionOIDs() == null ? 0 : certificate.getNonCriticalExtensionOIDs().size();
+            System.out.println("   Extensions: " + (criticalExt + nonCriticalExt) + " total (" + criticalExt + " critical)");
+            boolean catalystExtensions = certificate.getExtensionValue("2.5.29.72") != null   // subjectAltPublicKeyInfo
+                    && certificate.getExtensionValue("2.5.29.73") != null                    // altSignatureAlgorithm
+                    && certificate.getExtensionValue("2.5.29.74") != null;                   // altSignatureValue
+            System.out.println("   PQC alt-signature extensions present: " + catalystExtensions);
             System.out.println();
 
             // ═══════════════════════════════════════════════════════════════════════════

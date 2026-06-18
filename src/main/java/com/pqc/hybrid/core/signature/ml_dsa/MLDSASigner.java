@@ -1,133 +1,70 @@
 package com.pqc.hybrid.core.signature.ml_dsa;
 
+import com.pqc.hybrid.core.config.CryptographicProviderFactory;
+import com.pqc.hybrid.core.exception.PQCHybridException;
+
 import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.SecureRandom;
+import java.security.Provider;
 import java.security.Signature;
+import java.util.Objects;
 
 /**
- * ML-DSA (Module-Lattice-Based Digital Signature Algorithm) Signer.
- * 
- * This class provides deterministic signing operations using ML-DSA-44, ML-DSA-65, or ML-DSA-87.
- * ML-DSA is the NIST standardized lattice-based signature algorithm (formerly Dilithium).
- * 
- * Signing is deterministic: given the same message and key, the signature is always identical.
- * This is important for reproducibility and auditability in cryptographic applications.
- * 
- * Design Notes:
- * - Uses BouncyCastle's ML-DSA implementation (bcprov 1.77+)
- * - Signatures are deterministic (no randomness injected)
- * - Supports all three NIST-standardized ML-DSA variants (44, 65, 87)
- * - Input validation performed on data and keys
- * 
- * Example Usage:
- * <pre>
- *     MLDSASigner signer = new MLDSASigner();
- *     byte[] signature = signer.sign(getData(), privateKey);
- *     // signature is now ML-DSA signature (size depends on variant)
- * </pre>
- * 
+ * Centralized ML-DSA (Module-Lattice-Based Digital Signature Algorithm, FIPS 204, formerly
+ * Dilithium) signing.
+ *
+ * <p>ML-DSA is the post-quantum half of every hybrid signature and certificate produced by this
+ * library. All ML-DSA signing in the active path flows through this class, so the algorithm lives
+ * in a single, testable place instead of being duplicated as inline {@code Signature.getInstance}
+ * calls. Signing delegates to BouncyCastle's JCA provider; the concrete parameter set
+ * (ML-DSA-44/65/87) is selected by the {@code algorithm} name passed in.
+ *
+ * <p>Signing uses the provider's default (hedged) randomness, exactly like a direct JCA call.
+ *
  * @author PQC Hybrid Team
- * @version 1.0.0
- * @since 2026-04-14
+ * @version 1.0.0-BETA
  * @see MLDSAVerifier
  */
-public class MLDSASigner {
+public final class MLDSASigner {
 
-    /** The underlying BouncyCastle ML-DSA signature algorithm */
-    private static final String ALGORITHM = "ML-DSA";
-    
-    /** SecureRandom instance for any potential randomness (though ML-DSA is deterministic) */
-    private final SecureRandom secureRandom;
-
-    /**
-     * Constructs an ML-DSA signer with default SecureRandom.
-     */
-    public MLDSASigner() {
-        this.secureRandom = new SecureRandom();
+    private MLDSASigner() {
+        throw new AssertionError("Cannot instantiate MLDSASigner");
     }
 
     /**
-     * Constructs an ML-DSA signer with a specific SecureRandom instance.
-     * 
-     * @param secureRandom the SecureRandom to use (may not be used since ML-DSA is deterministic)
+     * Signs {@code data} with an ML-DSA private key.
+     *
+     * @param data       the data to sign
+     * @param privateKey the ML-DSA private key
+     * @param algorithm  the ML-DSA parameter set name (e.g. {@code "ML-DSA-44"})
+     * @return the ML-DSA signature bytes
+     * @throws NullPointerException if any argument is null
+     * @throws PQCHybridException   if signing fails
      */
-    public MLDSASigner(SecureRandom secureRandom) {
-        this.secureRandom = secureRandom != null ? secureRandom : new SecureRandom();
-    }
-
-    /**
-     * Signs data with the given ML-DSA private key.
-     * 
-     * Signing is deterministic: the same data and key always produce the same signature.
-     * Output size depends on the ML-DSA variant:
-     * - ML-DSA-44: ~2420 bytes
-     * - ML-DSA-65: ~3293 bytes
-     * - ML-DSA-87: ~4595 bytes
-     * 
-     * @param data the data to sign (must not be null)
-     * @param privateKey the ML-DSA private key (must not be null)
-     * @return the signature bytes (deterministic)
-     * @throws IllegalArgumentException if data or privateKey is null
-     * @throws IllegalStateException if the private key is invalid or if signing fails
-     */
-    public byte[] sign(byte[] data, PrivateKey privateKey) {
-        if (data == null) {
-            throw new IllegalArgumentException("Data to sign cannot be null");
-        }
-        if (privateKey == null) {
-            throw new IllegalArgumentException("Private key cannot be null");
-        }
+    public static byte[] sign(byte[] data, PrivateKey privateKey, String algorithm) {
+        Objects.requireNonNull(data, "Data cannot be null");
+        Objects.requireNonNull(privateKey, "Private key cannot be null");
+        Objects.requireNonNull(algorithm, "Algorithm cannot be null");
 
         try {
-            // Use JCA Signature API with BouncyCastle provider
-            Signature signer = Signature.getInstance("ML-DSA", "BC");
+            CryptographicProviderFactory.initialize();
+            Provider provider = CryptographicProviderFactory.getProvider();
+
+            Signature signer = Signature.getInstance(algorithm, provider);
             signer.initSign(privateKey);
             signer.update(data);
-            
-            byte[] signature = signer.sign();
-            
-            if (signature == null || signature.length == 0) {
-                throw new IllegalStateException("Signature generation failed: empty signature");
-            }
-            
-            return signature;
-            
-        } catch (IllegalArgumentException | IllegalStateException e) {
-            throw e;
+            return signer.sign();
         } catch (Exception e) {
-            throw new IllegalStateException("ML-DSA signing failed: " + e.getMessage(), e);
+            throw new PQCHybridException("ML-DSA signing failed: " + e.getMessage(), e);
         }
     }
 
     /**
-     * Returns the name of this signer.
-     * 
-     * @return "ML-DSA"
-     */
-    public String getAlgorithmName() {
-        return ALGORITHM;
-    }
-
-    /**
-     * Validates that a key is a valid ML-DSA private key.
-     * 
-     * @param key the key to validate
-     * @return true if key can be used for ML-DSA signing, false otherwise
+     * Checks whether a key can be used for ML-DSA signing.
+     *
+     * @param key the key to check
+     * @return true if the key's algorithm is an ML-DSA parameter set
      */
     public static boolean isValidPrivateKey(PrivateKey key) {
-        return key != null && "ML-DSA".equals(key.getAlgorithm());
-    }
-
-    /**
-     * Returns a string representation of this signer.
-     * 
-     * @return a description of this signer
-     */
-    @Override
-    public String toString() {
-        return "MLDSASigner{" +
-                "algorithm='" + ALGORITHM + '\'' +
-                '}';
+        return key != null && key.getAlgorithm() != null && key.getAlgorithm().startsWith("ML-DSA");
     }
 }
