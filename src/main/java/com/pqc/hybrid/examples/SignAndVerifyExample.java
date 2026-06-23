@@ -8,17 +8,12 @@ import java.util.Base64;
 
 /**
  * Example: Sign and Verify Data with Hybrid Signatures
- * 
+ *
  * This example demonstrates how to:
  * 1. Generate a hybrid key pair
  * 2. Sign data with both classical and PQC algorithms
  * 3. Verify signatures (both must be valid)
  * 4. Handle tampered data detection
- * 
- * Output: Hybrid signatures demonstrating dual security
- * 
- * @author PQC Hybrid Team
- * @version 1.0.0-BETA
  */
 public class SignAndVerifyExample {
 
@@ -28,23 +23,17 @@ public class SignAndVerifyExample {
         System.out.println("╚════════════════════════════════════════════════════════════╝\n");
 
         try {
-            // ═══════════════════════════════════════════════════════════════════════════
-            // Step 1: Initialize and Generate Keys
-            // ═══════════════════════════════════════════════════════════════════════════
-            System.out.println("📦 Step 1: Initialize API and Generate Keys...");
+            System.out.println("Step 1: Initialize API and Generate Keys...");
             PQCHybridCertificateAPI api = new PQCHybridCertificateAPI();
             api.initialize();
-            
+
             HybridKeyPair keyPair = api.generateHybridKeyPair(256);  // Maximum security
-            System.out.println("   ✅ Generated key pair: " + keyPair.getLabel());
+            System.out.println("   Generated key pair: " + keyPair.getLabel());
             System.out.println("   Classical Algorithm: " + keyPair.getClassicalAlgorithm());
             System.out.println("   PQC Algorithm: " + keyPair.getPQCAlgorithm());
             System.out.println();
 
-            // ═══════════════════════════════════════════════════════════════════════════
-            // Step 2: Sign Data
-            // ═══════════════════════════════════════════════════════════════════════════
-            System.out.println("✍️  Step 2: Sign Important Data...");
+            System.out.println("Step 2: Sign Important Data...");
             byte[] data = "This is a critical document that needs dual-algorithm protection".getBytes(StandardCharsets.UTF_8);
             System.out.println("   Data to sign: " + new String(data, StandardCharsets.UTF_8));
             System.out.println("   Data size: " + data.length + " bytes");
@@ -52,8 +41,8 @@ public class SignAndVerifyExample {
             long startTime = System.currentTimeMillis();
             byte[] signature = api.signData(data, keyPair);
             long endTime = System.currentTimeMillis();
-            
-            System.out.println("   ✅ Signature generated: " + signature.length + " bytes");
+
+            System.out.println("   Signature generated: " + signature.length + " bytes");
             System.out.println("      Signing time: " + (endTime - startTime) + " ms");
             System.out.println();
 
@@ -63,23 +52,17 @@ public class SignAndVerifyExample {
             System.out.println("      " + sigB64.substring(0, Math.min(80, sigB64.length())) + "...");
             System.out.println();
 
-            // ═══════════════════════════════════════════════════════════════════════════
-            // Step 3: Verify Valid Signature
-            // ═══════════════════════════════════════════════════════════════════════════
-            System.out.println("✅ Step 3: Verify Valid Signature...");
+            System.out.println("Step 3: Verify Valid Signature...");
             startTime = System.currentTimeMillis();
             boolean isValid = api.verifySignature(data, signature, keyPair);
             endTime = System.currentTimeMillis();
 
-            System.out.println("   Verification result: " + (isValid ? "✅ VALID" : "❌ INVALID"));
+            System.out.println("   Verification result: " + (isValid ? "VALID" : "INVALID"));
             System.out.println("   Verification time: " + (endTime - startTime) + " ms");
-            System.out.println("   ⚠️  NOTE: Both classical AND PQC signatures must be valid for success");
+            System.out.println("   NOTE: Both classical AND PQC signatures must be valid for success");
             System.out.println();
 
-            // ═══════════════════════════════════════════════════════════════════════════
-            // Step 4: Detect Tampered Data
-            // ═══════════════════════════════════════════════════════════════════════════
-            System.out.println("🔍 Step 4: Detect Tampered Data...");
+            System.out.println("Step 4: Detect Tampered Data...");
             byte[] tamperedData = "This is a FORGED document".getBytes(StandardCharsets.UTF_8);
             System.out.println("   Tampered data: " + new String(tamperedData, StandardCharsets.UTF_8));
 
@@ -87,14 +70,11 @@ public class SignAndVerifyExample {
             boolean isTamperedValid = api.verifySignature(tamperedData, signature, keyPair);
             endTime = System.currentTimeMillis();
 
-            System.out.println("   Verification result: " + (isTamperedValid ? "✅ VALID" : "❌ INVALID (TAMPERING DETECTED)"));
+            System.out.println("   Verification result: " + (isTamperedValid ? "VALID" : "INVALID (TAMPERING DETECTED)"));
             System.out.println("   Verification time: " + (endTime - startTime) + " ms");
             System.out.println();
 
-            // ═══════════════════════════════════════════════════════════════════════════
-            // Step 5: Detect Corrupted Signature
-            // ═══════════════════════════════════════════════════════════════════════════
-            System.out.println("🔍 Step 5: Detect Corrupted Signature...");
+            System.out.println("Step 5: Detect Corrupted Signature...");
             byte[] corruptedSig = signature.clone();
             // Corrupt a byte inside the PQC signature payload (last byte) rather than the
             // 4-byte length-prefix framing, so verification rejects it gracefully (returns
@@ -115,27 +95,26 @@ public class SignAndVerifyExample {
             endTime = System.currentTimeMillis();
 
             System.out.println("   Note: Modified last byte of signature");
-            System.out.println("   Verification result: " + (isCorruptedValid ? "✅ VALID" : "❌ INVALID (CORRUPTION DETECTED)"));
+            System.out.println("   Verification result: " + (isCorruptedValid ? "VALID" : "INVALID (CORRUPTION DETECTED)"));
             System.out.println("   Verification time: " + (endTime - startTime) + " ms");
             System.out.println();
 
-            // ═══════════════════════════════════════════════════════════════════════════
-            // Summary
-            // ═══════════════════════════════════════════════════════════════════════════
-            System.out.println("📊 Summary:");
-            System.out.println("   ✅ Original signature: " + (isValid ? "VALID" : "INVALID"));
-            System.out.println("   ✅ Tampered data: " + (!isTamperedValid ? "DETECTED" : "MISSED"));
-            System.out.println("   ✅ Corrupted signature: " + (!isCorruptedValid ? "DETECTED" : "MISSED"));
+            System.out.println("Summary:");
+            System.out.println("   Original signature: " + (isValid ? "VALID" : "INVALID"));
+            System.out.println("   Tampered data: " + (!isTamperedValid ? "DETECTED" : "MISSED"));
+            System.out.println("   Corrupted signature: " + (!isCorruptedValid ? "DETECTED" : "MISSED"));
             System.out.println();
-            System.out.println("✅ Sign & Verify example completed successfully!");
+            System.out.println("Sign & Verify example completed successfully!");
             System.out.println();
 
         } catch (PQCHybridException e) {
-            System.err.println("❌ PQC Hybrid Error: " + e.getMessage());
+            System.err.println("PQC Hybrid Error: " + e.getMessage());
             e.printStackTrace();
+            System.exit(1);
         } catch (Exception e) {
-            System.err.println("❌ Unexpected Error: " + e.getMessage());
+            System.err.println("Unexpected Error: " + e.getMessage());
             e.printStackTrace();
+            System.exit(1);
         }
     }
 }

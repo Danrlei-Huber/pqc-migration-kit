@@ -121,9 +121,8 @@ public class CertificatePrinter {
             for (String oid : certificate.getCriticalExtensionOIDs()) {
                 count++;
                 hasCritical = true;
-                break;
             }
-            
+
             for (String oid : certificate.getNonCriticalExtensionOIDs()) {
                 count++;
             }

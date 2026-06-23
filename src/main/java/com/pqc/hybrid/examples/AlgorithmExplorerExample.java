@@ -9,17 +9,12 @@ import com.pqc.hybrid.core.exception.PQCHybridException;
 
 /**
  * Example: Explore Supported Algorithms
- * 
+ *
  * This example demonstrates how to:
  * 1. Understand supported classical algorithms
  * 2. Understand supported PQC algorithms
  * 3. Get recommended algorithm pairs for different security levels
  * 4. Compare security levels and sizes
- * 
- * Output: Information about all supported algorithms
- * 
- * @author PQC Hybrid Team
- * @version 1.0.0-BETA
  */
 public class AlgorithmExplorerExample {
 
@@ -29,18 +24,12 @@ public class AlgorithmExplorerExample {
         System.out.println("╚════════════════════════════════════════════════════════════╝\n");
 
         try {
-            // ═══════════════════════════════════════════════════════════════════════════
-            // Initialize API
-            // ═══════════════════════════════════════════════════════════════════════════
-            System.out.println("📦 Initialize API...");
+            System.out.println("Initialize API...");
             PQCHybridCertificateAPI api = new PQCHybridCertificateAPI();
             api.initialize();
-            System.out.println("   ✅ API initialized\n");
+            System.out.println("   API initialized\n");
 
-            // ═══════════════════════════════════════════════════════════════════════════
-            // Classical Algorithms
-            // ═══════════════════════════════════════════════════════════════════════════
-            System.out.println("🔐 CLASSICAL ALGORITHMS:");
+            System.out.println("CLASSICAL ALGORITHMS:");
             System.out.println("   " + String.format("%-15s %-10s %-15s",
                 "Algorithm", "Key Size", "Security Level"));
             System.out.println("   " + "-".repeat(50));
@@ -54,10 +43,7 @@ public class AlgorithmExplorerExample {
             }
             System.out.println();
 
-            // ═══════════════════════════════════════════════════════════════════════════
-            // PQC Algorithms - Signatures
-            // ═══════════════════════════════════════════════════════════════════════════
-            System.out.println("📋 PQC SIGNATURE ALGORITHMS:");
+            System.out.println("PQC SIGNATURE ALGORITHMS:");
             System.out.println("   " + String.format("%-20s %-15s %-15s",
                 "Algorithm", "Security Level", "Public Key (B)"));
             System.out.println("   " + "-".repeat(55));
@@ -85,10 +71,7 @@ public class AlgorithmExplorerExample {
             }
             System.out.println();
 
-            // ═══════════════════════════════════════════════════════════════════════════
-            // PQC Algorithms - KEM
-            // ═══════════════════════════════════════════════════════════════════════════
-            System.out.println("🔑 PQC KEM ALGORITHMS:");
+            System.out.println("PQC KEM ALGORITHMS:");
             System.out.println("   " + String.format("%-20s %-15s %-15s",
                 "Algorithm", "Security Level", "Public Key (B)"));
             System.out.println("   " + "-".repeat(55));
@@ -108,10 +91,7 @@ public class AlgorithmExplorerExample {
             }
             System.out.println();
 
-            // ═══════════════════════════════════════════════════════════════════════════
-            // Recommended Pairs by Security Level
-            // ═══════════════════════════════════════════════════════════════════════════
-            System.out.println("🎯 RECOMMENDED HYBRID PAIRS BY SECURITY LEVEL:");
+            System.out.println("RECOMMENDED HYBRID PAIRS BY SECURITY LEVEL:");
             System.out.println();
 
             int[] securityLevels = {128, 192, 256};
@@ -127,10 +107,7 @@ public class AlgorithmExplorerExample {
                 System.out.println();
             }
 
-            // ═══════════════════════════════════════════════════════════════════════════
-            // Generate and Compare Keys for Each Level
-            // ═══════════════════════════════════════════════════════════════════════════
-            System.out.println("📊 KEY GENERATION PERFORMANCE:");
+            System.out.println("KEY GENERATION PERFORMANCE:");
             System.out.println("   " + String.format("%-15s %-15s %-15s %s",
                 "Security Level", "Algorithm Pair", "Time (ms)", "Status"));
             System.out.println("   " + "-".repeat(65));
@@ -147,20 +124,22 @@ public class AlgorithmExplorerExample {
                     level,
                     pair.getDescription().substring(0, Math.min(15, pair.getDescription().length())),
                     duration,
-                    "✅ Generated"
+                    "Generated"
                 ));
             }
             System.out.println();
 
-            System.out.println("✅ Algorithm explorer example completed successfully!");
+            System.out.println("Algorithm explorer example completed successfully!");
             System.out.println();
 
         } catch (PQCHybridException e) {
-            System.err.println("❌ PQC Hybrid Error: " + e.getMessage());
+            System.err.println("PQC Hybrid Error: " + e.getMessage());
             e.printStackTrace();
+            System.exit(1);
         } catch (Exception e) {
-            System.err.println("❌ Unexpected Error: " + e.getMessage());
+            System.err.println("Unexpected Error: " + e.getMessage());
             e.printStackTrace();
+            System.exit(1);
         }
     }
 }
