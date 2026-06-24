@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  *
  * Analyzes hybrid certificates to extract and display:
  * - Both classical and PQC signatures
- * - Hybrid scheme information (RSA+ML-DSA, ECDSA+ML-KEM combinations)
+ * - Hybrid scheme information (RSA+ML-DSA, ECDSA+ML-DSA combinations)
  * - Alternative signature extensions (altSignatureValue, subjectAltPublicKeyInfo)
  * - Security metadata and OID details
  *
@@ -180,9 +180,7 @@ public class HybridCertificateInspector {
         // Production "Catalyst" model: the PRIMARY signature is classical (RSA/ECDSA) and the
         // post-quantum side lives in the alternative-signature extensions (2.5.29.72/73/74).
         // Also handle the inline case where the primary signature itself is PQC.
-        boolean primaryIsPQC = sigAlgName.contains("ML-DSA")
-                || sigAlgName.contains("SLH-DSA")
-                || sigAlgName.contains("ML-KEM");
+        boolean primaryIsPQC = sigAlgName.contains("ML-DSA");
         boolean hasAltPQC = isHybridCertificate(certificate);
 
         if ((isRSA || isECDSA) && (hasAltPQC || primaryIsPQC)) {

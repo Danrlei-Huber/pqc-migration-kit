@@ -8,7 +8,7 @@ import java.util.Objects;
  * 
  * A hybrid signature consists of:
  * - A classical signature (RSA or ECDSA) for backward compatibility
- * - A PQC signature (ML-DSA, Falcon, or SLH-DSA) for quantum resistance
+ * - A PQC signature (ML-DSA) for quantum resistance
  *
  * Both signatures are computed over the same message and must both validate
  * for the hybrid signature to be considered authentic.

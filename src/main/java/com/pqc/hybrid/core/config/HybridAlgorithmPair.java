@@ -10,7 +10,7 @@ import java.util.Objects;
  * ensuring both are compatible and suitable for hybrid certificate generation.
  *
  * @param classicalAlgorithm the classical algorithm (RSA or ECDSA)
- * @param pqcAlgorithm the PQC algorithm (ML-DSA, Falcon, or SLH-DSA)
+ * @param pqcAlgorithm the PQC algorithm (ML-DSA)
  *
  * @author PQC Hybrid Team
  * @version 1.0.0-BETA

@@ -11,6 +11,12 @@
 
 **Objetivo**: Migração segura e gradual para criptografia pós-quântica sem abandonar compatibilidade com infraestrutura existente.
 
+**Escopo do módulo**: certificados X.509v3 **híbridos** com assinatura dupla — uma assinatura
+**clássica** (RSA ou ECDSA) para compatibilidade retroativa e uma assinatura **pós-quântica**
+com **ML-DSA** (FIPS 204), o único esquema PQC suportado. Ambas precisam ser válidas para o
+certificado ser aceito (lógica **E**). Outros algoritmos PQC (ML-KEM, SLH-DSA, Falcon) **não**
+fazem parte do escopo.
+
 ---
 
 ## Características Principais
@@ -58,7 +64,7 @@ src/main/java/com/pqc/hybrid/core/
 │
 ├── config/                       [Configuração]
 │   ├── ClassicalAlgorithm        ← Enum: RSA-2048, ECDSA-P256, etc
-│   ├── PQCAlgorithm              ← Enum: ML-DSA-65, ML-KEM-768, etc
+│   ├── PQCAlgorithm              ← Enum: ML-DSA-44, ML-DSA-65, ML-DSA-87
 │   ├── HybridAlgorithmPair       ← Record: combina clássico + PQC
 │   ├── HybridCertificateConfig   ← Config builder para certs
 │   └── CryptographicProviderFactory ← Inicializa BouncyCastle
@@ -67,16 +73,14 @@ src/main/java/com/pqc/hybrid/core/
 │   └── AlgorithmOIDRegistry      ← Mapeia OIDs ↔ algoritmos
 │
 ├── model/                        [Modelos de Dados]
-│   ├── HybridCertificateInfo     ← Metadados extraídos do certificado
-│   └── EncapsulationResult       ← Resultado de encapsulação KEM
+│   └── HybridCertificateInfo     ← Metadados extraídos do certificado
 │
 ├── exception/                    [Exceções]
 │   ├── PQCHybridException        ← Base
 │   ├── CertificateException      ← Erros de certificado
 │   ├── InvalidSignatureException ← Assinatura inválida
 │   ├── InvalidKeyException       ← Chave inválida
-│   ├── AlgorithmNotSupportedException ← Algoritmo não suportado
-│   └── EncapsulationException    ← Erro em KEM
+│   └── AlgorithmNotSupportedException ← Algoritmo não suportado
 │
 └── util/                         [Ferramentas]
     ├── printer/                  ← Pretty-printers (cert/chave/assinatura)
@@ -99,7 +103,6 @@ e são **excluídos do gate de cobertura**:
 | Componente | Pacote | Situação |
 |------------|--------|----------|
 | Assinatura **Composite** (`CompositeSigner`/`Verifier`/`SignatureStrategy`, `CompositeKeyGenerator`, chaves Composite, `CompositeAlgorithm`, `PreHashFunction`, `MessageRepresentativeBuilder`) | `config`, `keygen`, `signature` | Implementa `draft-ietf-lamps-pq-composite-sigs`; funcional em testes, mas paralelo ao caminho Catalyst e não plugado na API. |
-| **ML-KEM** (`MLKEMEncapsulator`/`MLKEMDecapsulator`, `KeyEncapsulationWrapper`) | `kem.ml_kem`, `keygen` | Placeholder; encapsulamento/decapsulamento não finalizados. |
 | Wrappers **ML-DSA** (`MLDSASigner`/`MLDSAVerifier`) | `signature.ml_dsa` | Não usados pelo caminho ativo (que assina via BouncyCastle direto). |
 | **Migração** (`LegacyCertificateMigrator`) | `migration` | Esqueleto; o parsing/migração real de certificados legados não está implementado. |
 
@@ -464,22 +467,10 @@ Algoritmos pós-quânticos suportados.
 **Valores**:
 
 ```java
-// Signature Algorithms
+// Signature Algorithms (ML-DSA — único esquema PQC do módulo)
 ML_DSA_44("ML-DSA-44", "2.16.840.1.101.3.4.3.17", 128 bits)
 ML_DSA_65("ML-DSA-65", "2.16.840.1.101.3.4.3.18", 192 bits)
 ML_DSA_87("ML-DSA-87", "2.16.840.1.101.3.4.3.19", 256 bits)
-
-SLH_DSA_SHA2_128S("SLH-DSA-SHA2-128s", "2.16.840.1.101.3.4.3.20", 128 bits)
-SLH_DSA_SHA2_128F("SLH-DSA-SHA2-128f", "2.16.840.1.101.3.4.3.21", 128 bits)
-// ... + SHA2-192 e SHA2-256 variants
-
-Falcon_512("Falcon-512", "1.3.9999.3.1", 128 bits)
-Falcon_1024("Falcon-1024", "1.3.9999.3.4", 256 bits)
-
-// KEM Algorithms
-ML_KEM_512("ML-KEM-512", "2.16.840.1.101.3.4.4.1", 128 bits)
-ML_KEM_768("ML-KEM-768", "2.16.840.1.101.3.4.4.2", 192 bits)
-ML_KEM_1024("ML-KEM-1024", "2.16.840.1.101.3.4.4.3", 256 bits)
 ```
 
 **Métodos**:
@@ -570,11 +561,6 @@ String OID_ML_DSA_44 = "2.16.840.1.101.3.4.3.17"
 String OID_ML_DSA_65 = "2.16.840.1.101.3.4.3.18"
 String OID_ML_DSA_87 = "2.16.840.1.101.3.4.3.19"
 
-// ML-KEM OIDs
-String OID_ML_KEM_512 = "2.16.840.1.101.3.4.4.1"
-String OID_ML_KEM_768 = "2.16.840.1.101.3.4.4.2"
-String OID_ML_KEM_1024 = "2.16.840.1.101.3.4.4.3"
-
 // X.509 Hybrid Extensions (ITU-T X.509 (2019) alternative-signature OIDs)
 String OID_ALT_SIGNATURE_ALGORITHM = "2.5.29.73"
 String OID_ALT_SIGNATURE_VALUE = "2.5.29.74"
@@ -634,8 +620,7 @@ RuntimeException
       ├── CertificateException
       ├── InvalidSignatureException
       ├── InvalidKeyException
-      ├── AlgorithmNotSupportedException
-      └── EncapsulationException
+      └── AlgorithmNotSupportedException
 ```
 
 **Tratamento**:
@@ -695,10 +680,9 @@ chmod +x build.sh
 |-----------|------|---------------|---------------|-----------|
 | ECDSA-P256 | Classical | 91 B | 138 B | 70 B |
 | RSA-2048 | Classical | 294 B | 1704 B | 256 B |
-| ML-DSA-65 | PQC Sig | 1312 B | 2560 B | 2420 B |
-| ML-KEM-768 | PQC KEM | 1184 B | 2400 B | 1088 B |
-| SLH-DSA-SHA2-128f | PQC Sig | 32 B | 64 B | 4784 B |
-| Falcon-512 | PQC Sig | 897 B | 1281 B | 666 B |
+| ML-DSA-44 | PQC Sig | 1312 B | 2560 B | 2420 B |
+| ML-DSA-65 | PQC Sig | 1952 B | 4032 B | 3309 B |
+| ML-DSA-87 | PQC Sig | 2592 B | 4896 B | 4627 B |
 
 ---
 

@@ -87,15 +87,6 @@ class ClassicalAlgorithmTest extends BaseTest {
 class PQCAlgorithmTest extends BaseTest {
 
     @Test
-    @DisplayName("should have FALCON algorithms")
-    void test_has_falcon_algorithms() {
-        assertThat(PQCAlgorithm.values()).contains(
-            PQCAlgorithm.FALCON_512,
-            PQCAlgorithm.FALCON_1024
-        );
-    }
-
-    @Test
     @DisplayName("should have ML-DSA algorithms")
     void test_has_ml_dsa_algorithms() {
         assertThat(PQCAlgorithm.values()).contains(
@@ -106,19 +97,14 @@ class PQCAlgorithmTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("should have SLH-DSA algorithms")
-    void test_has_slh_dsa_algorithms() {
-        assertThat(PQCAlgorithm.values()).contains(
-            PQCAlgorithm.SLH_DSA_SHA2_128S,
-            PQCAlgorithm.SLH_DSA_SHA2_128F
-        );
-    }
-
-    @Test
-    @DisplayName("should return non-empty name for FALCON")
-    void test_falcon_algorithm_name() {
-        String name = PQCAlgorithm.FALCON_1024.getName();
-        assertThat(name).isNotEmpty().contains("Falcon");
+    @DisplayName("should only support ML-DSA PQC algorithms")
+    void test_only_ml_dsa_supported() {
+        assertThat(PQCAlgorithm.values()).hasSize(3);
+        for (PQCAlgorithm algo : PQCAlgorithm.values()) {
+            assertThat(algo.getName()).startsWith("ML-DSA");
+            assertThat(algo.getCategory())
+                .isEqualTo(PQCAlgorithm.AlgorithmCategory.SIGNATURE);
+        }
     }
 
     @Test
@@ -129,37 +115,12 @@ class PQCAlgorithmTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("should return non-empty name for SLH-DSA")
-    void test_slh_dsa_algorithm_name() {
-        String name = PQCAlgorithm.SLH_DSA_SHA2_128S.getName();
-        assertThat(name).isNotEmpty().contains("SLH-DSA");
-    }
-
-    @Test
-    @DisplayName("FALCON-512 should be NIST Level 1")
-    void test_falcon_512_nist_level() {
-        // FALCON-512 ≈ NIST Level 1 (128-bit security)
-        assertThat(PQCAlgorithm.FALCON_512.getName()).isNotEmpty();
-    }
-
-    @Test
-    @DisplayName("FALCON-1024 should be NIST Level 5 equivalent")
-    void test_falcon_1024_nist_level() {
-        // FALCON-1024 ≈ NIST Level 5 (256-bit security)
-        assertThat(PQCAlgorithm.FALCON_1024.getName()).isNotEmpty();
-    }
-
-    @Test
     @DisplayName("all PQC algorithms should have unique names")
     void test_all_algorithms_have_unique_names() {
         org.junit.jupiter.api.Assertions.assertAll(
-            () -> assertThat(PQCAlgorithm.FALCON_512.getName()).isNotEmpty(),
-            () -> assertThat(PQCAlgorithm.FALCON_1024.getName()).isNotEmpty(),
             () -> assertThat(PQCAlgorithm.ML_DSA_44.getName()).isNotEmpty(),
             () -> assertThat(PQCAlgorithm.ML_DSA_65.getName()).isNotEmpty(),
-            () -> assertThat(PQCAlgorithm.ML_DSA_87.getName()).isNotEmpty(),
-            () -> assertThat(PQCAlgorithm.SLH_DSA_SHA2_128S.getName()).isNotEmpty(),
-            () -> assertThat(PQCAlgorithm.SLH_DSA_SHA2_128F.getName()).isNotEmpty()
+            () -> assertThat(PQCAlgorithm.ML_DSA_87.getName()).isNotEmpty()
         );
     }
 }

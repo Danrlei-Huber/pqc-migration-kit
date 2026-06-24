@@ -138,9 +138,12 @@ public final class HybridX509CertificateBuilder {
      * KMS, or in-memory keys.
      *
      * <p>The alternative signature is produced over the pre-TBS by BouncyCastle's
-     * {@code build(primarySigner, true, altSigner)}, which also emits the {@code altSignatureAlgorithm}
-     * ({@code 2.5.29.73}) and {@code altSignatureValue} ({@code 2.5.29.74}) extensions from the PQC
-     * signer's algorithm identifier and signature.
+     * {@code build(primarySigner, isCritical, altSigner)}, which also emits the
+     * {@code altSignatureAlgorithm} ({@code 2.5.29.73}) and {@code altSignatureValue}
+     * ({@code 2.5.29.74}) extensions from the PQC signer's algorithm identifier and signature. Their
+     * criticality is taken from {@link HybridCertificateConfig#isAltSignatureExtensionsCritical()}
+     * and defaults to non-critical, so RFC 5280 legacy verifiers ignore them and still accept the
+     * certificate by its classical signature.
      *
      * @param config                     certificate parameters (DNs, validity, serial, SANs, CA flags)
      * @param subjectClassicalPublicKey  the subject's classical public key (goes into the certificate)
@@ -192,7 +195,13 @@ public final class HybridX509CertificateBuilder {
                         subjectPqcPublicKey.getEncoded());
                 certBuilder.addExtension(Extension.subjectAltPublicKeyInfo, false, pqcSPKI);
 
-                holder = certBuilder.build(issuerSigner.classical(), true, issuerSigner.pqc());
+                // Criticality of altSignatureAlgorithm (2.5.29.73) / altSignatureValue (2.5.29.74)
+                // is a migration-phase trade-off (RFC 5280 §4.2). Default is non-critical, so a
+                // legacy verifier ignores the hybrid extensions and still accepts the certificate by
+                // its classical signature (backward-compatible). See
+                // HybridCertificateConfig#isAltSignatureExtensionsCritical().
+                boolean altCritical = config.isAltSignatureExtensionsCritical();
+                holder = certBuilder.build(issuerSigner.classical(), altCritical, issuerSigner.pqc());
                 logger.info("Issued hybrid certificate for " + config.getSubjectDN()
                         + " (issuer: " + issuer + ")");
             } else {

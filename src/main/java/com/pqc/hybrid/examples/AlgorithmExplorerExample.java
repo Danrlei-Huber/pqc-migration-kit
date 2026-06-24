@@ -51,38 +51,10 @@ public class AlgorithmExplorerExample {
             PQCAlgorithm[] sigAlgorithms = {
                 PQCAlgorithm.ML_DSA_44,
                 PQCAlgorithm.ML_DSA_65,
-                PQCAlgorithm.ML_DSA_87,
-                PQCAlgorithm.SLH_DSA_SHA2_128S,
-                PQCAlgorithm.SLH_DSA_SHA2_128F,
-                PQCAlgorithm.SLH_DSA_SHA2_192S,
-                PQCAlgorithm.SLH_DSA_SHA2_192F,
-                PQCAlgorithm.SLH_DSA_SHA2_256S,
-                PQCAlgorithm.SLH_DSA_SHA2_256F,
-                PQCAlgorithm.FALCON_512,
-                PQCAlgorithm.FALCON_1024
+                PQCAlgorithm.ML_DSA_87
             };
 
             for (PQCAlgorithm algo : sigAlgorithms) {
-                System.out.println("   " + String.format("%-20s %-15d %-15d",
-                    algo.getName(),
-                    algo.getSecurityLevel(),
-                    algo.getPublicKeySize()
-                ));
-            }
-            System.out.println();
-
-            System.out.println("PQC KEM ALGORITHMS:");
-            System.out.println("   " + String.format("%-20s %-15s %-15s",
-                "Algorithm", "Security Level", "Public Key (B)"));
-            System.out.println("   " + "-".repeat(55));
-
-            PQCAlgorithm[] kemAlgorithms = {
-                PQCAlgorithm.ML_KEM_512,
-                PQCAlgorithm.ML_KEM_768,
-                PQCAlgorithm.ML_KEM_1024
-            };
-
-            for (PQCAlgorithm algo : kemAlgorithms) {
                 System.out.println("   " + String.format("%-20s %-15d %-15d",
                     algo.getName(),
                     algo.getSecurityLevel(),

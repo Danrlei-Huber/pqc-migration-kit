@@ -503,7 +503,9 @@ public final class HybridCertificateValidator {
 
             PKIXParameters params = new PKIXParameters(Set.of(new TrustAnchor(root, null)));
             params.setRevocationEnabled(false);
-            // The Catalyst alt-signature extensions are marked critical; tell PKIX they are handled.
+            // Mark the Catalyst alt-signature extensions as handled so PKIX accepts them whether the
+            // issuer emitted them critical (strict-hybrid phase) or non-critical (default). Harmless
+            // for the non-critical case, required for the critical one.
             params.addCertPathChecker(new HybridExtensionChecker());
 
             CertPathValidator validator = CertPathValidator.getInstance("PKIX", "BC");

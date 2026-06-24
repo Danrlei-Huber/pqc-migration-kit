@@ -25,8 +25,6 @@ class AlgorithmOIDRegistryTest {
     void test_algorithm_type() {
         assertThat(AlgorithmOIDRegistry.getAlgorithmType(AlgorithmOIDRegistry.OID_ML_DSA_44))
                 .isEqualTo(AlgorithmType.PQC_SIGNATURE);
-        assertThat(AlgorithmOIDRegistry.getAlgorithmType(AlgorithmOIDRegistry.OID_ML_KEM_512))
-                .isEqualTo(AlgorithmType.PQC_KEM);
         assertThat(AlgorithmOIDRegistry.getAlgorithmType(AlgorithmOIDRegistry.OID_RSA))
                 .isEqualTo(AlgorithmType.CLASSICAL);
         assertThat(AlgorithmOIDRegistry.getAlgorithmType("0.0.0.0")).isNull();
@@ -36,7 +34,6 @@ class AlgorithmOIDRegistryTest {
     @DisplayName("isPQC should be true only for PQC signature/KEM OIDs")
     void test_is_pqc() {
         assertThat(AlgorithmOIDRegistry.isPQC(AlgorithmOIDRegistry.OID_ML_DSA_87)).isTrue();
-        assertThat(AlgorithmOIDRegistry.isPQC(AlgorithmOIDRegistry.OID_ML_KEM_1024)).isTrue();
         assertThat(AlgorithmOIDRegistry.isPQC(AlgorithmOIDRegistry.OID_RSA)).isFalse();
         assertThat(AlgorithmOIDRegistry.isPQC("0.0.0.0")).isFalse();
     }

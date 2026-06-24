@@ -14,10 +14,8 @@ import java.util.Map;
  * 
  * OID Standards:
  * - ML-DSA (Digital Signature): 2.16.840.1.101.3.4.3.x (NIST 2024)
- * - ML-KEM (Key Encapsulation): 2.16.840.1.101.3.4.4.x (NIST 2024)
- * - SLH-DSA (Stateless Hash-Based): 2.16.840.1.101.3.4.3.x (NIST 2024)
- * - Falcon (Alternate): 1.3.9999.3.x (NIST 2022)
  * - Classical (RSA, ECDSA): Standard X.509 OIDs
+ * - Composite ML-DSA: draft-ietf-lamps-pq-composite-sigs-18
  * - X.509 Hybrid Extensions: RFC 5280 / draft-ounsworth-pqc-hybrid-x509
  * 
  * @author PQC Hybrid Team
@@ -39,57 +37,6 @@ public final class AlgorithmOIDRegistry {
     
     /** OID for ML-DSA-87 (256-bit security, NIST level 5) */
     public static final String OID_ML_DSA_87 = "2.16.840.1.101.3.4.3.19";
-
-
-    // ============================================================================
-    // ML-KEM OIDs (Module-Lattice-Based Key-Encapsulation Mechanism)
-    // NIST FIPS 203: 2.16.840.1.101.3.4.4.x
-    // ============================================================================
-    
-    /** OID for ML-KEM-512 (128-bit security, NIST level 1) */
-    public static final String OID_ML_KEM_512 = "2.16.840.1.101.3.4.4.1";
-    
-    /** OID for ML-KEM-768 (192-bit security, NIST level 3) */
-    public static final String OID_ML_KEM_768 = "2.16.840.1.101.3.4.4.2";
-    
-    /** OID for ML-KEM-1024 (256-bit security, NIST level 5) */
-    public static final String OID_ML_KEM_1024 = "2.16.840.1.101.3.4.4.3";
-
-
-    // ============================================================================
-    // SLH-DSA OIDs (Stateless Hash-Based Digital Signature Algorithm)
-    // NIST FIPS 205: 2.16.840.1.101.3.4.3.x (same range as ML-DSA)
-    // ============================================================================
-    
-    /** OID for SLH-DSA-SHA2-128s (128-bit security, SHA-256 small) */
-    public static final String OID_SLH_DSA_SHA2_128S = "2.16.840.1.101.3.4.3.20";
-    
-    /** OID for SLH-DSA-SHA2-128f (128-bit security, SHA-256 fast) */
-    public static final String OID_SLH_DSA_SHA2_128F = "2.16.840.1.101.3.4.3.21";
-    
-    /** OID for SLH-DSA-SHA2-192s (192-bit security, SHA-256 small) */
-    public static final String OID_SLH_DSA_SHA2_192S = "2.16.840.1.101.3.4.3.22";
-    
-    /** OID for SLH-DSA-SHA2-192f (192-bit security, SHA-256 fast) */
-    public static final String OID_SLH_DSA_SHA2_192F = "2.16.840.1.101.3.4.3.23";
-    
-    /** OID for SLH-DSA-SHA2-256s (256-bit security, SHA-256 small) */
-    public static final String OID_SLH_DSA_SHA2_256S = "2.16.840.1.101.3.4.3.24";
-    
-    /** OID for SLH-DSA-SHA2-256f (256-bit security, SHA-256 fast) */
-    public static final String OID_SLH_DSA_SHA2_256F = "2.16.840.1.101.3.4.3.25";
-
-
-    // ============================================================================
-    // Falcon OIDs (Alternate lattice-based signature algorithm)
-    // Not yet NIST standardized (provisional): 1.3.9999.3.x
-    // ============================================================================
-    
-    /** OID for Falcon-512 (128-bit security) */
-    public static final String OID_FALCON_512 = "1.3.9999.3.1";
-    
-    /** OID for Falcon-1024 (256-bit security) */
-    public static final String OID_FALCON_1024 = "1.3.9999.3.4";
 
 
     // ============================================================================
@@ -180,24 +127,7 @@ public final class AlgorithmOIDRegistry {
         registerOID(OID_ML_DSA_44, "ML-DSA-44", AlgorithmType.PQC_SIGNATURE);
         registerOID(OID_ML_DSA_65, "ML-DSA-65", AlgorithmType.PQC_SIGNATURE);
         registerOID(OID_ML_DSA_87, "ML-DSA-87", AlgorithmType.PQC_SIGNATURE);
-        
-        // ML-KEM mappings
-        registerOID(OID_ML_KEM_512, "ML-KEM-512", AlgorithmType.PQC_KEM);
-        registerOID(OID_ML_KEM_768, "ML-KEM-768", AlgorithmType.PQC_KEM);
-        registerOID(OID_ML_KEM_1024, "ML-KEM-1024", AlgorithmType.PQC_KEM);
-        
-        // SLH-DSA mappings
-        registerOID(OID_SLH_DSA_SHA2_128S, "SLH-DSA-SHA2-128s", AlgorithmType.PQC_SIGNATURE);
-        registerOID(OID_SLH_DSA_SHA2_128F, "SLH-DSA-SHA2-128f", AlgorithmType.PQC_SIGNATURE);
-        registerOID(OID_SLH_DSA_SHA2_192S, "SLH-DSA-SHA2-192s", AlgorithmType.PQC_SIGNATURE);
-        registerOID(OID_SLH_DSA_SHA2_192F, "SLH-DSA-SHA2-192f", AlgorithmType.PQC_SIGNATURE);
-        registerOID(OID_SLH_DSA_SHA2_256S, "SLH-DSA-SHA2-256s", AlgorithmType.PQC_SIGNATURE);
-        registerOID(OID_SLH_DSA_SHA2_256F, "SLH-DSA-SHA2-256f", AlgorithmType.PQC_SIGNATURE);
-        
-        // Falcon mappings
-        registerOID(OID_FALCON_512, "Falcon-512", AlgorithmType.PQC_SIGNATURE);
-        registerOID(OID_FALCON_1024, "Falcon-1024", AlgorithmType.PQC_SIGNATURE);
-        
+
         // Classical mappings
         registerOID(OID_RSA, "RSA", AlgorithmType.CLASSICAL);
         registerOID(OID_ECDSA, "ECDSA", AlgorithmType.CLASSICAL);
@@ -321,10 +251,6 @@ public final class AlgorithmOIDRegistry {
         sb.append("  ML-DSA-44: ").append(OID_ML_DSA_44).append("\n");
         sb.append("  ML-DSA-65: ").append(OID_ML_DSA_65).append("\n");
         sb.append("  ML-DSA-87: ").append(OID_ML_DSA_87).append("\n");
-        sb.append("ML-KEM Algorithms:\n");
-        sb.append("  ML-KEM-512: ").append(OID_ML_KEM_512).append("\n");
-        sb.append("  ML-KEM-768: ").append(OID_ML_KEM_768).append("\n");
-        sb.append("  ML-KEM-1024: ").append(OID_ML_KEM_1024).append("\n");
         sb.append("Hybrid Extensions:\n");
         sb.append("  altSignatureAlgorithm: ").append(OID_ALT_SIGNATURE_ALGORITHM).append("\n");
         sb.append("  altSignatureValue: ").append(OID_ALT_SIGNATURE_VALUE).append("\n");
@@ -346,12 +272,12 @@ public final class AlgorithmOIDRegistry {
      * Enumeration of algorithm types for classification.
      */
     public enum AlgorithmType {
-        /** Post-quantum signature algorithm (ML-DSA, SLH-DSA, Falcon) */
+        /** Post-quantum signature algorithm (ML-DSA) */
         PQC_SIGNATURE,
-        
-        /** Post-quantum key encapsulation mechanism (ML-KEM) */
+
+        /** Post-quantum key encapsulation mechanism (reserved; unused) */
         PQC_KEM,
-        
+
         /** Classical asymmetric algorithm (RSA, ECDSA) */
         CLASSICAL,
         

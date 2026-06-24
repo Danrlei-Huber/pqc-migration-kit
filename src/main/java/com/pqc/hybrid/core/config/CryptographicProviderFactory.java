@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * Factory for initializing and managing BouncyCastle as the default cryptographic provider.
  * 
  * This class ensures that BouncyCastle is properly installed and configured so that all
- * PQC algorithms (ML-KEM, ML-DSA, SLH-DSA, Falcon) are available for use with standard
+ * PQC algorithms (ML-DSA) are available for use with standard
  * Java cryptography APIs (Signature, KeyPairGenerator, etc.).
  *
  * BouncyCastle must be initialized before any cryptographic operations are performed.
@@ -83,7 +83,7 @@ public final class CryptographicProviderFactory {
     /**
      * Checks if a specific algorithm is available.
      *
-     * @param algorithm the algorithm name (e.g., "ML-DSA-65", "ML-KEM-512")
+     * @param algorithm the algorithm name (e.g., "ML-DSA-65")
      * @return true if the algorithm is available
      */
     public static boolean isAlgorithmAvailable(String algorithm) {
@@ -107,16 +107,9 @@ public final class CryptographicProviderFactory {
         ensureInitialized();
 
         String[] requiredAlgorithms = {
-                "ML-KEM-512",
-                "ML-KEM-768",
-                "ML-KEM-1024",
                 "ML-DSA-44",
                 "ML-DSA-65",
-                "ML-DSA-87",
-                "SLH-DSA-SHA2-128s",
-                "SLH-DSA-SHA2-128f",
-                "Falcon",
-                "Falcon-512"
+                "ML-DSA-87"
         };
 
         StringBuilder unavailable = new StringBuilder();

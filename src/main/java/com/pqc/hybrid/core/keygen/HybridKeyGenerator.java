@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  * 
  * This class manages the generation of both key pair components:
  * - Classical key pair (RSA or ECDSA)
- * - PQC key pair (ML-DSA, Falcon, or SLH-DSA)
+ * - PQC key pair (ML-DSA)
  *
  * Key generation is performed using BouncyCastle's cryptographic provider
  * and follows NIST standards for both classical and PQC algorithms.

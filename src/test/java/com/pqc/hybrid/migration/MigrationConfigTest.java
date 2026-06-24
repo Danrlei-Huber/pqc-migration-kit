@@ -27,14 +27,14 @@ class MigrationConfigTest {
     @DisplayName("should allow configuration customization")
     void test_custom_configuration() {
         MigrationConfig config = new MigrationConfig();
-        config.setPqcAlgorithm(PQCAlgorithm.FALCON_1024);
+        config.setPqcAlgorithm(PQCAlgorithm.ML_DSA_87);
         config.setClassicalAlgorithm(ClassicalAlgorithm.ECDSA_P384);
         config.setPreserveChain(false);
         config.setOutputFormat("DER");
         config.setIncludeMetadata(false);
         config.setValidityDays(730);
 
-        assertThat(config.getPqcAlgorithm()).isEqualTo(PQCAlgorithm.FALCON_1024);
+        assertThat(config.getPqcAlgorithm()).isEqualTo(PQCAlgorithm.ML_DSA_87);
         assertThat(config.getClassicalAlgorithm()).isEqualTo(ClassicalAlgorithm.ECDSA_P384);
         assertThat(config.isPreserveChain()).isFalse();
         assertThat(config.getOutputFormat()).isEqualTo("DER");

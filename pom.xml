@@ -206,10 +206,6 @@
                                 <exclude>**/examples/**</exclude>
                                 <exclude>**/util/printer/**</exclude>
                                 <exclude>**/util/export/**</exclude>
-                                <!-- Experimental components: not wired into the
-                                     production (Catalyst/DualSignature) path -->
-                                <exclude>**/kem/ml_kem/**</exclude>
-                                <exclude>**/keygen/KeyEncapsulationWrapper.*</exclude>
                                 <exclude>**/migration/**</exclude>
                             </excludes>
                             <outputDirectory>target/jacoco-report</outputDirectory>

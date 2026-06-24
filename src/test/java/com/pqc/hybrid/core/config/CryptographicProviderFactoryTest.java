@@ -86,7 +86,7 @@ class CryptographicProviderFactoryTest extends BaseTest {
         Provider provider = CryptographicProviderFactory.getProvider();
 
         // At least one PQC algorithm should be available
-        // (FALCON, Dilithium, or SPHINCS+)
+        // (ML-DSA / Dilithium)
         // This depends on BouncyCastle version and configuration
     }
 
