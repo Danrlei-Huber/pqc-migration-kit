@@ -140,8 +140,12 @@ public final class CertificateSigningRequestBuilder {
         }
     }
 
+    /**
+     * Resolves the classical signature algorithm from the requester's key itself, so the digest
+     * matches the key's strength (P-384 signs with SHA-384, not SHA-256).
+     */
     private String getClassicalSignatureAlgorithmName() {
-        return ClassicalAlgorithm.getSignatureAlgorithmForName(keyPair.getClassicalAlgorithm());
+        return ClassicalAlgorithm.getSignatureAlgorithmForKey(keyPair.getClassicalPublicKey());
     }
 
     private String getPQCSignatureAlgorithmName() {

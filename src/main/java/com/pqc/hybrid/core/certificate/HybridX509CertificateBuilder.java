@@ -292,8 +292,12 @@ public final class HybridX509CertificateBuilder {
         return value.matches("^\\d{1,3}(\\.\\d{1,3}){3}$") || value.contains(":");
     }
 
+    /**
+     * Resolves the classical signature algorithm from the signing key itself, so the digest
+     * matches the key's strength (P-384 signs with SHA-384, not SHA-256).
+     */
     private String getClassicalSignatureAlgorithmName(HybridKeyPair signing) {
-        return ClassicalAlgorithm.getSignatureAlgorithmForName(signing.getClassicalAlgorithm());
+        return ClassicalAlgorithm.getSignatureAlgorithmForKey(signing.getClassicalPublicKey());
     }
 
     /**

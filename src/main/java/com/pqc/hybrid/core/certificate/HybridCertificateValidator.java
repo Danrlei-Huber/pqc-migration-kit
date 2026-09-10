@@ -69,6 +69,18 @@ public final class HybridCertificateValidator {
         }
     }
 
+    /**
+     * Checks that the certificate carries a non-empty subject and issuer distinguished name.
+     *
+     * <p>This is a <b>structural</b> check on a single certificate: RFC 5280 §4.1.2.4 allows an
+     * empty issuer name only in certificates this library never issues, and an end-entity
+     * certificate with an empty subject would be unusable. Consistency between a certificate and
+     * the authority that signed it cannot be decided from one certificate alone — for that, see
+     * {@link #validateIssuerLinkage(X509Certificate, X509Certificate)}.
+     *
+     * @param certificate the certificate to inspect
+     * @return true if both distinguished names are present and non-empty
+     */
     public static boolean validateDNs(X509Certificate certificate) {
         Objects.requireNonNull(certificate, "Certificate cannot be null");
         String subjectDN = certificate.getSubjectX500Principal().getName();
@@ -81,6 +93,36 @@ public final class HybridCertificateValidator {
             logger.warning("Certificate DN validation failed");
         }
         return valid;
+    }
+
+    /**
+     * Checks that a certificate's issuer name matches the subject name of the certificate that
+     * signed it — the name-chaining requirement of RFC 5280 §6.1.3(a)(4).
+     *
+     * <p>Names are compared through {@link javax.security.auth.x500.X500Principal#equals}, which
+     * compares canonical forms rather than raw strings, so equivalent encodings of the same name
+     * are treated as equal.
+     *
+     * @param certificate       the subordinate certificate
+     * @param issuerCertificate the certificate of the issuing authority
+     * @return true if the issuer name chains to the issuer certificate's subject name
+     */
+    public static boolean validateIssuerLinkage(X509Certificate certificate,
+                                                X509Certificate issuerCertificate) {
+        Objects.requireNonNull(certificate, "Certificate cannot be null");
+        Objects.requireNonNull(issuerCertificate, "Issuer certificate cannot be null");
+
+        boolean linked = certificate.getIssuerX500Principal()
+                .equals(issuerCertificate.getSubjectX500Principal());
+        if (linked) {
+            logger.fine("Issuer name chaining check passed");
+        } else {
+            logger.warning("Issuer name chaining failed: certificate issuer '"
+                    + certificate.getIssuerX500Principal().getName()
+                    + "' does not match issuer certificate subject '"
+                    + issuerCertificate.getSubjectX500Principal().getName() + "'");
+        }
+        return linked;
     }
 
     public static boolean validateValidityPeriod(X509Certificate certificate) {
@@ -181,7 +223,13 @@ public final class HybridCertificateValidator {
             }
             byte[] extValue = certificate.getExtensionValue(oid);
             if (extValue != null) {
-                target.put(oid, new Extension(new ASN1ObjectIdentifier(oid), critical, extValue));
+                // getExtensionValue() returns the extnValue already wrapped in a DER OCTET STRING,
+                // while Extension(oid, critical, byte[]) wraps whatever it is given. Passing the
+                // raw bytes therefore double-wraps the value and makes getParsedValue() yield a
+                // DEROctetString instead of the real content. Unwrap once so the Extension holds
+                // exactly the DER the certificate carries.
+                byte[] contents = ASN1OctetString.getInstance(extValue).getOctets();
+                target.put(oid, new Extension(new ASN1ObjectIdentifier(oid), critical, contents));
             }
         }
     }
@@ -405,12 +453,14 @@ public final class HybridCertificateValidator {
             return null;
         }
 
+        // Each getParsedValue() yields the extension's real content: an AlgorithmIdentifier
+        // SEQUENCE for 2.5.29.73, a BIT STRING for 2.5.29.74 and a SubjectPublicKeyInfo
+        // SEQUENCE for 2.5.29.72.
         AlgorithmIdentifier algId = AlgorithmIdentifier.getInstance(altAlg.getParsedValue());
 
-        byte[] sigBytes = ((DERBitString) altSig.getParsedValue()).getOctets();
+        byte[] sigBytes = ASN1BitString.getInstance(altSig.getParsedValue()).getOctets();
 
-        byte[] spkiBytes = ASN1OctetString.getInstance(altKey.getParsedValue()).getOctets();
-        SubjectPublicKeyInfo spki = SubjectPublicKeyInfo.getInstance(spkiBytes);
+        SubjectPublicKeyInfo spki = SubjectPublicKeyInfo.getInstance(altKey.getParsedValue());
 
         return new PQCExtensionsStructure(algId, sigBytes, spki);
     }
@@ -432,15 +482,18 @@ public final class HybridCertificateValidator {
         builder.validityPeriodValid(validateValidityPeriod(certificate));
         builder.publicKeyValid(validatePublicKey(certificate));
 
-        if (issuerPublicKey != null) {
-            try {
-                builder.signatureValid(validateSignature(certificate, issuerPublicKey));
-            } catch (CertificateException e) {
-                logger.warning("Signature validation error: " + e.getMessage());
-                builder.signatureValid(false);
-            }
-        } else {
-            builder.signatureValid(true);
+        // A signature is reported as valid only when one was actually verified. With no issuer
+        // key supplied the only signature that can be checked is a self-signature, so the
+        // certificate is verified against its own public key: a CA-issued certificate then fails
+        // here instead of being waved through on the assumption that it is self-signed.
+        PublicKey verificationKey = (issuerPublicKey != null)
+                ? issuerPublicKey
+                : certificate.getPublicKey();
+        try {
+            builder.signatureValid(validateSignature(certificate, verificationKey));
+        } catch (CertificateException e) {
+            logger.warning("Signature validation error: " + e.getMessage());
+            builder.signatureValid(false);
         }
 
         boolean hasPQCExts = validatePQCExtensions(certificate);
@@ -458,6 +511,67 @@ public final class HybridCertificateValidator {
             builder.pqcSignatureValid(false);
         } else {
             builder.pqcSignatureValid(true);
+        }
+
+        return builder.build();
+    }
+
+    /**
+     * Validates a certificate against the authority that issued it — the correct way to check a
+     * single issuer/subject link of a hybrid chain.
+     *
+     * <p>Unlike {@link #validateComprehensive(X509Certificate, PublicKey, HybridKeyPair)}, every
+     * credential is taken from the issuer's certificate, so nothing depends on the caller passing
+     * the right key: the classical signature is verified with the issuer's public key, the
+     * alternative signature with the issuer's {@code subjectAltPublicKeyInfo}, and the issuer name
+     * is required to chain to the issuer certificate's subject name. No private key material is
+     * involved.
+     *
+     * <p>Pass the certificate itself as {@code issuerCertificate} to validate a self-signed root.
+     *
+     * @param certificate       the certificate to validate
+     * @param issuerCertificate the certificate of the issuing authority
+     * @return the aggregated validation result
+     */
+    public static ValidationResult validateAgainstIssuer(X509Certificate certificate,
+                                                         X509Certificate issuerCertificate) {
+        Objects.requireNonNull(certificate, "Certificate cannot be null");
+        Objects.requireNonNull(issuerCertificate, "Issuer certificate cannot be null");
+
+        ValidationResult.Builder builder = new ValidationResult.Builder();
+
+        builder.notExpiredValid(validateNotExpired(certificate));
+        builder.validityPeriodValid(validateValidityPeriod(certificate));
+        builder.publicKeyValid(validatePublicKey(certificate));
+        builder.dnsValid(validateDNs(certificate)
+                && validateIssuerLinkage(certificate, issuerCertificate));
+
+        try {
+            builder.signatureValid(validateSignature(certificate, issuerCertificate.getPublicKey()));
+        } catch (CertificateException e) {
+            logger.warning("Signature validation error: " + e.getMessage());
+            builder.signatureValid(false);
+        }
+
+        boolean hasPQCExts = validatePQCExtensions(certificate);
+        builder.pqcExtensionsValid(hasPQCExts);
+
+        if (hasPQCExts) {
+            PublicKey issuerAltKey = extractAltPublicKey(issuerCertificate);
+            if (issuerAltKey == null) {
+                logger.warning("Issuer certificate carries no alternative public key; "
+                        + "the alternative signature cannot be verified");
+                builder.pqcSignatureValid(false);
+            } else {
+                try {
+                    builder.pqcSignatureValid(verifyAltSignature(certificate, issuerAltKey));
+                } catch (InvalidSignatureException e) {
+                    logger.warning("PQC signature validation error: " + e.getMessage());
+                    builder.pqcSignatureValid(false);
+                }
+            }
+        } else {
+            builder.pqcSignatureValid(false);
         }
 
         return builder.build();

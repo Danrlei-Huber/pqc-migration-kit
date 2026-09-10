@@ -76,6 +76,6 @@ public class LegacyCertificateMigrator implements MigrationService {
 
     @Override
     public java.util.List<String> getSupportedHybridConfigurations() {
-        return java.util.List.of("HYBRID_RSA_DILITHIUM", "HYBRID_ECDSA_MLDSA");
+        return java.util.List.of("HYBRID_RSA_MLDSA", "HYBRID_ECDSA_MLDSA");
     }
 }

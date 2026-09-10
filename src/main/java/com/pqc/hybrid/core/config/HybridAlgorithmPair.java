@@ -104,9 +104,14 @@ public record HybridAlgorithmPair(ClassicalAlgorithm classicalAlgorithm, PQCAlgo
     }
 
     /**
-     * All recommended hybrid algorithm pairs.
+     * All hybrid algorithm pairs the library ships as ready-made combinations.
      *
-     * @return array of recommended pairs
+     * <p>Not every entry is security-balanced: RSA-4096 provides roughly 152 bits, so pairing it
+     * with ML-DSA-87 (256 bits) leaves the classical half as the weaker link. Check
+     * {@link #isSecurityBalanced()} before adopting a pair, or use
+     * {@link #recommended(int)}, whose three ECDSA pairs are balanced by construction.
+     *
+     * @return array of ready-made pairs
      */
     public static HybridAlgorithmPair[] allRecommended() {
         return new HybridAlgorithmPair[]{

@@ -367,8 +367,14 @@ public final class PQCHybridCertificateAPI {
     /**
      * Validates an X.509 certificate.
      *
+     * <p>When {@code issuerPublicKey} is {@code null} the only signature that can be checked is a
+     * self-signature, so the certificate is verified against its own public key. A certificate
+     * issued by a CA therefore reports {@code signatureValid == false} here — pass the issuer's
+     * key, or prefer {@link #validateCertificateAgainstIssuer(X509Certificate, X509Certificate)},
+     * which also checks issuer name chaining and the alternative signature.
+     *
      * @param certificate the certificate to validate
-     * @param issuerPublicKey the issuer's public key (null for self-signed)
+     * @param issuerPublicKey the issuer's public key, or null to check a self-signature
      * @return validation result with detailed information
      */
     public HybridCertificateValidator.ValidationResult validateCertificate(X509Certificate certificate,
@@ -376,6 +382,26 @@ public final class PQCHybridCertificateAPI {
         ensureInitialized();
         Objects.requireNonNull(certificate, "Certificate cannot be null");
         return HybridCertificateValidator.validateComprehensive(certificate, issuerPublicKey);
+    }
+
+    /**
+     * Validates a certificate against the authority that issued it, taking every credential from
+     * the issuer's certificate: the classical signature is checked with the issuer's public key,
+     * the alternative signature with the issuer's {@code subjectAltPublicKeyInfo}, and the issuer
+     * name must chain to the issuer certificate's subject name.
+     *
+     * <p>Pass the certificate itself as {@code issuerCertificate} to validate a self-signed root.
+     *
+     * @param certificate       the certificate to validate
+     * @param issuerCertificate the certificate of the issuing authority
+     * @return validation result with detailed information
+     */
+    public HybridCertificateValidator.ValidationResult validateCertificateAgainstIssuer(
+            X509Certificate certificate, X509Certificate issuerCertificate) {
+        ensureInitialized();
+        Objects.requireNonNull(certificate, "Certificate cannot be null");
+        Objects.requireNonNull(issuerCertificate, "Issuer certificate cannot be null");
+        return HybridCertificateValidator.validateAgainstIssuer(certificate, issuerCertificate);
     }
 
     /**
