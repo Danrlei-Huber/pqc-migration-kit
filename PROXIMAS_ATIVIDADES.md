@@ -38,9 +38,11 @@ contradizia a própria tese de compatibilidade retroativa.
   `altSignatureExtensionsCriticalWhenOptedIn` (modo estrito). `mvn` verde.
 
 **Pendente (⬜) — fechar a evidência:**
-- [ ] Provar a compatibilidade com um **verificador legado real e externo**
+- [x] Provar a compatibilidade com um **verificador legado real e externo**
       (`openssl verify` ou `CertPathValidator` puro do JDK, sem o `HybridExtensionChecker`),
-      aceitando um cert híbrido com as extensões não críticas.
+      aceitando um cert híbrido com as extensões não críticas. Feito em
+      `LegacyVerifierCompatibilityTest` (com controle negativo) e medido na área
+      `evidencias/09-politica-validacao/` (JDK SUN + OpenSSL 3.0.13); texto em `sec:res:compat`.
 - [x] Discutir o *trade-off* de criticidade por fase de migração no texto
       (feito em `cap-resultados.tex` §Desafios).
 
@@ -87,6 +89,11 @@ repositório (`src/test/java/com/pqc/hybrid/core/benchmark/`, ~21 `@Benchmark`).
       pre-TBS que já contém a SPKI clássica e a chave 2.5.29.72), composição "E" e
       inforjabilidade (cita `bindel:hybrid`/`bindel:pki`), ataque de *stripping*/downgrade e
       mitigação por política do *relying party* + fronteira do artefato.
+- [x] **2026-10-07:** a política deixou de ser só "exposta": `ValidationPolicy` (`REQUIRE_BOTH`
+      padrão via `strict()`, `CLASSICAL_ONLY`, lista de ML-DSA aceitos) decide o veredito, com
+      `ValidationReason`. Seções reescritas em `.tex`: `sec:dev:validacao`, `sec:res:compat`,
+      `sec:res:adversarial` (inclui `sec:res:politica`, a matriz contra Kim et al.),
+      `sec:res:ameaca`, `sec:res:limitacoes`.
 - [ ] (Opcional) elevar a um tratamento formal de separabilidade no arcabouço de Bindel.
 
 ### ✅ 6. Alinhar a tabela de algoritmos à realidade + rebaixar interop
@@ -125,15 +132,15 @@ repositório (`src/test/java/com/pqc/hybrid/core/benchmark/`, ~21 `@Benchmark`).
 - [ ] (Opcional) explicitar no texto cada caso adversarial como um teste nomeado da suíte.
 - [ ] Revisão de forma: pontos finais em títulos, padronização de caixa, etc.
 
-### ⬜ 9. Componentes em aberto (do `TODO.md` e da via de pesquisa)
+### ✅ 9. Componentes em aberto (do `TODO.md` e da via de pesquisa)
 
 - [x] ML-KEM: **removido do módulo** (escopo reduzido a ML-DSA); deixou de ser pendência.
-- [ ] `LegacyCertificateMigrator`: "Real migration logic not implemented".
-- [ ] Decidir o destino do código **Composite** (funcional, mas desconectado da fachada):
-      manter como exploração rotulada **ou** remover da via "de produção 1.0.0-BETA".
+- [x] `LegacyCertificateMigrator`: pacote `migration` **removido** (era esqueleto).
+- [x] Código **Composite**: **removido** (desconectado da fachada; não sustenta a tabela
+      "Lógica E", que vem do `DualSignatureStrategy`).
 
 ---
 
 **Observações para revisão posterior:** `AlgorithmType.PQC_KEM` e
 `PQCAlgorithmDefinition.isKeyEncapsulation()` (hoje sempre `false`) ficaram como membros mortos —
-podem ser removidos depois. Mantido: clássicos RSA/ECDSA e a via Composite (baseada em ML-DSA).
+podem ser removidos depois. Mantido: clássicos RSA/ECDSA.

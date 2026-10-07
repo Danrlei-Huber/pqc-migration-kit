@@ -102,9 +102,11 @@ e são **excluídos do gate de cobertura**:
 
 | Componente | Pacote | Situação |
 |------------|--------|----------|
-| Assinatura **Composite** (`CompositeSigner`/`Verifier`/`SignatureStrategy`, `CompositeKeyGenerator`, chaves Composite, `CompositeAlgorithm`, `PreHashFunction`, `MessageRepresentativeBuilder`) | `config`, `keygen`, `signature` | Implementa `draft-ietf-lamps-pq-composite-sigs`; funcional em testes, mas paralelo ao caminho Catalyst e não plugado na API. |
 | Wrappers **ML-DSA** (`MLDSASigner`/`MLDSAVerifier`) | `signature.ml_dsa` | Não usados pelo caminho ativo (que assina via BouncyCastle direto). |
-| **Migração** (`LegacyCertificateMigrator`) | `migration` | Esqueleto; o parsing/migração real de certificados legados não está implementado. |
+
+> A assinatura *composite* (`draft-ietf-lamps-pq-composite-sigs`) e o pacote `migration`
+> (esqueleto sem implementação) foram **removidos** nesta versão: estavam fora do caminho
+> Catalyst e não sustentavam nenhuma funcionalidade da API.
 
 ---
 
@@ -330,38 +332,56 @@ X509Certificate cert = new HybridX509CertificateBuilder(config, keyPair)
 
 #### `HybridCertificateValidator`
 
-Classe **estática** para validar certificados híbridos.
+Classe **estática** para validar certificados híbridos. Toda credencial é tirada dos
+certificados apresentados; a decisão de aceitar é de uma `ValidationPolicy`.
 
-**Métodos**:
+**Métodos recomendados**:
 
 ```java
-// Verificar se não expirou
-public static boolean validateNotExpired(X509Certificate certificate)
+// Um certificado contra o emissor (clássica + alternativa + encadeamento de nomes)
+public static ValidationResult validateAgainstIssuer(X509Certificate cert, X509Certificate issuer)
+public static ValidationResult validateAgainstIssuer(X509Certificate cert, X509Certificate issuer,
+                                                     ValidationPolicy policy)
 
-// Verificar DNs
-public static boolean validateDNs(X509Certificate certificate)
-
-// Verificar período de validade
-public static boolean validateValidityPeriod(X509Certificate certificate)
-
-// Validação completa
-public static boolean validateFull(X509Certificate certificate, 
-                                   HybridKeyPair keyPair)
-    throws InvalidSignatureException
+// Cadeia completa, folha → … → raiz: PKIX (clássica) + assinatura alternativa elo a elo
+public static HybridChainValidationResult validateHybridChain(List<X509Certificate> chain)
+public static HybridChainValidationResult validateHybridChain(List<X509Certificate> chain,
+                                                              ValidationPolicy policy)
 ```
+
+Sem política explícita vale `ValidationPolicy.strict()`: `REQUIRE_BOTH` com ML-DSA-44/65/87.
+
+| Política | Decide por | Uso |
+|----------|-----------|-----|
+| `ValidationPolicy.strict()` | clássica **e** alternativa (padrão) | parte confiante que exige a componente PQ |
+| `ValidationPolicy.requireBoth(Set<PQCAlgorithm>)` | idem, restringindo o algoritmo alternativo | ex.: só ML-DSA-65/87 |
+| `ValidationPolicy.classicalOnly()` | só a clássica (PQ reportada, não decide) | fase inicial da migração; controle |
+
+O resultado traz `classicalValid()`/`pqcValid()` como **diagnóstico**, `accepted()` como
+**veredito** e `reasons()` — uma lista de `ValidationReason(code, chainIndex, detail)`, vazia
+exatamente quando aceito. Códigos: `CLASSICAL_PATH_INVALID`, `ALT_EXTENSIONS_MISSING`,
+`ALT_SIGNATURE_INVALID`, `ALT_ALGORITHM_NOT_ALLOWED`, `ISSUER_ALT_KEY_MISSING`,
+`ISSUER_NAME_MISMATCH`.
+
+**Obsoletos** (`@Deprecated`): `validateComprehensive` e `validatePQCSignature` (verificam a
+assinatura alternativa com a chave do *sujeito*, correto só para autoassinados) e, na fachada,
+`validateCertificate` e `generateCompleteHybridCertificate` (atalho de demonstração; use
+`createRootCA` + `issueCertificate`).
 
 **Exemplo**:
 
 ```java
-X509Certificate cert = /* ... */;
+HybridChainValidationResult r = HybridCertificateValidator.validateHybridChain(
+        List.of(folha, subCa, raiz),
+        ValidationPolicy.requireBoth(EnumSet.of(PQCAlgorithm.ML_DSA_65, PQCAlgorithm.ML_DSA_87)));
 
-// Verificar múltiplos aspectos
-if (HybridCertificateValidator.validateNotExpired(cert) &&
-    HybridCertificateValidator.validateDNs(cert) &&
-    HybridCertificateValidator.validateFull(cert, keyPair)) {
-    System.out.println("Certificado válido!");
+if (!r.accepted()) {
+    r.reasons().forEach(m -> System.err.println(m.code() + " no elo " + m.chainIndex()));
 }
 ```
+
+> A validação **não** consulta revogação (CRL/OCSP); isso fica para a camada de gestão do
+> ciclo de vida.
 
 #### `CertificateSigningRequestBuilder`
 
@@ -714,11 +734,11 @@ PrivateKey privKey = keyPair.getClassicalPrivateKey();
 
 ### 4. Validar Certificados Completamente
 ```java
-boolean allValid = 
-    HybridCertificateValidator.validateNotExpired(cert) &&
-    HybridCertificateValidator.validateDNs(cert) &&
-    HybridCertificateValidator.validateValidityPeriod(cert) &&
-    HybridCertificateValidator.validateFull(cert, keyPair);
+// Valide a cadeia inteira e decida pelo veredito da política, não por flags soltas:
+// um verificador que olha só a parte clássica aceita certificados com a parte PQ forjada.
+boolean aceito = HybridCertificateValidator
+        .validateHybridChain(List.of(cert, issuerCert, rootCert))   // strict() por padrão
+        .accepted();
 ```
 
 ### 5. Usar Níveis de Segurança Apropriados
@@ -813,7 +833,7 @@ import java.security.cert.X509Certificate;
 public class ValidateCertificateExample {
     public static void main(String[] args) throws Exception {
         X509Certificate cert = // ... carregar certificado
-        var keyPair = // ... carregar par de chaves
+        X509Certificate issuer = // ... carregar certificado do emissor
         
         // Validações individuais
         System.out.println("Não expirado: " + 
@@ -825,9 +845,10 @@ public class ValidateCertificateExample {
         System.out.println("Período válido: " + 
             HybridCertificateValidator.validateValidityPeriod(cert));
         
-        // Validação completa (inclui assinaturas)
-        System.out.println("Completamente válido: " + 
-            HybridCertificateValidator.validateFull(cert, keyPair));
+        // Validação completa contra o emissor (assinatura clássica e alternativa)
+        var resultado = HybridCertificateValidator.validateAgainstIssuer(cert, issuer);
+        System.out.println("Aceito: " + resultado.isAccepted()
+            + " motivos: " + resultado.getReasons());
     }
 }
 ```

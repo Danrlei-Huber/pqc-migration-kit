@@ -6,7 +6,10 @@ Lista de pendências conhecidas (bugs e melhorias). Itens marcados `[ ]` estão 
 
 ## Bugs
 
-### [ ] `extractCertificateInfo`: falha ao montar `PQCExtensionsStructure`
+### [x] `extractCertificateInfo`: falha ao montar `PQCExtensionsStructure`
+
+> **Resolvido:** `collectPQCExtensions` desembrulha o `extnValue` uma vez; coberto por
+> `PQCExtensionsExtractionTest` ("getPQCExtensions() returns a populated structure, not null").
 
 - **Sintoma (log):**
   ```
