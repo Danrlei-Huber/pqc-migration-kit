@@ -5,7 +5,7 @@ Descrição:                             ECDSA-256 + ML-DSA-44
 Clássico:                              ECDSA_P256 (128 bits)
 Pós-quântico:                          ML-DSA-44 (128 bits)
 Balanceado:                            true
-Tempo de geração:                      5 ms (indicativo, execução única)
+Tempo de geração:                      3 ms (indicativo, execução única)
 
 Artefatos gravados neste caso:
   - chave-publica-classica.der

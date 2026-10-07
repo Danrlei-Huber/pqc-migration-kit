@@ -1,4 +1,4 @@
 Nível    Par                           CSR (bytes)     Assinatura
-128      ECDSA-256 + ML-DSA-44                4054 SHA256withECDSA
+128      ECDSA-256 + ML-DSA-44                4055 SHA256withECDSA
 192      ECDSA-384 + ML-DSA-65                5645 SHA384withECDSA
 256      ECDSA-521 + ML-DSA-87                7677 SHA512withECDSA

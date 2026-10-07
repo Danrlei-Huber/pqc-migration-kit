@@ -1,11 +1,11 @@
 Hybrid Signature Pair
 ├── Scheme: ECDSA + ML-DSA-65
 ├── Classical Signature:
-│   ├── Size: 102 bytes
+│   ├── Size: 104 bytes
 │   ├── Algorithm: ECDSA
-│   └── Base64: MGQCMFc0+t8LF6zHc9JpiRs03Jbmd6I6CNL80aWPY7Ff2ll8...
+│   └── Base64: MGYCMQCcVB5kggCv/IJ4empJ64R7XmmP2mCgYt0dNvpky40N...
 ├── PQC Signature:
 │   ├── Size: 3309 bytes
 │   ├── Algorithm: ML-DSA-65
-│   └── Base64: fMLRkm70ltJgb+OZPJtYRCUDfrmC9YkS9G11jTSYdc5CLvWH...
-└── Total Size: 3411 bytes (3.33 KB)
+│   └── Base64: zGqsZAwiOW/9NRFigu4QQO0vyAZGARloOiiOFKy2R98KUtRq...
+└── Total Size: 3413 bytes (3.33 KB)

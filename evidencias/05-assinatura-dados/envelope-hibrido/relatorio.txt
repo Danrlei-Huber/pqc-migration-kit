@@ -3,11 +3,11 @@ Envelope de assinatura híbrida
 
 Par de algoritmos:                     ECDSA-384 + ML-DSA-65
 Dados assinados:                       71 bytes
-Envelope completo:                     3416 bytes
+Envelope completo:                     3415 bytes
 Prefixo de tamanho:                    4 bytes (big-endian)
-Assinatura clássica:                   103 bytes
+Assinatura clássica:                   102 bytes
 Assinatura ML-DSA-65:                  3309 bytes
-Sobrecarga sobre a clássica isolada:   33.2x
+Sobrecarga sobre a clássica isolada:   33.5x
 
 Artefatos gravados neste caso:
   - dados-assinados.bin

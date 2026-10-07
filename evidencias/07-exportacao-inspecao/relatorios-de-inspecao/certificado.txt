@@ -1,10 +1,10 @@
 X.509v3 Certificate
 ├── Subject: CN=inspecao.tcc.br,O=TCC,C=BR
 ├── Issuer: CN=inspecao.tcc.br,O=TCC,C=BR
-├── Serial: 1355176456171765328624287229999745311315792801458
+├── Serial: 1028234628372339910926844155098911332404799083455
 ├── Validity:
-│   ├── Not Before: 2026-10-07 16:30:02
-│   └── Not After: 2036-10-04 16:30:02
+│   ├── Not Before: 2026-10-07 17:55:53
+│   └── Not After: 2036-10-04 17:55:53
 ├── Public Key: EC-384
 ├── Signature Algorithm: SHA384WITHECDSA
 ├── Extensions: 7 extensions (including critical)

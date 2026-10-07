@@ -1,11 +1,11 @@
 Equivalência entre as saídas PEM e DER
 ======================================
 
-Certificado em DER:                    5871 bytes
-Certificado em PEM:                    8005 bytes (base64 com envelope)
+Certificado em DER:                    5874 bytes
+Certificado em PEM:                    8009 bytes (base64 com envelope)
 PEM decodificado == DER:               sim, byte a byte
 DER reconstrói o certificado:          sim
-SHA-256 do DER:                        08076388bd2702d2a06ac38d2d0e1d71d534c169b171e15fc445db25ba7befa6
+SHA-256 do DER:                        b3bde6c50854223ca7766e12b5ca795e81893313780fabf4832b305c39bfa8a7
 
 Artefatos gravados neste caso:
   - certificado.der

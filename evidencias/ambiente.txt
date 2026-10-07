@@ -1,11 +1,11 @@
 Ambiente de execucao da campanha de validacao
 ============================================================
 
-Data/hora do inicio:     2026-10-07T16:29:53.273217772-03:00
+Data/hora do inicio:     2026-10-07T17:55:51.690854437-03:00
 Java:                    21.0.11 (Eclipse Adoptium)
 JVM:                     OpenJDK 64-Bit Server VM 21.0.11+10-LTS
 Sistema operacional:     Linux 6.18.33.2-microsoft-standard-WSL2 (amd64)
 Provedor criptografico:  BC 1.84
 OpenSSL:                 OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)
-Commit:                  72ba7450b32555ff2c35ba4e61d052328419ebe0
+Commit:                  bb5a9735343513dfb445c2652390963c1d954544
 Arvore de trabalho:      limpa

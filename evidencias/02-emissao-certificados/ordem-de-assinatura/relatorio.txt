@@ -6,9 +6,11 @@ Assinatura clássica sobre TBS:         válida
 
 1. chave pública clássica nos campos tradicionais do TBS
 2. extensão 2.5.29.72 com a chave pública alternativa
-3. assinatura PQC sobre o pre-TBS (contém a 72, ainda sem 73/74)
-4. extensões 2.5.29.73 e 2.5.29.74
-5. assinatura clássica sobre o TBS completo
+3. extensão 2.5.29.73 com o algoritmo da assinatura alternativa
+4. assinatura PQC sobre o pre-TBS (contém 72 e 73; sem o campo
+   signature e sem a 74)
+5. extensão 2.5.29.74 com a assinatura PQC
+6. assinatura clássica sobre o TBS completo
 
 Ambas revalidam no certificado emitido, o que só ocorre se a ordem
 acima for respeitada na emissão e reproduzida na validação.
