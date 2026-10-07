@@ -63,7 +63,10 @@ final class EnvironmentProbe {
 
     private static String gitDirty() {
         try {
-            OpensslRunner.Result result = OpensslRunner.run("git", "status", "--porcelain");
+            // The campaign's own output is excluded: it is being rewritten while this runs, so
+            // counting it would report every campaign as "dirty" and hide real source changes.
+            OpensslRunner.Result result = OpensslRunner.run("git", "status", "--porcelain",
+                    "--", ".", ":(exclude)evidencias");
             if (!result.ok()) {
                 return "desconhecida";
             }
