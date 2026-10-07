@@ -59,7 +59,7 @@ class A9PoliticaValidacaoValidationTest extends ValidationTestBase {
 
     /** Um cenário da matriz: a cadeia apresentada e o que a biblioteca deve decidir. */
     private record Cenario(String id, String titulo, X509Certificate folha, X509Certificate raiz,
-                           boolean strictAceita, boolean restritaAceita,
+                           boolean strictAceita, boolean restritaAceita, boolean classicaAceita,
                            ValidationReason.Code motivoEsperado) {
     }
 
@@ -92,8 +92,9 @@ class A9PoliticaValidacaoValidationTest extends ValidationTestBase {
             assertThat(strict.accepted()).as("strict() em %s", c.id()).isEqualTo(c.strictAceita());
             assertThat(restrita.accepted()).as("REQUIRE_BOTH {65,87} em %s", c.id())
                     .isEqualTo(c.restritaAceita());
-            assertThat(classica.accepted()).as("CLASSICAL_ONLY em %s", c.id()).isTrue();
-            assertThat(classica.classicalValid()).as("parte clássica íntegra em %s", c.id()).isTrue();
+            assertThat(classica.accepted()).as("CLASSICAL_ONLY em %s", c.id()).isEqualTo(c.classicaAceita());
+            assertThat(classica.classicalValid()).as("dimensão clássica em %s", c.id())
+                    .isEqualTo(c.classicaAceita());
             if (c.motivoEsperado() != null) {
                 assertThat(restrita.reasons()).extracting(ValidationReason::code)
                         .contains(c.motivoEsperado());
@@ -125,9 +126,10 @@ class A9PoliticaValidacaoValidationTest extends ValidationTestBase {
                 .nota("Versão do OpenSSL", OpensslRunner.version())
                 .nota("Política restrita", "REQUIRE_BOTH {ML-DSA-65, ML-DSA-87}");
         resumo.texto("matriz.txt", tabela(linhas));
-        resumo.texto("Todos os certificados adversariais têm assinatura clássica válida, produzida")
-                .texto("com a chave clássica verdadeira da AC. JDK e OpenSSL foram executados e seus")
-                .texto("veredictos registrados; apenas o comportamento da biblioteca é afirmado.")
+        resumo.texto("Exceto em 'assinatura-classica-invalida', os certificados adversariais têm")
+                .texto("assinatura clássica válida, produzida com a chave clássica verdadeira da AC.")
+                .texto("JDK e OpenSSL foram executados e seus veredictos registrados; apenas o")
+                .texto("comportamento da biblioteca é afirmado.")
                 .encerra();
     }
 
@@ -140,6 +142,18 @@ class A9PoliticaValidacaoValidationTest extends ValidationTestBase {
         HybridKeyPair chavesFolha = api.generateHybridKeyPair(par192);
         HybridKeyPair chavesAtacante = api.generateHybridKeyPair(par192);
 
+        // Mesma chave clássica e mesmo DN da AC, mas certificado sem as extensões Catalyst.
+        X509Certificate raizClassica = HybridX509CertificateBuilder.builder(
+                        HybridCertificateConfig.builder()
+                                .withAlgorithmPair(par192)
+                                .withSubjectDN(DN_CA)
+                                .withIssuerDN(DN_CA)
+                                .withValidityDays(3650)
+                                .asCertificateAuthority(true)
+                                .build(), chavesCa)
+                .withPQCExtensions(false)
+                .build();
+
         HybridAlgorithmPair par128 = HybridAlgorithmPair.recommended(128); // ECDSA P-256 + ML-DSA-44
         HybridKeyPair chavesCa44 = api.generateHybridKeyPair(par128);
         X509Certificate raiz44 = raizAutoassinada(par128, chavesCa44, DN_CA);
@@ -148,17 +162,25 @@ class A9PoliticaValidacaoValidationTest extends ValidationTestBase {
         return List.of(
                 new Cenario("integro", "Íntegro",
                         folha(par192, chavesFolha, HybridSigner.of(classico(chavesCa), pqc(chavesCa)), raiz),
-                        raiz, true, true, null),
+                        raiz, true, true, true, null),
                 new Cenario("assinadores-misturados",
                         "Assinadores misturados (clássica da AC + ML-DSA do atacante)",
                         folha(par192, chavesFolha, HybridSigner.of(classico(chavesCa), pqc(chavesAtacante)), raiz),
-                        raiz, false, false, ValidationReason.Code.ALT_SIGNATURE_INVALID),
+                        raiz, false, false, true, ValidationReason.Code.ALT_SIGNATURE_INVALID),
                 new Cenario("stripping", "Stripping (só clássico, chave da AC)",
                         folha(par192, chavesFolha, HybridSigner.classicalOnly(classico(chavesCa)), raiz),
-                        raiz, false, false, ValidationReason.Code.ALT_EXTENSIONS_MISSING),
+                        raiz, false, false, true, ValidationReason.Code.ALT_EXTENSIONS_MISSING),
                 new Cenario("algoritmo-fora-da-lista", "Algoritmo alternativo fora da lista (ML-DSA-44)",
                         folha(par128, chavesFolha44, HybridSigner.of(classico(chavesCa44), pqc(chavesCa44)), raiz44),
-                        raiz44, true, false, ValidationReason.Code.ALT_ALGORITHM_NOT_ALLOWED));
+                        raiz44, true, false, true, ValidationReason.Code.ALT_ALGORITHM_NOT_ALLOWED),
+                new Cenario("assinatura-classica-invalida",
+                        "Assinatura clássica inválida (clássica do atacante + ML-DSA da AC)",
+                        folha(par192, chavesFolha, HybridSigner.of(classico(chavesAtacante), pqc(chavesCa)), raiz),
+                        raiz, false, false, false, ValidationReason.Code.CLASSICAL_PATH_INVALID),
+                new Cenario("emissor-sem-chave-alternativa",
+                        "Emissor sem chave alternativa (AC só clássica)",
+                        folha(par192, chavesFolha, HybridSigner.of(classico(chavesCa), pqc(chavesCa)), raizClassica),
+                        raizClassica, false, false, true, ValidationReason.Code.ISSUER_ALT_KEY_MISSING));
     }
 
     private static X509Certificate folha(HybridAlgorithmPair par, HybridKeyPair sujeito, HybridSigner assinador,
