@@ -4,9 +4,10 @@ Matriz: verificadores legados × política da biblioteca
 Versão do OpenSSL:                     OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)
 Política restrita:                     REQUIRE_BOTH {ML-DSA-65, ML-DSA-87}
 
-Todos os certificados adversariais têm assinatura clássica válida, produzida
-com a chave clássica verdadeira da AC. JDK e OpenSSL foram executados e seus
-veredictos registrados; apenas o comportamento da biblioteca é afirmado.
+Exceto em 'assinatura-classica-invalida', os certificados adversariais têm
+assinatura clássica válida, produzida com a chave clássica verdadeira da AC.
+JDK e OpenSSL foram executados e seus veredictos registrados; apenas o
+comportamento da biblioteca é afirmado.
 
 Artefatos gravados neste caso:
   - matriz.txt

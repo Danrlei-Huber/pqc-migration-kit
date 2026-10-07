@@ -3,7 +3,7 @@ ECDSA Public Key (384 bits)
 ├── Type: Public
 ├── Format: X.509
 ├── Size: 384 bits
-└── Base64: MHYwEAYHKoZIzj0CAQYFK4EEACIDYgAEdaQWPxRLXP6cq/VGelBXrFy2XlGuvKdp...
+└── Base64: MHYwEAYHKoZIzj0CAQYFK4EEACIDYgAE/14aGEBI99WUbR3BLKMLt8M+XsbHJb/K...
 
 Elliptic Curve Specific:
   • Curve field size: 384 bits

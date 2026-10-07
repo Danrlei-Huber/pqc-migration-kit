@@ -1,6 +1,8 @@
-| Cenário                                                      | JDK PKIX | openssl verify | strict() | REQUIRE_BOTH {65,87} | CLASSICAL_ONLY | Motivo (REQUIRE_BOTH {65,87})                            |
-| ------------------------------------------------------------ | -------- | -------------- | -------- | -------------------- | -------------- | -------------------------------------------------------- |
-| Íntegro                                                      | aceita   | aceita         | aceita   | aceita               | aceita         | —                                                        |
-| Assinadores misturados (clássica da AC + ML-DSA do atacante) | aceita   | aceita         | rejeita  | rejeita              | aceita         | ALT_SIGNATURE_INVALID@0                                  |
-| Stripping (só clássico, chave da AC)                         | aceita   | aceita         | rejeita  | rejeita              | aceita         | ALT_EXTENSIONS_MISSING@0                                 |
-| Algoritmo alternativo fora da lista (ML-DSA-44)              | aceita   | aceita         | aceita   | rejeita              | aceita         | ALT_ALGORITHM_NOT_ALLOWED@0, ALT_ALGORITHM_NOT_ALLOWED@1 |
+| Cenário                                                            | JDK PKIX | openssl verify | strict() | REQUIRE_BOTH {65,87} | CLASSICAL_ONLY | Motivo (REQUIRE_BOTH {65,87})                            |
+| ------------------------------------------------------------------ | -------- | -------------- | -------- | -------------------- | -------------- | -------------------------------------------------------- |
+| Íntegro                                                            | aceita   | aceita         | aceita   | aceita               | aceita         | —                                                        |
+| Assinadores misturados (clássica da AC + ML-DSA do atacante)       | aceita   | aceita         | rejeita  | rejeita              | aceita         | ALT_SIGNATURE_INVALID@0                                  |
+| Stripping (só clássico, chave da AC)                               | aceita   | aceita         | rejeita  | rejeita              | aceita         | ALT_EXTENSIONS_MISSING@0                                 |
+| Algoritmo alternativo fora da lista (ML-DSA-44)                    | aceita   | aceita         | aceita   | rejeita              | aceita         | ALT_ALGORITHM_NOT_ALLOWED@0, ALT_ALGORITHM_NOT_ALLOWED@1 |
+| Assinatura clássica inválida (clássica do atacante + ML-DSA da AC) | rejeita  | rejeita        | rejeita  | rejeita              | rejeita        | CLASSICAL_PATH_INVALID@0                                 |
+| Emissor sem chave alternativa (AC só clássica)                     | aceita   | aceita         | rejeita  | rejeita              | aceita         | ISSUER_ALT_KEY_MISSING@0, ALT_EXTENSIONS_MISSING@1       |

@@ -5,7 +5,7 @@ Descrição:                             ECDSA-384 + ML-DSA-65
 Clássico:                              ECDSA_P384 (192 bits)
 Pós-quântico:                          ML-DSA-65 (192 bits)
 Balanceado:                            true
-Tempo de geração:                      2 ms (indicativo, execução única)
+Tempo de geração:                      8 ms (indicativo, execução única)
 
 Artefatos gravados neste caso:
   - chave-publica-classica.der

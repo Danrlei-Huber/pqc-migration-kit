@@ -1,0 +1,5 @@
+exit=2
+CN = folha.politica.exemplo, O = TCC, C = BR
+error 7 at 0 depth lookup: certificate signature failure
+error <tmp>/folha.pem: verification failed
+40D7DF77E9750000:error:06880006:asn1 encoding routines:ASN1_item_verify_ctx:EVP lib:../crypto/asn1/a_verify.c:217:

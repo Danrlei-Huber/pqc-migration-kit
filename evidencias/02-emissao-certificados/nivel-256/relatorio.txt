@@ -4,8 +4,8 @@ Certificado híbrido autoassinado de 256 bits
 Par de algoritmos:                     ECDSA-521 + ML-DSA-87
 Algoritmo de assinatura:               SHA512WITHECDSA (OID 1.2.840.10045.4.3.4)
 Sujeito:                               C=BR,O=TCC,CN=nivel256.tcc.br
-Número serial:                         906116908993741077379487160361786197709165040686
-Certificado completo:                  7902 bytes (DER)
+Número serial:                         514692113249517244981716249891474809203952657337
+Certificado completo:                  7901 bytes (DER)
 2.5.29.72 subjectAltPublicKeyInfo:     2618 bytes, não crítica
 2.5.29.73 altSignatureAlgorithm:       15 bytes, não crítica
 2.5.29.74 altSignatureValue:           4636 bytes, não crítica
