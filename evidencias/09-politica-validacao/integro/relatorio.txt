@@ -1,0 +1,19 @@
+Íntegro
+=======
+
+JDK PKIX (sem BouncyCastle):           aceita
+openssl verify:                        aceita
+Biblioteca strict():                   aceita
+Biblioteca REQUIRE_BOTH {ML-DSA-65, ML-DSA-87}: aceita
+Biblioteca CLASSICAL_ONLY:             aceita
+Dimensão clássica (diagnóstico):       true
+Dimensão pós-quântica (diagnóstico):   true
+Motivos (REQUIRE_BOTH {65,87}):        —
+
+Artefatos gravados neste caso:
+  - jdk-pkix.txt
+  - openssl-verify.txt
+  - motivos-strict.txt
+  - motivos-restrita.txt
+  - folha.der
+  - raiz.der

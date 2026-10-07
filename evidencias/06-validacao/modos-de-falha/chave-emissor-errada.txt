@@ -1,1 +1,1 @@
-ValidationResult{notExpired=true, dns=true, validity=true, pubkey=true, sig=false, pqcExt=true, pqcSig=false, all=false}
+ValidationResult{notExpired=true, dns=true, validity=true, pubkey=true, sig=false, pqcExt=true, pqcSig=false, all=false, accepted=false, reasons=[]}

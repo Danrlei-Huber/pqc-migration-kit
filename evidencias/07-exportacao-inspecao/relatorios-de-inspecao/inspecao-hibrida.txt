@@ -6,13 +6,13 @@
 CERTIFICATE INFORMATION
   • Subject: CN=inspecao.tcc.br,O=TCC,C=BR
   • Issuer: CN=inspecao.tcc.br,O=TCC,C=BR
-  • Serial: 1223969819974313221714295929685893149857193218095
+  • Serial: 1270109960083898242043040662116042794514182159448
   • Version: v3
 
 SIGNATURE CONFIGURATION
   • Primary Algorithm: SHA384WITHECDSA
   • Algorithm OID: 1.2.840.10045.4.3.3
-  • Signature Length: 102 bytes
+  • Signature Length: 103 bytes
 
 PUBLIC KEY
   • Algorithm: EC (384 bits)

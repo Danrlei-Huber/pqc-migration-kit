@@ -5,7 +5,7 @@ Descrição:                             ECDSA-521 + ML-DSA-87
 Clássico:                              ECDSA_P521 (256 bits)
 Pós-quântico:                          ML-DSA-87 (256 bits)
 Balanceado:                            true
-Tempo de geração:                      9 ms (indicativo, execução única)
+Tempo de geração:                      3 ms (indicativo, execução única)
 
 Artefatos gravados neste caso:
   - chave-publica-classica.der
