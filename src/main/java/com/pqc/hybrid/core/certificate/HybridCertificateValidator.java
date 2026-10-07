@@ -289,6 +289,14 @@ public final class HybridCertificateValidator {
         }
     }
 
+    /**
+     * Verifies the alternative signature against the subject's own PQC public key — only
+     * meaningful for a self-signed certificate.
+     *
+     * @deprecated use {@link #validateAgainstIssuer(X509Certificate, X509Certificate)} or
+     *             {@link #verifyAltSignature(X509Certificate, PublicKey)} with the issuer's key.
+     */
+    @Deprecated
     public static boolean validatePQCSignature(X509Certificate certificate, HybridKeyPair keyPair)
             throws InvalidSignatureException {
         Objects.requireNonNull(certificate, "Certificate cannot be null");
@@ -465,11 +473,27 @@ public final class HybridCertificateValidator {
         return new PQCExtensionsStructure(algId, sigBytes, spki);
     }
 
+    /**
+     * @deprecated the alternative signature is never verified; use
+     *             {@link #validateAgainstIssuer(X509Certificate, X509Certificate)}.
+     */
+    @Deprecated
     public static ValidationResult validateComprehensive(X509Certificate certificate,
                                                          PublicKey issuerPublicKey) {
         return validateComprehensive(certificate, issuerPublicKey, null);
     }
 
+    /**
+     * Validates a certificate with an explicitly supplied issuer key.
+     *
+     * <p>The alternative signature is verified against {@code hybridKeyPair}'s PQC public key —
+     * the <b>subject's</b> key — so it is only correct for a self-signed certificate; without a key
+     * pair a hybrid certificate always reports {@code pqcSignatureValid == false}.
+     *
+     * @deprecated use {@link #validateAgainstIssuer(X509Certificate, X509Certificate)}, which takes
+     *             every credential from the issuer's certificate.
+     */
+    @Deprecated
     public static ValidationResult validateComprehensive(X509Certificate certificate,
                                                          PublicKey issuerPublicKey,
                                                          HybridKeyPair hybridKeyPair) {

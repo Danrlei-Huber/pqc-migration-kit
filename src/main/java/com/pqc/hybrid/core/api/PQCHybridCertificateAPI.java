@@ -356,6 +356,14 @@ public final class PQCHybridCertificateAPI {
         return HybridCertificateValidator.validatePQCExtensions(certificate);
     }
 
+    /**
+     * Verifies the alternative signature against the <b>subject's</b> own PQC public key, which is
+     * only meaningful for a self-signed certificate.
+     *
+     * @deprecated use {@link #validateCertificateAgainstIssuer(X509Certificate, X509Certificate)},
+     *             which takes the alternative key from the issuer's certificate.
+     */
+    @Deprecated
     public boolean validatePQCSignature(X509Certificate certificate, HybridKeyPair keyPair)
             throws InvalidSignatureException {
         ensureInitialized();
@@ -373,10 +381,16 @@ public final class PQCHybridCertificateAPI {
      * key, or prefer {@link #validateCertificateAgainstIssuer(X509Certificate, X509Certificate)},
      * which also checks issuer name chaining and the alternative signature.
      *
+     * <p>The alternative (PQC) signature is never verified here, so a hybrid certificate always
+     * reports {@code pqcSignatureValid == false}.
+     *
      * @param certificate the certificate to validate
      * @param issuerPublicKey the issuer's public key, or null to check a self-signature
      * @return validation result with detailed information
+     * @deprecated use {@link #validateCertificateAgainstIssuer(X509Certificate, X509Certificate)},
+     *             which verifies both signatures with credentials taken from the issuer's certificate.
      */
+    @Deprecated
     public HybridCertificateValidator.ValidationResult validateCertificate(X509Certificate certificate,
                                                                            PublicKey issuerPublicKey) {
         ensureInitialized();
@@ -464,7 +478,12 @@ public final class PQCHybridCertificateAPI {
      * @return the complete certificate (ready to use)
      * @throws PQCHybridException if key generation or signing fails
      * @throws CertificateException if certificate construction or validation fails
+     * @deprecated legacy demonstration shortcut, not part of the recommended flow: it self-signs
+     *             while accepting an {@code issuerDN} that may differ from the subject. Use
+     *             {@link #createRootCA(HybridCertificateConfig, HybridKeyPair)} and
+     *             {@link #issueCertificate(HybridCertificateAuthority, HybridCertificateConfig, HybridKeyPair)}.
      */
+    @Deprecated
     public X509Certificate generateCompleteHybridCertificate(int securityLevel,
                                                                String subjectDN,
                                                                String issuerDN,

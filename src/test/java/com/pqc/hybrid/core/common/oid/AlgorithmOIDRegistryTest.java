@@ -55,12 +55,11 @@ class AlgorithmOIDRegistryTest {
     }
 
     @Test
-    @DisplayName("dumpRegistry should include ML-DSA, extension and composite entries")
+    @DisplayName("dumpRegistry should include ML-DSA and extension entries")
     void test_dump_registry() {
         String dump = AlgorithmOIDRegistry.dumpRegistry();
         assertThat(dump)
                 .contains("ML-DSA-44").contains(AlgorithmOIDRegistry.OID_ML_DSA_44)
-                .contains("altSignatureValue")
-                .contains("COMPSIG-");
+                .contains("altSignatureValue");
     }
 }

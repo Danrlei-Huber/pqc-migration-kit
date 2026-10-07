@@ -15,7 +15,6 @@ import java.util.Map;
  * OID Standards:
  * - ML-DSA (Digital Signature): 2.16.840.1.101.3.4.3.x (NIST 2024)
  * - Classical (RSA, ECDSA): Standard X.509 OIDs
- * - Composite ML-DSA: draft-ietf-lamps-pq-composite-sigs-18
  * - X.509 Hybrid Extensions: RFC 5280 / draft-ounsworth-pqc-hybrid-x509
  * 
  * @author PQC Hybrid Team
@@ -57,48 +56,6 @@ public final class AlgorithmOIDRegistry {
 
 
     // ============================================================================
-    // Composite ML-DSA OIDs (draft-ietf-lamps-pq-composite-sigs-18)
-    // Range: 1.3.6.1.5.5.7.6.37-54
-    // ============================================================================
-
-    /** OID for id-MLDSA44-RSA2048-PSS-SHA256 (composite #1) */
-    public static final String OID_COMPOSITE_MLDSA44_RSA2048_PSS_SHA256 = "1.3.6.1.5.5.7.6.37";
-    /** OID for id-MLDSA44-RSA2048-PKCS15-SHA256 (composite #2) */
-    public static final String OID_COMPOSITE_MLDSA44_RSA2048_PKCS15_SHA256 = "1.3.6.1.5.5.7.6.38";
-    /** OID for id-MLDSA44-Ed25519-SHA512 (composite #3) */
-    public static final String OID_COMPOSITE_MLDSA44_ED25519_SHA512 = "1.3.6.1.5.5.7.6.39";
-    /** OID for id-MLDSA44-ECDSA-P256-SHA256 (composite #4) */
-    public static final String OID_COMPOSITE_MLDSA44_ECDSA_P256_SHA256 = "1.3.6.1.5.5.7.6.40";
-    /** OID for id-MLDSA65-RSA3072-PSS-SHA512 (composite #5) */
-    public static final String OID_COMPOSITE_MLDSA65_RSA3072_PSS_SHA512 = "1.3.6.1.5.5.7.6.41";
-    /** OID for id-MLDSA65-RSA3072-PKCS15-SHA512 (composite #6) */
-    public static final String OID_COMPOSITE_MLDSA65_RSA3072_PKCS15_SHA512 = "1.3.6.1.5.5.7.6.42";
-    /** OID for id-MLDSA65-RSA4096-PSS-SHA512 (composite #7) */
-    public static final String OID_COMPOSITE_MLDSA65_RSA4096_PSS_SHA512 = "1.3.6.1.5.5.7.6.43";
-    /** OID for id-MLDSA65-RSA4096-PKCS15-SHA512 (composite #8) */
-    public static final String OID_COMPOSITE_MLDSA65_RSA4096_PKCS15_SHA512 = "1.3.6.1.5.5.7.6.44";
-    /** OID for id-MLDSA65-ECDSA-P256-SHA512 (composite #9 — PRIMARY RECOMMENDATION) */
-    public static final String OID_COMPOSITE_MLDSA65_ECDSA_P256_SHA512 = "1.3.6.1.5.5.7.6.45";
-    /** OID for id-MLDSA65-ECDSA-P384-SHA512 (composite #10) */
-    public static final String OID_COMPOSITE_MLDSA65_ECDSA_P384_SHA512 = "1.3.6.1.5.5.7.6.46";
-    /** OID for id-MLDSA65-ECDSA-brainpoolP256r1-SHA512 (composite #11) */
-    public static final String OID_COMPOSITE_MLDSA65_ECDSA_BP256_SHA512 = "1.3.6.1.5.5.7.6.47";
-    /** OID for id-MLDSA65-Ed25519-SHA512 (composite #12) */
-    public static final String OID_COMPOSITE_MLDSA65_ED25519_SHA512 = "1.3.6.1.5.5.7.6.48";
-    /** OID for id-MLDSA87-ECDSA-P384-SHA512 (composite #13) */
-    public static final String OID_COMPOSITE_MLDSA87_ECDSA_P384_SHA512 = "1.3.6.1.5.5.7.6.49";
-    /** OID for id-MLDSA87-ECDSA-brainpoolP384r1-SHA512 (composite #14) */
-    public static final String OID_COMPOSITE_MLDSA87_ECDSA_BP384_SHA512 = "1.3.6.1.5.5.7.6.50";
-    /** OID for id-MLDSA87-Ed448-SHAKE256 (composite #15) */
-    public static final String OID_COMPOSITE_MLDSA87_ED448_SHAKE256 = "1.3.6.1.5.5.7.6.51";
-    /** OID for id-MLDSA87-RSA3072-PSS-SHA512 (composite #16) */
-    public static final String OID_COMPOSITE_MLDSA87_RSA3072_PSS_SHA512 = "1.3.6.1.5.5.7.6.52";
-    /** OID for id-MLDSA87-RSA4096-PSS-SHA512 (composite #17) */
-    public static final String OID_COMPOSITE_MLDSA87_RSA4096_PSS_SHA512 = "1.3.6.1.5.5.7.6.53";
-    /** OID for id-MLDSA87-ECDSA-P521-SHA512 (composite #18) */
-    public static final String OID_COMPOSITE_MLDSA87_ECDSA_P521_SHA512 = "1.3.6.1.5.5.7.6.54";
-
-    // ============================================================================
     // X.509 "Alternative" Certificate Extension OIDs (ITU-T X.509 (2019) / id-ce)
     // Catalyst hybrid model. Values mirror the BouncyCastle Extension constants,
     // which are the single source of truth (confirmed: id-ce 72/73/74).
@@ -134,26 +91,6 @@ public final class AlgorithmOIDRegistry {
         registerOID(OID_SHA256_WITH_RSA, "SHA256withRSA", AlgorithmType.CLASSICAL_SIGNATURE);
         registerOID(OID_ECDSA_WITH_SHA256, "ECDSA-with-SHA256", AlgorithmType.CLASSICAL_SIGNATURE);
         
-        // Composite ML-DSA mappings
-        registerOID(OID_COMPOSITE_MLDSA44_RSA2048_PSS_SHA256, "COMPSIG-MLDSA44-RSA2048-PSS-SHA256", AlgorithmType.COMPOSITE_SIGNATURE);
-        registerOID(OID_COMPOSITE_MLDSA44_RSA2048_PKCS15_SHA256, "COMPSIG-MLDSA44-RSA2048-PKCS15-SHA256", AlgorithmType.COMPOSITE_SIGNATURE);
-        registerOID(OID_COMPOSITE_MLDSA44_ED25519_SHA512, "COMPSIG-MLDSA44-Ed25519-SHA512", AlgorithmType.COMPOSITE_SIGNATURE);
-        registerOID(OID_COMPOSITE_MLDSA44_ECDSA_P256_SHA256, "COMPSIG-MLDSA44-ECDSA-P256-SHA256", AlgorithmType.COMPOSITE_SIGNATURE);
-        registerOID(OID_COMPOSITE_MLDSA65_RSA3072_PSS_SHA512, "COMPSIG-MLDSA65-RSA3072-PSS-SHA512", AlgorithmType.COMPOSITE_SIGNATURE);
-        registerOID(OID_COMPOSITE_MLDSA65_RSA3072_PKCS15_SHA512, "COMPSIG-MLDSA65-RSA3072-PKCS15-SHA512", AlgorithmType.COMPOSITE_SIGNATURE);
-        registerOID(OID_COMPOSITE_MLDSA65_RSA4096_PSS_SHA512, "COMPSIG-MLDSA65-RSA4096-PSS-SHA512", AlgorithmType.COMPOSITE_SIGNATURE);
-        registerOID(OID_COMPOSITE_MLDSA65_RSA4096_PKCS15_SHA512, "COMPSIG-MLDSA65-RSA4096-PKCS15-SHA512", AlgorithmType.COMPOSITE_SIGNATURE);
-        registerOID(OID_COMPOSITE_MLDSA65_ECDSA_P256_SHA512, "COMPSIG-MLDSA65-ECDSA-P256-SHA512", AlgorithmType.COMPOSITE_SIGNATURE);
-        registerOID(OID_COMPOSITE_MLDSA65_ECDSA_P384_SHA512, "COMPSIG-MLDSA65-ECDSA-P384-SHA512", AlgorithmType.COMPOSITE_SIGNATURE);
-        registerOID(OID_COMPOSITE_MLDSA65_ECDSA_BP256_SHA512, "COMPSIG-MLDSA65-ECDSA-BP256-SHA512", AlgorithmType.COMPOSITE_SIGNATURE);
-        registerOID(OID_COMPOSITE_MLDSA65_ED25519_SHA512, "COMPSIG-MLDSA65-Ed25519-SHA512", AlgorithmType.COMPOSITE_SIGNATURE);
-        registerOID(OID_COMPOSITE_MLDSA87_ECDSA_P384_SHA512, "COMPSIG-MLDSA87-ECDSA-P384-SHA512", AlgorithmType.COMPOSITE_SIGNATURE);
-        registerOID(OID_COMPOSITE_MLDSA87_ECDSA_BP384_SHA512, "COMPSIG-MLDSA87-ECDSA-BP384-SHA512", AlgorithmType.COMPOSITE_SIGNATURE);
-        registerOID(OID_COMPOSITE_MLDSA87_ED448_SHAKE256, "COMPSIG-MLDSA87-Ed448-SHAKE256", AlgorithmType.COMPOSITE_SIGNATURE);
-        registerOID(OID_COMPOSITE_MLDSA87_RSA3072_PSS_SHA512, "COMPSIG-MLDSA87-RSA3072-PSS-SHA512", AlgorithmType.COMPOSITE_SIGNATURE);
-        registerOID(OID_COMPOSITE_MLDSA87_RSA4096_PSS_SHA512, "COMPSIG-MLDSA87-RSA4096-PSS-SHA512", AlgorithmType.COMPOSITE_SIGNATURE);
-        registerOID(OID_COMPOSITE_MLDSA87_ECDSA_P521_SHA512, "COMPSIG-MLDSA87-ECDSA-P521-SHA512", AlgorithmType.COMPOSITE_SIGNATURE);
-
         // X.509 Extension mappings
         registerOID(OID_ALT_SIGNATURE_ALGORITHM, "altSignatureAlgorithm", AlgorithmType.X509_EXTENSION);
         registerOID(OID_ALT_SIGNATURE_VALUE, "altSignatureValue", AlgorithmType.X509_EXTENSION);
@@ -255,12 +192,6 @@ public final class AlgorithmOIDRegistry {
         sb.append("  altSignatureAlgorithm: ").append(OID_ALT_SIGNATURE_ALGORITHM).append("\n");
         sb.append("  altSignatureValue: ").append(OID_ALT_SIGNATURE_VALUE).append("\n");
         sb.append("  subjectAltPublicKeyInfo: ").append(OID_SUBJECT_ALT_PUBLIC_KEY_INFO).append("\n");
-        sb.append("Composite ML-DSA (draft-ietf-lamps-pq-composite-sigs-18):\n");
-        for (var entry : NAME_TO_OID.entrySet()) {
-            if (entry.getKey().startsWith("COMPSIG-")) {
-                sb.append("  ").append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
-            }
-        }
         return sb.toString();
     }
 
@@ -285,10 +216,7 @@ public final class AlgorithmOIDRegistry {
         CLASSICAL_SIGNATURE,
         
         /** X.509 v3 extension for hybrid certificates */
-        X509_EXTENSION,
-
-        /** Composite signature algorithm (draft-ietf-lamps-pq-composite-sigs-18) */
-        COMPOSITE_SIGNATURE;
+        X509_EXTENSION;
     }
 
     // Prevent instantiation
