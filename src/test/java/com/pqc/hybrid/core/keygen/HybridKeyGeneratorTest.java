@@ -89,4 +89,21 @@ class HybridKeyGeneratorTest {
         assertThatThrownBy(() -> HybridKeyGenerator.generatePQCKeyPair(null))
                 .isInstanceOf(NullPointerException.class);
     }
+
+    @Test
+    @DisplayName("should accept a freshly generated hybrid key pair as complete")
+    void test_validate_complete_key_pair() {
+        HybridKeyPair hybridKeyPair = HybridKeyGenerator.generate(
+                new com.pqc.hybrid.core.config.HybridAlgorithmPair(
+                        ClassicalAlgorithm.ECDSA_P256, PQCAlgorithm.ML_DSA_44));
+
+        assertThatCode(() -> HybridKeyGenerator.validate(hybridKeyPair)).doesNotThrowAnyException();
+    }
+
+    @Test
+    @DisplayName("should reject validating a null key pair")
+    void test_validate_null_key_pair() {
+        assertThatThrownBy(() -> HybridKeyGenerator.validate(null))
+                .isInstanceOf(NullPointerException.class);
+    }
 }
