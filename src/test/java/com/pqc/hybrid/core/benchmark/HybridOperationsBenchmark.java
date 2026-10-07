@@ -46,14 +46,23 @@ import java.util.concurrent.TimeUnit;
 @BenchmarkMode(Mode.AverageTime)
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Warmup(iterations = 5, time = 1)
-@Measurement(iterations = 5, time = 1)
-@Fork(value = 3, jvmArgs = {"-Xms512m", "-Xmx1024m"})
+@Measurement(iterations = 5, time = 2)
+@Fork(value = 5, jvmArgs = {"-Xms512m", "-Xmx1024m"})
 public class HybridOperationsBenchmark {
 
     @Param({"128", "192", "256"})
     public int nivel;
 
     private static final byte[] DADOS = new byte[1024];
+
+    /**
+     * Message signed by the signing benchmarks, changed on every invocation. Bouncy Castle's
+     * ML-DSA is deterministic and uses rejection sampling, so signing one fixed message with one
+     * key repeats the same number of rejections: the benchmark would measure that key's luck,
+     * not the average cost. Varying the message averages over the rejection loop.
+     */
+    private final byte[] mensagem = new byte[1024];
+    private long contador;
 
     private ClassicalAlgorithm classico;
     private String algoritmoAssinaturaClassica;
@@ -77,6 +86,7 @@ public class HybridOperationsBenchmark {
         CryptographicProviderFactory.initialize();
         java.util.logging.Logger.getLogger("com.pqc.hybrid").setLevel(java.util.logging.Level.WARNING);
         new java.util.Random(42).nextBytes(DADOS);
+        System.arraycopy(DADOS, 0, mensagem, 0, DADOS.length);
 
         HybridAlgorithmPair par = HybridAlgorithmPair.recommended(nivel);
         classico = par.classicalAlgorithm();
@@ -128,12 +138,12 @@ public class HybridOperationsBenchmark {
 
     @Benchmark
     public byte[] assinaturaClassica() throws Exception {
-        return assinar(algoritmoAssinaturaClassica, parClassico, DADOS);
+        return assinar(algoritmoAssinaturaClassica, parClassico, proximaMensagem());
     }
 
     @Benchmark
     public byte[] assinaturaMlDsa() throws Exception {
-        return assinar(algoritmoPqc, parPqc, DADOS);
+        return assinar(algoritmoPqc, parPqc, proximaMensagem());
     }
 
     @Benchmark
@@ -169,6 +179,14 @@ public class HybridOperationsBenchmark {
     }
 
     // ------------------------------------------------------------------ helpers
+
+    private byte[] proximaMensagem() {
+        long c = contador++;
+        for (int i = 0; i < 8; i++) {
+            mensagem[i] = (byte) (c >>> (8 * i));
+        }
+        return mensagem;
+    }
 
     private X509Certificate emitirClassico() throws Exception {
         return HybridX509CertificateBuilder.builder(configFolha, chavesFolha)
