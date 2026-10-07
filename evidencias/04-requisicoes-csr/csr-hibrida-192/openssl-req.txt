@@ -1,0 +1,30 @@
+Certificate Request:
+    Data:
+        Version: 1 (0x0)
+        Subject: CN = requisitante.tcc.br, O = TCC, C = BR
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey
+                Public-Key: (384 bit)
+                pub:
+                    04:19:15:a5:c6:39:40:0b:b7:63:87:ea:b7:13:8e:
+                    46:33:77:08:37:44:e3:bc:20:68:ea:fd:19:f8:83:
+                    83:b1:aa:a6:40:ea:00:a8:d5:bc:35:5b:54:3b:65:
+                    e4:7c:44:62:ac:b5:8b:2b:a7:42:56:a8:12:22:cc:
+                    75:23:83:2d:c7:92:a0:f4:d4:61:01:5e:2d:a5:1e:
+                    5d:f3:5b:5a:91:21:58:ec:53:38:24:03:3c:90:4f:
+                    b2:ec:d8:39:19:39:23
+                ASN1 OID: secp384r1
+                NIST CURVE: P-384
+        Attributes:
+            2.5.29.73                :unable to print attribute
+            2.5.29.72                :unable to print attribute
+            2.5.29.74                :unable to print attribute
+            Requested Extensions:
+    Signature Algorithm: ecdsa-with-SHA384
+    Signature Value:
+        30:64:02:30:36:3e:14:dc:67:7c:65:13:61:03:71:1c:7c:8a:
+        27:f0:2f:29:e3:9c:9c:66:07:fa:50:09:26:d6:1f:ac:40:d2:
+        a6:22:e5:96:d7:e3:e8:b6:25:a2:de:13:71:79:d6:08:02:30:
+        08:a4:81:c2:83:f6:8d:c1:19:57:62:8d:19:1b:fe:78:dc:65:
+        ab:04:77:3a:40:63:16:9e:c9:06:9a:3a:1c:75:d4:07:fa:40:
+        d2:b5:85:d3:19:84:5a:9e:23:09:4f:e4

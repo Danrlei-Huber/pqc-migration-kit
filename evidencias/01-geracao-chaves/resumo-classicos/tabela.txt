@@ -1,0 +1,7 @@
+Variante     Curva/Bits   SPKI (bytes)     Assinatura
+RSA_2048     2048                  294  SHA256withRSA
+RSA_3072     3072                  422  SHA256withRSA
+RSA_4096     4096                  550  SHA512withRSA
+ECDSA_P256   256                    91 SHA256withECDSA
+ECDSA_P384   384                   120 SHA384withECDSA
+ECDSA_P521   521                   158 SHA512withECDSA

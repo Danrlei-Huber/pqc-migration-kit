@@ -1,0 +1,19 @@
+Requisição PKCS#10 híbrida de 192 bits
+======================================
+
+Sujeito:                               CN=requisitante.tcc.br,O=TCC,C=BR
+Par de algoritmos:                     ECDSA-384 + ML-DSA-65
+Algoritmo da assinatura principal:     SHA384withECDSA (OID 1.2.840.10045.4.3.3)
+Chave clássica (campo convencional):   120 bytes
+Atributo altSubjectPublicKeyInfo:      presente (2.5.29.72)
+Requisição completa:                   5647 bytes (DER)
+openssl req -text:                     decodifica sem erro
+openssl req -verify:                   assinatura própria da CSR conferida
+
+Artefatos gravados neste caso:
+  - requisicao.der
+  - requisicao.pem
+  - chave-publica-classica.der
+  - chave-publica-pqc.der
+  - openssl-req.txt
+  - openssl-req-verify.txt

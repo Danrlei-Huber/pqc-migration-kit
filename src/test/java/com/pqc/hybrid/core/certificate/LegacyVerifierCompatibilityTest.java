@@ -7,8 +7,8 @@ import com.pqc.hybrid.core.config.HybridCertificateConfig;
 import com.pqc.hybrid.core.keygen.HybridKeyGenerator;
 import com.pqc.hybrid.core.keygen.HybridKeyPair;
 import com.pqc.hybrid.core.util.export.CertificateExporter;
+import com.pqc.hybrid.validation.OpensslRunner;
 
-import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +28,6 @@ import java.security.cert.TrustAnchor;
 import java.security.cert.X509Certificate;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -156,12 +155,12 @@ class LegacyVerifierCompatibilityTest extends BaseTest {
     @Test
     @DisplayName("openssl verify accepts a hybrid certificate with non-critical extensions")
     void opensslAcceptsNonCriticalExtensions() throws Exception {
-        assumeOpensslAvailable();
+        OpensslRunner.assumeAvailable();
         Chain chain = issueChain(false);
         Path rootPem = writePem(chain.root(), "root.pem");
         Path leafPem = writePem(chain.leaf(), "leaf.pem");
 
-        ProcessResult result = run("openssl", "verify",
+        OpensslRunner.Result result = OpensslRunner.run("openssl", "verify",
                 "-CAfile", rootPem.toString(), leafPem.toString());
 
         assertThat(result.exitCode())
@@ -173,12 +172,12 @@ class LegacyVerifierCompatibilityTest extends BaseTest {
     @Test
     @DisplayName("negative control: openssl verify rejects them when critical")
     void opensslRejectsCriticalExtensions() throws Exception {
-        assumeOpensslAvailable();
+        OpensslRunner.assumeAvailable();
         Chain chain = issueChain(true);
         Path rootPem = writePem(chain.root(), "root-critical.pem");
         Path leafPem = writePem(chain.leaf(), "leaf-critical.pem");
 
-        ProcessResult result = run("openssl", "verify",
+        OpensslRunner.Result result = OpensslRunner.run("openssl", "verify",
                 "-CAfile", rootPem.toString(), leafPem.toString());
 
         assertThat(result.exitCode())
@@ -191,11 +190,11 @@ class LegacyVerifierCompatibilityTest extends BaseTest {
     @Test
     @DisplayName("openssl parses the certificate and sees the three Catalyst extensions as non-critical")
     void opensslReportsExtensionsAsNonCritical() throws Exception {
-        assumeOpensslAvailable();
+        OpensslRunner.assumeAvailable();
         Chain chain = issueChain(false);
         Path leafPem = writePem(chain.leaf(), "leaf-text.pem");
 
-        ProcessResult result = run("openssl", "x509", "-in", leafPem.toString(), "-noout", "-text");
+        OpensslRunner.Result result = OpensslRunner.run("openssl", "x509", "-in", leafPem.toString(), "-noout", "-text");
 
         assertThat(result.exitCode()).isZero();
         // Present, and none of them followed by the "critical" marker OpenSSL prints inline.
@@ -214,27 +213,4 @@ class LegacyVerifierCompatibilityTest extends BaseTest {
         return path;
     }
 
-    private static void assumeOpensslAvailable() {
-        boolean available;
-        try {
-            available = run("openssl", "version").exitCode() == 0;
-        } catch (Exception e) {
-            available = false;
-        }
-        Assumptions.assumeTrue(available,
-                "openssl is not available on this machine; external-verifier check skipped");
-    }
-
-    private static ProcessResult run(String... command) throws IOException, InterruptedException {
-        Process process = new ProcessBuilder(command).redirectErrorStream(true).start();
-        String output = new String(process.getInputStream().readAllBytes(), StandardCharsets.UTF_8);
-        if (!process.waitFor(60, TimeUnit.SECONDS)) {
-            process.destroyForcibly();
-            throw new IOException("Timed out running: " + String.join(" ", command));
-        }
-        return new ProcessResult(process.exitValue(), output);
-    }
-
-    private record ProcessResult(int exitCode, String output) {
-    }
 }

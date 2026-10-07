@@ -1,0 +1,18 @@
+Separação de domínio pelo contexto FIPS 204
+===========================================
+
+Contexto usado na assinatura:          "faturamento"
+Verifica com "faturamento":            VÁLIDA
+Verifica com "auditoria":              INVÁLIDA
+Verifica sem contexto:                 INVÁLIDA
+Assinatura sem contexto, verificada com um: INVÁLIDA
+Limite do contexto:                    255 bytes, imposto pelo provedor
+
+O contexto é vinculado à metade pós-quântica: RSA e ECDSA não têm
+parâmetro equivalente. Como a verificação exige as duas metades, o par
+como um todo fica separado por domínio.
+
+Artefatos gravados neste caso:
+  - envelope-ctx-faturamento.bin
+  - envelope-sem-contexto.bin
+  - contexto-faturamento.bin

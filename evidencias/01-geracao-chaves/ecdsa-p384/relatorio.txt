@@ -1,0 +1,14 @@
+Chave pública ECDSA_P384
+========================
+
+Algoritmo:                             ECDSA
+Tamanho declarado:                     384 bits
+Nível de segurança:                    192 bits
+Algoritmo de assinatura:               SHA384withECDSA
+OID:                                   1.2.840.10045.2.1
+SPKI codificado:                       120 bytes
+
+Artefatos gravados neste caso:
+  - chave-publica.der
+  - chave-publica.txt
+  - chave-publica.hex

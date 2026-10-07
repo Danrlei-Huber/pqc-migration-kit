@@ -1,0 +1,10 @@
+CSR híbrida de 128 bits
+=======================
+
+Par de algoritmos:                     ECDSA-256 + ML-DSA-44
+Algoritmo da assinatura:               SHA256withECDSA
+Tamanho:                               4053 bytes (DER)
+
+Artefatos gravados neste caso:
+  - requisicao.der
+  - requisicao.pem

@@ -1,0 +1,12 @@
+Ausência deliberada de exportação de chave privada
+==================================================
+
+Formatos suportados:                   PEM e DER, apenas para certificados
+Métodos que tratam chave privada:      nenhum
+
+A decisão reduz o risco de exposição indevida de material criptográfico.
+Em produção, a chave privada permanece no HSM/KMS e chega à biblioteca
+apenas como ContentSigner, pela Layer 1.
+
+Artefatos gravados neste caso:
+  - api-do-exportador.txt

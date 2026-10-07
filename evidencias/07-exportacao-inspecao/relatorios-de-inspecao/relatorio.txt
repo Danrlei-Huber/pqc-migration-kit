@@ -1,0 +1,15 @@
+Relatórios produzidos pelos inspetores
+======================================
+
+Reconhecido como híbrido:              true
+Chave pública:                         ECDSA Public Key [ECDSA-384]
+Tamanho total das assinaturas:         3.33 KB
+
+Artefatos gravados neste caso:
+  - inspecao-hibrida.txt
+  - certificado.txt
+  - certificado-compacto.txt
+  - chave-publica-classica.txt
+  - chave-publica-pqc.txt
+  - assinaturas.txt
+  - assinaturas-comparacao.txt

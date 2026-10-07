@@ -25,6 +25,9 @@
         <jacoco.version>0.8.10</jacoco.version>
         <slf4j.version>2.0.7</slf4j.version>
         <maven.surefire.version>3.0.0</maven.surefire.version>
+        <!-- Sobrepostas pelo profile 'validacao'; vazio = sem filtro por tag. -->
+        <surefire.excludedGroups>validacao</surefire.excludedGroups>
+        <surefire.groups></surefire.groups>
         <maven.failsafe.version>3.0.0</maven.failsafe.version>
         <maven.javadoc.version>3.5.0</maven.javadoc.version>
         <maven.compiler.version>3.11.0</maven.compiler.version>
@@ -169,6 +172,11 @@
                         <include>**/*Test.java</include>
                         <include>**/*Tests.java</include>
                     </includes>
+                    <!-- A campanha de validacao grava artefatos em evidencias/, que e
+                         versionado. Deixa-la no build padrao sujaria a arvore de trabalho a
+                         cada mvn test/verify, entao ela so roda via -Pvalidacao. -->
+                    <excludedGroups>${surefire.excludedGroups}</excludedGroups>
+                    <groups>${surefire.groups}</groups>
                 </configuration>
             </plugin>
 
@@ -183,6 +191,7 @@
                         <include>**/*ITest.java</include>
                         <include>**/*IntegrationTest.java</include>
                     </includes>
+                    <excludedGroups>validacao</excludedGroups>
                 </configuration>
                 <executions>
                     <execution>
@@ -318,6 +327,17 @@
 
     <!-- Benchmark Profile -->
     <profiles>
+        <!-- Campanha de validacao do modulo: executa somente as classes marcadas com
+             @Tag("validacao"), que gravam evidencia bruta em evidencias/.
+             Uso: mvn test -Pvalidacao -->
+        <profile>
+            <id>validacao</id>
+            <properties>
+                <surefire.excludedGroups></surefire.excludedGroups>
+                <surefire.groups>validacao</surefire.groups>
+            </properties>
+        </profile>
+
         <profile>
             <id>benchmark</id>
             <build>

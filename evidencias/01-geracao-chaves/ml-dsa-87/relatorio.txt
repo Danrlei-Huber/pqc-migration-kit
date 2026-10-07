@@ -1,0 +1,11 @@
+Chave pública ML-DSA-87
+=======================
+
+Nível de segurança:                    256 bits
+OID:                                   2.16.840.1.101.3.4.3.19
+Chave crua (FIPS 204):                 2592 bytes
+SPKI codificado:                       2614 bytes
+
+Artefatos gravados neste caso:
+  - chave-publica.der
+  - chave-publica.hex

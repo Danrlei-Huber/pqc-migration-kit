@@ -1,0 +1,12 @@
+Par híbrido recomendado para 128 bits
+=====================================
+
+Descrição:                             ECDSA-256 + ML-DSA-44
+Clássico:                              ECDSA_P256 (128 bits)
+Pós-quântico:                          ML-DSA-44 (128 bits)
+Balanceado:                            true
+Tempo de geração:                      1 ms (indicativo, execução única)
+
+Artefatos gravados neste caso:
+  - chave-publica-classica.der
+  - chave-publica-pqc.der

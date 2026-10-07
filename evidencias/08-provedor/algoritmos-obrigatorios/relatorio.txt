@@ -1,0 +1,11 @@
+Verificação de algoritmos obrigatórios na inicialização
+=======================================================
+
+Resultado:                             aprovado, sem exceção
+Comportamento em caso de ausência:     PQCHybridException nomeando os algoritmos faltantes
+
+A checagem existe para transformar uma falha silenciosa em tempo de uso
+numa falha explícita em tempo de inicialização.
+
+Artefatos gravados neste caso:
+  - obrigatorios.txt

@@ -1,0 +1,17 @@
+Verificação sob lógica E e detecção de adulteração
+==================================================
+
+Assinatura íntegra:                    VÁLIDA
+Dado com 1 bit alterado:               INVÁLIDA
+Metade clássica corrompida:            INVÁLIDA
+Metade pós-quântica corrompida:        INVÁLIDA
+
+A verificação exige as duas metades: comprometer apenas uma delas não
+basta para produzir um resultado positivo. É a propriedade que sustenta
+a defesa em profundidade do modelo híbrido.
+
+Artefatos gravados neste caso:
+  - envelope-integro.bin
+  - envelope-classica-corrompida.bin
+  - envelope-pqc-corrompida.bin
+  - dado-adulterado.bin

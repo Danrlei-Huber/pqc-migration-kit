@@ -1,0 +1,5 @@
+Métodos públicos de CertificateExporter:
+  String exportCertificateToPEMString
+  byte[] exportCertificateToDERBytes
+  void exportCertificateToPEM
+  void exportCertificateToDER

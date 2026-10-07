@@ -1,0 +1,11 @@
+Chave pública ML-DSA-65
+=======================
+
+Nível de segurança:                    192 bits
+OID:                                   2.16.840.1.101.3.4.3.18
+Chave crua (FIPS 204):                 1952 bytes
+SPKI codificado:                       1974 bytes
+
+Artefatos gravados neste caso:
+  - chave-publica.der
+  - chave-publica.hex

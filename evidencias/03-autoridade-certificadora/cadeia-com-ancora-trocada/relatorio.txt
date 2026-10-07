@@ -1,0 +1,15 @@
+Rejeição de cadeia cuja âncora foi substituída
+==============================================
+
+DN das duas raízes:                    CN=PQC Hybrid Root CA,O=TCC,C=BR (idêntico)
+Cadeia legítima:                       clássica=true, pqc=true
+Cadeia com raiz impostora:             clássica=false, pqc=false
+
+Mesmo com o Distinguished Name idêntico, a substituição da âncora é
+detectada nas duas dimensões: nem a assinatura clássica nem a
+alternativa fecham contra o material da raiz impostora.
+
+Artefatos gravados neste caso:
+  - raiz-legitima.der
+  - raiz-impostora.der
+  - folha.der

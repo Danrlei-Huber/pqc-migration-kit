@@ -1,0 +1,11 @@
+Chave pública ML-DSA-44
+=======================
+
+Nível de segurança:                    128 bits
+OID:                                   2.16.840.1.101.3.4.3.17
+Chave crua (FIPS 204):                 1312 bytes
+SPKI codificado:                       1334 bytes
+
+Artefatos gravados neste caso:
+  - chave-publica.der
+  - chave-publica.hex

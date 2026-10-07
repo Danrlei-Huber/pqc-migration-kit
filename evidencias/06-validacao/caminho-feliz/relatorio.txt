@@ -1,0 +1,16 @@
+Certificado legítimo validado contra o emissor
+==============================================
+
+Não expirado:                          true
+DNs e encadeamento:                    true
+Período de validade:                   true
+Chave pública:                         true
+Assinatura clássica:                   true
+Extensões PQC:                         true
+Assinatura alternativa:                true
+Veredito global:                       true
+
+Artefatos gravados neste caso:
+  - validation-result.txt
+  - folha.der
+  - emissor.der

@@ -1,0 +1,7 @@
+Par                        Clássico       PQC            Balanceado  
+ECDSA-256 + ML-DSA-44      128 bits       128 bits       sim         
+ECDSA-384 + ML-DSA-65      192 bits       192 bits       sim         
+ECDSA-521 + ML-DSA-87      256 bits       256 bits       sim         
+RSA-2048 + ML-DSA-44       112 bits       128 bits       sim         
+RSA-3072 + ML-DSA-65       128 bits       192 bits       sim         
+RSA-4096 + ML-DSA-87       152 bits       256 bits       NÃO         

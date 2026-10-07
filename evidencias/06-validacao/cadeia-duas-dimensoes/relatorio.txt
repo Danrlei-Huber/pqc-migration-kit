@@ -1,0 +1,16 @@
+Validação de cadeia nas dimensões clássica e pós-quântica
+=========================================================
+
+Elos da cadeia:                        2 (folha → raiz)
+Dimensão clássica (CertPathValidator PKIX): true
+Dimensão pós-quântica (alt-signature por elo): true
+Veredito global:                       true
+
+As duas dimensões são calculadas de forma independente e combinadas por
+conjunção: a cadeia só é válida quando ambas passam. A dimensão
+pós-quântica percorre cada elo verificando a assinatura alternativa
+contra a chave alternativa do emissor, sobre o pre-TBS reconstruído.
+
+Artefatos gravados neste caso:
+  - folha.der
+  - raiz.der

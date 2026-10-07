@@ -1,0 +1,6 @@
+Tamanho das requisições por nível
+=================================
+
+
+Artefatos gravados neste caso:
+  - tabela.txt

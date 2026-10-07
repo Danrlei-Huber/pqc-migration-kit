@@ -1,0 +1,9 @@
+ECDSA Public Key (256 bits)
+├── Algorithm: ECDSA
+├── Type: Public
+├── Format: X.509
+├── Size: 256 bits
+└── Base64: MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEvCSqNwmPWs9kkgbmoiQb1joJ0T05...
+
+Elliptic Curve Specific:
+  • Curve field size: 256 bits

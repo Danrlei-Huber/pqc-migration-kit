@@ -1,0 +1,4 @@
+Algoritmos exigidos na inicialização:
+  ML-DSA-44 — OID 2.16.840.1.101.3.4.3.17
+  ML-DSA-65 — OID 2.16.840.1.101.3.4.3.18
+  ML-DSA-87 — OID 2.16.840.1.101.3.4.3.19

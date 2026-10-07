@@ -1,0 +1,732 @@
+{
+  "geradoEm": "2026-09-09T22:55:11.609241883-03:00",
+  "provedor": "BC 1.84",
+  "openssl": "OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)",
+  "java": "21.0.11",
+  "casos": [
+    {
+      "area": "05-assinatura-dados",
+      "caso": "envelope-hibrido",
+      "titulo": "Envelope de assinatura híbrida",
+      "pulado": null,
+      "notas": {
+        "Par de algoritmos": "ECDSA-384 + ML-DSA-65",
+        "Dados assinados": "71 bytes",
+        "Envelope completo": "3415 bytes",
+        "Prefixo de tamanho": "4 bytes (big-endian)",
+        "Assinatura clássica": "102 bytes",
+        "Assinatura ML-DSA-65": "3309 bytes",
+        "Sobrecarga sobre a clássica isolada": "33.5x"
+      }
+    },
+    {
+      "area": "05-assinatura-dados",
+      "caso": "verificacao-apenas-classica",
+      "titulo": "Conferência isolada da metade clássica",
+      "pulado": null,
+      "notas": {
+        "Verificação híbrida (E)": "VÁLIDA",
+        "Verificação apenas clássica": "VÁLIDA",
+        "Algoritmo clássico": "ECDSA",
+        "Algoritmo pós-quântico": "ML-DSA-65"
+      }
+    },
+    {
+      "area": "05-assinatura-dados",
+      "caso": "separacao-por-contexto",
+      "titulo": "Separação de domínio pelo contexto FIPS 204",
+      "pulado": null,
+      "notas": {
+        "Contexto usado na assinatura": "\"faturamento\"",
+        "Verifica com \"faturamento\"": "VÁLIDA",
+        "Verifica com \"auditoria\"": "INVÁLIDA",
+        "Verifica sem contexto": "INVÁLIDA",
+        "Assinatura sem contexto, verificada com um": "INVÁLIDA",
+        "Limite do contexto": "255 bytes, imposto pelo provedor"
+      }
+    },
+    {
+      "area": "05-assinatura-dados",
+      "caso": "logica-e-adulteracao",
+      "titulo": "Verificação sob lógica E e detecção de adulteração",
+      "pulado": null,
+      "notas": {
+        "Assinatura íntegra": "VÁLIDA",
+        "Dado com 1 bit alterado": "INVÁLIDA",
+        "Metade clássica corrompida": "INVÁLIDA",
+        "Metade pós-quântica corrompida": "INVÁLIDA"
+      }
+    },
+    {
+      "area": "02-emissao-certificados",
+      "caso": "criticidade-compativel",
+      "titulo": "Extensões alternativas não críticas",
+      "pulado": null,
+      "notas": {
+        "altSignatureExtensionsCritical": "false",
+        "Extensões críticas": "[2.5.29.19, 2.5.29.15]",
+        "Extensões não críticas": "[2.5.29.72, 2.5.29.73, 2.5.29.74, 2.5.29.35, 2.5.29.14, 2.5.29.37]",
+        "Consequência": "verificador clássico ignora as extensões e aceita pela assinatura clássica"
+      }
+    },
+    {
+      "area": "02-emissao-certificados",
+      "caso": "criticidade-estrita",
+      "titulo": "Extensões alternativas críticas",
+      "pulado": null,
+      "notas": {
+        "altSignatureExtensionsCritical": "true",
+        "Extensões críticas": "[2.5.29.19, 2.5.29.73, 2.5.29.74, 2.5.29.15]",
+        "Extensões não críticas": "[2.5.29.72, 2.5.29.35, 2.5.29.14, 2.5.29.37]",
+        "Consequência": "verificador conforme a RFC 5280 rejeita: impede downgrade silencioso"
+      }
+    },
+    {
+      "area": "02-emissao-certificados",
+      "caso": "nivel-128",
+      "titulo": "Certificado híbrido autoassinado de 128 bits",
+      "pulado": null,
+      "notas": {
+        "Par de algoritmos": "ECDSA-256 + ML-DSA-44",
+        "Algoritmo de assinatura": "SHA256WITHECDSA (OID 1.2.840.10045.4.3.2)",
+        "Sujeito": "C=BR,O=TCC,CN=nivel128.tcc.br",
+        "Número serial": "978307109808006059623988237496526942371807717873",
+        "Certificado completo": "4278 bytes (DER)",
+        "2.5.29.72 subjectAltPublicKeyInfo": "1338 bytes, não crítica",
+        "2.5.29.73 altSignatureAlgorithm": "15 bytes, não crítica",
+        "2.5.29.74 altSignatureValue": "2429 bytes, não crítica"
+      }
+    },
+    {
+      "area": "02-emissao-certificados",
+      "caso": "nivel-192",
+      "titulo": "Certificado híbrido autoassinado de 192 bits",
+      "pulado": null,
+      "notas": {
+        "Par de algoritmos": "ECDSA-384 + ML-DSA-65",
+        "Algoritmo de assinatura": "SHA384WITHECDSA (OID 1.2.840.10045.4.3.3)",
+        "Sujeito": "C=BR,O=TCC,CN=nivel192.tcc.br",
+        "Número serial": "1116882373870956325725958974149022642117448208832",
+        "Certificado completo": "5868 bytes (DER)",
+        "2.5.29.72 subjectAltPublicKeyInfo": "1978 bytes, não crítica",
+        "2.5.29.73 altSignatureAlgorithm": "15 bytes, não crítica",
+        "2.5.29.74 altSignatureValue": "3318 bytes, não crítica"
+      }
+    },
+    {
+      "area": "02-emissao-certificados",
+      "caso": "nivel-256",
+      "titulo": "Certificado híbrido autoassinado de 256 bits",
+      "pulado": null,
+      "notas": {
+        "Par de algoritmos": "ECDSA-521 + ML-DSA-87",
+        "Algoritmo de assinatura": "SHA512WITHECDSA (OID 1.2.840.10045.4.3.4)",
+        "Sujeito": "C=BR,O=TCC,CN=nivel256.tcc.br",
+        "Número serial": "1310441319498058932974671389948903385251642066787",
+        "Certificado completo": "7902 bytes (DER)",
+        "2.5.29.72 subjectAltPublicKeyInfo": "2618 bytes, não crítica",
+        "2.5.29.73 altSignatureAlgorithm": "15 bytes, não crítica",
+        "2.5.29.74 altSignatureValue": "4636 bytes, não crítica"
+      }
+    },
+    {
+      "area": "02-emissao-certificados",
+      "caso": "ordem-de-assinatura",
+      "titulo": "Ordem de assinatura do modelo Catalyst",
+      "pulado": null,
+      "notas": {
+        "Assinatura alternativa sobre pre-TBS": "válida",
+        "Assinatura clássica sobre TBS": "válida"
+      }
+    },
+    {
+      "area": "02-emissao-certificados",
+      "caso": "layer1-signer-externo",
+      "titulo": "Emissão via Layer 1 com ContentSigner fornecido externamente",
+      "pulado": null,
+      "notas": {
+        "Assinador clássico": "1.2.840.10045.4.3.3",
+        "Assinador alternativo": "2.16.840.1.101.3.4.3.18",
+        "Chave privada exigida pelo construtor": "nenhuma",
+        "Validação contra si mesmo": "aprovada nas duas dimensões"
+      }
+    },
+    {
+      "area": "04-requisicoes-csr",
+      "caso": "csr-nivel-128",
+      "titulo": "CSR híbrida de 128 bits",
+      "pulado": null,
+      "notas": {
+        "Par de algoritmos": "ECDSA-256 + ML-DSA-44",
+        "Algoritmo da assinatura": "SHA256withECDSA",
+        "Tamanho": "4053 bytes (DER)"
+      }
+    },
+    {
+      "area": "04-requisicoes-csr",
+      "caso": "csr-nivel-192",
+      "titulo": "CSR híbrida de 192 bits",
+      "pulado": null,
+      "notas": {
+        "Par de algoritmos": "ECDSA-384 + ML-DSA-65",
+        "Algoritmo da assinatura": "SHA384withECDSA",
+        "Tamanho": "5645 bytes (DER)"
+      }
+    },
+    {
+      "area": "04-requisicoes-csr",
+      "caso": "csr-nivel-256",
+      "titulo": "CSR híbrida de 256 bits",
+      "pulado": null,
+      "notas": {
+        "Par de algoritmos": "ECDSA-521 + ML-DSA-87",
+        "Algoritmo da assinatura": "SHA512withECDSA",
+        "Tamanho": "7675 bytes (DER)"
+      }
+    },
+    {
+      "area": "04-requisicoes-csr",
+      "caso": "resumo-csr",
+      "titulo": "Tamanho das requisições por nível",
+      "pulado": null,
+      "notas": {}
+    },
+    {
+      "area": "04-requisicoes-csr",
+      "caso": "csr-hibrida-192",
+      "titulo": "Requisição PKCS#10 híbrida de 192 bits",
+      "pulado": null,
+      "notas": {
+        "Sujeito": "CN=requisitante.tcc.br,O=TCC,C=BR",
+        "Par de algoritmos": "ECDSA-384 + ML-DSA-65",
+        "Algoritmo da assinatura principal": "SHA384withECDSA (OID 1.2.840.10045.4.3.3)",
+        "Chave clássica (campo convencional)": "120 bytes",
+        "Atributo altSubjectPublicKeyInfo": "presente (2.5.29.72)",
+        "Requisição completa": "5647 bytes (DER)",
+        "openssl req -text": "decodifica sem erro",
+        "openssl req -verify": "assinatura própria da CSR conferida"
+      }
+    },
+    {
+      "area": "07-exportacao-inspecao",
+      "caso": "sem-exportacao-de-chave-privada",
+      "titulo": "Ausência deliberada de exportação de chave privada",
+      "pulado": null,
+      "notas": {
+        "Formatos suportados": "PEM e DER, apenas para certificados",
+        "Métodos que tratam chave privada": "nenhum"
+      }
+    },
+    {
+      "area": "07-exportacao-inspecao",
+      "caso": "pem-equivale-der",
+      "titulo": "Equivalência entre as saídas PEM e DER",
+      "pulado": null,
+      "notas": {
+        "Certificado em DER": "5873 bytes",
+        "Certificado em PEM": "8009 bytes (base64 com envelope)",
+        "PEM decodificado == DER": "sim, byte a byte",
+        "DER reconstrói o certificado": "sim",
+        "SHA-256 do DER": "bbea03f7970785da16c6ed2ed24ef0bb8a2f5a55dc46ef093d1792c592d34982"
+      }
+    },
+    {
+      "area": "07-exportacao-inspecao",
+      "caso": "relatorios-de-inspecao",
+      "titulo": "Relatórios produzidos pelos inspetores",
+      "pulado": null,
+      "notas": {
+        "Reconhecido como híbrido": "true",
+        "Chave pública": "ECDSA Public Key [ECDSA-384]",
+        "Tamanho total das assinaturas": "3.33 KB"
+      }
+    },
+    {
+      "area": "07-exportacao-inspecao",
+      "caso": "guarda-material-privado",
+      "titulo": "Salvaguarda contra gravação de material privado",
+      "pulado": null,
+      "notas": {
+        "Extensões recusadas": ".key, .p12, .pkcs8, .jks",
+        "Nomes recusados": "qualquer um contendo \"private\" ou \"privada\""
+      }
+    },
+    {
+      "area": "06-validacao",
+      "caso": "cadeia-duas-dimensoes",
+      "titulo": "Validação de cadeia nas dimensões clássica e pós-quântica",
+      "pulado": null,
+      "notas": {
+        "Elos da cadeia": "2 (folha → raiz)",
+        "Dimensão clássica (CertPathValidator PKIX)": "true",
+        "Dimensão pós-quântica (alt-signature por elo)": "true",
+        "Veredito global": "true"
+      }
+    },
+    {
+      "area": "06-validacao",
+      "caso": "modos-de-falha",
+      "titulo": "Modos de falha detectados pela validação",
+      "pulado": null,
+      "notas": {
+        "Emissor errado — DNs": "false",
+        "Emissor errado — assinatura clássica": "false",
+        "Emissor errado — assinatura alternativa": "false",
+        "Chave pública de emissor errada": "false",
+        "Sem chave de emissor (folha emitida por CA)": "false",
+        "Certificado sem extensões Catalyst — extensões": "false",
+        "Certificado sem extensões Catalyst — assinatura alternativa": "false"
+      }
+    },
+    {
+      "area": "06-validacao",
+      "caso": "caminho-feliz",
+      "titulo": "Certificado legítimo validado contra o emissor",
+      "pulado": null,
+      "notas": {
+        "Não expirado": "true",
+        "DNs e encadeamento": "true",
+        "Período de validade": "true",
+        "Chave pública": "true",
+        "Assinatura clássica": "true",
+        "Extensões PQC": "true",
+        "Assinatura alternativa": "true",
+        "Veredito global": "true"
+      }
+    },
+    {
+      "area": "01-geracao-chaves",
+      "caso": "ml-dsa-44",
+      "titulo": "Chave pública ML-DSA-44",
+      "pulado": null,
+      "notas": {
+        "Nível de segurança": "128 bits",
+        "OID": "2.16.840.1.101.3.4.3.17",
+        "Chave crua (FIPS 204)": "1312 bytes",
+        "SPKI codificado": "1334 bytes"
+      }
+    },
+    {
+      "area": "01-geracao-chaves",
+      "caso": "ml-dsa-65",
+      "titulo": "Chave pública ML-DSA-65",
+      "pulado": null,
+      "notas": {
+        "Nível de segurança": "192 bits",
+        "OID": "2.16.840.1.101.3.4.3.18",
+        "Chave crua (FIPS 204)": "1952 bytes",
+        "SPKI codificado": "1974 bytes"
+      }
+    },
+    {
+      "area": "01-geracao-chaves",
+      "caso": "ml-dsa-87",
+      "titulo": "Chave pública ML-DSA-87",
+      "pulado": null,
+      "notas": {
+        "Nível de segurança": "256 bits",
+        "OID": "2.16.840.1.101.3.4.3.19",
+        "Chave crua (FIPS 204)": "2592 bytes",
+        "SPKI codificado": "2614 bytes"
+      }
+    },
+    {
+      "area": "01-geracao-chaves",
+      "caso": "resumo-ml-dsa",
+      "titulo": "Tabela comparativa das variantes ML-DSA",
+      "pulado": null,
+      "notas": {}
+    },
+    {
+      "area": "01-geracao-chaves",
+      "caso": "balanco-pares-prontos",
+      "titulo": "Balanço de segurança dos pares prontos",
+      "pulado": null,
+      "notas": {}
+    },
+    {
+      "area": "01-geracao-chaves",
+      "caso": "par-recomendado-128",
+      "titulo": "Par híbrido recomendado para 128 bits",
+      "pulado": null,
+      "notas": {
+        "Descrição": "ECDSA-256 + ML-DSA-44",
+        "Clássico": "ECDSA_P256 (128 bits)",
+        "Pós-quântico": "ML-DSA-44 (128 bits)",
+        "Balanceado": "true",
+        "Tempo de geração": "1 ms (indicativo, execução única)"
+      }
+    },
+    {
+      "area": "01-geracao-chaves",
+      "caso": "par-recomendado-192",
+      "titulo": "Par híbrido recomendado para 192 bits",
+      "pulado": null,
+      "notas": {
+        "Descrição": "ECDSA-384 + ML-DSA-65",
+        "Clássico": "ECDSA_P384 (192 bits)",
+        "Pós-quântico": "ML-DSA-65 (192 bits)",
+        "Balanceado": "true",
+        "Tempo de geração": "1 ms (indicativo, execução única)"
+      }
+    },
+    {
+      "area": "01-geracao-chaves",
+      "caso": "par-recomendado-256",
+      "titulo": "Par híbrido recomendado para 256 bits",
+      "pulado": null,
+      "notas": {
+        "Descrição": "ECDSA-521 + ML-DSA-87",
+        "Clássico": "ECDSA_P521 (256 bits)",
+        "Pós-quântico": "ML-DSA-87 (256 bits)",
+        "Balanceado": "true",
+        "Tempo de geração": "9 ms (indicativo, execução única)"
+      }
+    },
+    {
+      "area": "01-geracao-chaves",
+      "caso": "resumo-pares",
+      "titulo": "Pares recomendados por nível de segurança",
+      "pulado": null,
+      "notas": {}
+    },
+    {
+      "area": "01-geracao-chaves",
+      "caso": "rsa-2048",
+      "titulo": "Chave pública RSA_2048",
+      "pulado": null,
+      "notas": {
+        "Algoritmo": "RSA",
+        "Tamanho declarado": "2048 bits",
+        "Nível de segurança": "112 bits",
+        "Algoritmo de assinatura": "SHA256withRSA",
+        "OID": "1.2.840.113549.1.1.1",
+        "SPKI codificado": "294 bytes"
+      }
+    },
+    {
+      "area": "01-geracao-chaves",
+      "caso": "rsa-3072",
+      "titulo": "Chave pública RSA_3072",
+      "pulado": null,
+      "notas": {
+        "Algoritmo": "RSA",
+        "Tamanho declarado": "3072 bits",
+        "Nível de segurança": "128 bits",
+        "Algoritmo de assinatura": "SHA256withRSA",
+        "OID": "1.2.840.113549.1.1.1",
+        "SPKI codificado": "422 bytes"
+      }
+    },
+    {
+      "area": "01-geracao-chaves",
+      "caso": "rsa-4096",
+      "titulo": "Chave pública RSA_4096",
+      "pulado": null,
+      "notas": {
+        "Algoritmo": "RSA",
+        "Tamanho declarado": "4096 bits",
+        "Nível de segurança": "152 bits",
+        "Algoritmo de assinatura": "SHA512withRSA",
+        "OID": "1.2.840.113549.1.1.1",
+        "SPKI codificado": "550 bytes"
+      }
+    },
+    {
+      "area": "01-geracao-chaves",
+      "caso": "ecdsa-p256",
+      "titulo": "Chave pública ECDSA_P256",
+      "pulado": null,
+      "notas": {
+        "Algoritmo": "ECDSA",
+        "Tamanho declarado": "256 bits",
+        "Nível de segurança": "128 bits",
+        "Algoritmo de assinatura": "SHA256withECDSA",
+        "OID": "1.2.840.10045.2.1",
+        "SPKI codificado": "91 bytes"
+      }
+    },
+    {
+      "area": "01-geracao-chaves",
+      "caso": "ecdsa-p384",
+      "titulo": "Chave pública ECDSA_P384",
+      "pulado": null,
+      "notas": {
+        "Algoritmo": "ECDSA",
+        "Tamanho declarado": "384 bits",
+        "Nível de segurança": "192 bits",
+        "Algoritmo de assinatura": "SHA384withECDSA",
+        "OID": "1.2.840.10045.2.1",
+        "SPKI codificado": "120 bytes"
+      }
+    },
+    {
+      "area": "01-geracao-chaves",
+      "caso": "ecdsa-p521",
+      "titulo": "Chave pública ECDSA_P521",
+      "pulado": null,
+      "notas": {
+        "Algoritmo": "ECDSA",
+        "Tamanho declarado": "521 bits",
+        "Nível de segurança": "256 bits",
+        "Algoritmo de assinatura": "SHA512withECDSA",
+        "OID": "1.2.840.10045.2.1",
+        "SPKI codificado": "158 bytes"
+      }
+    },
+    {
+      "area": "01-geracao-chaves",
+      "caso": "resumo-classicos",
+      "titulo": "Tabela comparativa das variantes clássicas",
+      "pulado": null,
+      "notas": {}
+    },
+    {
+      "area": "03-autoridade-certificadora",
+      "caso": "cadeia-com-ancora-trocada",
+      "titulo": "Rejeição de cadeia cuja âncora foi substituída",
+      "pulado": null,
+      "notas": {
+        "DN das duas raízes": "CN=PQC Hybrid Root CA,O=TCC,C=BR (idêntico)",
+        "Cadeia legítima": "clássica=true, pqc=true",
+        "Cadeia com raiz impostora": "clássica=false, pqc=false"
+      }
+    },
+    {
+      "area": "03-autoridade-certificadora",
+      "caso": "encadeamento-de-nomes",
+      "titulo": "Encadeamento de nomes conforme RFC 5280 §6.1.3(a)(4)",
+      "pulado": null,
+      "notas": {
+        "Emissor declarado na folha": "C=BR,O=TCC,CN=PQC Hybrid Root CA",
+        "Sujeito da raiz legítima": "C=BR,O=TCC,CN=PQC Hybrid Root CA",
+        "Encadeia com a raiz legítima": "sim",
+        "Sujeito da outra CA": "C=BR,O=TCC,CN=Outra CA",
+        "Encadeia com a outra CA": "não"
+      }
+    },
+    {
+      "area": "03-autoridade-certificadora",
+      "caso": "cadeia-tres-niveis",
+      "titulo": "Cadeia híbrida raiz → sub-CA → entidade final",
+      "pulado": null,
+      "notas": {
+        "Par de algoritmos": "ECDSA-384 + ML-DSA-65",
+        "Raiz": "C=BR,O=TCC,CN=PQC Hybrid Root CA",
+        "Sub-CA": "C=BR,O=TCC,CN=PQC Hybrid Issuing CA",
+        "Entidade final": "C=BR,O=TCC,CN=secure.tcc.br",
+        "basicConstraints da raiz": "CA:TRUE, pathLen=1",
+        "basicConstraints da sub-CA": "CA:TRUE, pathLen=0",
+        "Validação clássica (PKIX)": "true",
+        "Validação pós-quântica": "true",
+        "openssl verify": "aceita (exit 0)"
+      }
+    },
+    {
+      "area": "08-provedor",
+      "caso": "algoritmos-obrigatorios",
+      "titulo": "Verificação de algoritmos obrigatórios na inicialização",
+      "pulado": null,
+      "notas": {
+        "Resultado": "aprovado, sem exceção",
+        "Comportamento em caso de ausência": "PQCHybridException nomeando os algoritmos faltantes"
+      }
+    },
+    {
+      "area": "08-provedor",
+      "caso": "provedor-em-uso",
+      "titulo": "Provedor criptográfico que respaldou a campanha",
+      "pulado": null,
+      "notas": {
+        "Nome": "BC",
+        "Versão": "1.84",
+        "Informação": "BouncyCastle Security Provider v1.84",
+        "Serviços registrados": "1624",
+        "Inicialização idempotente": "sim (dupla checagem sincronizada)"
+      }
+    },
+    {
+      "area": "08-provedor",
+      "caso": "disponibilidade-algoritmos",
+      "titulo": "Matriz de disponibilidade dos algoritmos do fluxo ativo",
+      "pulado": null,
+      "notas": {
+        "Variantes clássicas": "6",
+        "Variantes pós-quânticas": "3",
+        "Esquemas PQC no enum": "somente ML-DSA (FIPS 204)"
+      }
+    }
+  ],
+  "artefatos": [
+    {"caminho": "05-assinatura-dados/envelope-hibrido/dados-assinados.bin", "bytes": 71, "sha256": "438ac4ffc84f9b34b0a5ee67d4ca1c6bb8865b07f2fb4fbce363b5570037d5e9", "area": "05-assinatura-dados", "caso": "envelope-hibrido"},
+    {"caminho": "05-assinatura-dados/envelope-hibrido/envelope.bin", "bytes": 3415, "sha256": "22fd602ef99e6fb954824fed91091b398da6ebd17ee2412038b63639786b5f8a", "area": "05-assinatura-dados", "caso": "envelope-hibrido"},
+    {"caminho": "05-assinatura-dados/envelope-hibrido/assinatura-classica.bin", "bytes": 102, "sha256": "fc905b7520a826677ff29a82e8a35ea98ce53ebf2dc69a288af9c70109bd4865", "area": "05-assinatura-dados", "caso": "envelope-hibrido"},
+    {"caminho": "05-assinatura-dados/envelope-hibrido/assinatura-pqc.bin", "bytes": 3309, "sha256": "e377f59a8aeb56d72487000a07dee42b09f29d76224da41c5b82b9867614657f", "area": "05-assinatura-dados", "caso": "envelope-hibrido"},
+    {"caminho": "05-assinatura-dados/envelope-hibrido/envelope.hex", "bytes": 10245, "sha256": "ddafdcdad04bf2c9d44c435ef006bfd2262c7a4391d509897a0fa949e85e83fa", "area": "05-assinatura-dados", "caso": "envelope-hibrido"},
+    {"caminho": "05-assinatura-dados/envelope-hibrido/relatorio-assinatura.txt", "bytes": 443, "sha256": "b20c290e60dafdd4e81bfa82ca85969a95c1380766ce7493a38e5fa535ad4c7c", "area": "05-assinatura-dados", "caso": "envelope-hibrido"},
+    {"caminho": "05-assinatura-dados/envelope-hibrido/comparacao.txt", "bytes": 649, "sha256": "ed9e5164b3a72544f398c32082dc8bdb8ae860888457614f97ef663937c6cc1d", "area": "05-assinatura-dados", "caso": "envelope-hibrido"},
+    {"caminho": "05-assinatura-dados/envelope-hibrido/estatisticas.txt", "bytes": 279, "sha256": "1f8378f10d7a83d3cc9f472f330b4b44a49305af28be7ef3ff4aba84531e0e4b", "area": "05-assinatura-dados", "caso": "envelope-hibrido"},
+    {"caminho": "05-assinatura-dados/envelope-hibrido/relatorio.txt", "bytes": 639, "sha256": "2649e483c45f8ef9895d9f4101e02eda4a34ba3f531197f201f6c2b12c3a42dd", "area": "05-assinatura-dados", "caso": "envelope-hibrido"},
+    {"caminho": "05-assinatura-dados/verificacao-apenas-classica/assinatura-classica.bin", "bytes": 103, "sha256": "577927ecf8a805cdb44b9c552026a474b7ef1f3ac3fa0b0f8db3d593080e30d9", "area": "05-assinatura-dados", "caso": "verificacao-apenas-classica"},
+    {"caminho": "05-assinatura-dados/verificacao-apenas-classica/assinatura-pqc.bin", "bytes": 3309, "sha256": "3174b350abebff548e3f98357bf537a7639a325e9356363f9355428fbf9a1597", "area": "05-assinatura-dados", "caso": "verificacao-apenas-classica"},
+    {"caminho": "05-assinatura-dados/verificacao-apenas-classica/relatorio.txt", "bytes": 539, "sha256": "6c43b11b513b8738453c686950b21ee02fb4fdd5dab043fc9733442101b479f0", "area": "05-assinatura-dados", "caso": "verificacao-apenas-classica"},
+    {"caminho": "05-assinatura-dados/separacao-por-contexto/envelope-ctx-faturamento.bin", "bytes": 3415, "sha256": "d3d737df1ccdcc76a145c3f76fe87333c6663ec5309b461603d50af848f0d83b", "area": "05-assinatura-dados", "caso": "separacao-por-contexto"},
+    {"caminho": "05-assinatura-dados/separacao-por-contexto/envelope-sem-contexto.bin", "bytes": 3415, "sha256": "a3f18605acfac84cbd421417718cc86dd859ed14c42da393df377e88aaf50fe7", "area": "05-assinatura-dados", "caso": "separacao-por-contexto"},
+    {"caminho": "05-assinatura-dados/separacao-por-contexto/contexto-faturamento.bin", "bytes": 11, "sha256": "69e151e6bb68588d18413cd16d354f2844f433b343bd4f431e17713e28b33047", "area": "05-assinatura-dados", "caso": "separacao-por-contexto"},
+    {"caminho": "05-assinatura-dados/separacao-por-contexto/relatorio.txt", "bytes": 728, "sha256": "94997f18d8aee6e8386f4f31e0167825cf0787473b6f2fb695e63c5475744abd", "area": "05-assinatura-dados", "caso": "separacao-por-contexto"},
+    {"caminho": "05-assinatura-dados/logica-e-adulteracao/envelope-integro.bin", "bytes": 3416, "sha256": "e259078f926f2f6f4e7b1c3717f0d314cfa278e0d5a89e797018395070643d71", "area": "05-assinatura-dados", "caso": "logica-e-adulteracao"},
+    {"caminho": "05-assinatura-dados/logica-e-adulteracao/envelope-classica-corrompida.bin", "bytes": 3416, "sha256": "fac50f2947a45a4562088c9eec94ce68c32fad58c7a54619936938b85c20227c", "area": "05-assinatura-dados", "caso": "logica-e-adulteracao"},
+    {"caminho": "05-assinatura-dados/logica-e-adulteracao/envelope-pqc-corrompida.bin", "bytes": 3416, "sha256": "b05138795a5ef0626bfbe025bd0243bf551f0035ccdfc82052c501112160954f", "area": "05-assinatura-dados", "caso": "logica-e-adulteracao"},
+    {"caminho": "05-assinatura-dados/logica-e-adulteracao/dado-adulterado.bin", "bytes": 71, "sha256": "12d8c367735ed053a33a8a5b6fb5a33c20199e7ff6eb9abe764e538f58bc44d3", "area": "05-assinatura-dados", "caso": "logica-e-adulteracao"},
+    {"caminho": "05-assinatura-dados/logica-e-adulteracao/relatorio.txt", "bytes": 650, "sha256": "159301ebe0cc5e3fb2130e33e4d3c8c64d4534e96e387c242da263a30192097e", "area": "05-assinatura-dados", "caso": "logica-e-adulteracao"},
+    {"caminho": "02-emissao-certificados/criticidade-compativel/certificado.der", "bytes": 5903, "sha256": "8ee14f3455b477d7004619992d8df5cda2ece9405acfdb6d7fc1a7197f605588", "area": "02-emissao-certificados", "caso": "criticidade-compativel"},
+    {"caminho": "02-emissao-certificados/criticidade-compativel/certificado.pem", "bytes": 8049, "sha256": "b38eb68de233f12d431513ba8f414df17a1cf79e4b779f4a5fbee077898b6cde", "area": "02-emissao-certificados", "caso": "criticidade-compativel"},
+    {"caminho": "02-emissao-certificados/criticidade-compativel/relatorio.txt", "bytes": 484, "sha256": "f532de771d99cf7d91dfe071ad7d2c3eaf84bab53b3c84f5834547401c08fed4", "area": "02-emissao-certificados", "caso": "criticidade-compativel"},
+    {"caminho": "02-emissao-certificados/criticidade-estrita/certificado.der", "bytes": 5908, "sha256": "34c4c771030f438b3510b8e8c0f992cf8e994dc08214e146a04c254725f2fa86", "area": "02-emissao-certificados", "caso": "criticidade-estrita"},
+    {"caminho": "02-emissao-certificados/criticidade-estrita/certificado.pem", "bytes": 8058, "sha256": "042bd3cfc86510c96624fc0eea7edbfc5166ccbf6e28591218c6aa14b53e266a", "area": "02-emissao-certificados", "caso": "criticidade-estrita"},
+    {"caminho": "02-emissao-certificados/criticidade-estrita/relatorio.txt", "bytes": 465, "sha256": "5e9ce3e88be0b93cc07064ea8e6d759a786bb297d60e6973cec02493d0cb17f7", "area": "02-emissao-certificados", "caso": "criticidade-estrita"},
+    {"caminho": "02-emissao-certificados/nivel-128/certificado.der", "bytes": 4278, "sha256": "b12609c85c5ab2d0d578b8946677c6bc688cfdc6881189be3d19bd7ce648f890", "area": "02-emissao-certificados", "caso": "nivel-128"},
+    {"caminho": "02-emissao-certificados/nivel-128/certificado.pem", "bytes": 5848, "sha256": "2429df38b442aa059872b85da30f5c051102f8588068de607d99b04981554fc7", "area": "02-emissao-certificados", "caso": "nivel-128"},
+    {"caminho": "02-emissao-certificados/nivel-128/inspecao.txt", "bytes": 1187, "sha256": "121c5a9bea6f5cd946c0e95a94dd7b69a25c20a631967c4936051693ca61f4e5", "area": "02-emissao-certificados", "caso": "nivel-128"},
+    {"caminho": "02-emissao-certificados/nivel-128/extensao-2.5.29.72.der", "bytes": 1338, "sha256": "754f2af10965854cc4d0f0900e93751693d82bab4533a369bea1b736408c7d6c", "area": "02-emissao-certificados", "caso": "nivel-128"},
+    {"caminho": "02-emissao-certificados/nivel-128/extensao-2.5.29.73.der", "bytes": 15, "sha256": "20969a16b72e821aeab485aedc65b69ba6c8727a892ef27e49ec8638250d53b3", "area": "02-emissao-certificados", "caso": "nivel-128"},
+    {"caminho": "02-emissao-certificados/nivel-128/extensao-2.5.29.74.der", "bytes": 2429, "sha256": "67935c916f6f7ded1d7bc4e977190165599c9d71dd7f72bfe958ef2aa4c1a2e9", "area": "02-emissao-certificados", "caso": "nivel-128"},
+    {"caminho": "02-emissao-certificados/nivel-128/openssl-x509.txt", "bytes": 5570, "sha256": "8479f44e2b43f2b1d5cd0b5bcb2f83d32ec64ae483f6241461f9476fae1818e5", "area": "02-emissao-certificados", "caso": "nivel-128"},
+    {"caminho": "02-emissao-certificados/nivel-128/relatorio.txt", "bytes": 832, "sha256": "9b21aec472b9bedf0d565b7d3f19ad0fccad2a4287c300b6bb26418a4626f909", "area": "02-emissao-certificados", "caso": "nivel-128"},
+    {"caminho": "02-emissao-certificados/nivel-192/certificado.der", "bytes": 5868, "sha256": "1bc081fcccb6176923f842d0e2f78b920d8c2e77c78a5de78f62695b4db96685", "area": "02-emissao-certificados", "caso": "nivel-192"},
+    {"caminho": "02-emissao-certificados/nivel-192/certificado.pem", "bytes": 8001, "sha256": "c5d612bf743e7e15551e0d8fd77ebe8e5eb7fbceee7f9b9acf53e87b3e4b8ef3", "area": "02-emissao-certificados", "caso": "nivel-192"},
+    {"caminho": "02-emissao-certificados/nivel-192/inspecao.txt", "bytes": 1189, "sha256": "79a45e8eefb402170cd2fa60fdccc4e81b9bfa7e1e91ea5714d3c4c488534f29", "area": "02-emissao-certificados", "caso": "nivel-192"},
+    {"caminho": "02-emissao-certificados/nivel-192/extensao-2.5.29.72.der", "bytes": 1978, "sha256": "89ee56b993d9493a56b5d7103985be58124852deddfa6b8cf966b6bfeab7f4db", "area": "02-emissao-certificados", "caso": "nivel-192"},
+    {"caminho": "02-emissao-certificados/nivel-192/extensao-2.5.29.73.der", "bytes": 15, "sha256": "6d1e60231e16fdca46f0b1adf7631e110b33a1a2a59722bd745ce87f7fa6cf86", "area": "02-emissao-certificados", "caso": "nivel-192"},
+    {"caminho": "02-emissao-certificados/nivel-192/extensao-2.5.29.74.der", "bytes": 3318, "sha256": "9c4d7b177da52d6feba2ce3a5715acb5a148043f64bab7a1a10fca6367822183", "area": "02-emissao-certificados", "caso": "nivel-192"},
+    {"caminho": "02-emissao-certificados/nivel-192/openssl-x509.txt", "bytes": 7350, "sha256": "c8391c141a1c5ea180add6698154163e02b83c325eebe41682703106c575f487", "area": "02-emissao-certificados", "caso": "nivel-192"},
+    {"caminho": "02-emissao-certificados/nivel-192/relatorio.txt", "bytes": 833, "sha256": "38e5e9121aad1d984c9eaaac18fc75dd24e51460e3f2315f8834ecebeb5f6d75", "area": "02-emissao-certificados", "caso": "nivel-192"},
+    {"caminho": "02-emissao-certificados/nivel-256/certificado.der", "bytes": 7902, "sha256": "3f86d7a92010878a4cb25773e35a39a03672ef724a58266cc9df1e939821e34e", "area": "02-emissao-certificados", "caso": "nivel-256"},
+    {"caminho": "02-emissao-certificados/nivel-256/certificado.pem", "bytes": 10755, "sha256": "9c55ab84e52b55d957b9e24c822aa41e2b6cd61788dd994e6618d1aac6285920", "area": "02-emissao-certificados", "caso": "nivel-256"},
+    {"caminho": "02-emissao-certificados/nivel-256/inspecao.txt", "bytes": 1189, "sha256": "8c58275700bb83d4f16b34aa498cdd855252f8bc4f7ab7966d58bd20640ec213", "area": "02-emissao-certificados", "caso": "nivel-256"},
+    {"caminho": "02-emissao-certificados/nivel-256/extensao-2.5.29.72.der", "bytes": 2618, "sha256": "5de1b6f4505e8c081bd696a892390f21543b6fe651e25439cd82e87b9a9c4c03", "area": "02-emissao-certificados", "caso": "nivel-256"},
+    {"caminho": "02-emissao-certificados/nivel-256/extensao-2.5.29.73.der", "bytes": 15, "sha256": "17157d037c92aa80c313d9e7f97572f675f98a9651ecb9d3ad77e3485b3d6b3d", "area": "02-emissao-certificados", "caso": "nivel-256"},
+    {"caminho": "02-emissao-certificados/nivel-256/extensao-2.5.29.74.der", "bytes": 4636, "sha256": "1e90820da928271f2a76ba9fab60fc58b2d8300bbe576b99f739cdd3bc43f744", "area": "02-emissao-certificados", "caso": "nivel-256"},
+    {"caminho": "02-emissao-certificados/nivel-256/openssl-x509.txt", "bytes": 9587, "sha256": "825a66e409cdfe5d88adbf609a0a0cfa27e85fb2e21059d2c7fde006933169b5", "area": "02-emissao-certificados", "caso": "nivel-256"},
+    {"caminho": "02-emissao-certificados/nivel-256/relatorio.txt", "bytes": 833, "sha256": "ed6bb17c34aadae0a5a72e9d75fca1e73ff737a51b135766480d74847928bdb0", "area": "02-emissao-certificados", "caso": "nivel-256"},
+    {"caminho": "02-emissao-certificados/ordem-de-assinatura/tbs-certificate.der", "bytes": 5741, "sha256": "8713a257a436c62c0ee2f36977151dad1e7037daf4cf3e97fc2f752a66e9951a", "area": "02-emissao-certificados", "caso": "ordem-de-assinatura"},
+    {"caminho": "02-emissao-certificados/ordem-de-assinatura/relatorio.txt", "bytes": 625, "sha256": "d15bfa59105d1ab4b6b4aabf90008f143cd2075f1c09c1499f96cc301dcb2406", "area": "02-emissao-certificados", "caso": "ordem-de-assinatura"},
+    {"caminho": "02-emissao-certificados/layer1-signer-externo/certificado.der", "bytes": 5894, "sha256": "dc0060a394fbc7a5b4257b2378baca5d3508dcf9396ff739cc4ecdae7543a502", "area": "02-emissao-certificados", "caso": "layer1-signer-externo"},
+    {"caminho": "02-emissao-certificados/layer1-signer-externo/certificado.pem", "bytes": 8037, "sha256": "38de4909a49d175fb2616d4a802cb4e57b416de62a24d76dcd148a272dde4f44", "area": "02-emissao-certificados", "caso": "layer1-signer-externo"},
+    {"caminho": "02-emissao-certificados/layer1-signer-externo/relatorio.txt", "bytes": 436, "sha256": "7053ab44d4322ffa2a9554d8a57b57d32ce027af9df767892d617d20ee799c92", "area": "02-emissao-certificados", "caso": "layer1-signer-externo"},
+    {"caminho": "04-requisicoes-csr/csr-nivel-128/requisicao.der", "bytes": 4053, "sha256": "329ac073661033ab118d0aa74a0f54ea668c36e666dca4c4ed5c04f873c6a458", "area": "04-requisicoes-csr", "caso": "csr-nivel-128"},
+    {"caminho": "04-requisicoes-csr/csr-nivel-128/requisicao.pem", "bytes": 5559, "sha256": "2b7f0a5eab698354970a6e1779f364949fa10b3a01862c7f364666157ae2c907", "area": "04-requisicoes-csr", "caso": "csr-nivel-128"},
+    {"caminho": "04-requisicoes-csr/csr-nivel-128/relatorio.txt", "bytes": 292, "sha256": "d57490f79b105a785e4c476b4a71d65021926da538a41700017271a9a3b76b9f", "area": "04-requisicoes-csr", "caso": "csr-nivel-128"},
+    {"caminho": "04-requisicoes-csr/csr-nivel-192/requisicao.der", "bytes": 5645, "sha256": "1fe7a1bdf15f2625fadf88eba5d6add625781ba50d93e5f24bbbfba5fe3f607a", "area": "04-requisicoes-csr", "caso": "csr-nivel-192"},
+    {"caminho": "04-requisicoes-csr/csr-nivel-192/requisicao.pem", "bytes": 7716, "sha256": "8d5b6033164ec98d6e681b6effe4e958e4b9d8fefb2cdfd5c4ab705780f5255e", "area": "04-requisicoes-csr", "caso": "csr-nivel-192"},
+    {"caminho": "04-requisicoes-csr/csr-nivel-192/relatorio.txt", "bytes": 292, "sha256": "324ec23436fc04b25770db2b1dd59c2a55b3baa18c25b6b7a425168d99bdfd61", "area": "04-requisicoes-csr", "caso": "csr-nivel-192"},
+    {"caminho": "04-requisicoes-csr/csr-nivel-256/requisicao.der", "bytes": 7675, "sha256": "b7b575ccd85e8492dada22b3b88f479e1e8526542092be4415028b24fd9410a2", "area": "04-requisicoes-csr", "caso": "csr-nivel-256"},
+    {"caminho": "04-requisicoes-csr/csr-nivel-256/requisicao.pem", "bytes": 10466, "sha256": "efa8e4795c506580af4a0f7badf62d8e87698b29ed9616ab617781a4814d6b03", "area": "04-requisicoes-csr", "caso": "csr-nivel-256"},
+    {"caminho": "04-requisicoes-csr/csr-nivel-256/relatorio.txt", "bytes": 292, "sha256": "9c47a8d84f0bcdf915094c5b95846e11b17f93658f45a84d177c3b97e5e46e33", "area": "04-requisicoes-csr", "caso": "csr-nivel-256"},
+    {"caminho": "04-requisicoes-csr/resumo-csr/tabela.txt", "bytes": 268, "sha256": "02f9133e1c4e887c4b5851a0209bfcefc584e50d378f8bc3426c043a6b794ebd", "area": "04-requisicoes-csr", "caso": "resumo-csr"},
+    {"caminho": "04-requisicoes-csr/resumo-csr/relatorio.txt", "bytes": 119, "sha256": "3094617514575decb1556c4c72a86f3e2c51dcde2818f8026dde8ec4c9be0f17", "area": "04-requisicoes-csr", "caso": "resumo-csr"},
+    {"caminho": "04-requisicoes-csr/csr-hibrida-192/requisicao.der", "bytes": 5647, "sha256": "d03bcad13ad2f77a269b5068fdec79f2c0646faf6fa63ab366238ce9636f38e5", "area": "04-requisicoes-csr", "caso": "csr-hibrida-192"},
+    {"caminho": "04-requisicoes-csr/csr-hibrida-192/requisicao.pem", "bytes": 7720, "sha256": "3db75e1046712645534dec3b4f11a5ff324f0df25d6e0180429417078c9f30cd", "area": "04-requisicoes-csr", "caso": "csr-hibrida-192"},
+    {"caminho": "04-requisicoes-csr/csr-hibrida-192/chave-publica-classica.der", "bytes": 120, "sha256": "f4fed88d9df38a1bdbf898ccacf7c40b8e3b8e9068054f9c4c06b9b99142d1b5", "area": "04-requisicoes-csr", "caso": "csr-hibrida-192"},
+    {"caminho": "04-requisicoes-csr/csr-hibrida-192/chave-publica-pqc.der", "bytes": 1974, "sha256": "1466eb5ffa621edac23e16b6eb9f9860007a706ae3b779cd189ca9784338d5f0", "area": "04-requisicoes-csr", "caso": "csr-hibrida-192"},
+    {"caminho": "04-requisicoes-csr/csr-hibrida-192/openssl-req.txt", "bytes": 1432, "sha256": "f515eddfd11ce835efeb2ad10efefaeaaf24a36efb4dba729ccca0c35de550d7", "area": "04-requisicoes-csr", "caso": "csr-hibrida-192"},
+    {"caminho": "04-requisicoes-csr/csr-hibrida-192/openssl-req-verify.txt", "bytes": 100, "sha256": "54ef14f6a4032ede536f4f8d3ba1ed32c058add5d92f39849b7e21ef889bdd52", "area": "04-requisicoes-csr", "caso": "csr-hibrida-192"},
+    {"caminho": "04-requisicoes-csr/csr-hibrida-192/relatorio.txt", "bytes": 774, "sha256": "63b2855bdb0a46c149e30dfa4ed4c6c92128f4b0bf85b28336b38baef63f7baa", "area": "04-requisicoes-csr", "caso": "csr-hibrida-192"},
+    {"caminho": "07-exportacao-inspecao/sem-exportacao-de-chave-privada/api-do-exportador.txt", "bytes": 178, "sha256": "7ac390c1eb53bfe725471a72be8ff818e53750cb6c242a7239f0a59ae4df7e48", "area": "07-exportacao-inspecao", "caso": "sem-exportacao-de-chave-privada"},
+    {"caminho": "07-exportacao-inspecao/sem-exportacao-de-chave-privada/relatorio.txt", "bytes": 479, "sha256": "1a85c2045f9946946968e57917ef486e1385ace2a4c4964c3c966fb07f9cf2af", "area": "07-exportacao-inspecao", "caso": "sem-exportacao-de-chave-privada"},
+    {"caminho": "07-exportacao-inspecao/pem-equivale-der/certificado.der", "bytes": 5873, "sha256": "bbea03f7970785da16c6ed2ed24ef0bb8a2f5a55dc46ef093d1792c592d34982", "area": "07-exportacao-inspecao", "caso": "pem-equivale-der"},
+    {"caminho": "07-exportacao-inspecao/pem-equivale-der/certificado.pem", "bytes": 8009, "sha256": "49605bd5738b526e736512ee823d09606d26240777e83ba958cd1a8da00b13ac", "area": "07-exportacao-inspecao", "caso": "pem-equivale-der"},
+    {"caminho": "07-exportacao-inspecao/pem-equivale-der/relatorio.txt", "bytes": 479, "sha256": "06210c3e4a6044ded362ab0e7eaa7218ce622ebe03752b2defe0170cd99525ca", "area": "07-exportacao-inspecao", "caso": "pem-equivale-der"},
+    {"caminho": "07-exportacao-inspecao/relatorios-de-inspecao/inspecao-hibrida.txt", "bytes": 1189, "sha256": "2ed189b1515ece5d1715ab499100fb2b222245bc4914b87a54f59d780702a6c9", "area": "07-exportacao-inspecao", "caso": "relatorios-de-inspecao"},
+    {"caminho": "07-exportacao-inspecao/relatorios-de-inspecao/certificado.txt", "bytes": 469, "sha256": "d63f72ea73b7fb56d1549ff642ba643483da5de8e56c7519d3e8bae53b16687b", "area": "07-exportacao-inspecao", "caso": "relatorios-de-inspecao"},
+    {"caminho": "07-exportacao-inspecao/relatorios-de-inspecao/certificado-compacto.txt", "bytes": 106, "sha256": "8c5d78f7dc83a3117ad48c35fbf0c3c13ab63aa8de97eeb41a4b0d5cc8c957ac", "area": "07-exportacao-inspecao", "caso": "relatorios-de-inspecao"},
+    {"caminho": "07-exportacao-inspecao/relatorios-de-inspecao/chave-publica-classica.txt", "bytes": 272, "sha256": "39ae74f21759fb2f1615389d5741694e75897193dc469a9a93e46279a3841614", "area": "07-exportacao-inspecao", "caso": "relatorios-de-inspecao"},
+    {"caminho": "07-exportacao-inspecao/relatorios-de-inspecao/chave-publica-pqc.txt", "bytes": 224, "sha256": "44ed39f668ff1edb70fa6b0a22f306de63f21f0202a7c0de643219ba2fef4af1", "area": "07-exportacao-inspecao", "caso": "relatorios-de-inspecao"},
+    {"caminho": "07-exportacao-inspecao/relatorios-de-inspecao/assinaturas.txt", "bytes": 443, "sha256": "001f961794bbdb71ea2de86af36a71e3e8678e7f1c9d21bfc7b7c4bc3a1917b7", "area": "07-exportacao-inspecao", "caso": "relatorios-de-inspecao"},
+    {"caminho": "07-exportacao-inspecao/relatorios-de-inspecao/assinaturas-comparacao.txt", "bytes": 649, "sha256": "ed9e5164b3a72544f398c32082dc8bdb8ae860888457614f97ef663937c6cc1d", "area": "07-exportacao-inspecao", "caso": "relatorios-de-inspecao"},
+    {"caminho": "07-exportacao-inspecao/relatorios-de-inspecao/relatorio.txt", "bytes": 455, "sha256": "3a9e9368d4a798ef4276195cacddccc242fb0902d617b3167eb601e05d59c68a", "area": "07-exportacao-inspecao", "caso": "relatorios-de-inspecao"},
+    {"caminho": "07-exportacao-inspecao/guarda-material-privado/relatorio.txt", "bytes": 529, "sha256": "f23f1794380d3511d085a0eeec85bd844adabce883db980c9516e5e52d78f5c4", "area": "07-exportacao-inspecao", "caso": "guarda-material-privado"},
+    {"caminho": "06-validacao/cadeia-duas-dimensoes/folha.der", "bytes": 5980, "sha256": "901f6bf2998192712cff31ac42663e58b94dd6a5970e9546497e2a8188a7aa43", "area": "06-validacao", "caso": "cadeia-duas-dimensoes"},
+    {"caminho": "06-validacao/cadeia-duas-dimensoes/raiz.der", "bytes": 5874, "sha256": "47334ecbcedb2ab646ea390cbdf4268bf8f39e857321030f7c16ebfd4b88f538", "area": "06-validacao", "caso": "cadeia-duas-dimensoes"},
+    {"caminho": "06-validacao/cadeia-duas-dimensoes/relatorio.txt", "bytes": 675, "sha256": "7aa87f7a91065d0771468e181d0565289b26ad19ac8f299125abde0a8d7ce1ef", "area": "06-validacao", "caso": "cadeia-duas-dimensoes"},
+    {"caminho": "06-validacao/modos-de-falha/emissor-errado.txt", "bytes": 121, "sha256": "1f98423a6e8e6abc1f203910731d2e396c5d432f2eb7e9db01dc39c012a930b6", "area": "06-validacao", "caso": "modos-de-falha"},
+    {"caminho": "06-validacao/modos-de-falha/chave-emissor-errada.txt", "bytes": 120, "sha256": "da6b4289309a0dc1c945570ceff0f365cb62ba3bb7ff6dace41cc17806aa8743", "area": "06-validacao", "caso": "modos-de-falha"},
+    {"caminho": "06-validacao/modos-de-falha/sem-chave-de-emissor.txt", "bytes": 120, "sha256": "da6b4289309a0dc1c945570ceff0f365cb62ba3bb7ff6dace41cc17806aa8743", "area": "06-validacao", "caso": "modos-de-falha"},
+    {"caminho": "06-validacao/modos-de-falha/sem-extensoes-catalyst.txt", "bytes": 120, "sha256": "439e454f159a61652e6fe68e4f93d6b2ea2f7b6abc4a2882d8e6fb97256b2cde", "area": "06-validacao", "caso": "modos-de-falha"},
+    {"caminho": "06-validacao/modos-de-falha/certificado-sem-extensoes.der", "bytes": 551, "sha256": "b2e0515d7ec708823e596ba19b91dbb6071c0ea6256a17eb986deed107a94cfe", "area": "06-validacao", "caso": "modos-de-falha"},
+    {"caminho": "06-validacao/modos-de-falha/relatorio.txt", "bytes": 632, "sha256": "03035313b27e89e617ff452b56deff2a7da59f0b1b63a676e40fcc8207994ccf", "area": "06-validacao", "caso": "modos-de-falha"},
+    {"caminho": "06-validacao/caminho-feliz/validation-result.txt", "bytes": 117, "sha256": "56b0f7b5b96370ef1dbd45cf4fcade79879d692e0d3f79a93c2979ea177ade7c", "area": "06-validacao", "caso": "caminho-feliz"},
+    {"caminho": "06-validacao/caminho-feliz/folha.der", "bytes": 5978, "sha256": "5806fcbb21597253617268d49e6aa27e430de481b02575da012ed4ca46a16c23", "area": "06-validacao", "caso": "caminho-feliz"},
+    {"caminho": "06-validacao/caminho-feliz/emissor.der", "bytes": 5874, "sha256": "4596e6fefa0be055c6169c845cd595cbb9fef96f134e3923729293478544d50f", "area": "06-validacao", "caso": "caminho-feliz"},
+    {"caminho": "06-validacao/caminho-feliz/relatorio.txt", "bytes": 541, "sha256": "c3e655ec232b665b5fa5495ff2344b7f42e227c89adcbfd6d1bbc34423f332ce", "area": "06-validacao", "caso": "caminho-feliz"},
+    {"caminho": "01-geracao-chaves/ml-dsa-44/chave-publica.der", "bytes": 1334, "sha256": "d83a2cd4f9b5a0b7e8fc7d4cddbfba0193b2c6ee2c37376af111792f1cb4feb2", "area": "01-geracao-chaves", "caso": "ml-dsa-44"},
+    {"caminho": "01-geracao-chaves/ml-dsa-44/chave-publica.hex", "bytes": 4002, "sha256": "ee2e63b1c528c360bd92d9acfdc62d88766066ac39823919ec3f28fe729142cd", "area": "01-geracao-chaves", "caso": "ml-dsa-44"},
+    {"caminho": "01-geracao-chaves/ml-dsa-44/relatorio.txt", "bytes": 339, "sha256": "f6aa72c84e0499b8a2165192bef7f5e24af310926750ceab70d0d76847a21812", "area": "01-geracao-chaves", "caso": "ml-dsa-44"},
+    {"caminho": "01-geracao-chaves/ml-dsa-65/chave-publica.der", "bytes": 1974, "sha256": "a3dfc91dded80837fc5c358704d8da6c7e6822e896f177120ed6ad26ab6e1019", "area": "01-geracao-chaves", "caso": "ml-dsa-65"},
+    {"caminho": "01-geracao-chaves/ml-dsa-65/chave-publica.hex", "bytes": 5922, "sha256": "31f98609bb907a08cd08892c85b8b41306e40057ad07e309b6701af51ab684c9", "area": "01-geracao-chaves", "caso": "ml-dsa-65"},
+    {"caminho": "01-geracao-chaves/ml-dsa-65/relatorio.txt", "bytes": 339, "sha256": "f9cf080e228b1e1a611bfc487a9dbafbdd7a2a7a01dbea896efb4fd1cc3a8419", "area": "01-geracao-chaves", "caso": "ml-dsa-65"},
+    {"caminho": "01-geracao-chaves/ml-dsa-87/chave-publica.der", "bytes": 2614, "sha256": "b93f7f70f8ec88840d7793400899d17c147eafbc10ca8d8b4de93ad9d0287fef", "area": "01-geracao-chaves", "caso": "ml-dsa-87"},
+    {"caminho": "01-geracao-chaves/ml-dsa-87/chave-publica.hex", "bytes": 7842, "sha256": "042a88498476d74e60137b89ae0f0dbb6834ebd5cae12edbc639145fa91b45f9", "area": "01-geracao-chaves", "caso": "ml-dsa-87"},
+    {"caminho": "01-geracao-chaves/ml-dsa-87/relatorio.txt", "bytes": 339, "sha256": "68b6a902d8563d4f83cd2dfd537ced924dcfa624f83852c1feddc6d91d2717d9", "area": "01-geracao-chaves", "caso": "ml-dsa-87"},
+    {"caminho": "01-geracao-chaves/resumo-ml-dsa/tabela.txt", "bytes": 225, "sha256": "0d33a2301804efdd3a4ef9b35341aff90cd88f47dfa961f40acfe0350ff4d479", "area": "01-geracao-chaves", "caso": "resumo-ml-dsa"},
+    {"caminho": "01-geracao-chaves/resumo-ml-dsa/relatorio.txt", "bytes": 128, "sha256": "c270eb4e565df49ac2a1aac762569b679b2e244f6c05276a71c7a3435e287515", "area": "01-geracao-chaves", "caso": "resumo-ml-dsa"},
+    {"caminho": "01-geracao-chaves/balanco-pares-prontos/tabela.txt", "bytes": 492, "sha256": "3febb5f860285d507460355b1b11c61f2bdccbcf56f6e3155c62e4feb9c4dcd0", "area": "01-geracao-chaves", "caso": "balanco-pares-prontos"},
+    {"caminho": "01-geracao-chaves/balanco-pares-prontos/relatorio.txt", "bytes": 198, "sha256": "3c101b4d9e5bec05d923436b3af74efccb0e06ff619233a68ba39a94291d22fe", "area": "01-geracao-chaves", "caso": "balanco-pares-prontos"},
+    {"caminho": "01-geracao-chaves/par-recomendado-128/chave-publica-classica.der", "bytes": 91, "sha256": "e78d1b5d5c25105b3a27f421725dd85e5ef24ce2cb09d41d6188f5901501c757", "area": "01-geracao-chaves", "caso": "par-recomendado-128"},
+    {"caminho": "01-geracao-chaves/par-recomendado-128/chave-publica-pqc.der", "bytes": 1334, "sha256": "7af1ce7b65c204badd07a490de2d197639dc80b02fce9eec57ceed6e1103c5be", "area": "01-geracao-chaves", "caso": "par-recomendado-128"},
+    {"caminho": "01-geracao-chaves/par-recomendado-128/relatorio.txt", "bytes": 476, "sha256": "31b9b74c036b4c8357ac3833c9cf13f3511ee03ecf05bb3275fb32f69bffd13a", "area": "01-geracao-chaves", "caso": "par-recomendado-128"},
+    {"caminho": "01-geracao-chaves/par-recomendado-192/chave-publica-classica.der", "bytes": 120, "sha256": "b1aa0cb5545d1770bd4a60b862355dcd644a4b0cd9bb5dde37ced595ffc8ca5a", "area": "01-geracao-chaves", "caso": "par-recomendado-192"},
+    {"caminho": "01-geracao-chaves/par-recomendado-192/chave-publica-pqc.der", "bytes": 1974, "sha256": "575e3c1b56bbcaefd3173a76789d8589689e1db75b4db843f23f525035153e3a", "area": "01-geracao-chaves", "caso": "par-recomendado-192"},
+    {"caminho": "01-geracao-chaves/par-recomendado-192/relatorio.txt", "bytes": 476, "sha256": "f0a80eca2649fad20e619df4d9135402214b48b38672d90faf400354925d7b8a", "area": "01-geracao-chaves", "caso": "par-recomendado-192"},
+    {"caminho": "01-geracao-chaves/par-recomendado-256/chave-publica-classica.der", "bytes": 158, "sha256": "a85f0adb39b6f7582a3eb21f8a61d7cd96ef687153ea1550a498e13fdd843ba4", "area": "01-geracao-chaves", "caso": "par-recomendado-256"},
+    {"caminho": "01-geracao-chaves/par-recomendado-256/chave-publica-pqc.der", "bytes": 2614, "sha256": "06ee4047831a901e6f7e9e03e5cab21b775818608171d6b8d46e76e77d003309", "area": "01-geracao-chaves", "caso": "par-recomendado-256"},
+    {"caminho": "01-geracao-chaves/par-recomendado-256/relatorio.txt", "bytes": 476, "sha256": "157915321e0bf80da5f6512b4f497ec0ae5d00e2c55beef7269cd0030779eed9", "area": "01-geracao-chaves", "caso": "par-recomendado-256"},
+    {"caminho": "01-geracao-chaves/resumo-pares/tabela.txt", "bytes": 310, "sha256": "f04d85a9b55a73a405ba560664c77a26c2ce115e1f26f6c7d05ed03d4d6ab463", "area": "01-geracao-chaves", "caso": "resumo-pares"},
+    {"caminho": "01-geracao-chaves/resumo-pares/relatorio.txt", "bytes": 206, "sha256": "443baab7bfa5fe5d65b492c72de0f1d0f4951a23cca8cbd40bb010c97186aa5d", "area": "01-geracao-chaves", "caso": "resumo-pares"},
+    {"caminho": "01-geracao-chaves/rsa-2048/chave-publica.der", "bytes": 294, "sha256": "1cd5ee4e36de51be86cc21d19e0b11669d112c3bd48cbec35ca44f4f6dba77f4", "area": "01-geracao-chaves", "caso": "rsa-2048"},
+    {"caminho": "01-geracao-chaves/rsa-2048/chave-publica.txt", "bytes": 280, "sha256": "d7bb0df5bd75efaeed4756710434274e2dbd71693e6b370a81ead53582f1923b", "area": "01-geracao-chaves", "caso": "rsa-2048"},
+    {"caminho": "01-geracao-chaves/rsa-2048/chave-publica.hex", "bytes": 882, "sha256": "55ccd96217878f7c4a5f805bf1f4d01c575b615b4b80ba596705c4ee8d6ffa69", "area": "01-geracao-chaves", "caso": "rsa-2048"},
+    {"caminho": "01-geracao-chaves/rsa-2048/relatorio.txt", "bytes": 450, "sha256": "58f39f77331da62ce14e186d749a21e3c6736f4f7ee52940182d73231471a89a", "area": "01-geracao-chaves", "caso": "rsa-2048"},
+    {"caminho": "01-geracao-chaves/rsa-3072/chave-publica.der", "bytes": 422, "sha256": "c8ba60e41f4a47a254a5ad960eea7a5b283666eda79984d839769b5fa73660e1", "area": "01-geracao-chaves", "caso": "rsa-3072"},
+    {"caminho": "01-geracao-chaves/rsa-3072/chave-publica.txt", "bytes": 280, "sha256": "1f846463ac54635808ce55baa00eed079b187d51c0e3a4e90c771e03073fb0f0", "area": "01-geracao-chaves", "caso": "rsa-3072"},
+    {"caminho": "01-geracao-chaves/rsa-3072/chave-publica.hex", "bytes": 1266, "sha256": "c6b5c20b576ce31921bd971cc1096e8438f9205746fa3e7c4b6c931ce3d8894b", "area": "01-geracao-chaves", "caso": "rsa-3072"},
+    {"caminho": "01-geracao-chaves/rsa-3072/relatorio.txt", "bytes": 450, "sha256": "eb35b171f05929e330113d56efd2a850e1d9a1e38d43aac1a576026f59905c16", "area": "01-geracao-chaves", "caso": "rsa-3072"},
+    {"caminho": "01-geracao-chaves/rsa-4096/chave-publica.der", "bytes": 550, "sha256": "7fb72a74016edd2382f40c60420c71971ea7a2d5581252c4f4fabe26d835bcaf", "area": "01-geracao-chaves", "caso": "rsa-4096"},
+    {"caminho": "01-geracao-chaves/rsa-4096/chave-publica.txt", "bytes": 280, "sha256": "60da81a30c349a91969a9efc5f1a18b6c63acf0f5efce21bae4c9da0961366ff", "area": "01-geracao-chaves", "caso": "rsa-4096"},
+    {"caminho": "01-geracao-chaves/rsa-4096/chave-publica.hex", "bytes": 1650, "sha256": "61fa00256931a872815edbb2967fa0c6a513667eab021d2d9a419ccae46ccc3a", "area": "01-geracao-chaves", "caso": "rsa-4096"},
+    {"caminho": "01-geracao-chaves/rsa-4096/relatorio.txt", "bytes": 450, "sha256": "b3d0fe65a3e731ddb7f697f1e054c98fc9f0ed1dd8b4344902ca677f309c91bc", "area": "01-geracao-chaves", "caso": "rsa-4096"},
+    {"caminho": "01-geracao-chaves/ecdsa-p256/chave-publica.der", "bytes": 91, "sha256": "b9d494ca172a58f431258e6630ae27304baa62c8af635a29a8282908a42b01ad", "area": "01-geracao-chaves", "caso": "ecdsa-p256"},
+    {"caminho": "01-geracao-chaves/ecdsa-p256/chave-publica.txt", "bytes": 272, "sha256": "15779ed7d4888848aba1e6b60c420ff59a034fd47991929529b53554f6064209", "area": "01-geracao-chaves", "caso": "ecdsa-p256"},
+    {"caminho": "01-geracao-chaves/ecdsa-p256/chave-publica.hex", "bytes": 273, "sha256": "ad1cdbf64be8c900e3f8029c7f73cbc6cb11d7963d1802eaf8311d5fb67fbc83", "area": "01-geracao-chaves", "caso": "ecdsa-p256"},
+    {"caminho": "01-geracao-chaves/ecdsa-p256/relatorio.txt", "bytes": 453, "sha256": "a3990530b776a416aaf45a0b8d39c25cc05f4b4aa73d05818b475057f5c54260", "area": "01-geracao-chaves", "caso": "ecdsa-p256"},
+    {"caminho": "01-geracao-chaves/ecdsa-p384/chave-publica.der", "bytes": 120, "sha256": "623f4868590dea774c4be757e373074ec9fadf4aee73f6b0d20f21dc88ff7025", "area": "01-geracao-chaves", "caso": "ecdsa-p384"},
+    {"caminho": "01-geracao-chaves/ecdsa-p384/chave-publica.txt", "bytes": 272, "sha256": "4192194a84f72bcc064800fadbf14bfa5d1a58c2bb0d67417b5fcfdfd4738daf", "area": "01-geracao-chaves", "caso": "ecdsa-p384"},
+    {"caminho": "01-geracao-chaves/ecdsa-p384/chave-publica.hex", "bytes": 360, "sha256": "cb1667350474140cb6c0948d4e01e265606a99bc00a340698009e60a877fb00a", "area": "01-geracao-chaves", "caso": "ecdsa-p384"},
+    {"caminho": "01-geracao-chaves/ecdsa-p384/relatorio.txt", "bytes": 454, "sha256": "3503e0817b1c70c76fd95a6a0a2bd012e70d8c691b0098be2cccfa403a1000cf", "area": "01-geracao-chaves", "caso": "ecdsa-p384"},
+    {"caminho": "01-geracao-chaves/ecdsa-p521/chave-publica.der", "bytes": 158, "sha256": "be79a6a13d0786c32b347b32efdd8f95a4cffad4dbf2124bc1951a42d590c247", "area": "01-geracao-chaves", "caso": "ecdsa-p521"},
+    {"caminho": "01-geracao-chaves/ecdsa-p521/chave-publica.txt", "bytes": 272, "sha256": "e9b8bb0b7f789fd79fb687e1e474a90df15601c34132355488494c96cd611684", "area": "01-geracao-chaves", "caso": "ecdsa-p521"},
+    {"caminho": "01-geracao-chaves/ecdsa-p521/chave-publica.hex", "bytes": 474, "sha256": "fb2d8b6f0db0a8dc6788089742953aea548f5399ca5cb1e67c2eb9bf425036b8", "area": "01-geracao-chaves", "caso": "ecdsa-p521"},
+    {"caminho": "01-geracao-chaves/ecdsa-p521/relatorio.txt", "bytes": 454, "sha256": "fdd4f8369eadf1007fc17e93c781fa39f08db08a7c60d9f598a127360157e7f0", "area": "01-geracao-chaves", "caso": "ecdsa-p521"},
+    {"caminho": "01-geracao-chaves/resumo-classicos/tabela.txt", "bytes": 381, "sha256": "6beaf4b79f702e829c29df3366081036af23d3ae7b284d347430753ffaa32adc", "area": "01-geracao-chaves", "caso": "resumo-classicos"},
+    {"caminho": "01-geracao-chaves/resumo-classicos/relatorio.txt", "bytes": 135, "sha256": "ba604b989c0f1e49a7436dfc19e43487c336db1214957618bc5c3fcb99a0073f", "area": "01-geracao-chaves", "caso": "resumo-classicos"},
+    {"caminho": "03-autoridade-certificadora/cadeia-com-ancora-trocada/raiz-legitima.der", "bytes": 5874, "sha256": "1b666d917843f73467146e3b7cca8ce2cbc40e9bd58f798098ad9096549135dd", "area": "03-autoridade-certificadora", "caso": "cadeia-com-ancora-trocada"},
+    {"caminho": "03-autoridade-certificadora/cadeia-com-ancora-trocada/raiz-impostora.der", "bytes": 5875, "sha256": "dcf4c83982559de7d0654f8417a39b0bdc04683740c8755848c2564cb2f1d7d0", "area": "03-autoridade-certificadora", "caso": "cadeia-com-ancora-trocada"},
+    {"caminho": "03-autoridade-certificadora/cadeia-com-ancora-trocada/folha.der", "bytes": 5983, "sha256": "bcaea77c787e90667478f4b048c49a6052d1e87fa28ecf81ff645ef66815ee4e", "area": "03-autoridade-certificadora", "caso": "cadeia-com-ancora-trocada"},
+    {"caminho": "03-autoridade-certificadora/cadeia-com-ancora-trocada/relatorio.txt", "bytes": 600, "sha256": "2304b82be3a0bc5eab4b5eff61c2bb579babdf056c58d1e4b4c778fee04dea72", "area": "03-autoridade-certificadora", "caso": "cadeia-com-ancora-trocada"},
+    {"caminho": "03-autoridade-certificadora/encadeamento-de-nomes/relatorio.txt", "bytes": 581, "sha256": "13e13f46935c176961ecca031a40a6cd9a9566ddf2a8354afb52221e5a5e3da8", "area": "03-autoridade-certificadora", "caso": "encadeamento-de-nomes"},
+    {"caminho": "03-autoridade-certificadora/cadeia-tres-niveis/raiz.der", "bytes": 5877, "sha256": "7f508d1b2032bc5d65c1d6f07de03c006387b8e4e68d3ef5c083b2ea5584a32d", "area": "03-autoridade-certificadora", "caso": "cadeia-tres-niveis"},
+    {"caminho": "03-autoridade-certificadora/cadeia-tres-niveis/subca.der", "bytes": 5966, "sha256": "36eba4452a0ec2a0e5bece4b8797a0fdd3d2ffc43ba83bf827242ea2be2f0935", "area": "03-autoridade-certificadora", "caso": "cadeia-tres-niveis"},
+    {"caminho": "03-autoridade-certificadora/cadeia-tres-niveis/folha.der", "bytes": 6021, "sha256": "1c16fffb9b29161ff39baf27d867f6353db3b1377c11b982dc7bdac7129e90a2", "area": "03-autoridade-certificadora", "caso": "cadeia-tres-niveis"},
+    {"caminho": "03-autoridade-certificadora/cadeia-tres-niveis/raiz.pem", "bytes": 8013, "sha256": "baa57ea74f28dfb27a6dd94dbfeb2e4efbf2b85e2bfcf745995ce988fd76b7be", "area": "03-autoridade-certificadora", "caso": "cadeia-tres-niveis"},
+    {"caminho": "03-autoridade-certificadora/cadeia-tres-niveis/subca.pem", "bytes": 8135, "sha256": "bb9dd7bd46d44179185a586b220f2457ace83675777d90312ce160d936f980cf", "area": "03-autoridade-certificadora", "caso": "cadeia-tres-niveis"},
+    {"caminho": "03-autoridade-certificadora/cadeia-tres-niveis/folha.pem", "bytes": 8208, "sha256": "2e493f090c9040c960a22f6fd7ac656f92c55b3af5284f87e50f35c0b0d2866d", "area": "03-autoridade-certificadora", "caso": "cadeia-tres-niveis"},
+    {"caminho": "03-autoridade-certificadora/cadeia-tres-niveis/cadeia.pem", "bytes": 24356, "sha256": "10c05e75db9b7f8d06b1f5196de99f431b5b31a75a917cd6aa372d1256567d8d", "area": "03-autoridade-certificadora", "caso": "cadeia-tres-niveis"},
+    {"caminho": "03-autoridade-certificadora/cadeia-tres-niveis/openssl-verify.txt", "bytes": 198, "sha256": "aad138c99d17133c89556d5dd114d28c0d69982aa2aac4be2128e2a9c7fd3ed3", "area": "03-autoridade-certificadora", "caso": "cadeia-tres-niveis"},
+    {"caminho": "03-autoridade-certificadora/cadeia-tres-niveis/relatorio.txt", "bytes": 791, "sha256": "cb57747a4ce4efe44127c27c32552720d1b9212417b7a68366901fd6a3d53321", "area": "03-autoridade-certificadora", "caso": "cadeia-tres-niveis"},
+    {"caminho": "08-provedor/algoritmos-obrigatorios/obrigatorios.txt", "bytes": 172, "sha256": "ce7c95e884f26ca1b85760fc5319f2775c16a97a0b90f363afb1718694ece191", "area": "08-provedor", "caso": "algoritmos-obrigatorios"},
+    {"caminho": "08-provedor/algoritmos-obrigatorios/relatorio.txt", "bytes": 450, "sha256": "c5233b2eb2acd4296077cd42b05a79fa7e04b990277a438487b79be2e0bbef6e", "area": "08-provedor", "caso": "algoritmos-obrigatorios"},
+    {"caminho": "08-provedor/provedor-em-uso/relatorio.txt", "bytes": 383, "sha256": "70df3eabc0e85f33d24515d461555715ef28caa8aaedd8475d068967ab61d0ab", "area": "08-provedor", "caso": "provedor-em-uso"},
+    {"caminho": "08-provedor/disponibilidade-algoritmos/matriz.txt", "bytes": 510, "sha256": "ab419cdc0462b78c30c066690a9caa601b9b3f11350ecb77741dde7c6e3baee7", "area": "08-provedor", "caso": "disponibilidade-algoritmos"},
+    {"caminho": "08-provedor/disponibilidade-algoritmos/relatorio.txt", "bytes": 310, "sha256": "0382540eff4f4bef1c3b828e5a2844ad5cf4799fcb3b15b9488df3bac61adc9f", "area": "08-provedor", "caso": "disponibilidade-algoritmos"}
+  ]
+}

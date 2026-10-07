@@ -1,0 +1,10 @@
+RSA Public Key (3072 bits)
+├── Algorithm: RSA
+├── Type: Public
+├── Format: X.509
+├── Size: 3072 bits
+└── Base64: MIIBojANBgkqhkiG9w0BAQEFAAOCAY8AMIIBigKCAYEArXM6xX7ZzeoOdaAK4q2Q...
+
+RSA Specific:
+  • Modulus bits: 3072
+  • Public exponent: 65537

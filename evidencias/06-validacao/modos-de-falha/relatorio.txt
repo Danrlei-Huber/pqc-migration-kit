@@ -1,0 +1,17 @@
+Modos de falha detectados pela validação
+========================================
+
+Emissor errado — DNs:                  false
+Emissor errado — assinatura clássica:  false
+Emissor errado — assinatura alternativa: false
+Chave pública de emissor errada:       false
+Sem chave de emissor (folha emitida por CA): false
+Certificado sem extensões Catalyst — extensões: false
+Certificado sem extensões Catalyst — assinatura alternativa: false
+
+Artefatos gravados neste caso:
+  - emissor-errado.txt
+  - chave-emissor-errada.txt
+  - sem-chave-de-emissor.txt
+  - sem-extensoes-catalyst.txt
+  - certificado-sem-extensoes.der

@@ -1,0 +1,9 @@
+Matriz de disponibilidade dos algoritmos do fluxo ativo
+=======================================================
+
+Variantes clássicas:                   6
+Variantes pós-quânticas:               3
+Esquemas PQC no enum:                  somente ML-DSA (FIPS 204)
+
+Artefatos gravados neste caso:
+  - matriz.txt

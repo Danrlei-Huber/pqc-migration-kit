@@ -1,0 +1,14 @@
+Chave pública RSA_4096
+======================
+
+Algoritmo:                             RSA
+Tamanho declarado:                     4096 bits
+Nível de segurança:                    152 bits
+Algoritmo de assinatura:               SHA512withRSA
+OID:                                   1.2.840.113549.1.1.1
+SPKI codificado:                       550 bytes
+
+Artefatos gravados neste caso:
+  - chave-publica.der
+  - chave-publica.txt
+  - chave-publica.hex

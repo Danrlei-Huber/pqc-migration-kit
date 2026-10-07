@@ -1,0 +1,1 @@
+ValidationResult{notExpired=true, dns=true, validity=true, pubkey=true, sig=true, pqcExt=false, pqcSig=false, all=false}

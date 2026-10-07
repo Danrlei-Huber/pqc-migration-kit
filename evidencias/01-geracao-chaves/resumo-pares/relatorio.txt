@@ -1,0 +1,8 @@
+Pares recomendados por nível de segurança
+=========================================
+
+
+Os tempos são indicativos: execução única, sem aquecimento da JVM.
+
+Artefatos gravados neste caso:
+  - tabela.txt
