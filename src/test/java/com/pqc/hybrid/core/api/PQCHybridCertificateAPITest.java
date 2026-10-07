@@ -3,11 +3,9 @@ package com.pqc.hybrid.core.api;
 import com.pqc.hybrid.core.TestFixtures;
 import com.pqc.hybrid.core.certificate.HybridCertificateAuthority;
 import com.pqc.hybrid.core.certificate.HybridCertificateValidator;
-import com.pqc.hybrid.core.config.CompositeAlgorithm;
 import com.pqc.hybrid.core.config.HybridAlgorithmPair;
 import com.pqc.hybrid.core.config.HybridCertificateConfig;
 import com.pqc.hybrid.core.keygen.HybridKeyPair;
-import com.pqc.hybrid.core.signature.CompositeSignatureStrategy;
 import com.pqc.hybrid.core.signature.DualSignatureStrategy;
 import com.pqc.hybrid.core.signature.HybridSignatureManager;
 import com.pqc.hybrid.core.signature.HybridSignaturePair;
@@ -68,12 +66,11 @@ class PQCHybridCertificateAPITest {
         PQCHybridCertificateAPI local = new PQCHybridCertificateAPI();
         assertThat(local.getSignatureStrategy()).isInstanceOf(DualSignatureStrategy.class);
 
-        CompositeSignatureStrategy composite =
-                new CompositeSignatureStrategy(CompositeAlgorithm.MLDSA44_ECDSA_P256_SHA256);
-        local.setSignatureStrategy(composite);
-        assertThat(local.getSignatureStrategy()).isSameAs(composite);
+        DualSignatureStrategy other = new DualSignatureStrategy();
+        local.setSignatureStrategy(other);
+        assertThat(local.getSignatureStrategy()).isSameAs(other);
 
-        assertThat(new PQCHybridCertificateAPI(composite).getSignatureStrategy()).isSameAs(composite);
+        assertThat(new PQCHybridCertificateAPI(other).getSignatureStrategy()).isSameAs(other);
         assertThatThrownBy(() -> new PQCHybridCertificateAPI(null))
                 .isInstanceOf(NullPointerException.class);
     }

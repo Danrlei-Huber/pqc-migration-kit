@@ -10,6 +10,7 @@ import com.pqc.hybrid.core.signature.HybridSignaturePair;
 import com.pqc.hybrid.core.signature.DualSignatureStrategy;
 import com.pqc.hybrid.core.signature.DualSignatureValidator;
 import com.pqc.hybrid.core.certificate.HybridX509CertificateBuilder;
+import com.pqc.hybrid.core.certificate.ValidationPolicy;
 import com.pqc.hybrid.core.certificate.HybridCertificateValidator;
 import com.pqc.hybrid.core.certificate.CertificateSigningRequestBuilder;
 import com.pqc.hybrid.core.certificate.HybridCertificateAuthority;
@@ -356,6 +357,14 @@ public final class PQCHybridCertificateAPI {
         return HybridCertificateValidator.validatePQCExtensions(certificate);
     }
 
+    /**
+     * Verifies the alternative signature against the <b>subject's</b> own PQC public key, which is
+     * only meaningful for a self-signed certificate.
+     *
+     * @deprecated use {@link #validateCertificateAgainstIssuer(X509Certificate, X509Certificate)},
+     *             which takes the alternative key from the issuer's certificate.
+     */
+    @Deprecated
     public boolean validatePQCSignature(X509Certificate certificate, HybridKeyPair keyPair)
             throws InvalidSignatureException {
         ensureInitialized();
@@ -373,10 +382,16 @@ public final class PQCHybridCertificateAPI {
      * key, or prefer {@link #validateCertificateAgainstIssuer(X509Certificate, X509Certificate)},
      * which also checks issuer name chaining and the alternative signature.
      *
+     * <p>The alternative (PQC) signature is never verified here, so a hybrid certificate always
+     * reports {@code pqcSignatureValid == false}.
+     *
      * @param certificate the certificate to validate
      * @param issuerPublicKey the issuer's public key, or null to check a self-signature
      * @return validation result with detailed information
+     * @deprecated use {@link #validateCertificateAgainstIssuer(X509Certificate, X509Certificate)},
+     *             which verifies both signatures with credentials taken from the issuer's certificate.
      */
+    @Deprecated
     public HybridCertificateValidator.ValidationResult validateCertificate(X509Certificate certificate,
                                                                            PublicKey issuerPublicKey) {
         ensureInitialized();
@@ -402,6 +417,25 @@ public final class PQCHybridCertificateAPI {
         Objects.requireNonNull(certificate, "Certificate cannot be null");
         Objects.requireNonNull(issuerCertificate, "Issuer certificate cannot be null");
         return HybridCertificateValidator.validateAgainstIssuer(certificate, issuerCertificate);
+    }
+
+    /**
+     * Validates a certificate against the authority that issued it, deciding acceptance by
+     * {@code policy}. See {@link HybridCertificateValidator#validateAgainstIssuer(X509Certificate,
+     * X509Certificate, ValidationPolicy)}.
+     *
+     * @param certificate       the certificate to validate
+     * @param issuerCertificate the certificate of the issuing authority
+     * @param policy            the relying party's acceptance rule
+     * @return validation result; {@code isAccepted()} is the verdict, {@code getReasons()} explains it
+     */
+    public HybridCertificateValidator.ValidationResult validateCertificateAgainstIssuer(
+            X509Certificate certificate, X509Certificate issuerCertificate, ValidationPolicy policy) {
+        ensureInitialized();
+        Objects.requireNonNull(certificate, "Certificate cannot be null");
+        Objects.requireNonNull(issuerCertificate, "Issuer certificate cannot be null");
+        Objects.requireNonNull(policy, "Policy cannot be null");
+        return HybridCertificateValidator.validateAgainstIssuer(certificate, issuerCertificate, policy);
     }
 
     /**
@@ -464,7 +498,12 @@ public final class PQCHybridCertificateAPI {
      * @return the complete certificate (ready to use)
      * @throws PQCHybridException if key generation or signing fails
      * @throws CertificateException if certificate construction or validation fails
+     * @deprecated legacy demonstration shortcut, not part of the recommended flow: it self-signs
+     *             while accepting an {@code issuerDN} that may differ from the subject. Use
+     *             {@link #createRootCA(HybridCertificateConfig, HybridKeyPair)} and
+     *             {@link #issueCertificate(HybridCertificateAuthority, HybridCertificateConfig, HybridKeyPair)}.
      */
+    @Deprecated
     public X509Certificate generateCompleteHybridCertificate(int securityLevel,
                                                                String subjectDN,
                                                                String issuerDN,
@@ -547,6 +586,22 @@ public final class PQCHybridCertificateAPI {
         ensureInitialized();
         Objects.requireNonNull(chain, "Chain cannot be null");
         return HybridCertificateValidator.validateHybridChain(chain);
+    }
+
+    /**
+     * Validates a full hybrid certificate chain (ordered leaf → … → root), deciding acceptance by
+     * {@code policy}.
+     *
+     * @param chain  the ordered certificate chain (leaf first, self-signed root last)
+     * @param policy the relying party's acceptance rule
+     * @return the chain validation result; {@code accepted()} is the verdict
+     */
+    public HybridCertificateValidator.HybridChainValidationResult validateCertificateChain(
+            List<X509Certificate> chain, ValidationPolicy policy) {
+        ensureInitialized();
+        Objects.requireNonNull(chain, "Chain cannot be null");
+        Objects.requireNonNull(policy, "Policy cannot be null");
+        return HybridCertificateValidator.validateHybridChain(chain, policy);
     }
 
     /**

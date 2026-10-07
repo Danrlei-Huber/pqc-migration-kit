@@ -1,1 +1,1 @@
-ValidationResult{notExpired=true, dns=true, validity=true, pubkey=true, sig=true, pqcExt=false, pqcSig=false, all=false}
+ValidationResult{notExpired=true, dns=true, validity=true, pubkey=true, sig=true, pqcExt=false, pqcSig=false, all=false, accepted=false, reasons=[ALT_EXTENSIONS_MISSING@0 (subjectAltPublicKeyInfo, altSignatureAlgorithm and altSignatureValue are not all present)]}

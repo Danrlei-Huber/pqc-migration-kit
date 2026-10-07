@@ -1,0 +1,2 @@
+exit=0
+<tmp>/folha.pem: OK

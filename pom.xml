@@ -215,7 +215,6 @@
                                 <exclude>**/examples/**</exclude>
                                 <exclude>**/util/printer/**</exclude>
                                 <exclude>**/util/export/**</exclude>
-                                <exclude>**/migration/**</exclude>
                             </excludes>
                             <outputDirectory>target/jacoco-report</outputDirectory>
                         </configuration>

@@ -1,0 +1,1 @@
+[ISSUER_ALT_KEY_MISSING@0 (issuer certificate has no subjectAltPublicKeyInfo), ALT_EXTENSIONS_MISSING@1 (subjectAltPublicKeyInfo, altSignatureAlgorithm and altSignatureValue are not all present)]

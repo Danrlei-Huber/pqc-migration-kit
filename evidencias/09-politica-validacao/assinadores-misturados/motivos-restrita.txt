@@ -1,0 +1,1 @@
+[ALT_SIGNATURE_INVALID@0 (alternative signature does not verify under the issuer's alternative public key)]

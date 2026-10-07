@@ -6,13 +6,13 @@
 CERTIFICATE INFORMATION
   • Subject: CN=nivel256.tcc.br,O=TCC,C=BR
   • Issuer: CN=nivel256.tcc.br,O=TCC,C=BR
-  • Serial: 1310441319498058932974671389948903385251642066787
+  • Serial: 1061206605046802530548596462344641138400666863386
   • Version: v3
 
 SIGNATURE CONFIGURATION
   • Primary Algorithm: SHA512WITHECDSA
   • Algorithm OID: 1.2.840.10045.4.3.4
-  • Signature Length: 139 bytes
+  • Signature Length: 138 bytes
 
 PUBLIC KEY
   • Algorithm: EC (521 bits)

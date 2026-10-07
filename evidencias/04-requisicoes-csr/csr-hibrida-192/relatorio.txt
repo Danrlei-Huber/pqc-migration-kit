@@ -6,7 +6,7 @@ Par de algoritmos:                     ECDSA-384 + ML-DSA-65
 Algoritmo da assinatura principal:     SHA384withECDSA (OID 1.2.840.10045.4.3.3)
 Chave clássica (campo convencional):   120 bytes
 Atributo altSubjectPublicKeyInfo:      presente (2.5.29.72)
-Requisição completa:                   5647 bytes (DER)
+Requisição completa:                   5648 bytes (DER)
 openssl req -text:                     decodifica sem erro
 openssl req -verify:                   assinatura própria da CSR conferida
 

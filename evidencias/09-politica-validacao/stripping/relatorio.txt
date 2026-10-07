@@ -1,0 +1,19 @@
+Stripping (só clássico, chave da AC)
+====================================
+
+JDK PKIX (sem BouncyCastle):           aceita
+openssl verify:                        aceita
+Biblioteca strict():                   rejeita
+Biblioteca REQUIRE_BOTH {ML-DSA-65, ML-DSA-87}: rejeita
+Biblioteca CLASSICAL_ONLY:             aceita
+Dimensão clássica (diagnóstico):       true
+Dimensão pós-quântica (diagnóstico):   false
+Motivos (REQUIRE_BOTH {65,87}):        ALT_EXTENSIONS_MISSING@0
+
+Artefatos gravados neste caso:
+  - jdk-pkix.txt
+  - openssl-verify.txt
+  - motivos-strict.txt
+  - motivos-restrita.txt
+  - folha.der
+  - raiz.der
