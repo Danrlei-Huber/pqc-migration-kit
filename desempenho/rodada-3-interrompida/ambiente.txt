@@ -1,0 +1,12 @@
+Commit: 5d25d751ffe10795949fa160ce65f57737cac8b6
+Arvore: limpa
+Inicio: 2026-10-07T18:37:01-03:00
+Carga media no inicio (1/5/15 min): 0.94 1.49 3.25
+openjdk version "21.0.11" 2026-04-21 LTS
+OpenJDK Runtime Environment Temurin-21.0.11+10 (build 21.0.11+10-LTS)
+CPU:  12th Gen Intel(R) Core(TM) i7-12650H (16 threads logicas)
+Memoria: 7 GiB
+SO: Linux 6.18.33.2-microsoft-standard-WSL2
+Bouncy Castle: 1.84
+JMH: 1.36; modo AverageTime; 5 aquecimentos x 1 s; 5 medicoes x 2 s; 5 forks; -Xms512m -Xmx1024m; mensagem assinada varia a cada operacao
+Contêiner Ollama parado durante a medição
