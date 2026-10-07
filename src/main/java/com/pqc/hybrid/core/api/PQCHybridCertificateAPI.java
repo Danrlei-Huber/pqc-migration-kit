@@ -10,6 +10,7 @@ import com.pqc.hybrid.core.signature.HybridSignaturePair;
 import com.pqc.hybrid.core.signature.DualSignatureStrategy;
 import com.pqc.hybrid.core.signature.DualSignatureValidator;
 import com.pqc.hybrid.core.certificate.HybridX509CertificateBuilder;
+import com.pqc.hybrid.core.certificate.ValidationPolicy;
 import com.pqc.hybrid.core.certificate.HybridCertificateValidator;
 import com.pqc.hybrid.core.certificate.CertificateSigningRequestBuilder;
 import com.pqc.hybrid.core.certificate.HybridCertificateAuthority;
@@ -419,6 +420,25 @@ public final class PQCHybridCertificateAPI {
     }
 
     /**
+     * Validates a certificate against the authority that issued it, deciding acceptance by
+     * {@code policy}. See {@link HybridCertificateValidator#validateAgainstIssuer(X509Certificate,
+     * X509Certificate, ValidationPolicy)}.
+     *
+     * @param certificate       the certificate to validate
+     * @param issuerCertificate the certificate of the issuing authority
+     * @param policy            the relying party's acceptance rule
+     * @return validation result; {@code isAccepted()} is the verdict, {@code getReasons()} explains it
+     */
+    public HybridCertificateValidator.ValidationResult validateCertificateAgainstIssuer(
+            X509Certificate certificate, X509Certificate issuerCertificate, ValidationPolicy policy) {
+        ensureInitialized();
+        Objects.requireNonNull(certificate, "Certificate cannot be null");
+        Objects.requireNonNull(issuerCertificate, "Issuer certificate cannot be null");
+        Objects.requireNonNull(policy, "Policy cannot be null");
+        return HybridCertificateValidator.validateAgainstIssuer(certificate, issuerCertificate, policy);
+    }
+
+    /**
      * Creates a hybrid PKCS#10 Certificate Signing Request.
      *
      * @param subjectDN the subject Distinguished Name
@@ -566,6 +586,22 @@ public final class PQCHybridCertificateAPI {
         ensureInitialized();
         Objects.requireNonNull(chain, "Chain cannot be null");
         return HybridCertificateValidator.validateHybridChain(chain);
+    }
+
+    /**
+     * Validates a full hybrid certificate chain (ordered leaf → … → root), deciding acceptance by
+     * {@code policy}.
+     *
+     * @param chain  the ordered certificate chain (leaf first, self-signed root last)
+     * @param policy the relying party's acceptance rule
+     * @return the chain validation result; {@code accepted()} is the verdict
+     */
+    public HybridCertificateValidator.HybridChainValidationResult validateCertificateChain(
+            List<X509Certificate> chain, ValidationPolicy policy) {
+        ensureInitialized();
+        Objects.requireNonNull(chain, "Chain cannot be null");
+        Objects.requireNonNull(policy, "Policy cannot be null");
+        return HybridCertificateValidator.validateHybridChain(chain, policy);
     }
 
     /**
