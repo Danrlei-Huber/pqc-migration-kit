@@ -1,0 +1,21 @@
+Cenário: stripping
+Folha marcada como híbrida pelo Core: false
+Folha ligada a um emissor: true
+
+Folha: VALID
+  CERTIFICATE_CHAIN      VALID        Certificate chain is complete.
+  SIGNATURE_VERIFICATION VALID        Signature verification successful. 
+  CERTIFICATE_VALIDITY   VALID        Certificate is valid.
+  OCSP_VERIFICATION      NOT_CHECKED  Certificate does not contain AIA extension or OCSP URL is not present
+  CRL_VERIFICATION       NOT_CHECKED  The cRLDistributionPoints extension is not set.
+  BASIC_CONSTRAINTS      VALID        Certificate basic constraints verification successful.
+  KEY_USAGE              NOT_CHECKED  Certificate is not CA.
+
+Raiz: VALID
+  CERTIFICATE_CHAIN      VALID        Certificate chain is complete. Certificate is trusted Root CA certificate.
+  SIGNATURE_VERIFICATION VALID        Self-signed signature verification successful. Self-signed alternative signature verification successful.
+  CERTIFICATE_VALIDITY   VALID        Certificate is valid.
+  OCSP_VERIFICATION      NOT_CHECKED  Issuer certificate is not available.
+  CRL_VERIFICATION       NOT_CHECKED  The cRLDistributionPoints extension is not set.
+  BASIC_CONSTRAINTS      VALID        Certificate basic constraints verification successful.
+  KEY_USAGE              VALID        Certificate keyCertSign bit is set and can be used to verify signatures on other certificates.

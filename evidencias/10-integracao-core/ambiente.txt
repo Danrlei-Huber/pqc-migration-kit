@@ -1,10 +1,13 @@
-Commit do core: 6443a63cd5eb1efcd99bca207f2948fa3e861d97 (branch poc/pqc-migration-kit)
+Commit do core: 353ba0476271987873fafd8e761122470c1df00d (branch poc/pqc-migration-kit)
+Commit do core antes da integração (linha de base): cf583bcf71dbff291bd66191627ce8c32848be26
+Código de saída do Maven antes da integração: 0
+Código de saída do Maven das regras de arquitetura: 0
 Árvore do core antes e depois da medição: limpa
-Commit do kit: 021415df0787efae7f5e56eba62c74c9cab3bad8
+Commit do kit: b0728d973333d16e8d8c0e5358bd38a37e1e6155
 Árvore do kit (src/ e pom.xml): limpa
 Jar do kit instalado: 1e3584320d710adc06c504257e695ba8cc0ed3d835ac8edccc971edaeaa7f0c6
-Início: 2026-10-22T17:42:31-03:00
-Fim: 2026-10-22T17:43:33-03:00
+Início: 2026-10-22T19:20:04-03:00
+Fim: 2026-10-22T19:25:57-03:00
 Código de saída do Maven: 0
 openjdk version "21.0.11" 2026-04-21 LTS
 OpenJDK Runtime Environment Temurin-21.0.11+10 (build 21.0.11+10-LTS)

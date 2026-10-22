@@ -1,0 +1,1 @@
+Idênticos: os relatórios da linha de base no commit cf583bcf (antes do adaptador) e no modo native do commit atual.
