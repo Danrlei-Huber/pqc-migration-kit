@@ -1,0 +1,6 @@
+Cenário: integro
+Configuração: hybrid-issuer {65,87}
+Folha: VALID
+  VALID: Signature verification successful. Alternative signature accepted by PQC policy hybrid-issuer.
+Raiz: VALID
+  VALID: Self-signed signature verification successful. Self-signed alternative signature accepted by PQC policy hybrid-issuer.

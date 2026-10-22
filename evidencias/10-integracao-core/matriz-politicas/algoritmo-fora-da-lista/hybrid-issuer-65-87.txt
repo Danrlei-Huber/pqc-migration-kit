@@ -1,0 +1,6 @@
+Cenário: algoritmo-fora-da-lista
+Configuração: hybrid-issuer {65,87}
+Folha: INVALID
+  FAILED: Signature verification successful. Alternative signature rejected by PQC policy hybrid-issuer: ALT_ALGORITHM_NOT_ALLOWED (ML-DSA-44 is not in [ML_DSA_65, ML_DSA_87]).
+Raiz: INVALID
+  FAILED: Self-signed signature verification successful. Self-signed alternative signature rejected by PQC policy hybrid-issuer: ALT_ALGORITHM_NOT_ALLOWED (ML-DSA-44 is not in [ML_DSA_65, ML_DSA_87]).

@@ -1,0 +1,6 @@
+Cenário: assinadores-misturados
+Configuração: native
+Folha: INVALID
+  FAILED: Signature verification successful. Alternative signature verification failed.
+Raiz: VALID
+  VALID: Self-signed signature verification successful. Self-signed alternative signature verification successful.

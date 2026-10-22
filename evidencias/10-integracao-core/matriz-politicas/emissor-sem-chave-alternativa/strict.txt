@@ -1,0 +1,6 @@
+Cenário: emissor-sem-chave-alternativa
+Configuração: strict
+Folha: INVALID
+  FAILED: Signature verification successful. Alternative signature rejected by PQC policy strict: ISSUER_ALT_KEY_MISSING (issuer certificate has no subjectAltPublicKeyInfo).
+Raiz: INVALID
+  FAILED: Self-signed signature verification successful. Self-signed alternative signature rejected by PQC policy strict: ALT_EXTENSIONS_MISSING (subjectAltPublicKeyInfo, altSignatureAlgorithm and altSignatureValue are not all present).

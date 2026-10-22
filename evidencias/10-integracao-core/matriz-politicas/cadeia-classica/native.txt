@@ -1,0 +1,6 @@
+Cenário: cadeia-classica
+Configuração: native
+Folha: VALID
+  VALID: Signature verification successful.
+Raiz: VALID
+  VALID: Self-signed signature verification successful.

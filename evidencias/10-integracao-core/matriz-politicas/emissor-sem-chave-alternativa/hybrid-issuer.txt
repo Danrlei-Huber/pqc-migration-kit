@@ -1,0 +1,6 @@
+Cenário: emissor-sem-chave-alternativa
+Configuração: hybrid-issuer
+Folha: INVALID
+  FAILED: Signature verification successful. Alternative signature rejected by PQC policy hybrid-issuer: ISSUER_ALT_KEY_MISSING (issuer certificate has no subjectAltPublicKeyInfo).
+Raiz: VALID
+  VALID: Self-signed signature verification successful. Self-signed alternative signature not enforced by PQC policy hybrid-issuer.

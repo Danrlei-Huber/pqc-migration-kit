@@ -1,0 +1,6 @@
+Cenário: cadeia-classica
+Configuração: hybrid-issuer {65,87}
+Folha: VALID
+  VALID: Signature verification successful. Alternative signature not enforced by PQC policy hybrid-issuer.
+Raiz: VALID
+  VALID: Self-signed signature verification successful. Self-signed alternative signature not enforced by PQC policy hybrid-issuer.
