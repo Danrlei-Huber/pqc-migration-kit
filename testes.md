@@ -163,14 +163,16 @@ Componentes deliberadamente fora da via de produção:
 
 | Componente | Estado |
 |---|---|
-| `LegacyCertificateMigrator` | Esqueleto. `migrateToHybrid` devolve resultado com certificado vazio; a lógica de migração não está implementada |
-| `CompositeSignatureStrategy`, `CompositeSigner`, `CompositeVerifier` | Funcionais, porém **desligados da fachada**. Exploração do *draft-ietf-lamps-pq-composite-sigs*, mantida para comparação arquitetural |
+| Pacote de migração (`LegacyCertificateMigrator`) | Removido no commit `4b998f5`; era um esqueleto sem implementação |
+| Assinatura *composite* (`CompositeSignatureStrategy`, `CompositeSigner`, `CompositeVerifier`) | Removida no commit `4b998f5`; era paralela ao caminho Catalyst e não estava ligada à fachada |
 | ML-KEM, SLH-DSA, Falcon | Removidos do suporte no commit `fdccc5d`; o fluxo ativo concentra-se em ML-DSA |
-| Integração com a plataforma CZERTAINLY | Não realizada. A biblioteca foi desenvolvida e validada como artefato autônomo |
+| Integração com a plataforma OmniTrustILM | **Só a validação**, em prova de conceito no ramo `poc/pqc-migration-kit` do core, com o modo `hybrid-issuer`. Evidências em `evidencias/10-integracao-core`, geradas por `integracao/coletar-evidencias-core.sh`. A emissão pelo assinador externo não foi integrada |
 
 ## Estado de qualidade
 
-- **270 testes**, 0 falhas.
+- **254 testes**, 0 falhas: 214 unitários e 12 de integração no build padrão (`mvn verify`) e
+  28 da campanha de evidências (`-Pvalidacao`). A suíte também passa com o Bouncy Castle 1.85,
+  versão usada pelo core, com a matriz da área 09 idêntica.
 - Gate de cobertura JaCoCo de 75% atendido (exclui `examples`, `util/printer`, `util/export`,
   `migration` e `exception`).
 - A compatibilidade retroativa está travada por testes automatizados contra **dois
