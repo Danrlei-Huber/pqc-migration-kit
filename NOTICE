@@ -1,0 +1,6 @@
+pqc-migration-kit
+Copyright 2026 Danrlei Rafael Huber
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+It depends on the Bouncy Castle libraries (https://www.bouncycastle.org), distributed
+under the Bouncy Castle License.
