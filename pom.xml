@@ -142,6 +142,20 @@
 
     <!-- Build Configuration -->
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <!-- A licença Apache 2.0 exige que LICENSE e NOTICE acompanhem o binário distribuído. -->
+            <resource>
+                <directory>${project.basedir}</directory>
+                <targetPath>META-INF</targetPath>
+                <includes>
+                    <include>LICENSE</include>
+                    <include>NOTICE</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <!-- Compiler -->
             <plugin>
@@ -161,12 +175,11 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${maven.jar.version}</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.pqc.hybrid.core.PQCHybridCertificateAPI</mainClass>
-                            <addClasspath>true</addClasspath>
-                        </manifest>
-                    </archive>
+                    <!-- Os exemplos rodam de target/classes (run-examples.sh); não fazem parte da biblioteca
+                         distribuída a quem a incorpora. -->
+                    <excludes>
+                        <exclude>com/pqc/hybrid/examples/**</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
 
