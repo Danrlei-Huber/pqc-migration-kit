@@ -3,11 +3,11 @@ Commit do core antes da integração (linha de base): cf583bcf71dbff291bd6619162
 Código de saída do Maven antes da integração: 0
 Código de saída do Maven das regras de arquitetura: 0
 Árvore do core antes e depois da medição: limpa
-Commit do kit: 1cae60e524bf2e1c1f4dd925a6f0e4da67d4466a
+Commit do kit: 0f00595bc1eaaae66e247fe2fc7a00abd5951758
 Árvore do kit (src/ e pom.xml): limpa
-Jar do kit instalado: 1e3584320d710adc06c504257e695ba8cc0ed3d835ac8edccc971edaeaa7f0c6
-Início: 2026-10-22T22:14:24-03:00
-Fim: 2026-10-22T22:19:28-03:00
+Jar do kit instalado: 5de60f11f0393b50f7311831a7cc410211caa2220792bd56e3ffad9fe4e53831
+Início: 2026-10-23T01:47:36-03:00
+Fim: 2026-10-23T01:52:56-03:00
 Código de saída do Maven: 0
 openjdk version "21.0.11" 2026-04-21 LTS
 OpenJDK Runtime Environment Temurin-21.0.11+10 (build 21.0.11+10-LTS)

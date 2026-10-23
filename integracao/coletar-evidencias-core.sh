@@ -57,7 +57,9 @@ cp -r "$WORKTREE/target/pqc-native-baseline" "$OUT/linha-de-base-antes-da-integr
 rm -rf "$CORE/target/pqc-native-baseline" "$CORE/target/pqc-policy-matrix" "$CORE/target/pqc-twin-issuer" \
   "$CORE/target/surefire-reports"
 set +e
-( cd "$CORE" && mvn -B test -Dtest="$TESTES" -Dsurefire.failIfNoSpecifiedTests=false ) > "$MVN_LOG" 2>&1
+# clean: classes de uma compilação incremental anterior podem divergir das do código-fonte (nomes de lambdas
+# sintéticas, verificados pelas regras de arquitetura).
+( cd "$CORE" && mvn -B clean test -Dtest="$TESTES" -Dsurefire.failIfNoSpecifiedTests=false ) > "$MVN_LOG" 2>&1
 RC=$?
 set -e
 resultado > "$OUT/resultado-testes.txt"
