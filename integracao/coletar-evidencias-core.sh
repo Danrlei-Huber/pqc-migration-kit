@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
-# Mede a integração da biblioteca com o core (OmniTrustILM) e grava a área de evidências 10.
+# Mede a integração da biblioteca com o core (OmniTrustILM) e grava as evidências em integracao/evidencias.
 # Roda, no core, os testes da prova de conceito sobre os mesmos certificados da área 09 e copia
-# as matrizes observadas, os relatórios do Surefire e o ambiente para evidencias/10-integracao-core.
+# as matrizes observadas, os relatórios do Surefire e o ambiente para integracao/evidencias, separadas da
+# campanha da biblioteca (evidencias/01..09).
 # Uso: integracao/coletar-evidencias-core.sh [caminho-do-core]   (padrão: ../core)
 set -euo pipefail
 KIT="$(cd "$(dirname "$0")/.." && pwd)"
 CORE="$(cd "${1:-$KIT/../core}" && pwd)"
-OUT="$KIT/evidencias/10-integracao-core"
+OUT="$KIT/integracao/evidencias"
 AREA09="$KIT/evidencias/09-politica-validacao"
 FIXTURES="$CORE/src/test/resources/pqc/politica-validacao"
 TESTES="PqcNativeBaselineITest,PqcHybridValidationITest,PqcTwinIssuerITest,HybridAltSignatureCheckTest,PqcValidationSettingsTest,CertificateValidationITest"

@@ -166,7 +166,7 @@ Componentes deliberadamente fora da via de produção:
 | Pacote de migração (`LegacyCertificateMigrator`) | Removido no commit `4b998f5`; era um esqueleto sem implementação |
 | Assinatura *composite* (`CompositeSignatureStrategy`, `CompositeSigner`, `CompositeVerifier`) | Removida no commit `4b998f5`; era paralela ao caminho Catalyst e não estava ligada à fachada |
 | ML-KEM, SLH-DSA, Falcon | Removidos do suporte no commit `fdccc5d`; o fluxo ativo concentra-se em ML-DSA |
-| Integração com a plataforma OmniTrustILM | **Só a validação**, em prova de conceito no ramo `poc/pqc-migration-kit` do core, com o modo `hybrid-issuer`. Evidências em `evidencias/10-integracao-core`, geradas por `integracao/coletar-evidencias-core.sh`. A emissão pelo assinador externo não foi integrada |
+| Integração com a plataforma OmniTrustILM | **Só a validação**, em prova de conceito no ramo `poc/pqc-migration-kit` do core, com os modos `hybrid-issuer` e `hybrid-authorities`. Evidências em `integracao/evidencias`, geradas por `integracao/coletar-evidencias-core.sh`. A emissão pelo assinador externo não foi integrada |
 
 ## Estado de qualidade
 
