@@ -1,0 +1,6 @@
+Folha: integro
+Ordem de importação das raízes: fixada-na-hibrida
+Configuração: hybrid-issuer {65,87}
+Raiz ligada: híbrida
+Status: VALID
+  VALID: Signature verification successful. Alternative signature accepted by PQC policy hybrid-issuer.

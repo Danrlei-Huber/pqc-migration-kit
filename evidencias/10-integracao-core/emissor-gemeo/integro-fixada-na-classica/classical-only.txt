@@ -1,0 +1,6 @@
+Folha: integro
+Ordem de importação das raízes: fixada-na-classica
+Configuração: classical-only
+Raiz ligada: clássica
+Status: VALID
+  VALID: Signature verification successful. Alternative signature not enforced by PQC policy classical-only.

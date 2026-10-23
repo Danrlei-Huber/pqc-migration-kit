@@ -1,0 +1,6 @@
+Folha: integro
+Ordem de importação das raízes: fixada-na-classica
+Configuração: strict
+Raiz ligada: clássica
+Status: INVALID
+  FAILED: Signature verification successful. Alternative signature rejected by PQC policy strict: ISSUER_ALT_KEY_MISSING (issuer certificate has no subjectAltPublicKeyInfo).
