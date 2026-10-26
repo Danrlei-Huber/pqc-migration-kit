@@ -110,6 +110,65 @@ class PQCExtensionsBuildTest extends BaseTest {
     }
 
     @Test
+    @DisplayName("Alt-signature extensions (73/74) must be non-critical by default (legacy compat)")
+    void altSignatureExtensionsAreNonCriticalByDefault() throws Exception {
+        KeyPair pqcKp = generateMLDSAKeyPair();
+        KeyPair ecKp = generateECKeyPair("secp384r1");
+
+        HybridKeyPair keyPair = new HybridKeyPair(
+                ecKp.getPublic(), ecKp.getPrivate(),
+                pqcKp.getPublic(), pqcKp.getPrivate(),
+                CLASSICAL_ALGORITHM, PQC_ALGORITHM
+        );
+
+        HybridCertificateConfig config = HybridCertificateConfig.builder()
+                .withSubjectDN("CN=legacy-compat.example.com")
+                .withIssuerDN("CN=Test CA")
+                .withSerialNumber(java.math.BigInteger.valueOf(42))
+                .withAlgorithmPair(HybridAlgorithmPair.recommended(192))
+                .build();
+
+        X509Certificate certificate = HybridX509CertificateBuilder.builder(config, keyPair)
+                .withPQCExtensions(true)
+                .build();
+
+        // RFC 5280 §4.2: a legacy verifier rejects unrecognised CRITICAL extensions. For
+        // backward compatibility the Catalyst alt-signature extensions must be non-critical.
+        assertThat(certificate.getCriticalExtensionOIDs())
+                .doesNotContain("2.5.29.72", "2.5.29.73", "2.5.29.74");
+        assertThat(certificate.getNonCriticalExtensionOIDs())
+                .contains("2.5.29.72", "2.5.29.73", "2.5.29.74");
+    }
+
+    @Test
+    @DisplayName("Strict-hybrid mode emits alt-signature extensions (73/74) as critical")
+    void altSignatureExtensionsCriticalWhenOptedIn() throws Exception {
+        KeyPair pqcKp = generateMLDSAKeyPair();
+        KeyPair ecKp = generateECKeyPair("secp384r1");
+
+        HybridKeyPair keyPair = new HybridKeyPair(
+                ecKp.getPublic(), ecKp.getPrivate(),
+                pqcKp.getPublic(), pqcKp.getPrivate(),
+                CLASSICAL_ALGORITHM, PQC_ALGORITHM
+        );
+
+        HybridCertificateConfig config = HybridCertificateConfig.builder()
+                .withSubjectDN("CN=strict-hybrid.example.com")
+                .withIssuerDN("CN=Test CA")
+                .withSerialNumber(java.math.BigInteger.valueOf(43))
+                .withAlgorithmPair(HybridAlgorithmPair.recommended(192))
+                .withAltSignatureExtensionsCritical(true)
+                .build();
+
+        X509Certificate certificate = HybridX509CertificateBuilder.builder(config, keyPair)
+                .withPQCExtensions(true)
+                .build();
+
+        assertThat(certificate.getCriticalExtensionOIDs())
+                .contains("2.5.29.73", "2.5.29.74");
+    }
+
+    @Test
     @DisplayName("Should extract PQC algorithm OID")
     void shouldExtractPQCAlgorithmOID() throws Exception {
         KeyPair pqcKp = generateMLDSAKeyPair();

@@ -1,0 +1,14 @@
+Chave pública ECDSA_P256
+========================
+
+Algoritmo:                             ECDSA
+Tamanho declarado:                     256 bits
+Nível de segurança:                    128 bits
+Algoritmo de assinatura:               SHA256withECDSA
+OID:                                   1.2.840.10045.2.1
+SPKI codificado:                       91 bytes
+
+Artefatos gravados neste caso:
+  - chave-publica.der
+  - chave-publica.txt
+  - chave-publica.hex

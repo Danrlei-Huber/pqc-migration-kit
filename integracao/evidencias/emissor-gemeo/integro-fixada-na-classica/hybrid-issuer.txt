@@ -1,0 +1,6 @@
+Folha: integro
+Ordem de importação das raízes: fixada-na-classica
+Configuração: hybrid-issuer
+Raiz ligada: clássica
+Status: INVALID
+  FAILED: Signature verification successful. Alternative signature rejected by PQC policy hybrid-issuer: ISSUER_ALT_KEY_MISSING (issuer certificate has no subjectAltPublicKeyInfo).

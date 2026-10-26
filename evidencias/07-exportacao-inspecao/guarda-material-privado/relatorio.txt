@@ -1,0 +1,10 @@
+Salvaguarda contra gravação de material privado
+===============================================
+
+Extensões recusadas:                   .key, .p12, .pkcs8, .jks
+Nomes recusados:                       qualquer um contendo "private" ou "privada"
+
+A campanha grava em diretório versionado, então a salvaguarda é ativa e não
+apenas convencional: uma tentativa de gravar material privado falha em vez
+de produzir um segredo commitável. O .gitignore mantém os padrões de chave
+privada ignorados como segunda linha de defesa.

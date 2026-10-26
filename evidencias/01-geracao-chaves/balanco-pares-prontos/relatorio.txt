@@ -1,0 +1,8 @@
+Balanço de segurança dos pares prontos
+======================================
+
+
+Níveis equivalentes conforme NIST SP 800-57 Part 1 Rev 5, Tabela 2.
+
+Artefatos gravados neste caso:
+  - tabela.txt

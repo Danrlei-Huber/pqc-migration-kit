@@ -1,0 +1,8 @@
+Provedor criptográfico que respaldou a campanha
+===============================================
+
+Nome:                                  BC
+Versão:                                1.84
+Informação:                            BouncyCastle Security Provider v1.84
+Serviços registrados:                  1624
+Inicialização idempotente:             sim (dupla checagem sincronizada)

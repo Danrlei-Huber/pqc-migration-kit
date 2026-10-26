@@ -1,0 +1,6 @@
+Folha: stripping
+Ordem de importação das raízes: fixada-na-hibrida
+Configuração: strict
+Raiz ligada: híbrida
+Status: INVALID
+  FAILED: Signature verification successful. Alternative signature rejected by PQC policy strict: ALT_EXTENSIONS_MISSING (subjectAltPublicKeyInfo, altSignatureAlgorithm and altSignatureValue are not all present).

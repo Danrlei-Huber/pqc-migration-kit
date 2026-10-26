@@ -1,0 +1,4 @@
+Variante        Nível   Chave FIPS 204     SPKI (bytes)
+ML-DSA-44         128             1312             1334
+ML-DSA-65         192             1952             1974
+ML-DSA-87         256             2592             2614

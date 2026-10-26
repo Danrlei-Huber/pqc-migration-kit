@@ -1,0 +1,10 @@
+RSA Public Key (4096 bits)
+├── Algorithm: RSA
+├── Type: Public
+├── Format: X.509
+├── Size: 4096 bits
+└── Base64: MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAwYVDsxhVANP2UdVz1BOW...
+
+RSA Specific:
+  • Modulus bits: 4096
+  • Public exponent: 65537

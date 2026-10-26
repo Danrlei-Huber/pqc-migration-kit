@@ -197,6 +197,13 @@ jmeter.save
 *.cert
 *.csr
 
+# Excecao: evidencia da campanha de validacao do modulo (mvn test -Pvalidacao).
+# Contem exclusivamente material publico -- certificados, CSRs, chaves publicas e
+# assinaturas. Os padroes de chave privada acima (*.key, *.p12, *.jks, *.pkcs8, ...)
+# permanecem ignorados de proposito, como rede de seguranca contra commit acidental
+# de segredo neste diretorio.
+!evidencias/**/*.pem
+
 # Credentials & Secrets
 .env
 .env.local

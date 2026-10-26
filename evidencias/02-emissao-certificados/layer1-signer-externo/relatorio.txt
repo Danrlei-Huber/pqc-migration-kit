@@ -1,0 +1,11 @@
+Emissão via Layer 1 com ContentSigner fornecido externamente
+============================================================
+
+Assinador clássico:                    1.2.840.10045.4.3.3
+Assinador alternativo:                 2.16.840.1.101.3.4.3.18
+Chave privada exigida pelo construtor: nenhuma
+Validação contra si mesmo:             aprovada nas duas dimensões
+
+Artefatos gravados neste caso:
+  - certificado.der
+  - certificado.pem

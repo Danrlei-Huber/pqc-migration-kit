@@ -114,15 +114,6 @@ class HybridAlgorithmPairTest extends BaseTest {
     }
 
     @Test
-    @DisplayName("should throw exception when PQC algorithm is not a signature algorithm")
-    void test_non_signature_pqc_algorithm_throws_exception() {
-        assertThatThrownBy(() -> new HybridAlgorithmPair(
-            ClassicalAlgorithm.RSA_2048,
-            PQCAlgorithm.ML_KEM_512  // This is KEM, not signature
-        )).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
     @DisplayName("should provide all recommended pairs")
     void test_all_recommended_pairs() {
         // Note: This test would fail if allRecommended() includes non-signature algorithms (like KEM-only).
@@ -170,8 +161,7 @@ class HybridAlgorithmPairTest extends BaseTest {
             org.junit.jupiter.params.provider.Arguments.of(ClassicalAlgorithm.ECDSA_P256, PQCAlgorithm.ML_DSA_44),
             org.junit.jupiter.params.provider.Arguments.of(ClassicalAlgorithm.ECDSA_P384, PQCAlgorithm.ML_DSA_65),
             org.junit.jupiter.params.provider.Arguments.of(ClassicalAlgorithm.ECDSA_P521, PQCAlgorithm.ML_DSA_87),
-            org.junit.jupiter.params.provider.Arguments.of(ClassicalAlgorithm.RSA_3072, PQCAlgorithm.FALCON_1024),
-            org.junit.jupiter.params.provider.Arguments.of(ClassicalAlgorithm.RSA_2048, PQCAlgorithm.SLH_DSA_SHA2_256S)
+            org.junit.jupiter.params.provider.Arguments.of(ClassicalAlgorithm.RSA_3072, PQCAlgorithm.ML_DSA_65)
         );
     }
 }

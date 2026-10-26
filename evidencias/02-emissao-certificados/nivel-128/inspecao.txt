@@ -1,0 +1,30 @@
+
+╔════════════════════════════════════════════════════════╗
+║  HYBRID X.509 CERTIFICATE INSPECTION REPORT            ║
+╚════════════════════════════════════════════════════════╝
+
+CERTIFICATE INFORMATION
+  • Subject: CN=nivel128.tcc.br,O=TCC,C=BR
+  • Issuer: CN=nivel128.tcc.br,O=TCC,C=BR
+  • Serial: 925570618662526397431485785786919775303779757519
+  • Version: v3
+
+SIGNATURE CONFIGURATION
+  • Primary Algorithm: SHA256WITHECDSA
+  • Algorithm OID: 1.2.840.10045.4.3.2
+  • Signature Length: 70 bytes
+
+PUBLIC KEY
+  • Algorithm: EC (256 bits)
+
+EXTENSIONS ANALYSIS
+  • Critical Extensions: 2
+  • Non-Critical Extensions: 5
+  • Alternative Signature Value (detected)
+  • Alternative Public Key Info (detected)
+
+HYBRID SIGNATURE DETECTION
+  HYBRID SIGNATURE DETECTED
+  • Scheme: ECDSA (classical) + ML-DSA-44 (post-quantum)
+  • Primary signature: SHA256WITHECDSA
+  • PQC carried in: alternative-signature extensions (Catalyst)

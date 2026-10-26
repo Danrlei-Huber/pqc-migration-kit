@@ -1,0 +1,6 @@
+Cenário: integro
+Configuração: strict
+Folha: VALID
+  VALID: Signature verification successful. Alternative signature accepted by PQC policy strict.
+Raiz: VALID
+  VALID: Self-signed signature verification successful. Self-signed alternative signature accepted by PQC policy strict.

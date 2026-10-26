@@ -3,6 +3,7 @@ package com.pqc.hybrid.core.certificate;
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import org.bouncycastle.asn1.ASN1OctetString;
 import org.bouncycastle.asn1.ASN1Sequence;
+import org.bouncycastle.asn1.DERBitString;
 import org.bouncycastle.asn1.DEROctetString;
 import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.asn1.x509.Extension;
@@ -81,7 +82,7 @@ public final class X509ExtensionManager {
             );
             extensions.put(ALT_SIGNATURE_ALGORITHM_OID, altSigAlgExt);
 
-            byte[] signatureEncoded = new org.bouncycastle.asn1.DERBitString(pqcSignature).getEncoded();
+            byte[] signatureEncoded = new DERBitString(pqcSignature).getEncoded();
             Extension altSigValExt = new Extension(
                     new ASN1ObjectIdentifier(ALT_SIGNATURE_VALUE_OID),
                     critical,
@@ -115,7 +116,7 @@ public final class X509ExtensionManager {
         AlgorithmIdentifier algId = AlgorithmIdentifier.getInstance(
                 ASN1Sequence.getInstance(altSigAlg.getParsedValue())
         );
-        byte[] sigBytes = ((org.bouncycastle.asn1.DERBitString) altSigVal.getParsedValue()).getOctets();
+        byte[] sigBytes = ((DERBitString) altSigVal.getParsedValue()).getOctets();
         SubjectPublicKeyInfo spki = SubjectPublicKeyInfo.getInstance(
                 ASN1OctetString.getInstance(altPubKey.getParsedValue()).getOctets()
         );

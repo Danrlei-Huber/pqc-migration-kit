@@ -1,0 +1,6 @@
+Folha: stripping
+Ordem de importação das raízes: hibrida-primeiro
+Configuração: native
+Raiz ligada: híbrida
+Status: VALID
+  VALID: Signature verification successful.

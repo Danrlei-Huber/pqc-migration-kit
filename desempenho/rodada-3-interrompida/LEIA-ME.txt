@@ -1,0 +1,4 @@
+Rodada 3 (2026-10-07 18:37, commit 5d25d75) — INTERROMPIDA.
+
+A máquina travou entre 19:07 e 19:20 (carga média de 113–124, ver carga.log) e a sessão foi
+reiniciada; 19 de 30 combinações concluídas, JSON final não gravado. Nenhum número usado.

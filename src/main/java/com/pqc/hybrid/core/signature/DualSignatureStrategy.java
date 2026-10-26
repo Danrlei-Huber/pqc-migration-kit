@@ -40,7 +40,7 @@ public class DualSignatureStrategy implements HybridSignatureStrategy {
 
     @Override
     public byte[] signData(byte[] data, HybridKeyPair keyPair, byte[] ctx) throws PQCHybridException {
-        HybridSignaturePair sig = HybridSignatureManager.sign(data, keyPair);
+        HybridSignaturePair sig = HybridSignatureManager.sign(data, keyPair, ctx);
         byte[] classical = sig.getClassicalSignature();
         byte[] pqc = sig.getPQCSignature();
 
@@ -82,7 +82,7 @@ public class DualSignatureStrategy implements HybridSignatureStrategy {
                 keyPair.getClassicalAlgorithm(),
                 keyPair.getPQCAlgorithm(),
                 null);
-        return HybridSignatureManager.verify(data, sigPair, keyPair);
+        return HybridSignatureManager.verify(data, sigPair, keyPair, ctx);
     }
 
     @Override

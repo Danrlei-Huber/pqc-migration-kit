@@ -1,0 +1,6 @@
+Cenário: assinatura-classica-invalida
+Configuração: native
+Folha: INVALID
+  NOT_CHECKED: Issuer certificate is not available.
+Raiz: VALID
+  VALID: Self-signed signature verification successful. Self-signed alternative signature verification successful.

@@ -1,0 +1,6 @@
+Cenário: integro
+Configuração: classical-only
+Folha: VALID
+  VALID: Signature verification successful. Alternative signature not enforced by PQC policy classical-only.
+Raiz: VALID
+  VALID: Self-signed signature verification successful. Self-signed alternative signature not enforced by PQC policy classical-only.

@@ -7,6 +7,7 @@ import com.pqc.hybrid.core.config.PQCAlgorithm;
 import com.pqc.hybrid.core.exception.InvalidKeyException;
 import com.pqc.hybrid.core.exception.PQCHybridException;
 
+import java.security.InvalidAlgorithmParameterException;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.Provider;
@@ -20,7 +21,7 @@ import java.util.logging.Logger;
  * 
  * This class manages the generation of both key pair components:
  * - Classical key pair (RSA or ECDSA)
- * - PQC key pair (ML-DSA, Falcon, or SLH-DSA)
+ * - PQC key pair (ML-DSA)
  *
  * Key generation is performed using BouncyCastle's cryptographic provider
  * and follows NIST standards for both classical and PQC algorithms.
@@ -31,7 +32,7 @@ import java.util.logging.Logger;
 public final class HybridKeyGenerator {
 
     private static final Logger logger = Logger.getLogger(HybridKeyGenerator.class.getName());
-    private static final java.security.SecureRandom RANDOM = new java.security.SecureRandom();
+    private static final SecureRandom RANDOM = new SecureRandom();
 
     /**
      * Generates a hybrid key pair using the specified algorithm pair.
@@ -67,7 +68,7 @@ public final class HybridKeyGenerator {
             logger.info("Generated hybrid key pair: " + hybridPair.getLabel());
             return hybridPair;
 
-        } catch (NoSuchAlgorithmException | java.security.InvalidAlgorithmParameterException e) {
+        } catch (NoSuchAlgorithmException | InvalidAlgorithmParameterException e) {
             throw new PQCHybridException("Algorithm not available for key generation", e);
         }
     }
@@ -85,7 +86,7 @@ public final class HybridKeyGenerator {
         Provider provider = CryptographicProviderFactory.getProvider();
         try {
             return generateClassicalKeyPair(algorithm, provider);
-        } catch (NoSuchAlgorithmException | java.security.InvalidAlgorithmParameterException e) {
+        } catch (NoSuchAlgorithmException | InvalidAlgorithmParameterException e) {
             throw new PQCHybridException("Classical key generation failed: " + e.getMessage(), e);
         } catch (Exception e) {
             throw new PQCHybridException("Classical key generation failed: " + e.getMessage(), e);
@@ -116,7 +117,7 @@ public final class HybridKeyGenerator {
      * Internal method to generate a classical key pair using a specific provider.
      */
     private static KeyPair generateClassicalKeyPair(ClassicalAlgorithm algorithm, Provider provider) 
-            throws NoSuchAlgorithmException, java.security.InvalidAlgorithmParameterException {
+            throws NoSuchAlgorithmException, InvalidAlgorithmParameterException {
         
         String keyAlgorithm = algorithm.getAlgorithmName();
         KeyPairGenerator kpg = KeyPairGenerator.getInstance(keyAlgorithm, provider);

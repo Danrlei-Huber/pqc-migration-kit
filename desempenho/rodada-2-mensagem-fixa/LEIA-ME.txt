@@ -1,0 +1,8 @@
+Rodada 2 (2026-10-07, commit b595306, Ollama parado, carga <= 2,4) — SUBSTITUÍDA pela rodada 3.
+
+Máquina ociosa e 24 das 30 medições com erro de 1–5%, mas a assinatura ML-DSA (e, por
+consequência, a emissão híbrida) tinha erro de 34–46%: cada fork assinava sempre a mesma
+mensagem com um par de chaves gerado no setup. Como a assinatura ML-DSA do Bouncy Castle é
+determinística e usa amostragem por rejeição, o número de rejeições é fixo para cada
+(chave, mensagem); os forks mediam o custo de chaves diferentes (260 a 841 µs no ML-DSA-44).
+A rodada 3 varia a mensagem a cada operação e usa 5 forks com iterações de 2 s.

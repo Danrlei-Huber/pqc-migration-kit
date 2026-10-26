@@ -4,6 +4,7 @@ import com.pqc.hybrid.core.certificate.HybridX509CertificateBuilder;
 import com.pqc.hybrid.core.config.ClassicalAlgorithm;
 import com.pqc.hybrid.core.config.CryptographicProviderFactory;
 import com.pqc.hybrid.core.config.HybridAlgorithmPair;
+import com.pqc.hybrid.core.config.HybridCertificateConfig;
 import com.pqc.hybrid.core.config.PQCAlgorithm;
 import com.pqc.hybrid.core.keygen.HybridKeyGenerator;
 import com.pqc.hybrid.core.keygen.HybridKeyPair;
@@ -13,32 +14,25 @@ import com.pqc.hybrid.core.util.printer.HybridCertificateInspector;
 
 import java.io.File;
 import java.security.cert.X509Certificate;
-import java.util.Date;
-import java.util.logging.Logger;
 
 /**
  * Command-line interface for hybrid certificate operations.
- * 
+ *
  * Provides commands for:
  * - generate: Create self-signed hybrid certificates
  * - inspect: View certificate details and hybrid properties
  * - export: Export certificates to PEM/DER formats
  * - help: Display command help
- * 
+ *
  * Usage:
  * ```
  * java HybridCertificateHelper generate -s "CN=example.com" -o cert.pem
  * java HybridCertificateHelper inspect -f cert.pem
  * java HybridCertificateHelper export -f cert.der -f cert.pem
  * ```
- * 
- * @author PQC Hybrid Team
- * @version 1.0.0
- * @since 2026-04-14
  */
 public class HybridCertificateHelper {
 
-    private static final Logger logger = Logger.getLogger(HybridCertificateHelper.class.getName());
     private static final String VERSION = "1.0.0";
 
     public static void main(String[] args) {
@@ -76,6 +70,7 @@ public class HybridCertificateHelper {
         } catch (Exception e) {
             System.err.println("Error: " + e.getMessage());
             e.printStackTrace();
+            System.exit(1);
         }
     }
 
@@ -109,25 +104,29 @@ public class HybridCertificateHelper {
         );
         
         HybridKeyPair keyPair = HybridKeyGenerator.generate(algPair);
-        
-        // Note: Certificate creation requires HybridCertificateConfig
-        // For now, we just show the hybrid key pair was generated
-        System.out.println("✓ Hybrid key pair generated successfully");
-        System.out.println("  Classical Key: " + keyPair.getClassicalPublicKey().getAlgorithm());
-        System.out.println("  PQC Key: " + keyPair.getPQCPublicKey().getAlgorithm());
-        
-        X509Certificate cert = null;
-        
-        if (cert != null) {
-            // Export to PEM
-            CertificateExporter exporter = new CertificateExporter();
-            exporter.exportCertificateToPEM(cert, outputPath);
-            
-            System.out.println("✓ Certificate generated and saved to: " + outputPath);
-            System.out.println("  Serial: " + cert.getSerialNumber());
+        System.out.println("Hybrid key pair generated: " + keyPair.getLabel());
+
+        // Build a self-signed hybrid certificate (subject == issuer).
+        HybridCertificateConfig config = HybridCertificateConfig.builder()
+                .withAlgorithmPair(algPair)
+                .withSubjectDN(subject)
+                .withIssuerDN(subject)
+                .withValidityDays(validityDays)
+                .build();
+        X509Certificate cert = new HybridX509CertificateBuilder(config, keyPair).build();
+
+        // Export to DER when the output ends in .der, otherwise PEM.
+        CertificateExporter exporter = new CertificateExporter();
+        if (outputPath.toLowerCase().endsWith(".der")) {
+            exporter.exportCertificateToDER(cert, outputPath);
         } else {
-            System.out.println("Note: Certificate generation is available when HybridCertificateConfig is fully configured.");
+            exporter.exportCertificateToPEM(cert, outputPath);
         }
+
+        System.out.println("Certificate generated and saved to: " + outputPath);
+        System.out.println("  Subject: " + cert.getSubjectX500Principal());
+        System.out.println("  Serial:  " + cert.getSerialNumber());
+        System.out.println("  Valid:   " + cert.getNotBefore() + " -> " + cert.getNotAfter());
     }
 
     /**
@@ -227,7 +226,7 @@ public class HybridCertificateHelper {
             return;
         }
         
-        System.out.println("✓ Certificate exported to: " + outputPath);
+        System.out.println("Certificate exported to: " + outputPath);
     }
 
     /**

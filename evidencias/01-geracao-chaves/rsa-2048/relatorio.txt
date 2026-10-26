@@ -1,0 +1,14 @@
+Chave pública RSA_2048
+======================
+
+Algoritmo:                             RSA
+Tamanho declarado:                     2048 bits
+Nível de segurança:                    112 bits
+Algoritmo de assinatura:               SHA256withRSA
+OID:                                   1.2.840.113549.1.1.1
+SPKI codificado:                       294 bytes
+
+Artefatos gravados neste caso:
+  - chave-publica.der
+  - chave-publica.txt
+  - chave-publica.hex

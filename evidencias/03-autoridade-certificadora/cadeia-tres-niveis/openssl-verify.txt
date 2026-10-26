@@ -1,0 +1,3 @@
+$ openssl verify -CAfile raiz.pem -untrusted subca.pem folha.pem
+/home/usuario/arquivos/projects/tcc/pqc-migration-kit/evidencias/03-autoridade-certificadora/cadeia-tres-niveis/folha.pem: OK
+exit=0

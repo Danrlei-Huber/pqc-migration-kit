@@ -3,18 +3,19 @@ package com.pqc.hybrid.core.certificate;
 import com.pqc.hybrid.core.certificate.asn1.PQCExtensionsStructure;
 import com.pqc.hybrid.core.common.oid.AlgorithmOIDRegistry;
 import com.pqc.hybrid.core.config.CryptographicProviderFactory;
+import com.pqc.hybrid.core.config.PQCAlgorithm;
 import com.pqc.hybrid.core.exception.CertificateException;
 import com.pqc.hybrid.core.exception.InvalidSignatureException;
 import com.pqc.hybrid.core.keygen.HybridKeyPair;
 import com.pqc.hybrid.core.model.HybridCertificateInfo;
-import com.pqc.hybrid.core.signature.HybridSignatureManager;
-import com.pqc.hybrid.core.signature.HybridSignaturePair;
+import com.pqc.hybrid.core.signature.ml_dsa.MLDSAVerifier;
 
 import org.bouncycastle.asn1.ASN1BitString;
 import org.bouncycastle.asn1.ASN1Encoding;
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import org.bouncycastle.asn1.ASN1OctetString;
 import org.bouncycastle.asn1.DERBitString;
+import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.asn1.x509.Extension;
 import org.bouncycastle.asn1.x509.Extensions;
 import org.bouncycastle.asn1.x509.ExtensionsGenerator;
@@ -24,12 +25,11 @@ import org.bouncycastle.asn1.x509.V3TBSCertificateGenerator;
 import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
 
 import java.io.IOException;
-import java.security.Provider;
 import java.security.PublicKey;
-import java.security.Signature;
 import java.security.SignatureException;
 import java.security.cert.CertPath;
 import java.security.cert.CertPathValidator;
+import java.security.cert.CertPathValidatorException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 import java.security.cert.PKIXCertPathChecker;
@@ -71,10 +71,22 @@ public final class HybridCertificateValidator {
         }
     }
 
+    /**
+     * Checks that the certificate carries a non-empty subject and issuer distinguished name.
+     *
+     * <p>This is a <b>structural</b> check on a single certificate: RFC 5280 §4.1.2.4 allows an
+     * empty issuer name only in certificates this library never issues, and an end-entity
+     * certificate with an empty subject would be unusable. Consistency between a certificate and
+     * the authority that signed it cannot be decided from one certificate alone — for that, see
+     * {@link #validateIssuerLinkage(X509Certificate, X509Certificate)}.
+     *
+     * @param certificate the certificate to inspect
+     * @return true if both distinguished names are present and non-empty
+     */
     public static boolean validateDNs(X509Certificate certificate) {
         Objects.requireNonNull(certificate, "Certificate cannot be null");
-        String subjectDN = certificate.getSubjectDN().getName();
-        String issuerDN = certificate.getIssuerDN().getName();
+        String subjectDN = certificate.getSubjectX500Principal().getName();
+        String issuerDN = certificate.getIssuerX500Principal().getName();
         boolean valid = subjectDN != null && !subjectDN.isEmpty()
                      && issuerDN != null && !issuerDN.isEmpty();
         if (valid) {
@@ -83,6 +95,36 @@ public final class HybridCertificateValidator {
             logger.warning("Certificate DN validation failed");
         }
         return valid;
+    }
+
+    /**
+     * Checks that a certificate's issuer name matches the subject name of the certificate that
+     * signed it — the name-chaining requirement of RFC 5280 §6.1.3(a)(4).
+     *
+     * <p>Names are compared through {@link javax.security.auth.x500.X500Principal#equals}, which
+     * compares canonical forms rather than raw strings, so equivalent encodings of the same name
+     * are treated as equal.
+     *
+     * @param certificate       the subordinate certificate
+     * @param issuerCertificate the certificate of the issuing authority
+     * @return true if the issuer name chains to the issuer certificate's subject name
+     */
+    public static boolean validateIssuerLinkage(X509Certificate certificate,
+                                                X509Certificate issuerCertificate) {
+        Objects.requireNonNull(certificate, "Certificate cannot be null");
+        Objects.requireNonNull(issuerCertificate, "Issuer certificate cannot be null");
+
+        boolean linked = certificate.getIssuerX500Principal()
+                .equals(issuerCertificate.getSubjectX500Principal());
+        if (linked) {
+            logger.fine("Issuer name chaining check passed");
+        } else {
+            logger.warning("Issuer name chaining failed: certificate issuer '"
+                    + certificate.getIssuerX500Principal().getName()
+                    + "' does not match issuer certificate subject '"
+                    + issuerCertificate.getSubjectX500Principal().getName() + "'");
+        }
+        return linked;
     }
 
     public static boolean validateValidityPeriod(X509Certificate certificate) {
@@ -157,44 +199,48 @@ public final class HybridCertificateValidator {
         Map<String, Extension> extensions = new HashMap<>();
 
         try {
-            for (String oid : certificate.getCriticalExtensionOIDs()) {
-                if (oid.equals(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_ALGORITHM) ||
-                    oid.equals(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_VALUE) ||
-                    oid.equals(AlgorithmOIDRegistry.OID_SUBJECT_ALT_PUBLIC_KEY_INFO)) {
-                    byte[] extValue = certificate.getExtensionValue(oid);
-                    if (extValue != null) {
-                        Extension ext = new Extension(
-                                new ASN1ObjectIdentifier(oid),
-                                true,
-                                extValue
-                        );
-                        extensions.put(oid, ext);
-                    }
-                }
-            }
-
-            for (String oid : certificate.getNonCriticalExtensionOIDs()) {
-                if (oid.equals(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_ALGORITHM) ||
-                    oid.equals(AlgorithmOIDRegistry.OID_ALT_SIGNATURE_VALUE) ||
-                    oid.equals(AlgorithmOIDRegistry.OID_SUBJECT_ALT_PUBLIC_KEY_INFO)) {
-                    if (!extensions.containsKey(oid)) {
-                        byte[] extValue = certificate.getExtensionValue(oid);
-                        if (extValue != null) {
-                            Extension ext = new Extension(
-                                    new ASN1ObjectIdentifier(oid),
-                                    false,
-                                    extValue
-                            );
-                            extensions.put(oid, ext);
-                        }
-                    }
-                }
-            }
+            collectPQCExtensions(certificate, certificate.getCriticalExtensionOIDs(), true, extensions);
+            collectPQCExtensions(certificate, certificate.getNonCriticalExtensionOIDs(), false, extensions);
         } catch (Exception e) {
             logger.warning("Error extracting PQC extensions: " + e.getMessage());
         }
 
         return extensions;
+    }
+
+    /**
+     * Collects the Catalyst alternative-signature extensions found in {@code oids} into
+     * {@code target}, tagging each with the given criticality. Extensions already present in
+     * {@code target} are left untouched, so a critical entry takes precedence over a
+     * non-critical one with the same OID.
+     */
+    private static void collectPQCExtensions(X509Certificate certificate, Set<String> oids,
+                                             boolean critical, Map<String, Extension> target) {
+        if (oids == null) {
+            return;
+        }
+        for (String oid : oids) {
+            if (!isPQCExtensionOid(oid) || target.containsKey(oid)) {
+                continue;
+            }
+            byte[] extValue = certificate.getExtensionValue(oid);
+            if (extValue != null) {
+                // getExtensionValue() returns the extnValue already wrapped in a DER OCTET STRING,
+                // while Extension(oid, critical, byte[]) wraps whatever it is given. Passing the
+                // raw bytes therefore double-wraps the value and makes getParsedValue() yield a
+                // DEROctetString instead of the real content. Unwrap once so the Extension holds
+                // exactly the DER the certificate carries.
+                byte[] contents = ASN1OctetString.getInstance(extValue).getOctets();
+                target.put(oid, new Extension(new ASN1ObjectIdentifier(oid), critical, contents));
+            }
+        }
+    }
+
+    /** @return true if {@code oid} is one of the three Catalyst alternative-signature extension OIDs. */
+    private static boolean isPQCExtensionOid(String oid) {
+        return AlgorithmOIDRegistry.OID_ALT_SIGNATURE_ALGORITHM.equals(oid)
+                || AlgorithmOIDRegistry.OID_ALT_SIGNATURE_VALUE.equals(oid)
+                || AlgorithmOIDRegistry.OID_SUBJECT_ALT_PUBLIC_KEY_INFO.equals(oid);
     }
 
     public static String extractPQCAlgorithmOID(X509Certificate certificate) {
@@ -204,10 +250,8 @@ public final class HybridCertificateValidator {
             if (extValue == null) {
                 return null;
             }
-            org.bouncycastle.asn1.ASN1OctetString octetStr = 
-                org.bouncycastle.asn1.ASN1OctetString.getInstance(extValue);
-            org.bouncycastle.asn1.x509.AlgorithmIdentifier algId = 
-                org.bouncycastle.asn1.x509.AlgorithmIdentifier.getInstance(octetStr.getOctets());
+            ASN1OctetString octetStr = ASN1OctetString.getInstance(extValue);
+            AlgorithmIdentifier algId = AlgorithmIdentifier.getInstance(octetStr.getOctets());
             return algId.getAlgorithm().getId();
         } catch (Exception e) {
             logger.warning("Failed to extract PQC algorithm OID: " + e.getMessage());
@@ -222,10 +266,8 @@ public final class HybridCertificateValidator {
             if (extValue == null) {
                 return null;
             }
-            org.bouncycastle.asn1.ASN1OctetString octetStr = 
-                org.bouncycastle.asn1.ASN1OctetString.getInstance(extValue);
-            org.bouncycastle.asn1.ASN1BitString bitString = 
-                org.bouncycastle.asn1.DERBitString.getInstance(octetStr.getOctets());
+            ASN1OctetString octetStr = ASN1OctetString.getInstance(extValue);
+            ASN1BitString bitString = DERBitString.getInstance(octetStr.getOctets());
             return bitString.getOctets();
         } catch (Exception e) {
             logger.warning("Failed to extract PQC signature: " + e.getMessage());
@@ -240,8 +282,7 @@ public final class HybridCertificateValidator {
             if (extValue == null) {
                 return null;
             }
-            org.bouncycastle.asn1.ASN1OctetString octetStr = 
-                org.bouncycastle.asn1.ASN1OctetString.getInstance(extValue);
+            ASN1OctetString octetStr = ASN1OctetString.getInstance(extValue);
             SubjectPublicKeyInfo spki = SubjectPublicKeyInfo.getInstance(octetStr.getOctets());
             return spki.getPublicKeyData().getBytes();
         } catch (Exception e) {
@@ -250,6 +291,14 @@ public final class HybridCertificateValidator {
         }
     }
 
+    /**
+     * Verifies the alternative signature against the subject's own PQC public key — only
+     * meaningful for a self-signed certificate.
+     *
+     * @deprecated use {@link #validateAgainstIssuer(X509Certificate, X509Certificate)} or
+     *             {@link #verifyAltSignature(X509Certificate, PublicKey)} with the issuer's key.
+     */
+    @Deprecated
     public static boolean validatePQCSignature(X509Certificate certificate, HybridKeyPair keyPair)
             throws InvalidSignatureException {
         Objects.requireNonNull(certificate, "Certificate cannot be null");
@@ -290,13 +339,7 @@ public final class HybridCertificateValidator {
 
             byte[] preTbs = reconstructPreTBS(certificate);
 
-            CryptographicProviderFactory.initialize();
-            Provider provider = CryptographicProviderFactory.getProvider();
-
-            Signature sig = Signature.getInstance(algorithm, provider);
-            sig.initVerify(issuerAltPublicKey);
-            sig.update(preTbs);
-            boolean valid = sig.verify(pqcSignature);
+            boolean valid = MLDSAVerifier.verify(preTbs, pqcSignature, issuerAltPublicKey, algorithm);
 
             logger.fine("PQC alternative signature verification result: " + valid);
             return valid;
@@ -420,22 +463,39 @@ public final class HybridCertificateValidator {
             return null;
         }
 
-        org.bouncycastle.asn1.x509.AlgorithmIdentifier algId =
-                org.bouncycastle.asn1.x509.AlgorithmIdentifier.getInstance(altAlg.getParsedValue());
+        // Each getParsedValue() yields the extension's real content: an AlgorithmIdentifier
+        // SEQUENCE for 2.5.29.73, a BIT STRING for 2.5.29.74 and a SubjectPublicKeyInfo
+        // SEQUENCE for 2.5.29.72.
+        AlgorithmIdentifier algId = AlgorithmIdentifier.getInstance(altAlg.getParsedValue());
 
-        byte[] sigBytes = ((org.bouncycastle.asn1.DERBitString) altSig.getParsedValue()).getOctets();
+        byte[] sigBytes = ASN1BitString.getInstance(altSig.getParsedValue()).getOctets();
 
-        byte[] spkiBytes = ASN1OctetString.getInstance(altKey.getParsedValue()).getOctets();
-        SubjectPublicKeyInfo spki = SubjectPublicKeyInfo.getInstance(spkiBytes);
+        SubjectPublicKeyInfo spki = SubjectPublicKeyInfo.getInstance(altKey.getParsedValue());
 
         return new PQCExtensionsStructure(algId, sigBytes, spki);
     }
 
+    /**
+     * @deprecated the alternative signature is never verified; use
+     *             {@link #validateAgainstIssuer(X509Certificate, X509Certificate)}.
+     */
+    @Deprecated
     public static ValidationResult validateComprehensive(X509Certificate certificate,
                                                          PublicKey issuerPublicKey) {
         return validateComprehensive(certificate, issuerPublicKey, null);
     }
 
+    /**
+     * Validates a certificate with an explicitly supplied issuer key.
+     *
+     * <p>The alternative signature is verified against {@code hybridKeyPair}'s PQC public key —
+     * the <b>subject's</b> key — so it is only correct for a self-signed certificate; without a key
+     * pair a hybrid certificate always reports {@code pqcSignatureValid == false}.
+     *
+     * @deprecated use {@link #validateAgainstIssuer(X509Certificate, X509Certificate)}, which takes
+     *             every credential from the issuer's certificate.
+     */
+    @Deprecated
     public static ValidationResult validateComprehensive(X509Certificate certificate,
                                                          PublicKey issuerPublicKey,
                                                          HybridKeyPair hybridKeyPair) {
@@ -448,15 +508,18 @@ public final class HybridCertificateValidator {
         builder.validityPeriodValid(validateValidityPeriod(certificate));
         builder.publicKeyValid(validatePublicKey(certificate));
 
-        if (issuerPublicKey != null) {
-            try {
-                builder.signatureValid(validateSignature(certificate, issuerPublicKey));
-            } catch (CertificateException e) {
-                logger.warning("Signature validation error: " + e.getMessage());
-                builder.signatureValid(false);
-            }
-        } else {
-            builder.signatureValid(true);
+        // A signature is reported as valid only when one was actually verified. With no issuer
+        // key supplied the only signature that can be checked is a self-signature, so the
+        // certificate is verified against its own public key: a CA-issued certificate then fails
+        // here instead of being waved through on the assumption that it is self-signed.
+        PublicKey verificationKey = (issuerPublicKey != null)
+                ? issuerPublicKey
+                : certificate.getPublicKey();
+        try {
+            builder.signatureValid(validateSignature(certificate, verificationKey));
+        } catch (CertificateException e) {
+            logger.warning("Signature validation error: " + e.getMessage());
+            builder.signatureValid(false);
         }
 
         boolean hasPQCExts = validatePQCExtensions(certificate);
@@ -480,38 +543,170 @@ public final class HybridCertificateValidator {
     }
 
     /**
-     * Validates a full hybrid certificate chain in both dimensions.
+     * Validates a certificate against the authority that issued it under
+     * {@link ValidationPolicy#strict()}.
+     *
+     * @see #validateAgainstIssuer(X509Certificate, X509Certificate, ValidationPolicy)
+     */
+    public static ValidationResult validateAgainstIssuer(X509Certificate certificate,
+                                                         X509Certificate issuerCertificate) {
+        return validateAgainstIssuer(certificate, issuerCertificate, ValidationPolicy.strict());
+    }
+
+    /**
+     * Validates a certificate against the authority that issued it — the correct way to check a
+     * single issuer/subject link of a hybrid chain.
+     *
+     * <p>Unlike {@link #validateComprehensive(X509Certificate, PublicKey, HybridKeyPair)}, every
+     * credential is taken from the issuer's certificate, so nothing depends on the caller passing
+     * the right key: the classical signature is verified with the issuer's public key, the
+     * alternative signature with the issuer's {@code subjectAltPublicKeyInfo}, and the issuer name
+     * is required to chain to the issuer certificate's subject name. No private key material is
+     * involved.
+     *
+     * <p>Both dimensions are always evaluated and reported through the individual flags; the
+     * {@code policy} decides which of them can reject the certificate, and every rejection is
+     * listed in {@link ValidationResult#getReasons()} with chain index 0.
+     *
+     * <p>Pass the certificate itself as {@code issuerCertificate} to validate a self-signed root.
+     *
+     * @param certificate       the certificate to validate
+     * @param issuerCertificate the certificate of the issuing authority
+     * @param policy            the relying party's acceptance rule
+     * @return the aggregated validation result
+     */
+    public static ValidationResult validateAgainstIssuer(X509Certificate certificate,
+                                                         X509Certificate issuerCertificate,
+                                                         ValidationPolicy policy) {
+        Objects.requireNonNull(certificate, "Certificate cannot be null");
+        Objects.requireNonNull(issuerCertificate, "Issuer certificate cannot be null");
+        Objects.requireNonNull(policy, "Policy cannot be null");
+
+        ValidationResult.Builder builder = new ValidationResult.Builder();
+        List<ValidationReason> reasons = new ArrayList<>();
+
+        boolean notExpired = validateNotExpired(certificate);
+        boolean inValidityPeriod = validateValidityPeriod(certificate);
+        builder.notExpiredValid(notExpired);
+        builder.validityPeriodValid(inValidityPeriod);
+        if (!notExpired || !inValidityPeriod) {
+            reasons.add(new ValidationReason(ValidationReason.Code.CLASSICAL_PATH_INVALID, 0,
+                    "certificate is outside its validity period"));
+        }
+
+        boolean publicKeyValid = validatePublicKey(certificate);
+        builder.publicKeyValid(publicKeyValid);
+        if (!publicKeyValid) {
+            reasons.add(new ValidationReason(ValidationReason.Code.CLASSICAL_PATH_INVALID, 0,
+                    "subject public key is missing or unreadable"));
+        }
+
+        boolean namesPresent = validateDNs(certificate);
+        boolean linked = validateIssuerLinkage(certificate, issuerCertificate);
+        builder.dnsValid(namesPresent && linked);
+        if (!namesPresent) {
+            reasons.add(new ValidationReason(ValidationReason.Code.CLASSICAL_PATH_INVALID, 0,
+                    "subject or issuer name is empty"));
+        }
+        if (!linked) {
+            reasons.add(new ValidationReason(ValidationReason.Code.ISSUER_NAME_MISMATCH, 0,
+                    "issuer '" + certificate.getIssuerX500Principal().getName()
+                            + "' != issuer certificate subject '"
+                            + issuerCertificate.getSubjectX500Principal().getName() + "'"));
+        }
+
+        boolean signatureValid;
+        try {
+            signatureValid = validateSignature(certificate, issuerCertificate.getPublicKey());
+        } catch (CertificateException e) {
+            logger.warning("Signature validation error: " + e.getMessage());
+            signatureValid = false;
+        }
+        builder.signatureValid(signatureValid);
+        if (!signatureValid) {
+            reasons.add(new ValidationReason(ValidationReason.Code.CLASSICAL_PATH_INVALID, 0,
+                    "classical signature does not verify under the issuer's public key"));
+        }
+
+        AltLinkOutcome alt = checkAltLink(certificate, issuerCertificate, policy, 0);
+        builder.pqcExtensionsValid(alt.extensionsPresent());
+        builder.pqcSignatureValid(alt.signatureValid());
+        if (policy.requiresPqc() && alt.reason() != null) {
+            reasons.add(alt.reason());
+        }
+
+        return builder.policyOutcome(policy, reasons).build();
+    }
+
+    /**
+     * Validates a full hybrid certificate chain under {@link ValidationPolicy#strict()}.
+     *
+     * @see #validateHybridChain(List, ValidationPolicy)
+     */
+    public static HybridChainValidationResult validateHybridChain(List<X509Certificate> chain) {
+        return validateHybridChain(chain, ValidationPolicy.strict());
+    }
+
+    /**
+     * Validates a full hybrid certificate chain in both dimensions and decides acceptance by
+     * {@code policy}.
      *
      * <p>The chain must be ordered leaf → … → root, where the last element is the
      * (self-signed) trust anchor. The classical dimension is validated with the JDK's PKIX
      * {@link CertPathValidator}; the post-quantum dimension is validated by walking each link
-     * and verifying its alternative signature against the issuer's alternative public key.
+     * and verifying its alternative signature against the issuer's alternative public key. Both
+     * are always computed; the policy decides which of them can reject the chain.
      *
-     * @param chain the ordered certificate chain (leaf first, root last)
-     * @return a {@link HybridChainValidationResult} with both dimensions' outcomes
+     * @param chain  the ordered certificate chain (leaf first, root last)
+     * @param policy the relying party's acceptance rule
+     * @return a {@link HybridChainValidationResult} with both dimensions' outcomes and the verdict
      */
-    public static HybridChainValidationResult validateHybridChain(List<X509Certificate> chain) {
+    public static HybridChainValidationResult validateHybridChain(List<X509Certificate> chain,
+                                                                  ValidationPolicy policy) {
         Objects.requireNonNull(chain, "Chain cannot be null");
+        Objects.requireNonNull(policy, "Policy cannot be null");
         if (chain.isEmpty()) {
             throw new IllegalArgumentException("Certificate chain cannot be empty");
         }
-        boolean classicalValid = validateClassicalChain(chain);
-        boolean pqcValid = validateAltSignatureChain(chain);
-        logger.fine("Hybrid chain validation: classical=" + classicalValid + ", pqc=" + pqcValid);
-        return new HybridChainValidationResult(classicalValid, pqcValid);
+
+        List<ValidationReason> reasons = new ArrayList<>();
+
+        ValidationReason classicalFailure = validateClassicalChain(chain);
+        boolean classicalValid = classicalFailure == null;
+        if (!classicalValid) {
+            reasons.add(classicalFailure);
+        }
+
+        boolean pqcValid = true;
+        for (int i = 0; i < chain.size(); i++) {
+            X509Certificate cert = chain.get(i);
+            X509Certificate issuer = (i + 1 < chain.size()) ? chain.get(i + 1) : cert; // root self-issues
+            AltLinkOutcome alt = checkAltLink(cert, issuer, policy, i);
+            pqcValid &= alt.extensionsPresent() && alt.signatureValid();
+            if (policy.requiresPqc() && alt.reason() != null) {
+                reasons.add(alt.reason());
+            }
+        }
+
+        HybridChainValidationResult result =
+                new HybridChainValidationResult(classicalValid, pqcValid, policy, reasons);
+        logger.fine("Hybrid chain validation: " + result);
+        return result;
     }
 
-    private static boolean validateClassicalChain(List<X509Certificate> chain) {
+    /** @return null if the classical PKIX path validates, otherwise the reason it does not */
+    private static ValidationReason validateClassicalChain(List<X509Certificate> chain) {
+        int rootIndex = chain.size() - 1;
         try {
             CryptographicProviderFactory.initialize();
-            X509Certificate root = chain.get(chain.size() - 1);
+            X509Certificate root = chain.get(rootIndex);
 
             // The PKIX CertPath excludes the trust anchor (root).
-            List<X509Certificate> path = new ArrayList<>(chain.subList(0, chain.size() - 1));
+            List<X509Certificate> path = new ArrayList<>(chain.subList(0, rootIndex));
             if (path.isEmpty()) {
                 // Single self-signed certificate: verify its classical signature directly.
                 root.verify(root.getPublicKey(), "BC");
-                return true;
+                return null;
             }
 
             CertificateFactory cf = CertificateFactory.getInstance("X.509", "BC");
@@ -519,45 +714,99 @@ public final class HybridCertificateValidator {
 
             PKIXParameters params = new PKIXParameters(Set.of(new TrustAnchor(root, null)));
             params.setRevocationEnabled(false);
-            // The Catalyst alt-signature extensions are marked critical; tell PKIX they are handled.
+            // Mark the Catalyst alt-signature extensions as handled so PKIX accepts them whether the
+            // issuer emitted them critical (strict-hybrid phase) or non-critical (default). Harmless
+            // for the non-critical case, required for the critical one.
             params.addCertPathChecker(new HybridExtensionChecker());
 
             CertPathValidator validator = CertPathValidator.getInstance("PKIX", "BC");
             validator.validate(certPath, params);
-            return true;
+            return null;
+        } catch (CertPathValidatorException e) {
+            logger.warning("Classical chain validation failed: " + e.getMessage());
+            return new ValidationReason(ValidationReason.Code.CLASSICAL_PATH_INVALID, e.getIndex(),
+                    e.getMessage());
         } catch (Exception e) {
             logger.warning("Classical chain validation failed: " + e.getMessage());
-            return false;
-        }
-    }
-
-    private static boolean validateAltSignatureChain(List<X509Certificate> chain) {
-        try {
-            for (int i = 0; i < chain.size(); i++) {
-                X509Certificate cert = chain.get(i);
-                X509Certificate issuer = (i + 1 < chain.size()) ? chain.get(i + 1) : cert; // root self-issues
-                PublicKey issuerAltKey = extractAltPublicKey(issuer);
-                if (issuerAltKey == null) {
-                    logger.warning("Missing alternative public key for issuer at chain index " + i);
-                    return false;
-                }
-                if (!verifyAltSignature(cert, issuerAltKey)) {
-                    logger.warning("Alternative (PQC) signature invalid at chain index " + i);
-                    return false;
-                }
-            }
-            return true;
-        } catch (Exception e) {
-            logger.warning("PQC chain validation failed: " + e.getMessage());
-            return false;
+            int index = (rootIndex == 0) ? 0 : -1;
+            return new ValidationReason(ValidationReason.Code.CLASSICAL_PATH_INVALID, index,
+                    e.getMessage());
         }
     }
 
     /**
-     * Outcome of a hybrid chain validation: classical (PKIX) and post-quantum dimensions.
+     * Outcome of checking one certificate's alternative signature against its issuer.
+     * {@code extensionsPresent} and {@code signatureValid} are policy-independent diagnostics;
+     * {@code reason} is what the policy would reject the link for, or null.
      */
-    public record HybridChainValidationResult(boolean classicalValid, boolean pqcValid) {
-        /** @return true only if both the classical and the PQC dimensions are valid. */
+    private record AltLinkOutcome(boolean extensionsPresent, boolean signatureValid,
+                                  ValidationReason reason) {
+    }
+
+    private static AltLinkOutcome checkAltLink(X509Certificate cert, X509Certificate issuer,
+                                               ValidationPolicy policy, int index) {
+        if (!validatePQCExtensions(cert)) {
+            return new AltLinkOutcome(false, false, new ValidationReason(
+                    ValidationReason.Code.ALT_EXTENSIONS_MISSING, index,
+                    "subjectAltPublicKeyInfo, altSignatureAlgorithm and altSignatureValue are not all present"));
+        }
+
+        PublicKey issuerAltKey = extractAltPublicKey(issuer);
+        if (issuerAltKey == null) {
+            logger.warning("Missing alternative public key for issuer at chain index " + index);
+            return new AltLinkOutcome(true, false, new ValidationReason(
+                    ValidationReason.Code.ISSUER_ALT_KEY_MISSING, index,
+                    "issuer certificate has no subjectAltPublicKeyInfo"));
+        }
+
+        boolean signatureValid;
+        try {
+            signatureValid = verifyAltSignature(cert, issuerAltKey);
+        } catch (InvalidSignatureException e) {
+            logger.warning("PQC signature validation error at chain index " + index + ": " + e.getMessage());
+            signatureValid = false;
+        }
+
+        String oid = extractPQCAlgorithmOID(cert);
+        PQCAlgorithm algorithm = PQCAlgorithm.fromOid(oid);
+        if (!policy.allowsAltAlgorithm(algorithm)) {
+            return new AltLinkOutcome(true, signatureValid, new ValidationReason(
+                    ValidationReason.Code.ALT_ALGORITHM_NOT_ALLOWED, index,
+                    (algorithm != null ? algorithm.getName() : "OID " + oid)
+                            + " is not in " + policy.allowedAltAlgorithms()));
+        }
+        if (!signatureValid) {
+            logger.warning("Alternative (PQC) signature invalid at chain index " + index);
+            return new AltLinkOutcome(true, false, new ValidationReason(
+                    ValidationReason.Code.ALT_SIGNATURE_INVALID, index,
+                    "alternative signature does not verify under the issuer's alternative public key"));
+        }
+        return new AltLinkOutcome(true, true, null);
+    }
+
+    /**
+     * Outcome of a hybrid chain validation.
+     *
+     * @param classicalValid diagnostic: the classical (PKIX) path validates
+     * @param pqcValid       diagnostic: every link carries a valid alternative signature,
+     *                       regardless of the policy's allow-list
+     * @param policy         the policy the verdict was decided by
+     * @param reasons        why the chain was rejected under {@code policy}; empty if accepted
+     */
+    public record HybridChainValidationResult(boolean classicalValid, boolean pqcValid,
+                                              ValidationPolicy policy, List<ValidationReason> reasons) {
+
+        public HybridChainValidationResult {
+            Objects.requireNonNull(policy, "Policy cannot be null");
+            reasons = List.copyOf(reasons);
+        }
+
+        /** @return the verdict under {@link #policy()}: true exactly when there is no rejection reason */
+        public boolean accepted() {
+            return reasons.isEmpty();
+        }
+
+        /** @return true only if both the classical and the PQC dimensions are valid, whatever the policy. */
         public boolean isValid() {
             return classicalValid && pqcValid;
         }
@@ -597,6 +846,14 @@ public final class HybridCertificateValidator {
         }
     }
 
+    /**
+     * Outcome of validating a single certificate.
+     *
+     * <p>The individual flags are diagnostics. The verdict is {@link #isAccepted()}: for
+     * {@link #validateAgainstIssuer(X509Certificate, X509Certificate, ValidationPolicy)} it is
+     * decided by the policy and explained by {@link #getReasons()}; for the deprecated
+     * {@code validateComprehensive} it falls back to {@link #isAllValid()} with no reasons.
+     */
     public static class ValidationResult {
         private final boolean notExpiredValid;
         private final boolean dnsValid;
@@ -605,18 +862,19 @@ public final class HybridCertificateValidator {
         private final boolean signatureValid;
         private final boolean pqcExtensionsValid;
         private final boolean pqcSignatureValid;
+        private final ValidationPolicy policy;
+        private final List<ValidationReason> reasons;
 
-        private ValidationResult(boolean notExpiredValid, boolean dnsValid,
-                                boolean validityPeriodValid, boolean publicKeyValid,
-                                boolean signatureValid, boolean pqcExtensionsValid,
-                                boolean pqcSignatureValid) {
-            this.notExpiredValid = notExpiredValid;
-            this.dnsValid = dnsValid;
-            this.validityPeriodValid = validityPeriodValid;
-            this.publicKeyValid = publicKeyValid;
-            this.signatureValid = signatureValid;
-            this.pqcExtensionsValid = pqcExtensionsValid;
-            this.pqcSignatureValid = pqcSignatureValid;
+        private ValidationResult(Builder b) {
+            this.notExpiredValid = b.notExpiredValid;
+            this.dnsValid = b.dnsValid;
+            this.validityPeriodValid = b.validityPeriodValid;
+            this.publicKeyValid = b.publicKeyValid;
+            this.signatureValid = b.signatureValid;
+            this.pqcExtensionsValid = b.pqcExtensionsValid;
+            this.pqcSignatureValid = b.pqcSignatureValid;
+            this.policy = b.policy;
+            this.reasons = List.copyOf(b.reasons);
         }
 
         public boolean isNotExpiredValid() { return notExpiredValid; }
@@ -636,6 +894,17 @@ public final class HybridCertificateValidator {
             return pqcExtensionsValid && pqcSignatureValid;
         }
 
+        /** @return the verdict: decided by the policy when one was applied, else {@link #isAllValid()} */
+        public boolean isAccepted() {
+            return (policy != null) ? reasons.isEmpty() : isAllValid();
+        }
+
+        /** @return why the certificate was rejected under the policy; empty if accepted or no policy */
+        public List<ValidationReason> getReasons() { return reasons; }
+
+        /** @return the policy that decided {@link #isAccepted()}, or null for the deprecated path */
+        public ValidationPolicy getPolicy() { return policy; }
+
         public static class Builder {
             private boolean notExpiredValid = false;
             private boolean dnsValid = false;
@@ -644,6 +913,8 @@ public final class HybridCertificateValidator {
             private boolean signatureValid = false;
             private boolean pqcExtensionsValid = false;
             private boolean pqcSignatureValid = false;
+            private ValidationPolicy policy;
+            private List<ValidationReason> reasons = List.of();
 
             public Builder notExpiredValid(boolean valid) { this.notExpiredValid = valid; return this; }
             public Builder dnsValid(boolean valid) { this.dnsValid = valid; return this; }
@@ -653,18 +924,25 @@ public final class HybridCertificateValidator {
             public Builder pqcExtensionsValid(boolean valid) { this.pqcExtensionsValid = valid; return this; }
             public Builder pqcSignatureValid(boolean valid) { this.pqcSignatureValid = valid; return this; }
 
+            /** Records the policy that decides the verdict and the reasons it rejected the certificate. */
+            public Builder policyOutcome(ValidationPolicy policy, List<ValidationReason> reasons) {
+                this.policy = Objects.requireNonNull(policy, "Policy cannot be null");
+                this.reasons = Objects.requireNonNull(reasons, "Reasons cannot be null");
+                return this;
+            }
+
             public ValidationResult build() {
-                return new ValidationResult(notExpiredValid, dnsValid, validityPeriodValid,
-                        publicKeyValid, signatureValid, pqcExtensionsValid, pqcSignatureValid);
+                return new ValidationResult(this);
             }
         }
 
         @Override
         public String toString() {
             return String.format(
-                    "ValidationResult{notExpired=%b, dns=%b, validity=%b, pubkey=%b, sig=%b, pqcExt=%b, pqcSig=%b, all=%b}",
+                    "ValidationResult{notExpired=%b, dns=%b, validity=%b, pubkey=%b, sig=%b, pqcExt=%b, pqcSig=%b, all=%b, accepted=%b, reasons=%s}",
                     notExpiredValid, dnsValid, validityPeriodValid, publicKeyValid,
-                    signatureValid, pqcExtensionsValid, pqcSignatureValid, isAllValid());
+                    signatureValid, pqcExtensionsValid, pqcSignatureValid, isAllValid(),
+                    isAccepted(), reasons);
         }
     }
 }

@@ -1,0 +1,6 @@
+Cenário: assinatura-classica-invalida
+Configuração: hybrid-issuer {65,87}
+Folha: INVALID
+  NOT_CHECKED: Issuer certificate is not available.
+Raiz: VALID
+  VALID: Self-signed signature verification successful. Self-signed alternative signature accepted by PQC policy hybrid-issuer.

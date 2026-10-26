@@ -1,0 +1,6 @@
+Cenário: assinadores-misturados
+Configuração: hybrid-issuer {65,87}
+Folha: INVALID
+  FAILED: Signature verification successful. Alternative signature rejected by PQC policy hybrid-issuer: ALT_SIGNATURE_INVALID (alternative signature does not verify under the issuer's alternative public key).
+Raiz: VALID
+  VALID: Self-signed signature verification successful. Self-signed alternative signature accepted by PQC policy hybrid-issuer.

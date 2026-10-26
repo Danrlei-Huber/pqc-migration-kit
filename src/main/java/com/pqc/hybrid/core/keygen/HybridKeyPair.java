@@ -11,7 +11,7 @@ import javax.security.auth.Destroyable;
  * 
  * A hybrid key pair consists of:
  * - A classical key pair (RSA or ECDSA) for legacy compatibility
- * - A PQC key pair (ML-DSA, Falcon, or SLH-DSA) for quantum resistance
+ * - A PQC key pair (ML-DSA) for quantum resistance
  *
  * Both key pairs are kept in sync and used together for hybrid signing and verification.
  *

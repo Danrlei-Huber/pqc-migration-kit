@@ -26,6 +26,7 @@ public final class HybridCertificateConfig {
     private final List<String> subjectAltNames;
     private final boolean certificateAuthority;
     private final int pathLenConstraint;
+    private final boolean altSignatureExtensionsCritical;
     private final String version;
 
     /**
@@ -42,6 +43,7 @@ public final class HybridCertificateConfig {
         this.subjectAltNames = List.copyOf(builder.subjectAltNames);
         this.certificateAuthority = builder.certificateAuthority;
         this.pathLenConstraint = builder.pathLenConstraint;
+        this.altSignatureExtensionsCritical = builder.altSignatureExtensionsCritical;
         this.version = "1.0.0";
     }
 
@@ -123,6 +125,28 @@ public final class HybridCertificateConfig {
     }
 
     /**
+     * Indicates whether the Catalyst alternative-signature extensions
+     * ({@code altSignatureAlgorithm} 2.5.29.73 and {@code altSignatureValue} 2.5.29.74) are
+     * emitted as <b>critical</b>.
+     *
+     * <p>This flag encodes a migration-phase trade-off (see RFC 5280 §4.2):
+     * <ul>
+     *   <li><b>{@code false} (default — backward-compatible):</b> a legacy verifier that does not
+     *       recognise the extensions <em>ignores</em> them and still accepts the certificate by its
+     *       classical signature, enabling gradual rollout. The cost is that a downgrade attacker can
+     *       strip 2.5.29.73/74 unnoticed, so the post-quantum protection only holds if the relying
+     *       party enforces the presence and validity of the alternative signature (verifier policy).</li>
+     *   <li><b>{@code true} (strict hybrid):</b> forces every conforming verifier to process the
+     *       hybrid extensions (preventing silent downgrade), at the cost of breaking any
+     *       RFC 5280 verifier that does not understand them — which is most legacy clients.</li>
+     * </ul>
+     * The "correct" setting therefore depends on where the deployment sits in the migration.
+     */
+    public boolean isAltSignatureExtensionsCritical() {
+        return altSignatureExtensionsCritical;
+    }
+
+    /**
      * Builder for HybridCertificateConfig.
      */
     public static final class Builder {
@@ -137,6 +161,9 @@ public final class HybridCertificateConfig {
         private List<String> subjectAltNames = new ArrayList<>();
         private boolean certificateAuthority = false;
         private int pathLenConstraint = -1;
+        // Default: non-critical => RFC 5280 legacy verifiers ignore the hybrid extensions and
+        // still accept the certificate by its classical signature (backward-compatible rollout).
+        private boolean altSignatureExtensionsCritical = false;
 
         /**
          * Creates a new builder.
@@ -226,6 +253,20 @@ public final class HybridCertificateConfig {
         public Builder withPathLenConstraint(int pathLen) {
             this.pathLenConstraint = pathLen;
             this.certificateAuthority = true;
+            return this;
+        }
+
+        /**
+         * Sets the criticality of the Catalyst alternative-signature extensions (2.5.29.73 /
+         * 2.5.29.74). Defaults to {@code false} (non-critical), which keeps the certificate
+         * backward-compatible with RFC 5280 legacy verifiers. Set {@code true} only for a
+         * strict-hybrid migration phase where silent downgrade must be prevented and all relying
+         * parties are known to understand the hybrid extensions.
+         *
+         * @see HybridCertificateConfig#isAltSignatureExtensionsCritical()
+         */
+        public Builder withAltSignatureExtensionsCritical(boolean critical) {
+            this.altSignatureExtensionsCritical = critical;
             return this;
         }
 

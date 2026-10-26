@@ -1,0 +1,6 @@
+Tabela comparativa das variantes clássicas
+==========================================
+
+
+Artefatos gravados neste caso:
+  - tabela.txt

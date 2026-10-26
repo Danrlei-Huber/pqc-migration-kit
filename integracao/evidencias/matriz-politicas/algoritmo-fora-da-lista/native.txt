@@ -1,0 +1,6 @@
+Cenário: algoritmo-fora-da-lista
+Configuração: native
+Folha: VALID
+  VALID: Signature verification successful. Alternative signature verification successful.
+Raiz: VALID
+  VALID: Self-signed signature verification successful. Self-signed alternative signature verification successful.

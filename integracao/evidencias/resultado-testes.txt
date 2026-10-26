@@ -1,0 +1,8 @@
+[INFO] Tests run: 35, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 176.2 s -- in com.otilm.core.integration.service.PqcHybridValidationITest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.591 s -- in com.otilm.core.integration.service.PqcNativeBaselineITest
+[INFO] Tests run: 48, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 23.81 s -- in com.otilm.core.integration.service.PqcTwinIssuerITest
+[INFO] Tests run: 21, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 22.47 s -- in com.otilm.core.integration.service.CertificateValidationITest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.otilm.core.validation.certificate.pqc.PqcValidationSettingsTest
+[INFO] Tests run: 38, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.134 s -- in com.otilm.core.validation.certificate.pqc.HybridAltSignatureCheckTest
+[INFO] Tests run: 156, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS

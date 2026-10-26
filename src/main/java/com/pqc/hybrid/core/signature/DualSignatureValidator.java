@@ -109,9 +109,8 @@ public final class DualSignatureValidator {
 
         if (compatible) {
             // Classical should not be PQC and vice versa
-            compatible = !classical.contains("ML-") && !classical.contains("SLH-") 
-                       && !classical.contains("Falcon")
-                       && (pqc.contains("ML-") || pqc.contains("SLH-") || pqc.contains("Falcon"));
+            compatible = !classical.contains("ML-")
+                       && pqc.contains("ML-");
         }
 
         logger.fine("Algorithm compatibility check: " + compatible 

@@ -48,13 +48,13 @@ class HybridX509CertificateBuilderTest extends BaseTest {
         // Arrange
         HybridKeyPair keyPair = HybridKeyGenerator.generate(
                 new com.pqc.hybrid.core.config.HybridAlgorithmPair(
-                        ClassicalAlgorithm.ECDSA_P256, PQCAlgorithm.FALCON_512));
+                        ClassicalAlgorithm.ECDSA_P256, PQCAlgorithm.ML_DSA_44));
         HybridCertificateConfig config = HybridCertificateConfig.builder()
                 .withSubjectDN("CN=Test Certificate No PQC")
                 .withIssuerDN("CN=Test Certificate No PQC")
                 .withValidityDays(365)
                 .withSerialNumber(java.math.BigInteger.ONE)
-                .withAlgorithmPair(new HybridAlgorithmPair(ClassicalAlgorithm.ECDSA_P256, PQCAlgorithm.FALCON_512))
+                .withAlgorithmPair(new HybridAlgorithmPair(ClassicalAlgorithm.ECDSA_P256, PQCAlgorithm.ML_DSA_44))
                 .build();
 
         // Act

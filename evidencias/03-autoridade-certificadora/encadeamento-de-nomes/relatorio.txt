@@ -1,0 +1,12 @@
+Encadeamento de nomes conforme RFC 5280 §6.1.3(a)(4)
+====================================================
+
+Emissor declarado na folha:            C=BR,O=TCC,CN=PQC Hybrid Root CA
+Sujeito da raiz legítima:              C=BR,O=TCC,CN=PQC Hybrid Root CA
+Encadeia com a raiz legítima:          sim
+Sujeito da outra CA:                   C=BR,O=TCC,CN=Outra CA
+Encadeia com a outra CA:               não
+
+A comparação usa X500Principal.equals, que compara formas canônicas em
+vez de strings cruas, de modo que codificações equivalentes do mesmo
+nome são tratadas como iguais.

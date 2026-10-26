@@ -1,0 +1,2897 @@
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaClassica
+# Parameters: (nivel = 128)
+
+# Run progress: 0.00% complete, ETA 00:37:30
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:33:11 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+100.007 us/op
+# Warmup Iteration   2: 72.526 us/op
+# Warmup Iteration   3: 68.451 us/op
+# Warmup Iteration   4: 70.934 us/op
+# Warmup Iteration   5: 76.289 us/op
+Iteration   1: 76.350 us/op
+Iteration   2: 76.238 us/op
+Iteration   3: 72.974 us/op
+Iteration   4: 73.394 us/op
+Iteration   5: 75.612 us/op
+
+# Run progress: 0.67% complete, ETA 00:39:33
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:33:27 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+103.009 us/op
+# Warmup Iteration   2: 75.048 us/op
+# Warmup Iteration   3: 74.175 us/op
+# Warmup Iteration   4: 74.846 us/op
+# Warmup Iteration   5: 75.263 us/op
+Iteration   1: 75.073 us/op
+Iteration   2: 75.303 us/op
+Iteration   3: 71.895 us/op
+Iteration   4: 72.027 us/op
+Iteration   5: 74.460 us/op
+
+# Run progress: 1.33% complete, ETA 00:39:13
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:33:44 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+97.225 us/op
+# Warmup Iteration   2: 77.280 us/op
+# Warmup Iteration   3: 70.384 us/op
+# Warmup Iteration   4: 71.520 us/op
+# Warmup Iteration   5: 75.662 us/op
+Iteration   1: 78.516 us/op
+Iteration   2: 78.089 us/op
+Iteration   3: 73.011 us/op
+Iteration   4: 73.666 us/op
+Iteration   5: 76.982 us/op
+
+# Run progress: 2.00% complete, ETA 00:38:56
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:34:00 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+98.525 us/op
+# Warmup Iteration   2: 75.977 us/op
+# Warmup Iteration   3: 75.789 us/op
+# Warmup Iteration   4: 73.231 us/op
+# Warmup Iteration   5: 73.452 us/op
+Iteration   1: 77.752 us/op
+Iteration   2: 76.858 us/op
+Iteration   3: 74.827 us/op
+Iteration   4: 72.271 us/op
+Iteration   5: 76.395 us/op
+
+# Run progress: 2.67% complete, ETA 00:38:39
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:34:16 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+99.201 us/op
+# Warmup Iteration   2: 77.573 us/op
+# Warmup Iteration   3: 76.248 us/op
+# Warmup Iteration   4: 73.130 us/op
+# Warmup Iteration   5: 77.829 us/op
+Iteration   1: 82.633 us/op
+Iteration   2: 77.440 us/op
+Iteration   3: 76.567 us/op
+Iteration   4: 72.949 us/op
+Iteration   5: 76.697 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaClassica":
+  75.519 ±(99.9%) 1.862 us/op [Average]
+  (min, avg, max) = (71.895, 75.519, 82.633), stdev = 2.486
+  CI (99.9%): [73.657, 77.381] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaClassica
+# Parameters: (nivel = 192)
+
+# Run progress: 3.33% complete, ETA 00:38:24
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:34:32 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+279.858 us/op
+# Warmup Iteration   2: 232.132 us/op
+# Warmup Iteration   3: 216.696 us/op
+# Warmup Iteration   4: 216.834 us/op
+# Warmup Iteration   5: 213.638 us/op
+Iteration   1: 218.224 us/op
+Iteration   2: 221.870 us/op
+Iteration   3: 214.142 us/op
+Iteration   4: 216.526 us/op
+Iteration   5: 222.316 us/op
+
+# Run progress: 4.00% complete, ETA 00:38:09
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:34:49 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+272.598 us/op
+# Warmup Iteration   2: 230.040 us/op
+# Warmup Iteration   3: 204.010 us/op
+# Warmup Iteration   4: 210.079 us/op
+# Warmup Iteration   5: 203.215 us/op
+Iteration   1: 213.410 us/op
+Iteration   2: 216.651 us/op
+Iteration   3: 211.132 us/op
+Iteration   4: 209.829 us/op
+Iteration   5: 226.264 us/op
+
+# Run progress: 4.67% complete, ETA 00:37:54
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:35:05 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+268.678 us/op
+# Warmup Iteration   2: 225.621 us/op
+# Warmup Iteration   3: 210.209 us/op
+# Warmup Iteration   4: 214.926 us/op
+# Warmup Iteration   5: 211.688 us/op
+Iteration   1: 219.266 us/op
+Iteration   2: 221.923 us/op
+Iteration   3: 222.547 us/op
+Iteration   4: 223.480 us/op
+Iteration   5: 223.438 us/op
+
+# Run progress: 5.33% complete, ETA 00:37:38
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:35:22 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+274.948 us/op
+# Warmup Iteration   2: 228.403 us/op
+# Warmup Iteration   3: 224.957 us/op
+# Warmup Iteration   4: 223.256 us/op
+# Warmup Iteration   5: 223.700 us/op
+Iteration   1: 222.393 us/op
+Iteration   2: 216.697 us/op
+Iteration   3: 218.113 us/op
+Iteration   4: 212.994 us/op
+Iteration   5: 210.945 us/op
+
+# Run progress: 6.00% complete, ETA 00:37:22
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:35:37 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+257.391 us/op
+# Warmup Iteration   2: 226.183 us/op
+# Warmup Iteration   3: 214.158 us/op
+# Warmup Iteration   4: 217.290 us/op
+# Warmup Iteration   5: 214.252 us/op
+Iteration   1: 215.434 us/op
+Iteration   2: 216.210 us/op
+Iteration   3: 214.683 us/op
+Iteration   4: 211.625 us/op
+Iteration   5: 211.551 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaClassica":
+  217.266 ±(99.9%) 3.548 us/op [Average]
+  (min, avg, max) = (209.829, 217.266, 226.264), stdev = 4.737
+  CI (99.9%): [213.718, 220.815] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaClassica
+# Parameters: (nivel = 256)
+
+# Run progress: 6.67% complete, ETA 00:37:06
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:35:54 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+557.494 us/op
+# Warmup Iteration   2: 456.474 us/op
+# Warmup Iteration   3: 453.859 us/op
+# Warmup Iteration   4: 438.977 us/op
+# Warmup Iteration   5: 439.419 us/op
+Iteration   1: 433.080 us/op
+Iteration   2: 427.378 us/op
+Iteration   3: 437.350 us/op
+Iteration   4: 435.327 us/op
+Iteration   5: 435.935 us/op
+
+# Run progress: 7.33% complete, ETA 00:36:50
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:36:10 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+546.843 us/op
+# Warmup Iteration   2: 448.754 us/op
+# Warmup Iteration   3: 439.985 us/op
+# Warmup Iteration   4: 427.821 us/op
+# Warmup Iteration   5: 433.741 us/op
+Iteration   1: 436.506 us/op
+Iteration   2: 445.711 us/op
+Iteration   3: 436.413 us/op
+Iteration   4: 428.882 us/op
+Iteration   5: 439.162 us/op
+
+# Run progress: 8.00% complete, ETA 00:36:34
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:36:27 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+540.803 us/op
+# Warmup Iteration   2: 457.691 us/op
+# Warmup Iteration   3: 446.994 us/op
+# Warmup Iteration   4: 424.402 us/op
+# Warmup Iteration   5: 424.874 us/op
+Iteration   1: 428.169 us/op
+Iteration   2: 435.935 us/op
+Iteration   3: 437.919 us/op
+Iteration   4: 436.526 us/op
+Iteration   5: 436.160 us/op
+
+# Run progress: 8.67% complete, ETA 00:36:18
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:36:43 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+519.781 us/op
+# Warmup Iteration   2: 441.311 us/op
+# Warmup Iteration   3: 443.970 us/op
+# Warmup Iteration   4: 442.290 us/op
+# Warmup Iteration   5: 447.558 us/op
+Iteration   1: 438.011 us/op
+Iteration   2: 432.368 us/op
+Iteration   3: 438.760 us/op
+Iteration   4: 434.134 us/op
+Iteration   5: 430.736 us/op
+
+# Run progress: 9.33% complete, ETA 00:36:02
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:36:59 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+531.681 us/op
+# Warmup Iteration   2: 460.076 us/op
+# Warmup Iteration   3: 447.711 us/op
+# Warmup Iteration   4: 421.756 us/op
+# Warmup Iteration   5: 421.127 us/op
+Iteration   1: 427.255 us/op
+Iteration   2: 434.832 us/op
+Iteration   3: 425.801 us/op
+Iteration   4: 427.077 us/op
+Iteration   5: 430.596 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaClassica":
+  434.001 ±(99.9%) 3.595 us/op [Average]
+  (min, avg, max) = (425.801, 434.001, 445.711), stdev = 4.799
+  CI (99.9%): [430.406, 437.596] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaMlDsa
+# Parameters: (nivel = 128)
+
+# Run progress: 10.00% complete, ETA 00:35:46
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:37:15 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+357.552 us/op
+# Warmup Iteration   2: 311.814 us/op
+# Warmup Iteration   3: 304.926 us/op
+# Warmup Iteration   4: 305.030 us/op
+# Warmup Iteration   5: 310.052 us/op
+Iteration   1: 306.753 us/op
+Iteration   2: 303.438 us/op
+Iteration   3: 303.582 us/op
+Iteration   4: 300.540 us/op
+Iteration   5: 297.676 us/op
+
+# Run progress: 10.67% complete, ETA 00:35:30
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:37:32 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+362.602 us/op
+# Warmup Iteration   2: 306.334 us/op
+# Warmup Iteration   3: 306.953 us/op
+# Warmup Iteration   4: 285.572 us/op
+# Warmup Iteration   5: 283.842 us/op
+Iteration   1: 283.188 us/op
+Iteration   2: 291.979 us/op
+Iteration   3: 302.236 us/op
+Iteration   4: 305.121 us/op
+Iteration   5: 297.124 us/op
+
+# Run progress: 11.33% complete, ETA 00:35:13
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:37:48 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+355.686 us/op
+# Warmup Iteration   2: 308.543 us/op
+# Warmup Iteration   3: 306.661 us/op
+# Warmup Iteration   4: 298.886 us/op
+# Warmup Iteration   5: 303.225 us/op
+Iteration   1: 298.462 us/op
+Iteration   2: 298.084 us/op
+Iteration   3: 299.510 us/op
+Iteration   4: 305.779 us/op
+Iteration   5: 302.735 us/op
+
+# Run progress: 12.00% complete, ETA 00:34:57
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:38:05 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+390.366 us/op
+# Warmup Iteration   2: 317.975 us/op
+# Warmup Iteration   3: 311.236 us/op
+# Warmup Iteration   4: 303.425 us/op
+# Warmup Iteration   5: 302.348 us/op
+Iteration   1: 299.348 us/op
+Iteration   2: 294.270 us/op
+Iteration   3: 298.109 us/op
+Iteration   4: 284.615 us/op
+Iteration   5: 279.441 us/op
+
+# Run progress: 12.67% complete, ETA 00:34:41
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:38:20 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+374.099 us/op
+# Warmup Iteration   2: 311.204 us/op
+# Warmup Iteration   3: 307.912 us/op
+# Warmup Iteration   4: 309.197 us/op
+# Warmup Iteration   5: 301.998 us/op
+Iteration   1: 306.661 us/op
+Iteration   2: 294.752 us/op
+Iteration   3: 301.868 us/op
+Iteration   4: 298.092 us/op
+Iteration   5: 322.843 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaMlDsa":
+  299.048 ±(99.9%) 6.458 us/op [Average]
+  (min, avg, max) = (279.441, 299.048, 322.843), stdev = 8.622
+  CI (99.9%): [292.590, 305.506] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaMlDsa
+# Parameters: (nivel = 192)
+
+# Run progress: 13.33% complete, ETA 00:34:25
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:38:37 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+611.727 us/op
+# Warmup Iteration   2: 538.860 us/op
+# Warmup Iteration   3: 533.774 us/op
+# Warmup Iteration   4: 511.986 us/op
+# Warmup Iteration   5: 475.158 us/op
+Iteration   1: 481.974 us/op
+Iteration   2: 479.009 us/op
+Iteration   3: 487.167 us/op
+Iteration   4: 490.044 us/op
+Iteration   5: 489.514 us/op
+
+# Run progress: 14.00% complete, ETA 00:34:09
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:38:53 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+591.996 us/op
+# Warmup Iteration   2: 490.885 us/op
+# Warmup Iteration   3: 482.910 us/op
+# Warmup Iteration   4: 493.930 us/op
+# Warmup Iteration   5: 485.442 us/op
+Iteration   1: 480.433 us/op
+Iteration   2: 483.769 us/op
+Iteration   3: 478.891 us/op
+Iteration   4: 481.247 us/op
+Iteration   5: 494.631 us/op
+
+# Run progress: 14.67% complete, ETA 00:33:53
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:39:10 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+610.454 us/op
+# Warmup Iteration   2: 511.973 us/op
+# Warmup Iteration   3: 569.887 us/op
+# Warmup Iteration   4: 583.758 us/op
+# Warmup Iteration   5: 548.556 us/op
+Iteration   1: 536.020 us/op
+Iteration   2: 547.747 us/op
+Iteration   3: 537.548 us/op
+Iteration   4: 507.558 us/op
+Iteration   5: 493.766 us/op
+
+# Run progress: 15.33% complete, ETA 00:33:37
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:39:26 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+562.359 us/op
+# Warmup Iteration   2: 513.056 us/op
+# Warmup Iteration   3: 533.528 us/op
+# Warmup Iteration   4: 520.430 us/op
+# Warmup Iteration   5: 511.697 us/op
+Iteration   1: 508.702 us/op
+Iteration   2: 539.916 us/op
+Iteration   3: 535.318 us/op
+Iteration   4: 530.798 us/op
+Iteration   5: 523.976 us/op
+
+# Run progress: 16.00% complete, ETA 00:33:21
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:39:43 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+597.693 us/op
+# Warmup Iteration   2: 510.951 us/op
+# Warmup Iteration   3: 531.895 us/op
+# Warmup Iteration   4: 526.526 us/op
+# Warmup Iteration   5: 494.317 us/op
+Iteration   1: 487.928 us/op
+Iteration   2: 479.251 us/op
+Iteration   3: 507.908 us/op
+Iteration   4: 526.495 us/op
+Iteration   5: 545.541 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaMlDsa":
+  506.206 ±(99.9%) 18.467 us/op [Average]
+  (min, avg, max) = (478.891, 506.206, 547.747), stdev = 24.653
+  CI (99.9%): [487.739, 524.673] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaMlDsa
+# Parameters: (nivel = 256)
+
+# Run progress: 16.67% complete, ETA 00:33:06
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:39:59 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+788.866 us/op
+# Warmup Iteration   2: 664.883 us/op
+# Warmup Iteration   3: 645.058 us/op
+# Warmup Iteration   4: 665.772 us/op
+# Warmup Iteration   5: 645.413 us/op
+Iteration   1: 670.266 us/op
+Iteration   2: 657.348 us/op
+Iteration   3: 653.902 us/op
+Iteration   4: 676.201 us/op
+Iteration   5: 646.330 us/op
+
+# Run progress: 17.33% complete, ETA 00:32:51
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:40:16 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+737.873 us/op
+# Warmup Iteration   2: 607.514 us/op
+# Warmup Iteration   3: 623.202 us/op
+# Warmup Iteration   4: 622.344 us/op
+# Warmup Iteration   5: 590.189 us/op
+Iteration   1: 569.762 us/op
+Iteration   2: 566.795 us/op
+Iteration   3: 606.783 us/op
+Iteration   4: 596.725 us/op
+Iteration   5: 601.637 us/op
+
+# Run progress: 18.00% complete, ETA 00:32:35
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:40:31 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+775.332 us/op
+# Warmup Iteration   2: 617.024 us/op
+# Warmup Iteration   3: 602.887 us/op
+# Warmup Iteration   4: 615.326 us/op
+# Warmup Iteration   5: 610.276 us/op
+Iteration   1: 594.273 us/op
+Iteration   2: 602.938 us/op
+Iteration   3: 598.091 us/op
+Iteration   4: 597.982 us/op
+Iteration   5: 611.873 us/op
+
+# Run progress: 18.67% complete, ETA 00:32:19
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:40:48 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+705.293 us/op
+# Warmup Iteration   2: 601.130 us/op
+# Warmup Iteration   3: 611.321 us/op
+# Warmup Iteration   4: 661.269 us/op
+# Warmup Iteration   5: 646.809 us/op
+Iteration   1: 615.596 us/op
+Iteration   2: 603.082 us/op
+Iteration   3: 632.824 us/op
+Iteration   4: 640.081 us/op
+Iteration   5: 641.362 us/op
+
+# Run progress: 19.33% complete, ETA 00:32:03
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:41:04 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+702.512 us/op
+# Warmup Iteration   2: 628.947 us/op
+# Warmup Iteration   3: 597.813 us/op
+# Warmup Iteration   4: 619.455 us/op
+# Warmup Iteration   5: 599.994 us/op
+Iteration   1: 587.012 us/op
+Iteration   2: 601.368 us/op
+Iteration   3: 590.504 us/op
+Iteration   4: 586.511 us/op
+Iteration   5: 601.301 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaMlDsa":
+  614.022 ±(99.9%) 22.435 us/op [Average]
+  (min, avg, max) = (566.795, 614.022, 676.201), stdev = 29.950
+  CI (99.9%): [591.587, 636.457] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoClassica
+# Parameters: (nivel = 128)
+
+# Run progress: 20.00% complete, ETA 00:31:47
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:41:21 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+255.732 us/op
+# Warmup Iteration   2: 119.099 us/op
+# Warmup Iteration   3: 105.741 us/op
+# Warmup Iteration   4: 103.769 us/op
+# Warmup Iteration   5: 104.501 us/op
+Iteration   1: 96.478 us/op
+Iteration   2: 95.331 us/op
+Iteration   3: 99.997 us/op
+Iteration   4: 100.805 us/op
+Iteration   5: 100.637 us/op
+
+# Run progress: 20.67% complete, ETA 00:31:31
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:41:37 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+246.181 us/op
+# Warmup Iteration   2: 123.754 us/op
+# Warmup Iteration   3: 104.966 us/op
+# Warmup Iteration   4: 105.447 us/op
+# Warmup Iteration   5: 107.027 us/op
+Iteration   1: 103.908 us/op
+Iteration   2: 103.183 us/op
+Iteration   3: 103.229 us/op
+Iteration   4: 103.624 us/op
+Iteration   5: 105.341 us/op
+
+# Run progress: 21.33% complete, ETA 00:31:15
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:41:54 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+225.857 us/op
+# Warmup Iteration   2: 119.836 us/op
+# Warmup Iteration   3: 106.437 us/op
+# Warmup Iteration   4: 104.176 us/op
+# Warmup Iteration   5: 103.238 us/op
+Iteration   1: 98.781 us/op
+Iteration   2: 96.478 us/op
+Iteration   3: 101.483 us/op
+Iteration   4: 109.229 us/op
+Iteration   5: 106.226 us/op
+
+# Run progress: 22.00% complete, ETA 00:30:59
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:42:10 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+241.510 us/op
+# Warmup Iteration   2: 129.864 us/op
+# Warmup Iteration   3: 112.813 us/op
+# Warmup Iteration   4: 106.642 us/op
+# Warmup Iteration   5: 107.576 us/op
+Iteration   1: 111.645 us/op
+Iteration   2: 113.089 us/op
+Iteration   3: 110.837 us/op
+Iteration   4: 106.766 us/op
+Iteration   5: 107.977 us/op
+
+# Run progress: 22.67% complete, ETA 00:30:43
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:42:27 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+230.670 us/op
+# Warmup Iteration   2: 127.943 us/op
+# Warmup Iteration   3: 108.842 us/op
+# Warmup Iteration   4: 110.409 us/op
+# Warmup Iteration   5: 110.979 us/op
+Iteration   1: 101.923 us/op
+Iteration   2: 98.641 us/op
+Iteration   3: 100.256 us/op
+Iteration   4: 104.643 us/op
+Iteration   5: 101.826 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoClassica":
+  103.293 ±(99.9%) 3.573 us/op [Average]
+  (min, avg, max) = (95.331, 103.293, 113.089), stdev = 4.769
+  CI (99.9%): [99.721, 106.866] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoClassica
+# Parameters: (nivel = 192)
+
+# Run progress: 23.33% complete, ETA 00:30:27
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:42:42 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+471.686 us/op
+# Warmup Iteration   2: 262.441 us/op
+# Warmup Iteration   3: 264.489 us/op
+# Warmup Iteration   4: 252.617 us/op
+# Warmup Iteration   5: 247.810 us/op
+Iteration   1: 244.165 us/op
+Iteration   2: 236.778 us/op
+Iteration   3: 243.742 us/op
+Iteration   4: 239.145 us/op
+Iteration   5: 242.429 us/op
+
+# Run progress: 24.00% complete, ETA 00:30:11
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:42:59 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+489.802 us/op
+# Warmup Iteration   2: 263.787 us/op
+# Warmup Iteration   3: 270.993 us/op
+# Warmup Iteration   4: 251.764 us/op
+# Warmup Iteration   5: 243.729 us/op
+Iteration   1: 244.959 us/op
+Iteration   2: 242.808 us/op
+Iteration   3: 239.876 us/op
+Iteration   4: 240.959 us/op
+Iteration   5: 243.530 us/op
+
+# Run progress: 24.67% complete, ETA 00:29:55
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:43:15 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+451.538 us/op
+# Warmup Iteration   2: 262.542 us/op
+# Warmup Iteration   3: 260.594 us/op
+# Warmup Iteration   4: 247.428 us/op
+# Warmup Iteration   5: 248.083 us/op
+Iteration   1: 242.971 us/op
+Iteration   2: 242.738 us/op
+Iteration   3: 239.476 us/op
+Iteration   4: 241.676 us/op
+Iteration   5: 240.737 us/op
+
+# Run progress: 25.33% complete, ETA 00:29:39
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:43:31 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+478.757 us/op
+# Warmup Iteration   2: 260.769 us/op
+# Warmup Iteration   3: 264.530 us/op
+# Warmup Iteration   4: 246.202 us/op
+# Warmup Iteration   5: 244.691 us/op
+Iteration   1: 239.044 us/op
+Iteration   2: 242.389 us/op
+Iteration   3: 241.298 us/op
+Iteration   4: 240.994 us/op
+Iteration   5: 238.791 us/op
+
+# Run progress: 26.00% complete, ETA 00:29:24
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:43:48 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+498.373 us/op
+# Warmup Iteration   2: 263.424 us/op
+# Warmup Iteration   3: 260.168 us/op
+# Warmup Iteration   4: 246.732 us/op
+# Warmup Iteration   5: 241.163 us/op
+Iteration   1: 243.753 us/op
+Iteration   2: 239.396 us/op
+Iteration   3: 240.165 us/op
+Iteration   4: 239.856 us/op
+Iteration   5: 239.310 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoClassica":
+  241.239 ±(99.9%) 1.541 us/op [Average]
+  (min, avg, max) = (236.778, 241.239, 244.959), stdev = 2.057
+  CI (99.9%): [239.699, 242.780] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoClassica
+# Parameters: (nivel = 256)
+
+# Run progress: 26.67% complete, ETA 00:29:08
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:44:03 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+896.118 us/op
+# Warmup Iteration   2: 509.776 us/op
+# Warmup Iteration   3: 495.276 us/op
+# Warmup Iteration   4: 508.267 us/op
+# Warmup Iteration   5: 498.178 us/op
+Iteration   1: 472.508 us/op
+Iteration   2: 472.373 us/op
+Iteration   3: 475.476 us/op
+Iteration   4: 466.333 us/op
+Iteration   5: 480.922 us/op
+
+# Run progress: 27.33% complete, ETA 00:28:52
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:44:20 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+978.260 us/op
+# Warmup Iteration   2: 543.695 us/op
+# Warmup Iteration   3: 499.207 us/op
+# Warmup Iteration   4: 504.643 us/op
+# Warmup Iteration   5: 505.415 us/op
+Iteration   1: 487.943 us/op
+Iteration   2: 474.768 us/op
+Iteration   3: 480.621 us/op
+Iteration   4: 472.868 us/op
+Iteration   5: 481.454 us/op
+
+# Run progress: 28.00% complete, ETA 00:28:36
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:44:36 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+822.301 us/op
+# Warmup Iteration   2: 526.442 us/op
+# Warmup Iteration   3: 491.967 us/op
+# Warmup Iteration   4: 500.547 us/op
+# Warmup Iteration   5: 517.902 us/op
+Iteration   1: 486.933 us/op
+Iteration   2: 483.423 us/op
+Iteration   3: 477.663 us/op
+Iteration   4: 474.121 us/op
+Iteration   5: 467.618 us/op
+
+# Run progress: 28.67% complete, ETA 00:28:20
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:44:53 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+857.514 us/op
+# Warmup Iteration   2: 515.154 us/op
+# Warmup Iteration   3: 493.751 us/op
+# Warmup Iteration   4: 486.909 us/op
+# Warmup Iteration   5: 531.648 us/op
+Iteration   1: 476.607 us/op
+Iteration   2: 478.427 us/op
+Iteration   3: 479.221 us/op
+Iteration   4: 468.461 us/op
+Iteration   5: 475.711 us/op
+
+# Run progress: 29.33% complete, ETA 00:28:04
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:45:09 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+873.370 us/op
+# Warmup Iteration   2: 513.562 us/op
+# Warmup Iteration   3: 490.670 us/op
+# Warmup Iteration   4: 500.833 us/op
+# Warmup Iteration   5: 496.005 us/op
+Iteration   1: 480.122 us/op
+Iteration   2: 474.331 us/op
+Iteration   3: 469.107 us/op
+Iteration   4: 470.962 us/op
+Iteration   5: 475.409 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoClassica":
+  476.135 ±(99.9%) 4.231 us/op [Average]
+  (min, avg, max) = (466.333, 476.135, 487.943), stdev = 5.648
+  CI (99.9%): [471.904, 480.366] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoHibrida
+# Parameters: (nivel = 128)
+
+# Run progress: 30.00% complete, ETA 00:27:48
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:45:26 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+903.222 us/op
+# Warmup Iteration   2: 328.062 us/op
+# Warmup Iteration   3: 350.537 us/op
+# Warmup Iteration   4: 733.318 us/op
+# Warmup Iteration   5: 793.139 us/op
+Iteration   1: 379.179 us/op
+Iteration   2: 469.556 us/op
+Iteration   3: 454.841 us/op
+Iteration   4: 407.117 us/op
+Iteration   5: 293.111 us/op
+
+# Run progress: 30.67% complete, ETA 00:27:32
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:45:41 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1273.923 us/op
+# Warmup Iteration   2: 911.011 us/op
+# Warmup Iteration   3: 695.782 us/op
+# Warmup Iteration   4: 468.439 us/op
+# Warmup Iteration   5: 409.045 us/op
+Iteration   1: 787.665 us/op
+Iteration   2: 343.843 us/op
+Iteration   3: 363.375 us/op
+Iteration   4: 649.628 us/op
+Iteration   5: 452.686 us/op
+
+# Run progress: 31.33% complete, ETA 00:27:16
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:45:58 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+605.664 us/op
+# Warmup Iteration   2: 494.020 us/op
+# Warmup Iteration   3: 420.655 us/op
+# Warmup Iteration   4: 511.366 us/op
+# Warmup Iteration   5: 366.485 us/op
+Iteration   1: 326.793 us/op
+Iteration   2: 285.243 us/op
+Iteration   3: 327.254 us/op
+Iteration   4: 288.911 us/op
+Iteration   5: 413.509 us/op
+
+# Run progress: 32.00% complete, ETA 00:27:00
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:46:14 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+863.533 us/op
+# Warmup Iteration   2: 422.530 us/op
+# Warmup Iteration   3: 378.342 us/op
+# Warmup Iteration   4: 448.202 us/op
+# Warmup Iteration   5: 389.145 us/op
+Iteration   1: 365.191 us/op
+Iteration   2: 392.073 us/op
+Iteration   3: 320.209 us/op
+Iteration   4: 310.804 us/op
+Iteration   5: 372.614 us/op
+
+# Run progress: 32.67% complete, ETA 00:26:44
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:46:31 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+845.289 us/op
+# Warmup Iteration   2: 377.401 us/op
+# Warmup Iteration   3: 311.763 us/op
+# Warmup Iteration   4: 299.964 us/op
+# Warmup Iteration   5: 376.277 us/op
+Iteration   1: 326.742 us/op
+Iteration   2: 385.894 us/op
+Iteration   3: 352.444 us/op
+Iteration   4: 328.522 us/op
+Iteration   5: 390.004 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoHibrida":
+  391.488 ±(99.9%) 84.242 us/op [Average]
+  (min, avg, max) = (285.243, 391.488, 787.665), stdev = 112.461
+  CI (99.9%): [307.246, 475.731] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoHibrida
+# Parameters: (nivel = 192)
+
+# Run progress: 33.33% complete, ETA 00:26:28
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:46:47 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1266.902 us/op
+# Warmup Iteration   2: 711.742 us/op
+# Warmup Iteration   3: 902.986 us/op
+# Warmup Iteration   4: 743.303 us/op
+# Warmup Iteration   5: 1083.035 us/op
+Iteration   1: 981.253 us/op
+Iteration   2: 602.792 us/op
+Iteration   3: 569.131 us/op
+Iteration   4: 873.622 us/op
+Iteration   5: 785.099 us/op
+
+# Run progress: 34.00% complete, ETA 00:26:13
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:47:03 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+999.955 us/op
+# Warmup Iteration   2: 673.820 us/op
+# Warmup Iteration   3: 950.726 us/op
+# Warmup Iteration   4: 897.743 us/op
+# Warmup Iteration   5: 903.035 us/op
+Iteration   1: 681.769 us/op
+Iteration   2: 783.689 us/op
+Iteration   3: 569.585 us/op
+Iteration   4: 690.130 us/op
+Iteration   5: 635.661 us/op
+
+# Run progress: 34.67% complete, ETA 00:25:57
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:47:19 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+2030.708 us/op
+# Warmup Iteration   2: 575.669 us/op
+# Warmup Iteration   3: 882.438 us/op
+# Warmup Iteration   4: 527.635 us/op
+# Warmup Iteration   5: 956.746 us/op
+Iteration   1: 1018.975 us/op
+Iteration   2: 664.350 us/op
+Iteration   3: 643.656 us/op
+Iteration   4: 1038.801 us/op
+Iteration   5: 540.701 us/op
+
+# Run progress: 35.33% complete, ETA 00:25:41
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:47:36 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+966.026 us/op
+# Warmup Iteration   2: 873.890 us/op
+# Warmup Iteration   3: 603.118 us/op
+# Warmup Iteration   4: 534.325 us/op
+# Warmup Iteration   5: 563.881 us/op
+Iteration   1: 567.480 us/op
+Iteration   2: 688.129 us/op
+Iteration   3: 714.693 us/op
+Iteration   4: 948.841 us/op
+Iteration   5: 553.519 us/op
+
+# Run progress: 36.00% complete, ETA 00:25:25
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:47:52 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1037.221 us/op
+# Warmup Iteration   2: 573.361 us/op
+# Warmup Iteration   3: 795.994 us/op
+# Warmup Iteration   4: 713.590 us/op
+# Warmup Iteration   5: 755.924 us/op
+Iteration   1: 679.890 us/op
+Iteration   2: 932.489 us/op
+Iteration   3: 625.757 us/op
+Iteration   4: 815.332 us/op
+Iteration   5: 787.040 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoHibrida":
+  735.695 ±(99.9%) 115.267 us/op [Average]
+  (min, avg, max) = (540.701, 735.695, 1038.801), stdev = 153.879
+  CI (99.9%): [620.428, 850.963] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoHibrida
+# Parameters: (nivel = 256)
+
+# Run progress: 36.67% complete, ETA 00:25:09
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:48:09 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+2235.152 us/op
+# Warmup Iteration   2: 1197.469 us/op
+# Warmup Iteration   3: 930.447 us/op
+# Warmup Iteration   4: 926.061 us/op
+# Warmup Iteration   5: 932.460 us/op
+Iteration   1: 1119.675 us/op
+Iteration   2: 1040.732 us/op
+Iteration   3: 1264.605 us/op
+Iteration   4: 1066.528 us/op
+Iteration   5: 994.466 us/op
+
+# Run progress: 37.33% complete, ETA 00:24:53
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:48:25 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+2218.408 us/op
+# Warmup Iteration   2: 1781.302 us/op
+# Warmup Iteration   3: 1245.292 us/op
+# Warmup Iteration   4: 1234.491 us/op
+# Warmup Iteration   5: 1112.318 us/op
+Iteration   1: 1391.185 us/op
+Iteration   2: 1195.845 us/op
+Iteration   3: 1144.417 us/op
+Iteration   4: 1058.948 us/op
+Iteration   5: 956.799 us/op
+
+# Run progress: 38.00% complete, ETA 00:24:37
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:48:41 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1790.061 us/op
+# Warmup Iteration   2: 970.674 us/op
+# Warmup Iteration   3: 977.925 us/op
+# Warmup Iteration   4: 1755.880 us/op
+# Warmup Iteration   5: 1037.760 us/op
+Iteration   1: 1322.089 us/op
+Iteration   2: 1114.829 us/op
+Iteration   3: 1188.128 us/op
+Iteration   4: 1133.300 us/op
+Iteration   5: 1273.385 us/op
+
+# Run progress: 38.67% complete, ETA 00:24:21
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:48:57 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+2329.633 us/op
+# Warmup Iteration   2: 1020.987 us/op
+# Warmup Iteration   3: 1220.031 us/op
+# Warmup Iteration   4: 936.443 us/op
+# Warmup Iteration   5: 1670.974 us/op
+Iteration   1: 1145.188 us/op
+Iteration   2: 1347.923 us/op
+Iteration   3: 1024.630 us/op
+Iteration   4: 1028.503 us/op
+Iteration   5: 1103.589 us/op
+
+# Run progress: 39.33% complete, ETA 00:24:05
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:49:14 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+2540.471 us/op
+# Warmup Iteration   2: 1820.538 us/op
+# Warmup Iteration   3: 1247.919 us/op
+# Warmup Iteration   4: 1540.607 us/op
+# Warmup Iteration   5: 1036.443 us/op
+Iteration   1: 1199.288 us/op
+Iteration   2: 1270.585 us/op
+Iteration   3: 1155.757 us/op
+Iteration   4: 1199.844 us/op
+Iteration   5: 1340.016 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoHibrida":
+  1163.210 ±(99.9%) 88.360 us/op [Average]
+  (min, avg, max) = (956.799, 1163.210, 1391.185), stdev = 117.959
+  CI (99.9%): [1074.850, 1251.571] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesClassica
+# Parameters: (nivel = 128)
+
+# Run progress: 40.00% complete, ETA 00:23:50
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:49:30 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+94.940 us/op
+# Warmup Iteration   2: 67.895 us/op
+# Warmup Iteration   3: 67.938 us/op
+# Warmup Iteration   4: 68.265 us/op
+# Warmup Iteration   5: 71.210 us/op
+Iteration   1: 68.755 us/op
+Iteration   2: 67.265 us/op
+Iteration   3: 67.136 us/op
+Iteration   4: 67.761 us/op
+Iteration   5: 66.488 us/op
+
+# Run progress: 40.67% complete, ETA 00:23:34
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:49:47 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+95.932 us/op
+# Warmup Iteration   2: 68.028 us/op
+# Warmup Iteration   3: 68.456 us/op
+# Warmup Iteration   4: 69.238 us/op
+# Warmup Iteration   5: 68.274 us/op
+Iteration   1: 67.011 us/op
+Iteration   2: 67.058 us/op
+Iteration   3: 67.836 us/op
+Iteration   4: 66.845 us/op
+Iteration   5: 67.088 us/op
+
+# Run progress: 41.33% complete, ETA 00:23:18
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:50:02 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+93.233 us/op
+# Warmup Iteration   2: 68.258 us/op
+# Warmup Iteration   3: 62.689 us/op
+# Warmup Iteration   4: 63.118 us/op
+# Warmup Iteration   5: 65.160 us/op
+Iteration   1: 66.967 us/op
+Iteration   2: 66.179 us/op
+Iteration   3: 64.909 us/op
+Iteration   4: 64.897 us/op
+Iteration   5: 65.306 us/op
+
+# Run progress: 42.00% complete, ETA 00:23:02
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:50:19 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+90.865 us/op
+# Warmup Iteration   2: 66.156 us/op
+# Warmup Iteration   3: 65.897 us/op
+# Warmup Iteration   4: 67.750 us/op
+# Warmup Iteration   5: 67.762 us/op
+Iteration   1: 67.491 us/op
+Iteration   2: 67.036 us/op
+Iteration   3: 66.318 us/op
+Iteration   4: 64.733 us/op
+Iteration   5: 66.107 us/op
+
+# Run progress: 42.67% complete, ETA 00:22:46
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:50:35 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+90.089 us/op
+# Warmup Iteration   2: 66.799 us/op
+# Warmup Iteration   3: 66.179 us/op
+# Warmup Iteration   4: 64.661 us/op
+# Warmup Iteration   5: 66.291 us/op
+Iteration   1: 66.427 us/op
+Iteration   2: 65.518 us/op
+Iteration   3: 66.056 us/op
+Iteration   4: 65.152 us/op
+Iteration   5: 64.038 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesClassica":
+  66.415 ±(99.9%) 0.848 us/op [Average]
+  (min, avg, max) = (64.038, 66.415, 68.755), stdev = 1.132
+  CI (99.9%): [65.567, 67.263] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesClassica
+# Parameters: (nivel = 192)
+
+# Run progress: 43.33% complete, ETA 00:22:30
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:50:52 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+257.577 us/op
+# Warmup Iteration   2: 210.539 us/op
+# Warmup Iteration   3: 198.776 us/op
+# Warmup Iteration   4: 200.190 us/op
+# Warmup Iteration   5: 198.873 us/op
+Iteration   1: 198.831 us/op
+Iteration   2: 192.597 us/op
+Iteration   3: 195.316 us/op
+Iteration   4: 196.723 us/op
+Iteration   5: 195.484 us/op
+
+# Run progress: 44.00% complete, ETA 00:22:14
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:51:08 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+245.611 us/op
+# Warmup Iteration   2: 205.376 us/op
+# Warmup Iteration   3: 200.797 us/op
+# Warmup Iteration   4: 203.254 us/op
+# Warmup Iteration   5: 198.258 us/op
+Iteration   1: 196.203 us/op
+Iteration   2: 197.691 us/op
+Iteration   3: 195.126 us/op
+Iteration   4: 196.928 us/op
+Iteration   5: 195.732 us/op
+
+# Run progress: 44.67% complete, ETA 00:21:58
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:51:25 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+250.164 us/op
+# Warmup Iteration   2: 207.365 us/op
+# Warmup Iteration   3: 202.980 us/op
+# Warmup Iteration   4: 198.417 us/op
+# Warmup Iteration   5: 201.058 us/op
+Iteration   1: 198.290 us/op
+Iteration   2: 197.632 us/op
+Iteration   3: 198.564 us/op
+Iteration   4: 197.743 us/op
+Iteration   5: 194.851 us/op
+
+# Run progress: 45.33% complete, ETA 00:21:42
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:51:40 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+243.681 us/op
+# Warmup Iteration   2: 198.696 us/op
+# Warmup Iteration   3: 195.128 us/op
+# Warmup Iteration   4: 199.100 us/op
+# Warmup Iteration   5: 191.760 us/op
+Iteration   1: 194.781 us/op
+Iteration   2: 195.178 us/op
+Iteration   3: 196.545 us/op
+Iteration   4: 195.769 us/op
+Iteration   5: 191.195 us/op
+
+# Run progress: 46.00% complete, ETA 00:21:26
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:51:57 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+250.043 us/op
+# Warmup Iteration   2: 210.632 us/op
+# Warmup Iteration   3: 205.993 us/op
+# Warmup Iteration   4: 202.105 us/op
+# Warmup Iteration   5: 200.302 us/op
+Iteration   1: 199.467 us/op
+Iteration   2: 196.748 us/op
+Iteration   3: 202.299 us/op
+Iteration   4: 202.215 us/op
+Iteration   5: 199.887 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesClassica":
+  196.872 ±(99.9%) 1.915 us/op [Average]
+  (min, avg, max) = (191.195, 196.872, 202.299), stdev = 2.557
+  CI (99.9%): [194.957, 198.787] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesClassica
+# Parameters: (nivel = 256)
+
+# Run progress: 46.67% complete, ETA 00:21:10
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:52:13 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+522.301 us/op
+# Warmup Iteration   2: 424.640 us/op
+# Warmup Iteration   3: 416.818 us/op
+# Warmup Iteration   4: 431.147 us/op
+# Warmup Iteration   5: 414.241 us/op
+Iteration   1: 410.973 us/op
+Iteration   2: 412.859 us/op
+Iteration   3: 408.343 us/op
+Iteration   4: 408.596 us/op
+Iteration   5: 411.285 us/op
+
+# Run progress: 47.33% complete, ETA 00:20:54
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:52:30 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+537.419 us/op
+# Warmup Iteration   2: 427.506 us/op
+# Warmup Iteration   3: 431.291 us/op
+# Warmup Iteration   4: 436.467 us/op
+# Warmup Iteration   5: 417.354 us/op
+Iteration   1: 415.660 us/op
+Iteration   2: 414.309 us/op
+Iteration   3: 415.553 us/op
+Iteration   4: 409.245 us/op
+Iteration   5: 403.705 us/op
+
+# Run progress: 48.00% complete, ETA 00:20:38
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:52:46 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+553.850 us/op
+# Warmup Iteration   2: 431.544 us/op
+# Warmup Iteration   3: 430.100 us/op
+# Warmup Iteration   4: 432.273 us/op
+# Warmup Iteration   5: 435.488 us/op
+Iteration   1: 429.493 us/op
+Iteration   2: 415.173 us/op
+Iteration   3: 422.904 us/op
+Iteration   4: 413.450 us/op
+Iteration   5: 412.446 us/op
+
+# Run progress: 48.67% complete, ETA 00:20:23
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:53:02 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+534.532 us/op
+# Warmup Iteration   2: 437.244 us/op
+# Warmup Iteration   3: 427.867 us/op
+# Warmup Iteration   4: 426.905 us/op
+# Warmup Iteration   5: 430.213 us/op
+Iteration   1: 420.510 us/op
+Iteration   2: 419.924 us/op
+Iteration   3: 415.204 us/op
+Iteration   4: 415.714 us/op
+Iteration   5: 423.208 us/op
+
+# Run progress: 49.33% complete, ETA 00:20:07
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:53:18 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+515.697 us/op
+# Warmup Iteration   2: 432.955 us/op
+# Warmup Iteration   3: 429.964 us/op
+# Warmup Iteration   4: 421.265 us/op
+# Warmup Iteration   5: 424.075 us/op
+Iteration   1: 410.983 us/op
+Iteration   2: 414.768 us/op
+Iteration   3: 411.318 us/op
+Iteration   4: 410.699 us/op
+Iteration   5: 412.541 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesClassica":
+  414.355 ±(99.9%) 4.130 us/op [Average]
+  (min, avg, max) = (403.705, 414.355, 429.493), stdev = 5.514
+  CI (99.9%): [410.224, 418.485] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesMlDsa
+# Parameters: (nivel = 128)
+
+# Run progress: 50.00% complete, ETA 00:19:51
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:53:35 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+88.616 us/op
+# Warmup Iteration   2: 74.070 us/op
+# Warmup Iteration   3: 74.792 us/op
+# Warmup Iteration   4: 72.078 us/op
+# Warmup Iteration   5: 72.619 us/op
+Iteration   1: 73.314 us/op
+Iteration   2: 72.689 us/op
+Iteration   3: 71.501 us/op
+Iteration   4: 71.987 us/op
+Iteration   5: 72.371 us/op
+
+# Run progress: 50.67% complete, ETA 00:19:35
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:53:51 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+85.988 us/op
+# Warmup Iteration   2: 72.838 us/op
+# Warmup Iteration   3: 73.458 us/op
+# Warmup Iteration   4: 73.957 us/op
+# Warmup Iteration   5: 72.636 us/op
+Iteration   1: 72.347 us/op
+Iteration   2: 71.936 us/op
+Iteration   3: 71.452 us/op
+Iteration   4: 71.857 us/op
+Iteration   5: 70.712 us/op
+
+# Run progress: 51.33% complete, ETA 00:19:19
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:54:08 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+86.912 us/op
+# Warmup Iteration   2: 73.039 us/op
+# Warmup Iteration   3: 73.266 us/op
+# Warmup Iteration   4: 73.522 us/op
+# Warmup Iteration   5: 72.260 us/op
+Iteration   1: 72.175 us/op
+Iteration   2: 71.971 us/op
+Iteration   3: 71.472 us/op
+Iteration   4: 71.596 us/op
+Iteration   5: 71.505 us/op
+
+# Run progress: 52.00% complete, ETA 00:19:03
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:54:24 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+86.451 us/op
+# Warmup Iteration   2: 73.121 us/op
+# Warmup Iteration   3: 73.135 us/op
+# Warmup Iteration   4: 72.371 us/op
+# Warmup Iteration   5: 72.819 us/op
+Iteration   1: 73.031 us/op
+Iteration   2: 71.348 us/op
+Iteration   3: 71.812 us/op
+Iteration   4: 71.944 us/op
+Iteration   5: 71.154 us/op
+
+# Run progress: 52.67% complete, ETA 00:18:47
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:54:40 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+87.965 us/op
+# Warmup Iteration   2: 73.720 us/op
+# Warmup Iteration   3: 73.928 us/op
+# Warmup Iteration   4: 74.074 us/op
+# Warmup Iteration   5: 72.404 us/op
+Iteration   1: 72.742 us/op
+Iteration   2: 72.360 us/op
+Iteration   3: 72.642 us/op
+Iteration   4: 72.498 us/op
+Iteration   5: 71.506 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesMlDsa":
+  71.997 ±(99.9%) 0.465 us/op [Average]
+  (min, avg, max) = (70.712, 71.997, 73.314), stdev = 0.620
+  CI (99.9%): [71.532, 72.462] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesMlDsa
+# Parameters: (nivel = 192)
+
+# Run progress: 53.33% complete, ETA 00:18:31
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:54:56 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+164.310 us/op
+# Warmup Iteration   2: 140.079 us/op
+# Warmup Iteration   3: 138.098 us/op
+# Warmup Iteration   4: 139.134 us/op
+# Warmup Iteration   5: 137.180 us/op
+Iteration   1: 136.579 us/op
+Iteration   2: 136.808 us/op
+Iteration   3: 135.285 us/op
+Iteration   4: 136.776 us/op
+Iteration   5: 136.527 us/op
+
+# Run progress: 54.00% complete, ETA 00:18:15
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:55:13 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+160.243 us/op
+# Warmup Iteration   2: 141.131 us/op
+# Warmup Iteration   3: 139.361 us/op
+# Warmup Iteration   4: 137.556 us/op
+# Warmup Iteration   5: 136.931 us/op
+Iteration   1: 137.838 us/op
+Iteration   2: 135.672 us/op
+Iteration   3: 135.436 us/op
+Iteration   4: 136.552 us/op
+Iteration   5: 136.174 us/op
+
+# Run progress: 54.67% complete, ETA 00:17:59
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:55:29 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+161.260 us/op
+# Warmup Iteration   2: 138.210 us/op
+# Warmup Iteration   3: 137.637 us/op
+# Warmup Iteration   4: 135.843 us/op
+# Warmup Iteration   5: 137.729 us/op
+Iteration   1: 137.676 us/op
+Iteration   2: 136.820 us/op
+Iteration   3: 138.205 us/op
+Iteration   4: 137.793 us/op
+Iteration   5: 136.776 us/op
+
+# Run progress: 55.33% complete, ETA 00:17:43
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:55:46 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+162.890 us/op
+# Warmup Iteration   2: 140.860 us/op
+# Warmup Iteration   3: 141.210 us/op
+# Warmup Iteration   4: 140.561 us/op
+# Warmup Iteration   5: 140.056 us/op
+Iteration   1: 137.819 us/op
+Iteration   2: 137.438 us/op
+Iteration   3: 137.391 us/op
+Iteration   4: 135.192 us/op
+Iteration   5: 136.326 us/op
+
+# Run progress: 56.00% complete, ETA 00:17:27
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:56:01 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+156.228 us/op
+# Warmup Iteration   2: 136.757 us/op
+# Warmup Iteration   3: 135.776 us/op
+# Warmup Iteration   4: 136.815 us/op
+# Warmup Iteration   5: 138.013 us/op
+Iteration   1: 138.116 us/op
+Iteration   2: 136.901 us/op
+Iteration   3: 136.560 us/op
+Iteration   4: 136.728 us/op
+Iteration   5: 138.337 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesMlDsa":
+  136.869 ±(99.9%) 0.675 us/op [Average]
+  (min, avg, max) = (135.192, 136.869, 138.337), stdev = 0.901
+  CI (99.9%): [136.194, 137.544] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesMlDsa
+# Parameters: (nivel = 256)
+
+# Run progress: 56.67% complete, ETA 00:17:12
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:56:18 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+236.151 us/op
+# Warmup Iteration   2: 210.939 us/op
+# Warmup Iteration   3: 201.272 us/op
+# Warmup Iteration   4: 196.902 us/op
+# Warmup Iteration   5: 199.690 us/op
+Iteration   1: 191.180 us/op
+Iteration   2: 190.395 us/op
+Iteration   3: 194.132 us/op
+Iteration   4: 194.811 us/op
+Iteration   5: 196.494 us/op
+
+# Run progress: 57.33% complete, ETA 00:16:56
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:56:34 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+231.054 us/op
+# Warmup Iteration   2: 203.323 us/op
+# Warmup Iteration   3: 195.945 us/op
+# Warmup Iteration   4: 197.168 us/op
+# Warmup Iteration   5: 195.675 us/op
+Iteration   1: 196.143 us/op
+Iteration   2: 195.148 us/op
+Iteration   3: 198.331 us/op
+Iteration   4: 197.835 us/op
+Iteration   5: 197.930 us/op
+
+# Run progress: 58.00% complete, ETA 00:16:40
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:56:51 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+239.300 us/op
+# Warmup Iteration   2: 208.020 us/op
+# Warmup Iteration   3: 204.373 us/op
+# Warmup Iteration   4: 203.163 us/op
+# Warmup Iteration   5: 200.918 us/op
+Iteration   1: 192.272 us/op
+Iteration   2: 187.157 us/op
+Iteration   3: 189.926 us/op
+Iteration   4: 195.361 us/op
+Iteration   5: 199.130 us/op
+
+# Run progress: 58.67% complete, ETA 00:16:24
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:57:07 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+233.758 us/op
+# Warmup Iteration   2: 209.154 us/op
+# Warmup Iteration   3: 200.271 us/op
+# Warmup Iteration   4: 203.710 us/op
+# Warmup Iteration   5: 201.017 us/op
+Iteration   1: 197.628 us/op
+Iteration   2: 198.530 us/op
+Iteration   3: 196.684 us/op
+Iteration   4: 198.293 us/op
+Iteration   5: 201.037 us/op
+
+# Run progress: 59.33% complete, ETA 00:16:08
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:57:24 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+243.636 us/op
+# Warmup Iteration   2: 211.889 us/op
+# Warmup Iteration   3: 204.502 us/op
+# Warmup Iteration   4: 206.302 us/op
+# Warmup Iteration   5: 203.059 us/op
+Iteration   1: 199.451 us/op
+Iteration   2: 199.376 us/op
+Iteration   3: 197.922 us/op
+Iteration   4: 198.705 us/op
+Iteration   5: 190.446 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesMlDsa":
+  195.773 ±(99.9%) 2.719 us/op [Average]
+  (min, avg, max) = (187.157, 195.773, 201.037), stdev = 3.630
+  CI (99.9%): [193.053, 198.492] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaClassica
+# Parameters: (nivel = 128)
+
+# Run progress: 60.00% complete, ETA 00:15:52
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:57:40 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+121.329 us/op
+# Warmup Iteration   2: 79.591 us/op
+# Warmup Iteration   3: 74.437 us/op
+# Warmup Iteration   4: 79.561 us/op
+# Warmup Iteration   5: 78.309 us/op
+Iteration   1: 77.748 us/op
+Iteration   2: 76.885 us/op
+Iteration   3: 77.358 us/op
+Iteration   4: 77.602 us/op
+Iteration   5: 78.473 us/op
+
+# Run progress: 60.67% complete, ETA 00:15:36
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:57:57 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+130.161 us/op
+# Warmup Iteration   2: 88.917 us/op
+# Warmup Iteration   3: 79.656 us/op
+# Warmup Iteration   4: 81.559 us/op
+# Warmup Iteration   5: 77.828 us/op
+Iteration   1: 75.615 us/op
+Iteration   2: 71.992 us/op
+Iteration   3: 73.269 us/op
+Iteration   4: 75.639 us/op
+Iteration   5: 75.731 us/op
+
+# Run progress: 61.33% complete, ETA 00:15:20
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:58:12 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+138.759 us/op
+# Warmup Iteration   2: 90.808 us/op
+# Warmup Iteration   3: 79.497 us/op
+# Warmup Iteration   4: 79.025 us/op
+# Warmup Iteration   5: 78.392 us/op
+Iteration   1: 77.475 us/op
+Iteration   2: 76.252 us/op
+Iteration   3: 75.557 us/op
+Iteration   4: 78.845 us/op
+Iteration   5: 77.722 us/op
+
+# Run progress: 62.00% complete, ETA 00:15:04
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:58:29 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+143.157 us/op
+# Warmup Iteration   2: 89.761 us/op
+# Warmup Iteration   3: 79.670 us/op
+# Warmup Iteration   4: 78.983 us/op
+# Warmup Iteration   5: 79.954 us/op
+Iteration   1: 76.807 us/op
+Iteration   2: 77.518 us/op
+Iteration   3: 75.551 us/op
+Iteration   4: 75.330 us/op
+Iteration   5: 75.163 us/op
+
+# Run progress: 62.67% complete, ETA 00:14:49
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:58:45 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+126.857 us/op
+# Warmup Iteration   2: 78.854 us/op
+# Warmup Iteration   3: 73.600 us/op
+# Warmup Iteration   4: 75.923 us/op
+# Warmup Iteration   5: 77.498 us/op
+Iteration   1: 76.227 us/op
+Iteration   2: 75.755 us/op
+Iteration   3: 76.666 us/op
+Iteration   4: 76.694 us/op
+Iteration   5: 75.282 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaClassica":
+  76.286 ±(99.9%) 1.140 us/op [Average]
+  (min, avg, max) = (71.992, 76.286, 78.845), stdev = 1.521
+  CI (99.9%): [75.147, 77.426] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaClassica
+# Parameters: (nivel = 192)
+
+# Run progress: 63.33% complete, ETA 00:14:33
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:59:02 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+387.232 us/op
+# Warmup Iteration   2: 271.818 us/op
+# Warmup Iteration   3: 252.545 us/op
+# Warmup Iteration   4: 248.227 us/op
+# Warmup Iteration   5: 249.115 us/op
+Iteration   1: 242.266 us/op
+Iteration   2: 237.389 us/op
+Iteration   3: 236.438 us/op
+Iteration   4: 240.127 us/op
+Iteration   5: 237.775 us/op
+
+# Run progress: 64.00% complete, ETA 00:14:17
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:59:18 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+349.222 us/op
+# Warmup Iteration   2: 252.918 us/op
+# Warmup Iteration   3: 238.983 us/op
+# Warmup Iteration   4: 234.679 us/op
+# Warmup Iteration   5: 240.122 us/op
+Iteration   1: 238.804 us/op
+Iteration   2: 238.138 us/op
+Iteration   3: 238.302 us/op
+Iteration   4: 236.843 us/op
+Iteration   5: 232.293 us/op
+
+# Run progress: 64.67% complete, ETA 00:14:01
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:59:35 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+392.299 us/op
+# Warmup Iteration   2: 272.965 us/op
+# Warmup Iteration   3: 267.416 us/op
+# Warmup Iteration   4: 252.275 us/op
+# Warmup Iteration   5: 246.740 us/op
+Iteration   1: 241.212 us/op
+Iteration   2: 239.353 us/op
+Iteration   3: 237.731 us/op
+Iteration   4: 236.599 us/op
+Iteration   5: 252.803 us/op
+
+# Run progress: 65.33% complete, ETA 00:13:45
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 7:59:51 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+366.365 us/op
+# Warmup Iteration   2: 268.155 us/op
+# Warmup Iteration   3: 262.010 us/op
+# Warmup Iteration   4: 241.450 us/op
+# Warmup Iteration   5: 247.805 us/op
+Iteration   1: 241.881 us/op
+Iteration   2: 241.410 us/op
+Iteration   3: 240.906 us/op
+Iteration   4: 241.548 us/op
+Iteration   5: 239.756 us/op
+
+# Run progress: 66.00% complete, ETA 00:13:29
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:00:06 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+366.839 us/op
+# Warmup Iteration   2: 266.479 us/op
+# Warmup Iteration   3: 266.974 us/op
+# Warmup Iteration   4: 251.369 us/op
+# Warmup Iteration   5: 247.460 us/op
+Iteration   1: 240.467 us/op
+Iteration   2: 240.572 us/op
+Iteration   3: 239.694 us/op
+Iteration   4: 237.233 us/op
+Iteration   5: 239.712 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaClassica":
+  239.570 ±(99.9%) 2.656 us/op [Average]
+  (min, avg, max) = (232.293, 239.570, 252.803), stdev = 3.546
+  CI (99.9%): [236.914, 242.226] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaClassica
+# Parameters: (nivel = 256)
+
+# Run progress: 66.67% complete, ETA 00:13:13
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:00:23 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+800.390 us/op
+# Warmup Iteration   2: 569.143 us/op
+# Warmup Iteration   3: 585.343 us/op
+# Warmup Iteration   4: 574.484 us/op
+# Warmup Iteration   5: 567.033 us/op
+Iteration   1: 555.780 us/op
+Iteration   2: 558.607 us/op
+Iteration   3: 542.269 us/op
+Iteration   4: 545.013 us/op
+Iteration   5: 541.923 us/op
+
+# Run progress: 67.33% complete, ETA 00:12:57
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:00:39 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+862.906 us/op
+# Warmup Iteration   2: 612.169 us/op
+# Warmup Iteration   3: 600.710 us/op
+# Warmup Iteration   4: 592.681 us/op
+# Warmup Iteration   5: 571.759 us/op
+Iteration   1: 555.648 us/op
+Iteration   2: 545.779 us/op
+Iteration   3: 529.224 us/op
+Iteration   4: 534.832 us/op
+Iteration   5: 548.622 us/op
+
+# Run progress: 68.00% complete, ETA 00:12:42
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:00:56 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+822.317 us/op
+# Warmup Iteration   2: 580.811 us/op
+# Warmup Iteration   3: 578.276 us/op
+# Warmup Iteration   4: 580.368 us/op
+# Warmup Iteration   5: 557.251 us/op
+Iteration   1: 557.498 us/op
+Iteration   2: 540.384 us/op
+Iteration   3: 543.438 us/op
+Iteration   4: 539.812 us/op
+Iteration   5: 541.069 us/op
+
+# Run progress: 68.67% complete, ETA 00:12:26
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:01:12 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+823.629 us/op
+# Warmup Iteration   2: 589.943 us/op
+# Warmup Iteration   3: 589.578 us/op
+# Warmup Iteration   4: 589.193 us/op
+# Warmup Iteration   5: 568.623 us/op
+Iteration   1: 558.684 us/op
+Iteration   2: 540.337 us/op
+Iteration   3: 547.758 us/op
+Iteration   4: 543.370 us/op
+Iteration   5: 546.020 us/op
+
+# Run progress: 69.33% complete, ETA 00:12:10
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:01:29 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+770.857 us/op
+# Warmup Iteration   2: 564.832 us/op
+# Warmup Iteration   3: 566.935 us/op
+# Warmup Iteration   4: 564.287 us/op
+# Warmup Iteration   5: 570.119 us/op
+Iteration   1: 562.315 us/op
+Iteration   2: 555.932 us/op
+Iteration   3: 546.677 us/op
+Iteration   4: 554.797 us/op
+Iteration   5: 547.595 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaClassica":
+  547.335 ±(99.9%) 6.171 us/op [Average]
+  (min, avg, max) = (529.224, 547.335, 562.315), stdev = 8.238
+  CI (99.9%): [541.164, 553.506] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaHibrida
+# Parameters: (nivel = 128)
+
+# Run progress: 70.00% complete, ETA 00:11:54
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:01:45 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+709.721 us/op
+# Warmup Iteration   2: 393.538 us/op
+# Warmup Iteration   3: 375.341 us/op
+# Warmup Iteration   4: 356.347 us/op
+# Warmup Iteration   5: 339.103 us/op
+Iteration   1: 331.101 us/op
+Iteration   2: 327.654 us/op
+Iteration   3: 316.558 us/op
+Iteration   4: 318.010 us/op
+Iteration   5: 322.366 us/op
+
+# Run progress: 70.67% complete, ETA 00:11:38
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:02:02 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+671.909 us/op
+# Warmup Iteration   2: 381.815 us/op
+# Warmup Iteration   3: 375.337 us/op
+# Warmup Iteration   4: 343.627 us/op
+# Warmup Iteration   5: 326.876 us/op
+Iteration   1: 323.606 us/op
+Iteration   2: 328.892 us/op
+Iteration   3: 329.269 us/op
+Iteration   4: 329.587 us/op
+Iteration   5: 329.174 us/op
+
+# Run progress: 71.33% complete, ETA 00:11:22
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:02:17 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+716.277 us/op
+# Warmup Iteration   2: 407.707 us/op
+# Warmup Iteration   3: 389.931 us/op
+# Warmup Iteration   4: 362.030 us/op
+# Warmup Iteration   5: 345.862 us/op
+Iteration   1: 329.666 us/op
+Iteration   2: 332.637 us/op
+Iteration   3: 324.023 us/op
+Iteration   4: 318.780 us/op
+Iteration   5: 320.528 us/op
+
+# Run progress: 72.00% complete, ETA 00:11:06
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:02:34 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+719.724 us/op
+# Warmup Iteration   2: 382.670 us/op
+# Warmup Iteration   3: 374.552 us/op
+# Warmup Iteration   4: 340.115 us/op
+# Warmup Iteration   5: 326.516 us/op
+Iteration   1: 324.044 us/op
+Iteration   2: 327.315 us/op
+Iteration   3: 328.853 us/op
+Iteration   4: 331.115 us/op
+Iteration   5: 324.604 us/op
+
+# Run progress: 72.67% complete, ETA 00:10:50
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:02:50 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+748.934 us/op
+# Warmup Iteration   2: 404.443 us/op
+# Warmup Iteration   3: 388.436 us/op
+# Warmup Iteration   4: 353.901 us/op
+# Warmup Iteration   5: 345.172 us/op
+Iteration   1: 341.098 us/op
+Iteration   2: 329.436 us/op
+Iteration   3: 321.959 us/op
+Iteration   4: 321.476 us/op
+Iteration   5: 322.270 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaHibrida":
+  326.161 ±(99.9%) 4.096 us/op [Average]
+  (min, avg, max) = (316.558, 326.161, 341.098), stdev = 5.469
+  CI (99.9%): [322.064, 330.257] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaHibrida
+# Parameters: (nivel = 192)
+
+# Run progress: 73.33% complete, ETA 00:10:34
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:03:07 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1191.737 us/op
+# Warmup Iteration   2: 668.958 us/op
+# Warmup Iteration   3: 668.172 us/op
+# Warmup Iteration   4: 695.494 us/op
+# Warmup Iteration   5: 618.175 us/op
+Iteration   1: 617.119 us/op
+Iteration   2: 602.435 us/op
+Iteration   3: 600.904 us/op
+Iteration   4: 605.446 us/op
+Iteration   5: 607.580 us/op
+
+# Run progress: 74.00% complete, ETA 00:10:19
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:03:23 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1127.081 us/op
+# Warmup Iteration   2: 682.317 us/op
+# Warmup Iteration   3: 668.603 us/op
+# Warmup Iteration   4: 668.233 us/op
+# Warmup Iteration   5: 639.384 us/op
+Iteration   1: 611.924 us/op
+Iteration   2: 599.163 us/op
+Iteration   3: 608.262 us/op
+Iteration   4: 601.131 us/op
+Iteration   5: 598.673 us/op
+
+# Run progress: 74.67% complete, ETA 00:10:03
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:03:40 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1116.709 us/op
+# Warmup Iteration   2: 678.091 us/op
+# Warmup Iteration   3: 661.245 us/op
+# Warmup Iteration   4: 653.454 us/op
+# Warmup Iteration   5: 659.182 us/op
+Iteration   1: 616.234 us/op
+Iteration   2: 613.827 us/op
+Iteration   3: 608.643 us/op
+Iteration   4: 595.868 us/op
+Iteration   5: 598.047 us/op
+
+# Run progress: 75.33% complete, ETA 00:09:47
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:03:56 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1176.140 us/op
+# Warmup Iteration   2: 681.834 us/op
+# Warmup Iteration   3: 665.810 us/op
+# Warmup Iteration   4: 698.560 us/op
+# Warmup Iteration   5: 659.873 us/op
+Iteration   1: 636.842 us/op
+Iteration   2: 623.605 us/op
+Iteration   3: 609.368 us/op
+Iteration   4: 602.665 us/op
+Iteration   5: 601.596 us/op
+
+# Run progress: 76.00% complete, ETA 00:09:31
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:04:13 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1203.238 us/op
+# Warmup Iteration   2: 688.787 us/op
+# Warmup Iteration   3: 677.410 us/op
+# Warmup Iteration   4: 664.446 us/op
+# Warmup Iteration   5: 647.507 us/op
+Iteration   1: 611.041 us/op
+Iteration   2: 613.660 us/op
+Iteration   3: 605.898 us/op
+Iteration   4: 624.154 us/op
+Iteration   5: 617.550 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaHibrida":
+  609.265 ±(99.9%) 7.256 us/op [Average]
+  (min, avg, max) = (595.868, 609.265, 636.842), stdev = 9.686
+  CI (99.9%): [602.009, 616.521] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaHibrida
+# Parameters: (nivel = 256)
+
+# Run progress: 76.67% complete, ETA 00:09:15
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:04:29 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1962.678 us/op
+# Warmup Iteration   2: 1235.393 us/op
+# Warmup Iteration   3: 1149.875 us/op
+# Warmup Iteration   4: 1174.236 us/op
+# Warmup Iteration   5: 1229.031 us/op
+Iteration   1: 1178.338 us/op
+Iteration   2: 1135.742 us/op
+Iteration   3: 1124.832 us/op
+Iteration   4: 1111.526 us/op
+Iteration   5: 1104.692 us/op
+
+# Run progress: 77.33% complete, ETA 00:08:59
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:04:46 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+2034.365 us/op
+# Warmup Iteration   2: 1247.553 us/op
+# Warmup Iteration   3: 1237.243 us/op
+# Warmup Iteration   4: 1229.809 us/op
+# Warmup Iteration   5: 1228.252 us/op
+Iteration   1: 1153.851 us/op
+Iteration   2: 1170.487 us/op
+Iteration   3: 1136.610 us/op
+Iteration   4: 1131.890 us/op
+Iteration   5: 1113.750 us/op
+
+# Run progress: 78.00% complete, ETA 00:08:43
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:05:01 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1990.619 us/op
+# Warmup Iteration   2: 1238.004 us/op
+# Warmup Iteration   3: 1184.857 us/op
+# Warmup Iteration   4: 1190.346 us/op
+# Warmup Iteration   5: 1220.186 us/op
+Iteration   1: 1161.448 us/op
+Iteration   2: 1134.519 us/op
+Iteration   3: 1130.950 us/op
+Iteration   4: 1106.385 us/op
+Iteration   5: 1100.832 us/op
+
+# Run progress: 78.67% complete, ETA 00:08:28
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:05:18 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1965.630 us/op
+# Warmup Iteration   2: 1244.837 us/op
+# Warmup Iteration   3: 1159.717 us/op
+# Warmup Iteration   4: 1160.249 us/op
+# Warmup Iteration   5: 1203.262 us/op
+Iteration   1: 1157.351 us/op
+Iteration   2: 1122.312 us/op
+Iteration   3: 1123.850 us/op
+Iteration   4: 1104.514 us/op
+Iteration   5: 1123.814 us/op
+
+# Run progress: 79.33% complete, ETA 00:08:12
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:05:34 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1997.894 us/op
+# Warmup Iteration   2: 1242.409 us/op
+# Warmup Iteration   3: 1186.234 us/op
+# Warmup Iteration   4: 1155.646 us/op
+# Warmup Iteration   5: 1239.747 us/op
+Iteration   1: 1134.579 us/op
+Iteration   2: 1145.198 us/op
+Iteration   3: 1098.305 us/op
+Iteration   4: 1105.320 us/op
+Iteration   5: 1102.609 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaHibrida":
+  1128.548 ±(99.9%) 17.035 us/op [Average]
+  (min, avg, max) = (1098.305, 1128.548, 1178.338), stdev = 22.741
+  CI (99.9%): [1111.513, 1145.583] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoClassica
+# Parameters: (nivel = 128)
+
+# Run progress: 80.00% complete, ETA 00:07:56
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:05:51 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+94.577 us/op
+# Warmup Iteration   2: 74.957 us/op
+# Warmup Iteration   3: 75.167 us/op
+# Warmup Iteration   4: 75.096 us/op
+# Warmup Iteration   5: 73.687 us/op
+Iteration   1: 72.354 us/op
+Iteration   2: 72.908 us/op
+Iteration   3: 72.584 us/op
+Iteration   4: 72.121 us/op
+Iteration   5: 71.318 us/op
+
+# Run progress: 80.67% complete, ETA 00:07:40
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:06:07 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+92.491 us/op
+# Warmup Iteration   2: 71.439 us/op
+# Warmup Iteration   3: 71.402 us/op
+# Warmup Iteration   4: 71.046 us/op
+# Warmup Iteration   5: 72.339 us/op
+Iteration   1: 71.149 us/op
+Iteration   2: 70.217 us/op
+Iteration   3: 69.616 us/op
+Iteration   4: 69.191 us/op
+Iteration   5: 69.354 us/op
+
+# Run progress: 81.33% complete, ETA 00:07:24
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:06:24 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+92.575 us/op
+# Warmup Iteration   2: 71.101 us/op
+# Warmup Iteration   3: 72.199 us/op
+# Warmup Iteration   4: 69.219 us/op
+# Warmup Iteration   5: 69.873 us/op
+Iteration   1: 70.616 us/op
+Iteration   2: 69.511 us/op
+Iteration   3: 70.376 us/op
+Iteration   4: 70.927 us/op
+Iteration   5: 70.076 us/op
+
+# Run progress: 82.00% complete, ETA 00:07:08
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:06:40 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+90.578 us/op
+# Warmup Iteration   2: 70.754 us/op
+# Warmup Iteration   3: 69.213 us/op
+# Warmup Iteration   4: 69.905 us/op
+# Warmup Iteration   5: 70.508 us/op
+Iteration   1: 70.332 us/op
+Iteration   2: 70.674 us/op
+Iteration   3: 69.467 us/op
+Iteration   4: 68.849 us/op
+Iteration   5: 69.846 us/op
+
+# Run progress: 82.67% complete, ETA 00:06:52
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:06:57 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+91.159 us/op
+# Warmup Iteration   2: 70.165 us/op
+# Warmup Iteration   3: 69.653 us/op
+# Warmup Iteration   4: 70.426 us/op
+# Warmup Iteration   5: 70.373 us/op
+Iteration   1: 70.885 us/op
+Iteration   2: 70.152 us/op
+Iteration   3: 69.906 us/op
+Iteration   4: 70.157 us/op
+Iteration   5: 69.491 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoClassica":
+  70.483 ±(99.9%) 0.818 us/op [Average]
+  (min, avg, max) = (68.849, 70.483, 72.908), stdev = 1.091
+  CI (99.9%): [69.666, 71.301] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoClassica
+# Parameters: (nivel = 192)
+
+# Run progress: 83.33% complete, ETA 00:06:36
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:07:12 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+280.011 us/op
+# Warmup Iteration   2: 235.448 us/op
+# Warmup Iteration   3: 230.807 us/op
+# Warmup Iteration   4: 225.245 us/op
+# Warmup Iteration   5: 224.538 us/op
+Iteration   1: 228.853 us/op
+Iteration   2: 221.859 us/op
+Iteration   3: 225.140 us/op
+Iteration   4: 225.248 us/op
+Iteration   5: 223.909 us/op
+
+# Run progress: 84.00% complete, ETA 00:06:20
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:07:29 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+287.681 us/op
+# Warmup Iteration   2: 239.212 us/op
+# Warmup Iteration   3: 234.074 us/op
+# Warmup Iteration   4: 228.568 us/op
+# Warmup Iteration   5: 228.354 us/op
+Iteration   1: 231.163 us/op
+Iteration   2: 231.269 us/op
+Iteration   3: 226.645 us/op
+Iteration   4: 227.158 us/op
+Iteration   5: 226.879 us/op
+
+# Run progress: 84.67% complete, ETA 00:06:05
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:07:45 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+285.507 us/op
+# Warmup Iteration   2: 234.274 us/op
+# Warmup Iteration   3: 231.590 us/op
+# Warmup Iteration   4: 224.128 us/op
+# Warmup Iteration   5: 222.260 us/op
+Iteration   1: 221.914 us/op
+Iteration   2: 224.518 us/op
+Iteration   3: 224.912 us/op
+Iteration   4: 224.236 us/op
+Iteration   5: 223.760 us/op
+
+# Run progress: 85.33% complete, ETA 00:05:49
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:08:02 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+283.463 us/op
+# Warmup Iteration   2: 242.655 us/op
+# Warmup Iteration   3: 237.192 us/op
+# Warmup Iteration   4: 232.876 us/op
+# Warmup Iteration   5: 231.634 us/op
+Iteration   1: 234.098 us/op
+Iteration   2: 232.360 us/op
+Iteration   3: 227.956 us/op
+Iteration   4: 227.945 us/op
+Iteration   5: 226.898 us/op
+
+# Run progress: 86.00% complete, ETA 00:05:33
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:08:18 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+287.761 us/op
+# Warmup Iteration   2: 239.355 us/op
+# Warmup Iteration   3: 238.981 us/op
+# Warmup Iteration   4: 236.176 us/op
+# Warmup Iteration   5: 233.269 us/op
+Iteration   1: 234.765 us/op
+Iteration   2: 232.673 us/op
+Iteration   3: 230.294 us/op
+Iteration   4: 226.327 us/op
+Iteration   5: 234.357 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoClassica":
+  227.805 ±(99.9%) 2.896 us/op [Average]
+  (min, avg, max) = (221.859, 227.805, 234.765), stdev = 3.867
+  CI (99.9%): [224.909, 230.702] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoClassica
+# Parameters: (nivel = 256)
+
+# Run progress: 86.67% complete, ETA 00:05:17
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:08:34 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+661.860 us/op
+# Warmup Iteration   2: 557.719 us/op
+# Warmup Iteration   3: 546.985 us/op
+# Warmup Iteration   4: 551.677 us/op
+# Warmup Iteration   5: 534.811 us/op
+Iteration   1: 545.020 us/op
+Iteration   2: 540.077 us/op
+Iteration   3: 537.847 us/op
+Iteration   4: 541.760 us/op
+Iteration   5: 532.815 us/op
+
+# Run progress: 87.33% complete, ETA 00:05:01
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:08:50 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+644.446 us/op
+# Warmup Iteration   2: 545.595 us/op
+# Warmup Iteration   3: 527.568 us/op
+# Warmup Iteration   4: 547.218 us/op
+# Warmup Iteration   5: 534.565 us/op
+Iteration   1: 526.730 us/op
+Iteration   2: 525.781 us/op
+Iteration   3: 527.599 us/op
+Iteration   4: 522.610 us/op
+Iteration   5: 520.091 us/op
+
+# Run progress: 88.00% complete, ETA 00:04:45
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:09:08 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+659.701 us/op
+# Warmup Iteration   2: 553.834 us/op
+# Warmup Iteration   3: 539.024 us/op
+# Warmup Iteration   4: 534.520 us/op
+# Warmup Iteration   5: 543.298 us/op
+Iteration   1: 525.716 us/op
+Iteration   2: 523.680 us/op
+Iteration   3: 523.905 us/op
+Iteration   4: 530.514 us/op
+Iteration   5: 524.293 us/op
+
+# Run progress: 88.67% complete, ETA 00:04:29
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:09:24 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+631.894 us/op
+# Warmup Iteration   2: 534.638 us/op
+# Warmup Iteration   3: 532.977 us/op
+# Warmup Iteration   4: 528.450 us/op
+# Warmup Iteration   5: 531.750 us/op
+Iteration   1: 521.995 us/op
+Iteration   2: 526.992 us/op
+Iteration   3: 523.770 us/op
+Iteration   4: 516.871 us/op
+Iteration   5: 518.450 us/op
+
+# Run progress: 89.33% complete, ETA 00:04:13
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:09:41 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+636.190 us/op
+# Warmup Iteration   2: 538.643 us/op
+# Warmup Iteration   3: 543.970 us/op
+# Warmup Iteration   4: 541.646 us/op
+# Warmup Iteration   5: 528.891 us/op
+Iteration   1: 525.308 us/op
+Iteration   2: 531.645 us/op
+Iteration   3: 527.115 us/op
+Iteration   4: 530.808 us/op
+Iteration   5: 518.172 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoClassica":
+  527.582 ±(99.9%) 5.504 us/op [Average]
+  (min, avg, max) = (516.871, 527.582, 545.020), stdev = 7.347
+  CI (99.9%): [522.079, 533.086] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoMlDsa
+# Parameters: (nivel = 128)
+
+# Run progress: 90.00% complete, ETA 00:03:58
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:09:56 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+99.836 us/op
+# Warmup Iteration   2: 81.188 us/op
+# Warmup Iteration   3: 79.493 us/op
+# Warmup Iteration   4: 81.505 us/op
+# Warmup Iteration   5: 81.226 us/op
+Iteration   1: 80.101 us/op
+Iteration   2: 81.046 us/op
+Iteration   3: 81.422 us/op
+Iteration   4: 80.316 us/op
+Iteration   5: 80.641 us/op
+
+# Run progress: 90.67% complete, ETA 00:03:42
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:10:13 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+98.023 us/op
+# Warmup Iteration   2: 80.471 us/op
+# Warmup Iteration   3: 79.643 us/op
+# Warmup Iteration   4: 80.391 us/op
+# Warmup Iteration   5: 81.460 us/op
+Iteration   1: 78.579 us/op
+Iteration   2: 78.178 us/op
+Iteration   3: 78.512 us/op
+Iteration   4: 79.003 us/op
+Iteration   5: 80.318 us/op
+
+# Run progress: 91.33% complete, ETA 00:03:26
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:10:29 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+100.479 us/op
+# Warmup Iteration   2: 82.968 us/op
+# Warmup Iteration   3: 79.708 us/op
+# Warmup Iteration   4: 79.792 us/op
+# Warmup Iteration   5: 81.526 us/op
+Iteration   1: 82.101 us/op
+Iteration   2: 80.454 us/op
+Iteration   3: 80.185 us/op
+Iteration   4: 80.290 us/op
+Iteration   5: 80.031 us/op
+
+# Run progress: 92.00% complete, ETA 00:03:10
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:10:46 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+102.754 us/op
+# Warmup Iteration   2: 81.719 us/op
+# Warmup Iteration   3: 84.753 us/op
+# Warmup Iteration   4: 83.347 us/op
+# Warmup Iteration   5: 82.030 us/op
+Iteration   1: 80.789 us/op
+Iteration   2: 78.408 us/op
+Iteration   3: 79.899 us/op
+Iteration   4: 78.808 us/op
+Iteration   5: 80.141 us/op
+
+# Run progress: 92.67% complete, ETA 00:02:54
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:11:02 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+102.619 us/op
+# Warmup Iteration   2: 83.988 us/op
+# Warmup Iteration   3: 83.831 us/op
+# Warmup Iteration   4: 83.888 us/op
+# Warmup Iteration   5: 83.234 us/op
+Iteration   1: 81.413 us/op
+Iteration   2: 81.509 us/op
+Iteration   3: 82.717 us/op
+Iteration   4: 81.997 us/op
+Iteration   5: 80.794 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoMlDsa":
+  80.306 ±(99.9%) 0.912 us/op [Average]
+  (min, avg, max) = (78.178, 80.306, 82.717), stdev = 1.217
+  CI (99.9%): [79.394, 81.218] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoMlDsa
+# Parameters: (nivel = 192)
+
+# Run progress: 93.33% complete, ETA 00:02:38
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:11:19 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+154.057 us/op
+# Warmup Iteration   2: 132.504 us/op
+# Warmup Iteration   3: 129.509 us/op
+# Warmup Iteration   4: 129.864 us/op
+# Warmup Iteration   5: 128.364 us/op
+Iteration   1: 128.708 us/op
+Iteration   2: 122.693 us/op
+Iteration   3: 122.979 us/op
+Iteration   4: 123.324 us/op
+Iteration   5: 125.686 us/op
+
+# Run progress: 94.00% complete, ETA 00:02:22
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:11:35 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+156.602 us/op
+# Warmup Iteration   2: 132.646 us/op
+# Warmup Iteration   3: 130.378 us/op
+# Warmup Iteration   4: 128.707 us/op
+# Warmup Iteration   5: 127.447 us/op
+Iteration   1: 131.309 us/op
+Iteration   2: 136.812 us/op
+Iteration   3: 136.174 us/op
+Iteration   4: 131.396 us/op
+Iteration   5: 127.526 us/op
+
+# Run progress: 94.67% complete, ETA 00:02:06
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:11:51 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+154.292 us/op
+# Warmup Iteration   2: 130.918 us/op
+# Warmup Iteration   3: 127.950 us/op
+# Warmup Iteration   4: 125.969 us/op
+# Warmup Iteration   5: 129.356 us/op
+Iteration   1: 124.964 us/op
+Iteration   2: 122.287 us/op
+Iteration   3: 120.139 us/op
+Iteration   4: 123.544 us/op
+Iteration   5: 126.602 us/op
+
+# Run progress: 95.33% complete, ETA 00:01:51
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:12:07 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+153.858 us/op
+# Warmup Iteration   2: 129.812 us/op
+# Warmup Iteration   3: 127.880 us/op
+# Warmup Iteration   4: 127.011 us/op
+# Warmup Iteration   5: 129.253 us/op
+Iteration   1: 127.209 us/op
+Iteration   2: 129.158 us/op
+Iteration   3: 127.526 us/op
+Iteration   4: 127.502 us/op
+Iteration   5: 128.057 us/op
+
+# Run progress: 96.00% complete, ETA 00:01:35
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:12:24 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+152.486 us/op
+# Warmup Iteration   2: 130.633 us/op
+# Warmup Iteration   3: 132.015 us/op
+# Warmup Iteration   4: 129.480 us/op
+# Warmup Iteration   5: 127.255 us/op
+Iteration   1: 125.159 us/op
+Iteration   2: 125.295 us/op
+Iteration   3: 125.541 us/op
+Iteration   4: 125.870 us/op
+Iteration   5: 126.354 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoMlDsa":
+  126.873 ±(99.9%) 2.953 us/op [Average]
+  (min, avg, max) = (120.139, 126.873, 136.812), stdev = 3.943
+  CI (99.9%): [123.919, 129.826] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 2 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoMlDsa
+# Parameters: (nivel = 256)
+
+# Run progress: 96.67% complete, ETA 00:01:19
+# Fork: 1 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:12:40 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+238.723 us/op
+# Warmup Iteration   2: 213.841 us/op
+# Warmup Iteration   3: 204.288 us/op
+# Warmup Iteration   4: 205.087 us/op
+# Warmup Iteration   5: 206.304 us/op
+Iteration   1: 205.555 us/op
+Iteration   2: 205.260 us/op
+Iteration   3: 204.314 us/op
+Iteration   4: 206.301 us/op
+Iteration   5: 206.811 us/op
+
+# Run progress: 97.33% complete, ETA 00:01:03
+# Fork: 2 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:12:56 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+251.520 us/op
+# Warmup Iteration   2: 220.357 us/op
+# Warmup Iteration   3: 215.158 us/op
+# Warmup Iteration   4: 211.982 us/op
+# Warmup Iteration   5: 208.567 us/op
+Iteration   1: 208.922 us/op
+Iteration   2: 202.305 us/op
+Iteration   3: 202.794 us/op
+Iteration   4: 203.946 us/op
+Iteration   5: 204.808 us/op
+
+# Run progress: 98.00% complete, ETA 00:00:47
+# Fork: 3 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:13:13 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+245.463 us/op
+# Warmup Iteration   2: 215.127 us/op
+# Warmup Iteration   3: 204.997 us/op
+# Warmup Iteration   4: 208.454 us/op
+# Warmup Iteration   5: 206.949 us/op
+Iteration   1: 204.767 us/op
+Iteration   2: 204.933 us/op
+Iteration   3: 202.957 us/op
+Iteration   4: 204.624 us/op
+Iteration   5: 206.089 us/op
+
+# Run progress: 98.67% complete, ETA 00:00:31
+# Fork: 4 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:13:29 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+254.561 us/op
+# Warmup Iteration   2: 225.353 us/op
+# Warmup Iteration   3: 219.924 us/op
+# Warmup Iteration   4: 213.661 us/op
+# Warmup Iteration   5: 210.182 us/op
+Iteration   1: 211.026 us/op
+Iteration   2: 205.755 us/op
+Iteration   3: 207.302 us/op
+Iteration   4: 202.118 us/op
+Iteration   5: 201.543 us/op
+
+# Run progress: 99.33% complete, ETA 00:00:15
+# Fork: 5 of 5
+# Warmup Iteration   1: Oct 07, 2026 8:13:46 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+240.538 us/op
+# Warmup Iteration   2: 210.683 us/op
+# Warmup Iteration   3: 201.769 us/op
+# Warmup Iteration   4: 202.435 us/op
+# Warmup Iteration   5: 204.765 us/op
+Iteration   1: 204.404 us/op
+Iteration   2: 206.699 us/op
+Iteration   3: 209.007 us/op
+Iteration   4: 208.012 us/op
+Iteration   5: 205.298 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoMlDsa":
+  205.422 ±(99.9%) 1.720 us/op [Average]
+  (min, avg, max) = (201.543, 205.422, 211.026), stdev = 2.296
+  CI (99.9%): [203.702, 207.142] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:39:40
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                                          (nivel)  Mode  Cnt     Score     Error  Units
+HybridOperationsBenchmark.assinaturaClassica           128  avgt   25    75.519 ±   1.862  us/op
+HybridOperationsBenchmark.assinaturaClassica           192  avgt   25   217.266 ±   3.548  us/op
+HybridOperationsBenchmark.assinaturaClassica           256  avgt   25   434.001 ±   3.595  us/op
+HybridOperationsBenchmark.assinaturaMlDsa              128  avgt   25   299.048 ±   6.458  us/op
+HybridOperationsBenchmark.assinaturaMlDsa              192  avgt   25   506.206 ±  18.467  us/op
+HybridOperationsBenchmark.assinaturaMlDsa              256  avgt   25   614.022 ±  22.435  us/op
+HybridOperationsBenchmark.emissaoClassica              128  avgt   25   103.293 ±   3.573  us/op
+HybridOperationsBenchmark.emissaoClassica              192  avgt   25   241.239 ±   1.541  us/op
+HybridOperationsBenchmark.emissaoClassica              256  avgt   25   476.135 ±   4.231  us/op
+HybridOperationsBenchmark.emissaoHibrida               128  avgt   25   391.488 ±  84.242  us/op
+HybridOperationsBenchmark.emissaoHibrida               192  avgt   25   735.695 ± 115.267  us/op
+HybridOperationsBenchmark.emissaoHibrida               256  avgt   25  1163.210 ±  88.360  us/op
+HybridOperationsBenchmark.geracaoChavesClassica        128  avgt   25    66.415 ±   0.848  us/op
+HybridOperationsBenchmark.geracaoChavesClassica        192  avgt   25   196.872 ±   1.915  us/op
+HybridOperationsBenchmark.geracaoChavesClassica        256  avgt   25   414.355 ±   4.130  us/op
+HybridOperationsBenchmark.geracaoChavesMlDsa           128  avgt   25    71.997 ±   0.465  us/op
+HybridOperationsBenchmark.geracaoChavesMlDsa           192  avgt   25   136.869 ±   0.675  us/op
+HybridOperationsBenchmark.geracaoChavesMlDsa           256  avgt   25   195.773 ±   2.719  us/op
+HybridOperationsBenchmark.validacaoCadeiaClassica      128  avgt   25    76.286 ±   1.140  us/op
+HybridOperationsBenchmark.validacaoCadeiaClassica      192  avgt   25   239.570 ±   2.656  us/op
+HybridOperationsBenchmark.validacaoCadeiaClassica      256  avgt   25   547.335 ±   6.171  us/op
+HybridOperationsBenchmark.validacaoCadeiaHibrida       128  avgt   25   326.161 ±   4.096  us/op
+HybridOperationsBenchmark.validacaoCadeiaHibrida       192  avgt   25   609.265 ±   7.256  us/op
+HybridOperationsBenchmark.validacaoCadeiaHibrida       256  avgt   25  1128.548 ±  17.035  us/op
+HybridOperationsBenchmark.verificacaoClassica          128  avgt   25    70.483 ±   0.818  us/op
+HybridOperationsBenchmark.verificacaoClassica          192  avgt   25   227.805 ±   2.896  us/op
+HybridOperationsBenchmark.verificacaoClassica          256  avgt   25   527.582 ±   5.504  us/op
+HybridOperationsBenchmark.verificacaoMlDsa             128  avgt   25    80.306 ±   0.912  us/op
+HybridOperationsBenchmark.verificacaoMlDsa             192  avgt   25   126.873 ±   2.953  us/op
+HybridOperationsBenchmark.verificacaoMlDsa             256  avgt   25   205.422 ±   1.720  us/op
+
+Benchmark result is saved to /home/usuario/arquivos/projects/tcc/pqc-migration-kit/desempenho/resultados.json

@@ -1,0 +1,807 @@
+# Manifesto de evidência — validação do módulo
+
+Gerado por `mvn test -Pvalidacao` em 2026-10-07T17:55:51.690854437-03:00.
+
+Todo artefato listado abaixo é **material público** — certificados, requisições, chaves públicas e assinaturas. Nenhuma chave privada é gravada.
+
+Ambiente completo em [`ambiente.txt`](ambiente.txt). Versão legível por máquina em [`manifesto.json`](manifesto.json).
+
+## Resumo
+
+- Casos executados: **52**
+- Casos pulados: **0**
+- Artefatos gravados: **214**
+- Bytes totais: **484672**
+
+## 05-assinatura-dados
+
+### envelope-hibrido — Envelope de assinatura híbrida
+
+- **Par de algoritmos:** ECDSA-384 + ML-DSA-65
+- **Dados assinados:** 71 bytes
+- **Envelope completo:** 3415 bytes
+- **Prefixo de tamanho:** 4 bytes (big-endian)
+- **Assinatura clássica:** 102 bytes
+- **Assinatura ML-DSA-65:** 3309 bytes
+- **Sobrecarga sobre a clássica isolada:** 33.5x
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `05-assinatura-dados/envelope-hibrido/dados-assinados.bin` | 71 | `438ac4ffc84f9b34b0a5ee67d4ca1c6bb8865b07f2fb4fbce363b5570037d5e9` |
+| `05-assinatura-dados/envelope-hibrido/envelope.bin` | 3415 | `96bcbfa4d36255e3436cde5231f187184b6aa78abd342151278a7710d525b2ea` |
+| `05-assinatura-dados/envelope-hibrido/assinatura-classica.bin` | 102 | `f9fa55ad037b024b61f7a9716ad979d7096e475cfb24ca19c2dcb0d59f0e97b2` |
+| `05-assinatura-dados/envelope-hibrido/assinatura-pqc.bin` | 3309 | `92a5d16450b0e498442c4dcf66c2636c6147a9056a0bb807fe2d6c29144c4296` |
+| `05-assinatura-dados/envelope-hibrido/envelope.hex` | 10245 | `cda35562ab0ba1d18df32101472076b0ffb3254c4bb423ea2d95405e915b4259` |
+| `05-assinatura-dados/envelope-hibrido/relatorio-assinatura.txt` | 443 | `cd4bb55cc83a529a75f92c64d765cd1ad9764ef61bcc40372a244248bd47beee` |
+| `05-assinatura-dados/envelope-hibrido/comparacao.txt` | 649 | `ed9e5164b3a72544f398c32082dc8bdb8ae860888457614f97ef663937c6cc1d` |
+| `05-assinatura-dados/envelope-hibrido/estatisticas.txt` | 279 | `1f8378f10d7a83d3cc9f472f330b4b44a49305af28be7ef3ff4aba84531e0e4b` |
+| `05-assinatura-dados/envelope-hibrido/relatorio.txt` | 639 | `2649e483c45f8ef9895d9f4101e02eda4a34ba3f531197f201f6c2b12c3a42dd` |
+
+### verificacao-apenas-classica — Conferência isolada da metade clássica
+
+- **Verificação híbrida (E):** VÁLIDA
+- **Verificação apenas clássica:** VÁLIDA
+- **Algoritmo clássico:** ECDSA
+- **Algoritmo pós-quântico:** ML-DSA-65
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `05-assinatura-dados/verificacao-apenas-classica/assinatura-classica.bin` | 102 | `72268a986635121fa46061d2ba876a3fd083e2e48448c5ab81a5cd56bd868375` |
+| `05-assinatura-dados/verificacao-apenas-classica/assinatura-pqc.bin` | 3309 | `02ed071a7ade7b4845fcd04c68ba66afde02e4af9aec01cfd3828b83c9627a55` |
+| `05-assinatura-dados/verificacao-apenas-classica/relatorio.txt` | 539 | `6c43b11b513b8738453c686950b21ee02fb4fdd5dab043fc9733442101b479f0` |
+
+### separacao-por-contexto — Separação de domínio pelo contexto FIPS 204
+
+- **Contexto usado na assinatura:** "faturamento"
+- **Verifica com "faturamento":** VÁLIDA
+- **Verifica com "auditoria":** INVÁLIDA
+- **Verifica sem contexto:** INVÁLIDA
+- **Assinatura sem contexto, verificada com um:** INVÁLIDA
+- **Limite do contexto:** 255 bytes, imposto pelo provedor
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `05-assinatura-dados/separacao-por-contexto/envelope-ctx-faturamento.bin` | 3416 | `f5968456ae8e87412b9420e3af9cef5469448097b2c03d3fb1867bc215e1d2c9` |
+| `05-assinatura-dados/separacao-por-contexto/envelope-sem-contexto.bin` | 3416 | `c893c8a766acd23633e435a623175d48bf5ca4dc5d5d4f1857003a0e009234ca` |
+| `05-assinatura-dados/separacao-por-contexto/contexto-faturamento.bin` | 11 | `69e151e6bb68588d18413cd16d354f2844f433b343bd4f431e17713e28b33047` |
+| `05-assinatura-dados/separacao-por-contexto/relatorio.txt` | 728 | `94997f18d8aee6e8386f4f31e0167825cf0787473b6f2fb695e63c5475744abd` |
+
+### logica-e-adulteracao — Verificação sob lógica E e detecção de adulteração
+
+- **Assinatura íntegra:** VÁLIDA
+- **Dado com 1 bit alterado:** INVÁLIDA
+- **Metade clássica corrompida:** INVÁLIDA
+- **Metade pós-quântica corrompida:** INVÁLIDA
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `05-assinatura-dados/logica-e-adulteracao/envelope-integro.bin` | 3416 | `1e5d0f0d42d6837fb561ab4be1313e67f41e98df37e309363f3addab8267779d` |
+| `05-assinatura-dados/logica-e-adulteracao/envelope-classica-corrompida.bin` | 3416 | `f077259bc6374adb3f097a487599a4051d9ac5ac81f23b9fb517865c49ac846c` |
+| `05-assinatura-dados/logica-e-adulteracao/envelope-pqc-corrompida.bin` | 3416 | `4bb795bf0cdacd1178fe416462c18580da2ffc2c4974cb95fb3106a79ffd292c` |
+| `05-assinatura-dados/logica-e-adulteracao/dado-adulterado.bin` | 71 | `12d8c367735ed053a33a8a5b6fb5a33c20199e7ff6eb9abe764e538f58bc44d3` |
+| `05-assinatura-dados/logica-e-adulteracao/relatorio.txt` | 650 | `159301ebe0cc5e3fb2130e33e4d3c8c64d4534e96e387c242da263a30192097e` |
+
+## 02-emissao-certificados
+
+### criticidade-compativel — Extensões alternativas não críticas
+
+- **altSignatureExtensionsCritical:** false
+- **Extensões críticas:** [2.5.29.19, 2.5.29.15]
+- **Extensões não críticas:** [2.5.29.72, 2.5.29.73, 2.5.29.74, 2.5.29.35, 2.5.29.14, 2.5.29.37]
+- **Consequência:** verificador clássico ignora as extensões e aceita pela assinatura clássica
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `02-emissao-certificados/criticidade-compativel/certificado.der` | 5904 | `092ff495df588f157557d235716c994eaab37ca4850a441d5e6b380a5d75e5d0` |
+| `02-emissao-certificados/criticidade-compativel/certificado.pem` | 8049 | `4283ac8bdf57dffac7bf45ae46a5e01eeb6cfbf1f5a409c11ab53e7f60bed825` |
+| `02-emissao-certificados/criticidade-compativel/relatorio.txt` | 484 | `f532de771d99cf7d91dfe071ad7d2c3eaf84bab53b3c84f5834547401c08fed4` |
+
+### criticidade-estrita — Extensões alternativas críticas
+
+- **altSignatureExtensionsCritical:** true
+- **Extensões críticas:** [2.5.29.19, 2.5.29.73, 2.5.29.74, 2.5.29.15]
+- **Extensões não críticas:** [2.5.29.72, 2.5.29.35, 2.5.29.14, 2.5.29.37]
+- **Consequência:** verificador conforme a RFC 5280 rejeita: impede downgrade silencioso
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `02-emissao-certificados/criticidade-estrita/certificado.der` | 5910 | `26f698ad2da11ed3563881b76268f0815db1442479a95ad3b7cf1c9f24c35ca4` |
+| `02-emissao-certificados/criticidade-estrita/certificado.pem` | 8058 | `9afba7e21ced5db23f8fb5e3bb5d528789fc08e0e83d01b8c7a0fb3db85b2892` |
+| `02-emissao-certificados/criticidade-estrita/relatorio.txt` | 465 | `5e9ce3e88be0b93cc07064ea8e6d759a786bb297d60e6973cec02493d0cb17f7` |
+
+### nivel-128 — Certificado híbrido autoassinado de 128 bits
+
+- **Par de algoritmos:** ECDSA-256 + ML-DSA-44
+- **Algoritmo de assinatura:** SHA256WITHECDSA (OID 1.2.840.10045.4.3.2)
+- **Sujeito:** C=BR,O=TCC,CN=nivel128.tcc.br
+- **Número serial:** 925570618662526397431485785786919775303779757519
+- **Certificado completo:** 4278 bytes (DER)
+- **2.5.29.72 subjectAltPublicKeyInfo:** 1338 bytes, não crítica
+- **2.5.29.73 altSignatureAlgorithm:** 15 bytes, não crítica
+- **2.5.29.74 altSignatureValue:** 2429 bytes, não crítica
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `02-emissao-certificados/nivel-128/certificado.der` | 4278 | `f4dbace905bc33b5edee50e042b948241057b06a2ed7183c7c0dc2a39bf3cb8e` |
+| `02-emissao-certificados/nivel-128/certificado.pem` | 5848 | `aeae1db03e6349d40aa761683f3bab880fe288e746c7ab81a65523c0ae8f7995` |
+| `02-emissao-certificados/nivel-128/inspecao.txt` | 1187 | `39fe6833c7873c2e0f5721774046aac73fb988e54a01448f30311c69e9235fea` |
+| `02-emissao-certificados/nivel-128/extensao-2.5.29.72.der` | 1338 | `b5a070dbf6b111a2d432b23a5d821f15d9b3ee01dd805f096ea7891b88112acb` |
+| `02-emissao-certificados/nivel-128/extensao-2.5.29.73.der` | 15 | `20969a16b72e821aeab485aedc65b69ba6c8727a892ef27e49ec8638250d53b3` |
+| `02-emissao-certificados/nivel-128/extensao-2.5.29.74.der` | 2429 | `fa37cf33930addc4fec6c04694ba6b1f96107d6e63a0ac465a7e8bbae42a386a` |
+| `02-emissao-certificados/nivel-128/openssl-x509.txt` | 5570 | `efb286d067f8a2cde1690f7f625c5c8f56d363592f4d1d337e93dc307103fd2e` |
+| `02-emissao-certificados/nivel-128/relatorio.txt` | 832 | `4bb96e43de556878ac3e0ee20f1c1b0144a79714fa50077f5c8d9aff79588787` |
+
+### nivel-192 — Certificado híbrido autoassinado de 192 bits
+
+- **Par de algoritmos:** ECDSA-384 + ML-DSA-65
+- **Algoritmo de assinatura:** SHA384WITHECDSA (OID 1.2.840.10045.4.3.3)
+- **Sujeito:** C=BR,O=TCC,CN=nivel192.tcc.br
+- **Número serial:** 1359189958673769843328655654269354733540786094495
+- **Certificado completo:** 5868 bytes (DER)
+- **2.5.29.72 subjectAltPublicKeyInfo:** 1978 bytes, não crítica
+- **2.5.29.73 altSignatureAlgorithm:** 15 bytes, não crítica
+- **2.5.29.74 altSignatureValue:** 3318 bytes, não crítica
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `02-emissao-certificados/nivel-192/certificado.der` | 5868 | `475680a5a4710c9aeddfc186df1296d64bb7017a7819869d3d9a47ac90783e64` |
+| `02-emissao-certificados/nivel-192/certificado.pem` | 8001 | `6b7512dc4125387df13d213d0d506df37f739d2f1dc30fb8acb9c84743d72f84` |
+| `02-emissao-certificados/nivel-192/inspecao.txt` | 1189 | `13187dacc6fc549c9135dd9e0811d690249dd4fa90872dacef19d927a33bcd0a` |
+| `02-emissao-certificados/nivel-192/extensao-2.5.29.72.der` | 1978 | `1c9219ad4adee3911c1707a30f01bc43e7e9e75ea66e8a0c60cfea6bf564bdcf` |
+| `02-emissao-certificados/nivel-192/extensao-2.5.29.73.der` | 15 | `6d1e60231e16fdca46f0b1adf7631e110b33a1a2a59722bd745ce87f7fa6cf86` |
+| `02-emissao-certificados/nivel-192/extensao-2.5.29.74.der` | 3318 | `aef03143de6e9f7a61944cbd36a5b64b4163984759f57ebb3ea68c21b5f7ce64` |
+| `02-emissao-certificados/nivel-192/openssl-x509.txt` | 7350 | `8983a47d64158c9e71c9c890ccfbb7b671a615c42b75ddefd56629baa9c92c99` |
+| `02-emissao-certificados/nivel-192/relatorio.txt` | 833 | `a9a07bc74ae1bc49668eaafd1027c02e716b169baaefc581fa5a130db051ceb6` |
+
+### nivel-256 — Certificado híbrido autoassinado de 256 bits
+
+- **Par de algoritmos:** ECDSA-521 + ML-DSA-87
+- **Algoritmo de assinatura:** SHA512WITHECDSA (OID 1.2.840.10045.4.3.4)
+- **Sujeito:** C=BR,O=TCC,CN=nivel256.tcc.br
+- **Número serial:** 1061206605046802530548596462344641138400666863386
+- **Certificado completo:** 7901 bytes (DER)
+- **2.5.29.72 subjectAltPublicKeyInfo:** 2618 bytes, não crítica
+- **2.5.29.73 altSignatureAlgorithm:** 15 bytes, não crítica
+- **2.5.29.74 altSignatureValue:** 4636 bytes, não crítica
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `02-emissao-certificados/nivel-256/certificado.der` | 7901 | `c6586845e6229e08897041b8fe2eb5acd0685fb19f3145f1481d7b5d5f232f77` |
+| `02-emissao-certificados/nivel-256/certificado.pem` | 10755 | `005e603d31db439f0bfb55b9f36e886a05c94e62d1c4ae4bfdc8cc0d39cc42c2` |
+| `02-emissao-certificados/nivel-256/inspecao.txt` | 1189 | `e45ce7b99ce5c48cddd87fe3ab10397e6cd661f8482e3313e34d7caeeb9be733` |
+| `02-emissao-certificados/nivel-256/extensao-2.5.29.72.der` | 2618 | `190e449994829e30a67ff36187f8f10a434bee91085cb9167fc18e8c8a93e3ea` |
+| `02-emissao-certificados/nivel-256/extensao-2.5.29.73.der` | 15 | `17157d037c92aa80c313d9e7f97572f675f98a9651ecb9d3ad77e3485b3d6b3d` |
+| `02-emissao-certificados/nivel-256/extensao-2.5.29.74.der` | 4636 | `1d8b66ed0c04334051cf553ebf3ba6642a214b8a143bfd6461bbd8727d9649f2` |
+| `02-emissao-certificados/nivel-256/openssl-x509.txt` | 9584 | `cac3f349f24cca1c1212e4f786c427cb6a5c2cb5305a2a4bf8926f2ded400abe` |
+| `02-emissao-certificados/nivel-256/relatorio.txt` | 833 | `1e0d9f423809fb28624bf714dbe356403ab9bfc58afb9bf4548bd4246c32e6b3` |
+
+### ordem-de-assinatura — Ordem de assinatura do modelo Catalyst
+
+- **Assinatura alternativa sobre pre-TBS:** válida
+- **Assinatura clássica sobre TBS:** válida
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `02-emissao-certificados/ordem-de-assinatura/tbs-certificate.der` | 5741 | `e347d525ce196fad508a609065b05c650f58fee48d5468027b1dd19f31a324a1` |
+| `02-emissao-certificados/ordem-de-assinatura/relatorio.txt` | 721 | `e8cc69ad5e33c137d469d167a545ea797633b9b4827b1232c6d00adecb3cc5e9` |
+
+### layer1-signer-externo — Emissão via Layer 1 com ContentSigner fornecido externamente
+
+- **Assinador clássico:** 1.2.840.10045.4.3.3
+- **Assinador alternativo:** 2.16.840.1.101.3.4.3.18
+- **Chave privada exigida pelo construtor:** nenhuma
+- **Validação contra si mesmo:** aprovada nas duas dimensões
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `02-emissao-certificados/layer1-signer-externo/certificado.der` | 5891 | `2320feadf29927d68f12e6533a73e36c497129eeae74522ffbd87e3bb60fd6ff` |
+| `02-emissao-certificados/layer1-signer-externo/certificado.pem` | 8033 | `bcb4905daa27c26b275643d873937601d7e06620366b691520ce0b8e2aafbe1a` |
+| `02-emissao-certificados/layer1-signer-externo/relatorio.txt` | 436 | `7053ab44d4322ffa2a9554d8a57b57d32ce027af9df767892d617d20ee799c92` |
+
+## 04-requisicoes-csr
+
+### csr-nivel-128 — CSR híbrida de 128 bits
+
+- **Par de algoritmos:** ECDSA-256 + ML-DSA-44
+- **Algoritmo da assinatura:** SHA256withECDSA
+- **Tamanho:** 4055 bytes (DER)
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `04-requisicoes-csr/csr-nivel-128/requisicao.der` | 4055 | `a756c0d1117f631af3f6ccf780b03ebd8db8d4370b7032dab7a48c89a158a9ea` |
+| `04-requisicoes-csr/csr-nivel-128/requisicao.pem` | 5563 | `1d2082ff10902baf2318e2565b89b23a38a3457bc98be47bb4dc11e6cdd81696` |
+| `04-requisicoes-csr/csr-nivel-128/relatorio.txt` | 292 | `7e23ff08966af0483c2e7f73f231de88a439e17bd98b29f7802a4ef41c0834ef` |
+
+### csr-nivel-192 — CSR híbrida de 192 bits
+
+- **Par de algoritmos:** ECDSA-384 + ML-DSA-65
+- **Algoritmo da assinatura:** SHA384withECDSA
+- **Tamanho:** 5645 bytes (DER)
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `04-requisicoes-csr/csr-nivel-192/requisicao.der` | 5645 | `a990652e14c523ae4f0b1e932ef1c163b1b5ae8f0ed388b8f960720b5c090f33` |
+| `04-requisicoes-csr/csr-nivel-192/requisicao.pem` | 7716 | `22728f1113ac362bfed84b1fc7ae025952aa8f1e4a2b47df1b8d13bec5186657` |
+| `04-requisicoes-csr/csr-nivel-192/relatorio.txt` | 292 | `324ec23436fc04b25770db2b1dd59c2a55b3baa18c25b6b7a425168d99bdfd61` |
+
+### csr-nivel-256 — CSR híbrida de 256 bits
+
+- **Par de algoritmos:** ECDSA-521 + ML-DSA-87
+- **Algoritmo da assinatura:** SHA512withECDSA
+- **Tamanho:** 7677 bytes (DER)
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `04-requisicoes-csr/csr-nivel-256/requisicao.der` | 7677 | `ac50521aeba067e5fdba3e7922c77731298d0b968094b38331ec874867339c71` |
+| `04-requisicoes-csr/csr-nivel-256/requisicao.pem` | 10466 | `c4c0b2e57a5cfbd9d96b5bbe9bc63d77b6b181ea1d105f6776a24c9cdf308092` |
+| `04-requisicoes-csr/csr-nivel-256/relatorio.txt` | 292 | `c90660fc95044e40faf505dc169c34d8f6f780a615dba3d62b39b47ca08e0a87` |
+
+### resumo-csr — Tamanho das requisições por nível
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `04-requisicoes-csr/resumo-csr/tabela.txt` | 268 | `fef67294de4d4bf32628e14775317589ddf803a91e836a3726e99db2b3021ba9` |
+| `04-requisicoes-csr/resumo-csr/relatorio.txt` | 119 | `3094617514575decb1556c4c72a86f3e2c51dcde2818f8026dde8ec4c9be0f17` |
+
+### csr-hibrida-192 — Requisição PKCS#10 híbrida de 192 bits
+
+- **Sujeito:** CN=requisitante.tcc.br,O=TCC,C=BR
+- **Par de algoritmos:** ECDSA-384 + ML-DSA-65
+- **Algoritmo da assinatura principal:** SHA384withECDSA (OID 1.2.840.10045.4.3.3)
+- **Chave clássica (campo convencional):** 120 bytes
+- **Atributo altSubjectPublicKeyInfo:** presente (2.5.29.72)
+- **Requisição completa:** 5648 bytes (DER)
+- **openssl req -text:** decodifica sem erro
+- **openssl req -verify:** assinatura própria da CSR conferida
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `04-requisicoes-csr/csr-hibrida-192/requisicao.der` | 5648 | `00e090a49e9189c4dc9540d2dc160aad799d8c949d24c5e8242c8e1e27a0b7ac` |
+| `04-requisicoes-csr/csr-hibrida-192/requisicao.pem` | 7720 | `e240747ad810472b6c3d3b29757a5a6da11292bc6fbe2b9678490c731484cf95` |
+| `04-requisicoes-csr/csr-hibrida-192/chave-publica-classica.der` | 120 | `168a0874c6de66f2d502de3b940c9d1dbd0292e693fb72668efa03a264dbb85a` |
+| `04-requisicoes-csr/csr-hibrida-192/chave-publica-pqc.der` | 1974 | `00bdc0ea67363d1c142125b037848a3ddd513f73d4712bd07151479cf5cad17a` |
+| `04-requisicoes-csr/csr-hibrida-192/openssl-req.txt` | 1435 | `fa4834f11ebb5e8c60cc9e4ae8f5adff79d89f5ec494267d6e2ffa6867fac706` |
+| `04-requisicoes-csr/csr-hibrida-192/openssl-req-verify.txt` | 100 | `54ef14f6a4032ede536f4f8d3ba1ed32c058add5d92f39849b7e21ef889bdd52` |
+| `04-requisicoes-csr/csr-hibrida-192/relatorio.txt` | 774 | `2c47aaa3910b91f100b7655385c833ff395082018aaf949ed66745a35da2ad0b` |
+
+## 07-exportacao-inspecao
+
+### sem-exportacao-de-chave-privada — Ausência deliberada de exportação de chave privada
+
+- **Formatos suportados:** PEM e DER, apenas para certificados
+- **Métodos que tratam chave privada:** nenhum
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `07-exportacao-inspecao/sem-exportacao-de-chave-privada/api-do-exportador.txt` | 178 | `7ac390c1eb53bfe725471a72be8ff818e53750cb6c242a7239f0a59ae4df7e48` |
+| `07-exportacao-inspecao/sem-exportacao-de-chave-privada/relatorio.txt` | 479 | `1a85c2045f9946946968e57917ef486e1385ace2a4c4964c3c966fb07f9cf2af` |
+
+### pem-equivale-der — Equivalência entre as saídas PEM e DER
+
+- **Certificado em DER:** 5874 bytes
+- **Certificado em PEM:** 8009 bytes (base64 com envelope)
+- **PEM decodificado == DER:** sim, byte a byte
+- **DER reconstrói o certificado:** sim
+- **SHA-256 do DER:** b3bde6c50854223ca7766e12b5ca795e81893313780fabf4832b305c39bfa8a7
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `07-exportacao-inspecao/pem-equivale-der/certificado.der` | 5874 | `b3bde6c50854223ca7766e12b5ca795e81893313780fabf4832b305c39bfa8a7` |
+| `07-exportacao-inspecao/pem-equivale-der/certificado.pem` | 8009 | `f469594d8d62bec8d3fa8b4eded66ae692fba790e7af9f7919988380a527bd3a` |
+| `07-exportacao-inspecao/pem-equivale-der/relatorio.txt` | 479 | `d43c67b96605b6073b5bb36a9d97dd2f98f9734c56e6e8412d5a91443d81c05a` |
+
+### relatorios-de-inspecao — Relatórios produzidos pelos inspetores
+
+- **Reconhecido como híbrido:** true
+- **Chave pública:** ECDSA Public Key [ECDSA-384]
+- **Tamanho total das assinaturas:** 3.33 KB
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `07-exportacao-inspecao/relatorios-de-inspecao/inspecao-hibrida.txt` | 1189 | `c7ab415424f01ad9df062e9889322d20546219512025033968f6d211e65f206c` |
+| `07-exportacao-inspecao/relatorios-de-inspecao/certificado.txt` | 469 | `48bc1f13ff85c004bcec9de3cd29122bcbcac9be8b3e1af3a900e2ba72877ca9` |
+| `07-exportacao-inspecao/relatorios-de-inspecao/certificado-compacto.txt` | 106 | `53c7bbdac4bb2ee4bcd758482fd286928eba52092be236fc4ade5b6bfe066421` |
+| `07-exportacao-inspecao/relatorios-de-inspecao/chave-publica-classica.txt` | 272 | `1e9ccb53f1816801f448aa7df6ff3ca183bfb62f7f666f673e9798db8b3b6250` |
+| `07-exportacao-inspecao/relatorios-de-inspecao/chave-publica-pqc.txt` | 224 | `c488fe262bd8aedfd756b4119e74699046fefdc59a612f1a8d1fb8681d5133f7` |
+| `07-exportacao-inspecao/relatorios-de-inspecao/assinaturas.txt` | 443 | `af3547d433f5ab58a4ee35a66b98a5b916d6da96b57658170b6ca2fec26efc4a` |
+| `07-exportacao-inspecao/relatorios-de-inspecao/assinaturas-comparacao.txt` | 649 | `ed9e5164b3a72544f398c32082dc8bdb8ae860888457614f97ef663937c6cc1d` |
+| `07-exportacao-inspecao/relatorios-de-inspecao/relatorio.txt` | 455 | `3a9e9368d4a798ef4276195cacddccc242fb0902d617b3167eb601e05d59c68a` |
+
+### guarda-material-privado — Salvaguarda contra gravação de material privado
+
+- **Extensões recusadas:** .key, .p12, .pkcs8, .jks
+- **Nomes recusados:** qualquer um contendo "private" ou "privada"
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `07-exportacao-inspecao/guarda-material-privado/relatorio.txt` | 529 | `f23f1794380d3511d085a0eeec85bd844adabce883db980c9516e5e52d78f5c4` |
+
+## 06-validacao
+
+### cadeia-duas-dimensoes — Validação de cadeia nas dimensões clássica e pós-quântica
+
+- **Elos da cadeia:** 2 (folha → raiz)
+- **Dimensão clássica (CertPathValidator PKIX):** true
+- **Dimensão pós-quântica (alt-signature por elo):** true
+- **Veredito global:** true
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `06-validacao/cadeia-duas-dimensoes/folha.der` | 5979 | `87343bbbb7f4c034fb474630d4312543d7701691be6d409258c002feb72b25e7` |
+| `06-validacao/cadeia-duas-dimensoes/raiz.der` | 5871 | `03436aff183707e7d156b801faddf4c686838455e0807f329590ca1c2e333d24` |
+| `06-validacao/cadeia-duas-dimensoes/relatorio.txt` | 675 | `7aa87f7a91065d0771468e181d0565289b26ad19ac8f299125abde0a8d7ce1ef` |
+
+### modos-de-falha — Modos de falha detectados pela validação
+
+- **Emissor errado — DNs:** false
+- **Emissor errado — assinatura clássica:** false
+- **Emissor errado — assinatura alternativa:** false
+- **Chave pública de emissor errada:** false
+- **Sem chave de emissor (folha emitida por CA):** false
+- **Certificado sem extensões Catalyst — extensões:** false
+- **Certificado sem extensões Catalyst — assinatura alternativa:** false
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `06-validacao/modos-de-falha/emissor-errado.txt` | 470 | `8965b8e9a11c7cde239501e5d29f8d39d7f13467c9cc4a71cf4365b0bba4ec13` |
+| `06-validacao/modos-de-falha/chave-emissor-errada.txt` | 148 | `7f371c0e749b8efc702092a2147f63a004657819ce0d875cb48f4a19542ad7b9` |
+| `06-validacao/modos-de-falha/sem-chave-de-emissor.txt` | 148 | `7f371c0e749b8efc702092a2147f63a004657819ce0d875cb48f4a19542ad7b9` |
+| `06-validacao/modos-de-falha/sem-extensoes-catalyst.txt` | 263 | `d96de9fae82e422e4fd2e64032c5368c39c7da04687588889b0cfc2a17fe0dc1` |
+| `06-validacao/modos-de-falha/certificado-sem-extensoes.der` | 549 | `4b6643d4652885eb60afec1a9e5dbf2f89652ad26c37437521ef77c92d76daed` |
+| `06-validacao/modos-de-falha/relatorio.txt` | 632 | `03035313b27e89e617ff452b56deff2a7da59f0b1b63a676e40fcc8207994ccf` |
+
+### caminho-feliz — Certificado legítimo validado contra o emissor
+
+- **Não expirado:** true
+- **DNs e encadeamento:** true
+- **Período de validade:** true
+- **Chave pública:** true
+- **Assinatura clássica:** true
+- **Extensões PQC:** true
+- **Assinatura alternativa:** true
+- **Veredito global:** true
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `06-validacao/caminho-feliz/validation-result.txt` | 144 | `ce2ae0d5f451b5a701bf88f03556e388afb91ea83bcbe55ec1f63205b5bb0a05` |
+| `06-validacao/caminho-feliz/folha.der` | 5979 | `0419d4f3085a21369ff628ead202ea07cf963b27286d31c5067dd13033c93ed1` |
+| `06-validacao/caminho-feliz/emissor.der` | 5873 | `015005281c29dbe7975901f50b9e534e42a329a663543a998058fb3edefe6f3f` |
+| `06-validacao/caminho-feliz/relatorio.txt` | 541 | `c3e655ec232b665b5fa5495ff2344b7f42e227c89adcbfd6d1bbc34423f332ce` |
+
+## 01-geracao-chaves
+
+### ml-dsa-44 — Chave pública ML-DSA-44
+
+- **Nível de segurança:** 128 bits
+- **OID:** 2.16.840.1.101.3.4.3.17
+- **Chave crua (FIPS 204):** 1312 bytes
+- **SPKI codificado:** 1334 bytes
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `01-geracao-chaves/ml-dsa-44/chave-publica.der` | 1334 | `8e93fca5507919cb61eeb2ceed57a6f12d5394d5e4c769827d63a1b58b23408e` |
+| `01-geracao-chaves/ml-dsa-44/chave-publica.hex` | 4002 | `b6d15ccf43db973304d5f2c5cb84c11a143062d85b94a2260c463309d57aaa33` |
+| `01-geracao-chaves/ml-dsa-44/relatorio.txt` | 339 | `f6aa72c84e0499b8a2165192bef7f5e24af310926750ceab70d0d76847a21812` |
+
+### ml-dsa-65 — Chave pública ML-DSA-65
+
+- **Nível de segurança:** 192 bits
+- **OID:** 2.16.840.1.101.3.4.3.18
+- **Chave crua (FIPS 204):** 1952 bytes
+- **SPKI codificado:** 1974 bytes
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `01-geracao-chaves/ml-dsa-65/chave-publica.der` | 1974 | `945dd95c44320fa685ff01cb960e7cd20bbf7758fb71658904c75d1cdd080433` |
+| `01-geracao-chaves/ml-dsa-65/chave-publica.hex` | 5922 | `f7e1d6ff4b8cc2e0aacf0fd2e162569a9a88203987a1863f8db574e4447cef84` |
+| `01-geracao-chaves/ml-dsa-65/relatorio.txt` | 339 | `f9cf080e228b1e1a611bfc487a9dbafbdd7a2a7a01dbea896efb4fd1cc3a8419` |
+
+### ml-dsa-87 — Chave pública ML-DSA-87
+
+- **Nível de segurança:** 256 bits
+- **OID:** 2.16.840.1.101.3.4.3.19
+- **Chave crua (FIPS 204):** 2592 bytes
+- **SPKI codificado:** 2614 bytes
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `01-geracao-chaves/ml-dsa-87/chave-publica.der` | 2614 | `fd337549aac40a6ae6d9e9624104f4eb5032aeb83cb1f9e0d5b4421c46e2bab6` |
+| `01-geracao-chaves/ml-dsa-87/chave-publica.hex` | 7842 | `b6fae11aa8c21a1fb6da62d79e22834a7985f2682ba227fdc10fd61cc05f733f` |
+| `01-geracao-chaves/ml-dsa-87/relatorio.txt` | 339 | `68b6a902d8563d4f83cd2dfd537ced924dcfa624f83852c1feddc6d91d2717d9` |
+
+### resumo-ml-dsa — Tabela comparativa das variantes ML-DSA
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `01-geracao-chaves/resumo-ml-dsa/tabela.txt` | 225 | `0d33a2301804efdd3a4ef9b35341aff90cd88f47dfa961f40acfe0350ff4d479` |
+| `01-geracao-chaves/resumo-ml-dsa/relatorio.txt` | 128 | `c270eb4e565df49ac2a1aac762569b679b2e244f6c05276a71c7a3435e287515` |
+
+### balanco-pares-prontos — Balanço de segurança dos pares prontos
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `01-geracao-chaves/balanco-pares-prontos/tabela.txt` | 492 | `3febb5f860285d507460355b1b11c61f2bdccbcf56f6e3155c62e4feb9c4dcd0` |
+| `01-geracao-chaves/balanco-pares-prontos/relatorio.txt` | 198 | `3c101b4d9e5bec05d923436b3af74efccb0e06ff619233a68ba39a94291d22fe` |
+
+### par-recomendado-128 — Par híbrido recomendado para 128 bits
+
+- **Descrição:** ECDSA-256 + ML-DSA-44
+- **Clássico:** ECDSA_P256 (128 bits)
+- **Pós-quântico:** ML-DSA-44 (128 bits)
+- **Balanceado:** true
+- **Tempo de geração:** 3 ms (indicativo, execução única)
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `01-geracao-chaves/par-recomendado-128/chave-publica-classica.der` | 91 | `3ed3b3eff061893e889a227a44b0ab917ac7c729dca28370502eeaa3a8510218` |
+| `01-geracao-chaves/par-recomendado-128/chave-publica-pqc.der` | 1334 | `9e9cbae625ca80ca1110eb1cfec47c86800d1fc5dc87b652bef6a8acf324f6a3` |
+| `01-geracao-chaves/par-recomendado-128/relatorio.txt` | 476 | `3493dba5dd8cb731ef0133b5d92a6e82cfc82c5b58e108435823fd63f301e9ab` |
+
+### par-recomendado-192 — Par híbrido recomendado para 192 bits
+
+- **Descrição:** ECDSA-384 + ML-DSA-65
+- **Clássico:** ECDSA_P384 (192 bits)
+- **Pós-quântico:** ML-DSA-65 (192 bits)
+- **Balanceado:** true
+- **Tempo de geração:** 3 ms (indicativo, execução única)
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `01-geracao-chaves/par-recomendado-192/chave-publica-classica.der` | 120 | `b4f48cd70820c0408fe0879035071f5689f94b05716939d135d7d11c6014f5c9` |
+| `01-geracao-chaves/par-recomendado-192/chave-publica-pqc.der` | 1974 | `d23bec8dacbc5776fa20afe819f634230d03ba258f8cf148316cd32f8ad8df55` |
+| `01-geracao-chaves/par-recomendado-192/relatorio.txt` | 476 | `3ba8ea85cb6c6ea233ed75699a38ee9be309c928fc211334fde0bc39ec7d934e` |
+
+### par-recomendado-256 — Par híbrido recomendado para 256 bits
+
+- **Descrição:** ECDSA-521 + ML-DSA-87
+- **Clássico:** ECDSA_P521 (256 bits)
+- **Pós-quântico:** ML-DSA-87 (256 bits)
+- **Balanceado:** true
+- **Tempo de geração:** 4 ms (indicativo, execução única)
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `01-geracao-chaves/par-recomendado-256/chave-publica-classica.der` | 158 | `c952956d3a86daf645134609efe5cf526a459ad3c3826626646beee957a24bf4` |
+| `01-geracao-chaves/par-recomendado-256/chave-publica-pqc.der` | 2614 | `3a4b1252ca956c1fd6859c6a91a4508c5ed309f8c4aa8cfe2a9855c95a889b08` |
+| `01-geracao-chaves/par-recomendado-256/relatorio.txt` | 476 | `49b8d8a2fd1b9bc6589027b99031f8fe4d3aa195d43e8fa27062ad852a455a49` |
+
+### resumo-pares — Pares recomendados por nível de segurança
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `01-geracao-chaves/resumo-pares/tabela.txt` | 310 | `f04d85a9b55a73a405ba560664c77a26c2ce115e1f26f6c7d05ed03d4d6ab463` |
+| `01-geracao-chaves/resumo-pares/relatorio.txt` | 206 | `443baab7bfa5fe5d65b492c72de0f1d0f4951a23cca8cbd40bb010c97186aa5d` |
+
+### rsa-2048 — Chave pública RSA_2048
+
+- **Algoritmo:** RSA
+- **Tamanho declarado:** 2048 bits
+- **Nível de segurança:** 112 bits
+- **Algoritmo de assinatura:** SHA256withRSA
+- **OID:** 1.2.840.113549.1.1.1
+- **SPKI codificado:** 294 bytes
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `01-geracao-chaves/rsa-2048/chave-publica.der` | 294 | `4098a2d04d3208553736661682355244a2d7333ffc06931bc081508a79ceff02` |
+| `01-geracao-chaves/rsa-2048/chave-publica.txt` | 280 | `419ea6bcc4100926232dd583a5106ac7ee16a6e7fd49d329878b16084fa9e407` |
+| `01-geracao-chaves/rsa-2048/chave-publica.hex` | 882 | `ae1e2d160024cbe1f688a469d2cace45d64a0cfa4aea92f0789b58cd6d8a1666` |
+| `01-geracao-chaves/rsa-2048/relatorio.txt` | 450 | `58f39f77331da62ce14e186d749a21e3c6736f4f7ee52940182d73231471a89a` |
+
+### rsa-3072 — Chave pública RSA_3072
+
+- **Algoritmo:** RSA
+- **Tamanho declarado:** 3072 bits
+- **Nível de segurança:** 128 bits
+- **Algoritmo de assinatura:** SHA256withRSA
+- **OID:** 1.2.840.113549.1.1.1
+- **SPKI codificado:** 422 bytes
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `01-geracao-chaves/rsa-3072/chave-publica.der` | 422 | `9aab90fdc66369f3ebdd469736b8353fec84dd0efca707137265d1161db54755` |
+| `01-geracao-chaves/rsa-3072/chave-publica.txt` | 280 | `b351b5714f6f349cad6f1bfd16fd4b42f325ebe49ee12c8d5d9e60ae2fa71ef1` |
+| `01-geracao-chaves/rsa-3072/chave-publica.hex` | 1266 | `f51cc255fdf7d528d3b2c9f4ca88cd47179cf58c53151b50c8c6f4eaaf75f7ca` |
+| `01-geracao-chaves/rsa-3072/relatorio.txt` | 450 | `eb35b171f05929e330113d56efd2a850e1d9a1e38d43aac1a576026f59905c16` |
+
+### rsa-4096 — Chave pública RSA_4096
+
+- **Algoritmo:** RSA
+- **Tamanho declarado:** 4096 bits
+- **Nível de segurança:** 152 bits
+- **Algoritmo de assinatura:** SHA512withRSA
+- **OID:** 1.2.840.113549.1.1.1
+- **SPKI codificado:** 550 bytes
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `01-geracao-chaves/rsa-4096/chave-publica.der` | 550 | `e75d30799d04470067b09f31d76d453c80ba035596a1cbb88e85e52fef2e8ce0` |
+| `01-geracao-chaves/rsa-4096/chave-publica.txt` | 280 | `d54515004fde6b5c0ce1a71596952badb4151a86008b38049f7257f2f68c148f` |
+| `01-geracao-chaves/rsa-4096/chave-publica.hex` | 1650 | `6d4bf8519d192b3e8e8753370b2f4b98a1f7fda6bfda372d63352368c27c62eb` |
+| `01-geracao-chaves/rsa-4096/relatorio.txt` | 450 | `b3d0fe65a3e731ddb7f697f1e054c98fc9f0ed1dd8b4344902ca677f309c91bc` |
+
+### ecdsa-p256 — Chave pública ECDSA_P256
+
+- **Algoritmo:** ECDSA
+- **Tamanho declarado:** 256 bits
+- **Nível de segurança:** 128 bits
+- **Algoritmo de assinatura:** SHA256withECDSA
+- **OID:** 1.2.840.10045.2.1
+- **SPKI codificado:** 91 bytes
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `01-geracao-chaves/ecdsa-p256/chave-publica.der` | 91 | `5feda9e12e6041bbe2a2ecd777d2a4652ab9d785b6e1974c495bf6e28f254403` |
+| `01-geracao-chaves/ecdsa-p256/chave-publica.txt` | 272 | `b7930098c847076578ec44d014627b7d5d84bc78d68b2dbc6571e4611b963393` |
+| `01-geracao-chaves/ecdsa-p256/chave-publica.hex` | 273 | `b22d82184228699aa798fba88d44beb3390d86e7cee3e005353bf29c5dfa477e` |
+| `01-geracao-chaves/ecdsa-p256/relatorio.txt` | 453 | `a3990530b776a416aaf45a0b8d39c25cc05f4b4aa73d05818b475057f5c54260` |
+
+### ecdsa-p384 — Chave pública ECDSA_P384
+
+- **Algoritmo:** ECDSA
+- **Tamanho declarado:** 384 bits
+- **Nível de segurança:** 192 bits
+- **Algoritmo de assinatura:** SHA384withECDSA
+- **OID:** 1.2.840.10045.2.1
+- **SPKI codificado:** 120 bytes
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `01-geracao-chaves/ecdsa-p384/chave-publica.der` | 120 | `94db455ebaf9feaf26351246ec83d375b67e04f028206b7fc3a92e03a7b3edd9` |
+| `01-geracao-chaves/ecdsa-p384/chave-publica.txt` | 272 | `446d74f8bf53a4ad271104bc663f5036e46b2cb5d28d198971a33bdd932ad739` |
+| `01-geracao-chaves/ecdsa-p384/chave-publica.hex` | 360 | `9c5271533a8593465e5912ca620bb0fb8ab19535450e4c52de304ae7efecc5b3` |
+| `01-geracao-chaves/ecdsa-p384/relatorio.txt` | 454 | `3503e0817b1c70c76fd95a6a0a2bd012e70d8c691b0098be2cccfa403a1000cf` |
+
+### ecdsa-p521 — Chave pública ECDSA_P521
+
+- **Algoritmo:** ECDSA
+- **Tamanho declarado:** 521 bits
+- **Nível de segurança:** 256 bits
+- **Algoritmo de assinatura:** SHA512withECDSA
+- **OID:** 1.2.840.10045.2.1
+- **SPKI codificado:** 158 bytes
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `01-geracao-chaves/ecdsa-p521/chave-publica.der` | 158 | `a7cd463687aff1c996e54ef311c5d6d4e7fe00a14b93c30d45932e43cdc735a5` |
+| `01-geracao-chaves/ecdsa-p521/chave-publica.txt` | 272 | `285befeefa223911495da4c85f04fe976395b84a549eeb91784c17ab14c6e16c` |
+| `01-geracao-chaves/ecdsa-p521/chave-publica.hex` | 474 | `34ab4f27221fec5af31021eb6a27b986a138ed5021aacae325168b6b665138db` |
+| `01-geracao-chaves/ecdsa-p521/relatorio.txt` | 454 | `fdd4f8369eadf1007fc17e93c781fa39f08db08a7c60d9f598a127360157e7f0` |
+
+### resumo-classicos — Tabela comparativa das variantes clássicas
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `01-geracao-chaves/resumo-classicos/tabela.txt` | 381 | `6beaf4b79f702e829c29df3366081036af23d3ae7b284d347430753ffaa32adc` |
+| `01-geracao-chaves/resumo-classicos/relatorio.txt` | 135 | `ba604b989c0f1e49a7436dfc19e43487c336db1214957618bc5c3fcb99a0073f` |
+
+## 03-autoridade-certificadora
+
+### cadeia-com-ancora-trocada — Rejeição de cadeia cuja âncora foi substituída
+
+- **DN das duas raízes:** CN=PQC Hybrid Root CA,O=TCC,C=BR (idêntico)
+- **Cadeia legítima:** clássica=true, pqc=true
+- **Cadeia com raiz impostora:** clássica=false, pqc=false
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `03-autoridade-certificadora/cadeia-com-ancora-trocada/raiz-legitima.der` | 5874 | `88c9b623dbdf6eae29bedc5dacc713db4613226edede1a234e4382d7974f5f2e` |
+| `03-autoridade-certificadora/cadeia-com-ancora-trocada/raiz-impostora.der` | 5876 | `4a11929bf51278c829fc2fbd5839957775dc298a692e299d4152e7a95793c434` |
+| `03-autoridade-certificadora/cadeia-com-ancora-trocada/folha.der` | 5982 | `71783c2f12cd9fb00a5149e085d6d1c9f5c4890f1920ccd302569033cc49d107` |
+| `03-autoridade-certificadora/cadeia-com-ancora-trocada/relatorio.txt` | 600 | `2304b82be3a0bc5eab4b5eff61c2bb579babdf056c58d1e4b4c778fee04dea72` |
+
+### encadeamento-de-nomes — Encadeamento de nomes conforme RFC 5280 §6.1.3(a)(4)
+
+- **Emissor declarado na folha:** C=BR,O=TCC,CN=PQC Hybrid Root CA
+- **Sujeito da raiz legítima:** C=BR,O=TCC,CN=PQC Hybrid Root CA
+- **Encadeia com a raiz legítima:** sim
+- **Sujeito da outra CA:** C=BR,O=TCC,CN=Outra CA
+- **Encadeia com a outra CA:** não
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `03-autoridade-certificadora/encadeamento-de-nomes/relatorio.txt` | 581 | `13e13f46935c176961ecca031a40a6cd9a9566ddf2a8354afb52221e5a5e3da8` |
+
+### cadeia-tres-niveis — Cadeia híbrida raiz → sub-CA → entidade final
+
+- **Par de algoritmos:** ECDSA-384 + ML-DSA-65
+- **Raiz:** C=BR,O=TCC,CN=PQC Hybrid Root CA
+- **Sub-CA:** C=BR,O=TCC,CN=PQC Hybrid Issuing CA
+- **Entidade final:** C=BR,O=TCC,CN=secure.tcc.br
+- **basicConstraints da raiz:** CA:TRUE, pathLen=1
+- **basicConstraints da sub-CA:** CA:TRUE, pathLen=0
+- **Validação clássica (PKIX):** true
+- **Validação pós-quântica:** true
+- **openssl verify:** aceita (exit 0)
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `03-autoridade-certificadora/cadeia-tres-niveis/raiz.der` | 5877 | `3c3e748b5c3f5a602d7391e795e44e19d737a24bd478490011f6f78ce1c76475` |
+| `03-autoridade-certificadora/cadeia-tres-niveis/subca.der` | 5966 | `3060534d511e03203a6769a369e02156b40e9cd8d860c44250fc0d0c343a85fb` |
+| `03-autoridade-certificadora/cadeia-tres-niveis/folha.der` | 6024 | `1b40f026c7c3376775d7252c7724143de4a93e38cefe846f88f7e52f1ea4b472` |
+| `03-autoridade-certificadora/cadeia-tres-niveis/raiz.pem` | 8013 | `ee7de0c84ec917d99cd585cf9388627e10be380476ee4d9aa7dc292a3fd8f7d5` |
+| `03-autoridade-certificadora/cadeia-tres-niveis/subca.pem` | 8135 | `ade8668cb4433427674b2def2265b39cd16ecd10884aa8e25cedd1e40048f56d` |
+| `03-autoridade-certificadora/cadeia-tres-niveis/folha.pem` | 8212 | `641750e615999bd22962d0bec34af97bbf3c5f3144665f70757321627de6439a` |
+| `03-autoridade-certificadora/cadeia-tres-niveis/cadeia.pem` | 24360 | `f3c6d6c06e0bc2d8b3357cb4fbd2b171032afc13bf08d3c09d6b2df5bb828a82` |
+| `03-autoridade-certificadora/cadeia-tres-niveis/openssl-verify.txt` | 198 | `aad138c99d17133c89556d5dd114d28c0d69982aa2aac4be2128e2a9c7fd3ed3` |
+| `03-autoridade-certificadora/cadeia-tres-niveis/relatorio.txt` | 791 | `cb57747a4ce4efe44127c27c32552720d1b9212417b7a68366901fd6a3d53321` |
+
+## 09-politica-validacao
+
+### integro — Íntegro
+
+- **JDK PKIX (sem BouncyCastle):** aceita
+- **openssl verify:** aceita
+- **Biblioteca strict():** aceita
+- **Biblioteca REQUIRE_BOTH {ML-DSA-65, ML-DSA-87}:** aceita
+- **Biblioteca CLASSICAL_ONLY:** aceita
+- **Dimensão clássica (diagnóstico):** true
+- **Dimensão pós-quântica (diagnóstico):** true
+- **Motivos (REQUIRE_BOTH {65,87}):** —
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `09-politica-validacao/integro/jdk-pkix.txt` | 36 | `be895871435f359e7243fd442ebecd023adccc7707fd0c881b25ff21eafa4c7a` |
+| `09-politica-validacao/integro/openssl-verify.txt` | 27 | `2b87727f5b0387f9ad19be7819faae1a1a15125c44a83faefec156b35cf7e3e3` |
+| `09-politica-validacao/integro/motivos-strict.txt` | 3 | `37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570` |
+| `09-politica-validacao/integro/motivos-restrita.txt` | 3 | `37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570` |
+| `09-politica-validacao/integro/folha.der` | 5985 | `bfa1f9a2c939487b5c88ec25047547b490cc8fee9af6a966b39e5667a77d25d4` |
+| `09-politica-validacao/integro/raiz.der` | 5871 | `d2c2dca60df780c80759e034a4ced5f6baecbf9d1c888174878e4e6356e70b27` |
+| `09-politica-validacao/integro/relatorio.txt` | 542 | `abd9e6b552df5739846503cb058bdcec947db5e3aa24241908fa8e98c79f8d29` |
+
+### assinadores-misturados — Assinadores misturados (clássica da AC + ML-DSA do atacante)
+
+- **JDK PKIX (sem BouncyCastle):** aceita
+- **openssl verify:** aceita
+- **Biblioteca strict():** rejeita
+- **Biblioteca REQUIRE_BOTH {ML-DSA-65, ML-DSA-87}:** rejeita
+- **Biblioteca CLASSICAL_ONLY:** aceita
+- **Dimensão clássica (diagnóstico):** true
+- **Dimensão pós-quântica (diagnóstico):** false
+- **Motivos (REQUIRE_BOTH {65,87}):** ALT_SIGNATURE_INVALID@0
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `09-politica-validacao/assinadores-misturados/jdk-pkix.txt` | 36 | `be895871435f359e7243fd442ebecd023adccc7707fd0c881b25ff21eafa4c7a` |
+| `09-politica-validacao/assinadores-misturados/openssl-verify.txt` | 27 | `2b87727f5b0387f9ad19be7819faae1a1a15125c44a83faefec156b35cf7e3e3` |
+| `09-politica-validacao/assinadores-misturados/motivos-strict.txt` | 108 | `3c5f0850c05e6d1b7acf229b85c4fbf82a352f09c0cd3bd6a511bfa7953062ae` |
+| `09-politica-validacao/assinadores-misturados/motivos-restrita.txt` | 108 | `3c5f0850c05e6d1b7acf229b85c4fbf82a352f09c0cd3bd6a511bfa7953062ae` |
+| `09-politica-validacao/assinadores-misturados/folha.der` | 5985 | `8df112a79b22c7d605b48bda46dca30a8c57b8d1960070af5caf0a68b0e06efd` |
+| `09-politica-validacao/assinadores-misturados/raiz.der` | 5871 | `d2c2dca60df780c80759e034a4ced5f6baecbf9d1c888174878e4e6356e70b27` |
+| `09-politica-validacao/assinadores-misturados/relatorio.txt` | 671 | `5a47d37c3a75c4455da24f4f2c999f7618d920ded0141839f37e6f18666a1d97` |
+
+### stripping — Stripping (só clássico, chave da AC)
+
+- **JDK PKIX (sem BouncyCastle):** aceita
+- **openssl verify:** aceita
+- **Biblioteca strict():** rejeita
+- **Biblioteca REQUIRE_BOTH {ML-DSA-65, ML-DSA-87}:** rejeita
+- **Biblioteca CLASSICAL_ONLY:** aceita
+- **Dimensão clássica (diagnóstico):** true
+- **Dimensão pós-quântica (diagnóstico):** false
+- **Motivos (REQUIRE_BOTH {65,87}):** ALT_EXTENSIONS_MISSING@0
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `09-politica-validacao/stripping/jdk-pkix.txt` | 36 | `be895871435f359e7243fd442ebecd023adccc7707fd0c881b25ff21eafa4c7a` |
+| `09-politica-validacao/stripping/openssl-verify.txt` | 27 | `2b87727f5b0387f9ad19be7819faae1a1a15125c44a83faefec156b35cf7e3e3` |
+| `09-politica-validacao/stripping/motivos-strict.txt` | 118 | `802a1fa295a52a89df2cd4741a06b413f0334cb99c7ff9d1ccdcf36413afb1ef` |
+| `09-politica-validacao/stripping/motivos-restrita.txt` | 118 | `802a1fa295a52a89df2cd4741a06b413f0334cb99c7ff9d1ccdcf36413afb1ef` |
+| `09-politica-validacao/stripping/folha.der` | 649 | `52606de242b5a2f4e7269937ecdd5554d17ae6b75bc63d3ecd1cc335e10dd139` |
+| `09-politica-validacao/stripping/raiz.der` | 5871 | `d2c2dca60df780c80759e034a4ced5f6baecbf9d1c888174878e4e6356e70b27` |
+| `09-politica-validacao/stripping/relatorio.txt` | 625 | `fdd4d8c2f8b9beb482c4bdbb8ef453415fc70944beb4ee34ff3e8c82181b78a8` |
+
+### algoritmo-fora-da-lista — Algoritmo alternativo fora da lista (ML-DSA-44)
+
+- **JDK PKIX (sem BouncyCastle):** aceita
+- **openssl verify:** aceita
+- **Biblioteca strict():** aceita
+- **Biblioteca REQUIRE_BOTH {ML-DSA-65, ML-DSA-87}:** rejeita
+- **Biblioteca CLASSICAL_ONLY:** aceita
+- **Dimensão clássica (diagnóstico):** true
+- **Dimensão pós-quântica (diagnóstico):** true
+- **Motivos (REQUIRE_BOTH {65,87}):** ALT_ALGORITHM_NOT_ALLOWED@0, ALT_ALGORITHM_NOT_ALLOWED@1
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `09-politica-validacao/algoritmo-fora-da-lista/jdk-pkix.txt` | 36 | `be895871435f359e7243fd442ebecd023adccc7707fd0c881b25ff21eafa4c7a` |
+| `09-politica-validacao/algoritmo-fora-da-lista/openssl-verify.txt` | 27 | `2b87727f5b0387f9ad19be7819faae1a1a15125c44a83faefec156b35cf7e3e3` |
+| `09-politica-validacao/algoritmo-fora-da-lista/motivos-strict.txt` | 3 | `37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570` |
+| `09-politica-validacao/algoritmo-fora-da-lista/motivos-restrita.txt` | 149 | `8b555a8a2fd2e838c01a8c0390740294acd109416e7cdabaa41391977951bec0` |
+| `09-politica-validacao/algoritmo-fora-da-lista/folha.der` | 4398 | `3882b22ec7d5d218085fc822628ea407a5be0bc2daca655dbac78efc48a57061` |
+| `09-politica-validacao/algoritmo-fora-da-lista/raiz.der` | 4282 | `d2a5e73320d8deb333af3ca578126eb907018dab67f6a30388c3396e71ed74c5` |
+| `09-politica-validacao/algoritmo-fora-da-lista/relatorio.txt` | 675 | `92050240870cdbaca3942eb0ab115e24e5ad2cac34576dec29be69db66260d63` |
+
+### assinatura-classica-invalida — Assinatura clássica inválida (clássica do atacante + ML-DSA da AC)
+
+- **JDK PKIX (sem BouncyCastle):** rejeita
+- **openssl verify:** rejeita
+- **Biblioteca strict():** rejeita
+- **Biblioteca REQUIRE_BOTH {ML-DSA-65, ML-DSA-87}:** rejeita
+- **Biblioteca CLASSICAL_ONLY:** rejeita
+- **Dimensão clássica (diagnóstico):** false
+- **Dimensão pós-quântica (diagnóstico):** true
+- **Motivos (REQUIRE_BOTH {65,87}):** CLASSICAL_PATH_INVALID@0
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `09-politica-validacao/assinatura-classica-invalida/jdk-pkix.txt` | 51 | `f02574985de386a6f17cdb5049345197a37904f50b4dd5b40d424886099596d3` |
+| `09-politica-validacao/assinatura-classica-invalida/openssl-verify.txt` | 267 | `b8d0017a8c9866060114f1f66b17d8ccc162d8c4933854c2d0907d891ad27dc2` |
+| `09-politica-validacao/assinatura-classica-invalida/motivos-strict.txt` | 82 | `08c7f7f95851e82114f0449d16d2318542086f15996d6eab6ea6614b0ef77590` |
+| `09-politica-validacao/assinatura-classica-invalida/motivos-restrita.txt` | 82 | `08c7f7f95851e82114f0449d16d2318542086f15996d6eab6ea6614b0ef77590` |
+| `09-politica-validacao/assinatura-classica-invalida/folha.der` | 5987 | `cb2691566e1f37a428c50dcea19246e138b1946e75d548851b448cb2495c905b` |
+| `09-politica-validacao/assinatura-classica-invalida/raiz.der` | 5871 | `d2c2dca60df780c80759e034a4ced5f6baecbf9d1c888174878e4e6356e70b27` |
+| `09-politica-validacao/assinatura-classica-invalida/relatorio.txt` | 689 | `41382af32f67fa1480ed39d286bafbacd0ca1d7ad8217e12c7f5207c923885e9` |
+
+### emissor-sem-chave-alternativa — Emissor sem chave alternativa (AC só clássica)
+
+- **JDK PKIX (sem BouncyCastle):** aceita
+- **openssl verify:** aceita
+- **Biblioteca strict():** rejeita
+- **Biblioteca REQUIRE_BOTH {ML-DSA-65, ML-DSA-87}:** rejeita
+- **Biblioteca CLASSICAL_ONLY:** aceita
+- **Dimensão clássica (diagnóstico):** true
+- **Dimensão pós-quântica (diagnóstico):** false
+- **Motivos (REQUIRE_BOTH {65,87}):** ISSUER_ALT_KEY_MISSING@0, ALT_EXTENSIONS_MISSING@1
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `09-politica-validacao/emissor-sem-chave-alternativa/jdk-pkix.txt` | 36 | `be895871435f359e7243fd442ebecd023adccc7707fd0c881b25ff21eafa4c7a` |
+| `09-politica-validacao/emissor-sem-chave-alternativa/openssl-verify.txt` | 27 | `2b87727f5b0387f9ad19be7819faae1a1a15125c44a83faefec156b35cf7e3e3` |
+| `09-politica-validacao/emissor-sem-chave-alternativa/motivos-strict.txt` | 196 | `331d6a212495906380bd9dffe76541937ef8f237bb23ae6982a52bd228198ef3` |
+| `09-politica-validacao/emissor-sem-chave-alternativa/motivos-restrita.txt` | 196 | `331d6a212495906380bd9dffe76541937ef8f237bb23ae6982a52bd228198ef3` |
+| `09-politica-validacao/emissor-sem-chave-alternativa/folha.der` | 5987 | `a6653f8a833cb05e0cf5f4afa2a8196e37e74c270f73f3c514da302902debd42` |
+| `09-politica-validacao/emissor-sem-chave-alternativa/raiz.der` | 532 | `4488b40d5fb60bc3bc6994b57724607b8aa8a94bf0ba7c4def5bc6d686063293` |
+| `09-politica-validacao/emissor-sem-chave-alternativa/relatorio.txt` | 671 | `56f9e9eaa40d18218c15df1c9419cbf77e15edb8f36f93507517f76429d496ef` |
+
+### matriz — Matriz: verificadores legados × política da biblioteca
+
+- **Versão do OpenSSL:** OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)
+- **Política restrita:** REQUIRE_BOTH {ML-DSA-65, ML-DSA-87}
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `09-politica-validacao/matriz/matriz.txt` | 1684 | `5d63788db93122c59023ed80362a8c661092a417da3dd0952434ddfd577e6fe8` |
+| `09-politica-validacao/matriz/relatorio.txt` | 610 | `5351e116826a32d22e725b1b932a956f5bfc19d9e13d5b288912b3b6d1ac29ec` |
+
+## 08-provedor
+
+### algoritmos-obrigatorios — Verificação de algoritmos obrigatórios na inicialização
+
+- **Resultado:** aprovado, sem exceção
+- **Comportamento em caso de ausência:** PQCHybridException nomeando os algoritmos faltantes
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `08-provedor/algoritmos-obrigatorios/obrigatorios.txt` | 172 | `ce7c95e884f26ca1b85760fc5319f2775c16a97a0b90f363afb1718694ece191` |
+| `08-provedor/algoritmos-obrigatorios/relatorio.txt` | 450 | `c5233b2eb2acd4296077cd42b05a79fa7e04b990277a438487b79be2e0bbef6e` |
+
+### provedor-em-uso — Provedor criptográfico que respaldou a campanha
+
+- **Nome:** BC
+- **Versão:** 1.84
+- **Informação:** BouncyCastle Security Provider v1.84
+- **Serviços registrados:** 1624
+- **Inicialização idempotente:** sim (dupla checagem sincronizada)
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `08-provedor/provedor-em-uso/relatorio.txt` | 383 | `70df3eabc0e85f33d24515d461555715ef28caa8aaedd8475d068967ab61d0ab` |
+
+### disponibilidade-algoritmos — Matriz de disponibilidade dos algoritmos do fluxo ativo
+
+- **Variantes clássicas:** 6
+- **Variantes pós-quânticas:** 3
+- **Esquemas PQC no enum:** somente ML-DSA (FIPS 204)
+
+| Artefato | Bytes | SHA-256 |
+|---|---:|---|
+| `08-provedor/disponibilidade-algoritmos/matriz.txt` | 510 | `ab419cdc0462b78c30c066690a9caa601b9b3f11350ecb77741dde7c6e3baee7` |
+| `08-provedor/disponibilidade-algoritmos/relatorio.txt` | 310 | `0382540eff4f4bef1c3b828e5a2844ad5cf4799fcb3b15b9488df3bac61adc9f` |
+
+## Conferência de integridade
+
+```sh
+# a partir do diretorio evidencias/
+sha256sum -c SHA256SUMS
+```

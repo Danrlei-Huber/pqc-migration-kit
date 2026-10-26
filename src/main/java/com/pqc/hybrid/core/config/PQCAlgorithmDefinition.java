@@ -55,9 +55,10 @@ public final class PQCAlgorithmDefinition extends AlgorithmDefinition {
 
     /**
      * Indicates whether this is a key encapsulation mechanism (KEM).
+     * This module's PQC support is ML-DSA (signature) only, so this is always false.
      */
     public boolean isKeyEncapsulation() {
-        return category == PQCAlgorithm.AlgorithmCategory.KEY_ENCAPSULATION;
+        return false;
     }
 
     @Override

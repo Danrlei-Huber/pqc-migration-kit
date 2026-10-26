@@ -1,0 +1,21 @@
+Commit do core: 1ebe8e6722d1559d9e020eec7fa7f719298df118 (branch poc/pqc-migration-kit)
+Commit do core antes da integração (linha de base): cf583bcf71dbff291bd66191627ce8c32848be26
+Código de saída do Maven antes da integração: 0
+Código de saída do Maven das regras de arquitetura: 0
+Árvore do core antes e depois da medição: limpa
+Commit do kit: 029e48840efa7dd1abd84ecef1687505065b149d
+Árvore do kit (src/ e pom.xml): limpa
+Jar do kit instalado: 5de60f11f0393b50f7311831a7cc410211caa2220792bd56e3ffad9fe4e53831
+Início: 2026-10-23T02:55:00-03:00
+Fim: 2026-10-23T03:08:11-03:00
+Código de saída do Maven: 0
+openjdk version "21.0.11" 2026-04-21 LTS
+OpenJDK Runtime Environment Temurin-21.0.11+10 (build 21.0.11+10-LTS)
+Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)
+Docker: 29.6.1
+SO: Linux 6.18.33.2-microsoft-standard-WSL2
+Bouncy Castle resolvido no core:
+  +- org.bouncycastle:bcprov-jdk18on:jar:1.85:compile
+  +- org.bouncycastle:bcpkix-jdk18on:jar:1.85:compile
+  |  \- org.bouncycastle:bcutil-jdk18on:jar:1.85:compile
+  \- com.pqc.hybrid:pqc-hybrid-certificates:jar:1.0.0-BETA:compile

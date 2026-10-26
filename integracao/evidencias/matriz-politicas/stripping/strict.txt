@@ -1,0 +1,6 @@
+Cenário: stripping
+Configuração: strict
+Folha: INVALID
+  FAILED: Signature verification successful. Alternative signature rejected by PQC policy strict: ALT_EXTENSIONS_MISSING (subjectAltPublicKeyInfo, altSignatureAlgorithm and altSignatureValue are not all present).
+Raiz: VALID
+  VALID: Self-signed signature verification successful. Self-signed alternative signature accepted by PQC policy strict.

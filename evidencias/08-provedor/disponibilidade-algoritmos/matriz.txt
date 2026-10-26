@@ -1,0 +1,10 @@
+Variante     Algoritmo JCA    Categoria      Disponível
+RSA_2048     SHA256withRSA    clássico       sim
+RSA_3072     SHA256withRSA    clássico       sim
+RSA_4096     SHA512withRSA    clássico       sim
+ECDSA_P256   SHA256withECDSA  clássico       sim
+ECDSA_P384   SHA384withECDSA  clássico       sim
+ECDSA_P521   SHA512withECDSA  clássico       sim
+ML-DSA-44    ML-DSA-44        pós-quântico   sim
+ML-DSA-65    ML-DSA-65        pós-quântico   sim
+ML-DSA-87    ML-DSA-87        pós-quântico   sim

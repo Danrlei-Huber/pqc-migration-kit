@@ -1,0 +1,9 @@
+Rodada 1 do HybridOperationsBenchmark (2026-10-07, commit c8842b7) — INVÁLIDA.
+
+Durante a execução, a carga média do sistema chegou a 26,95 (média de 15 min, máquina com
+16 threads lógicas): outros processos (provavelmente o contêiner Ollama engineering-rag)
+disputavam CPU com o JMH. Sintomas: iterações isoladas de até 1,07 s em operações de
+~0,5–2 ms (assinatura ML-DSA-44; emissão clássica nível 128), erros maiores que a média
+e emissão híbrida mais rápida que a clássica no nível 256.
+
+Mantida apenas como registro; nenhum número desta rodada é usado no texto.

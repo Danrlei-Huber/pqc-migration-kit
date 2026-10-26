@@ -1,0 +1,2553 @@
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaClassica
+# Parameters: (nivel = 128)
+
+# Run progress: 0.00% complete, ETA 00:15:00
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:18:46 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+115.995 us/op
+# Warmup Iteration   2: 83.758 us/op
+# Warmup Iteration   3: 79.511 us/op
+# Warmup Iteration   4: 82.197 us/op
+# Warmup Iteration   5: 82.305 us/op
+Iteration   1: 81.553 us/op
+Iteration   2: 79.946 us/op
+Iteration   3: 79.316 us/op
+Iteration   4: 78.124 us/op
+Iteration   5: 79.220 us/op
+
+# Run progress: 1.11% complete, ETA 00:16:29
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:18:57 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+105.360 us/op
+# Warmup Iteration   2: 83.966 us/op
+# Warmup Iteration   3: 83.007 us/op
+# Warmup Iteration   4: 80.931 us/op
+# Warmup Iteration   5: 81.466 us/op
+Iteration   1: 81.708 us/op
+Iteration   2: 80.218 us/op
+Iteration   3: 83.354 us/op
+Iteration   4: 79.405 us/op
+Iteration   5: 82.772 us/op
+
+# Run progress: 2.22% complete, ETA 00:16:14
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:19:07 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+116.764 us/op
+# Warmup Iteration   2: 82.942 us/op
+# Warmup Iteration   3: 83.201 us/op
+# Warmup Iteration   4: 82.159 us/op
+# Warmup Iteration   5: 81.612 us/op
+Iteration   1: 81.718 us/op
+Iteration   2: 82.194 us/op
+Iteration   3: 80.928 us/op
+Iteration   4: 83.402 us/op
+Iteration   5: 82.474 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaClassica":
+  81.089 ±(99.9%) 1.757 us/op [Average]
+  (min, avg, max) = (78.124, 81.089, 83.402), stdev = 1.643
+  CI (99.9%): [79.332, 82.846] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaClassica
+# Parameters: (nivel = 192)
+
+# Run progress: 3.33% complete, ETA 00:16:00
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:19:18 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+299.362 us/op
+# Warmup Iteration   2: 244.212 us/op
+# Warmup Iteration   3: 238.093 us/op
+# Warmup Iteration   4: 237.711 us/op
+# Warmup Iteration   5: 237.852 us/op
+Iteration   1: 238.580 us/op
+Iteration   2: 227.617 us/op
+Iteration   3: 243.792 us/op
+Iteration   4: 241.832 us/op
+Iteration   5: 241.046 us/op
+
+# Run progress: 4.44% complete, ETA 00:15:48
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:19:29 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+288.127 us/op
+# Warmup Iteration   2: 241.801 us/op
+# Warmup Iteration   3: 237.454 us/op
+# Warmup Iteration   4: 243.085 us/op
+# Warmup Iteration   5: 231.739 us/op
+Iteration   1: 228.607 us/op
+Iteration   2: 234.315 us/op
+Iteration   3: 230.435 us/op
+Iteration   4: 232.278 us/op
+Iteration   5: 233.728 us/op
+
+# Run progress: 5.56% complete, ETA 00:15:37
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:19:39 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+306.578 us/op
+# Warmup Iteration   2: 247.571 us/op
+# Warmup Iteration   3: 237.005 us/op
+# Warmup Iteration   4: 239.777 us/op
+# Warmup Iteration   5: 233.354 us/op
+Iteration   1: 236.388 us/op
+Iteration   2: 232.993 us/op
+Iteration   3: 235.107 us/op
+Iteration   4: 237.917 us/op
+Iteration   5: 233.762 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaClassica":
+  235.226 ±(99.9%) 5.065 us/op [Average]
+  (min, avg, max) = (227.617, 235.226, 243.792), stdev = 4.738
+  CI (99.9%): [230.161, 240.292] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaClassica
+# Parameters: (nivel = 256)
+
+# Run progress: 6.67% complete, ETA 00:15:26
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:19:50 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+631.692 us/op
+# Warmup Iteration   2: 515.933 us/op
+# Warmup Iteration   3: 514.209 us/op
+# Warmup Iteration   4: 507.981 us/op
+# Warmup Iteration   5: 510.450 us/op
+Iteration   1: 509.466 us/op
+Iteration   2: 502.589 us/op
+Iteration   3: 497.651 us/op
+Iteration   4: 527.202 us/op
+Iteration   5: 496.400 us/op
+
+# Run progress: 7.78% complete, ETA 00:15:15
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:20:01 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+641.485 us/op
+# Warmup Iteration   2: 512.637 us/op
+# Warmup Iteration   3: 499.667 us/op
+# Warmup Iteration   4: 506.915 us/op
+# Warmup Iteration   5: 499.747 us/op
+Iteration   1: 506.766 us/op
+Iteration   2: 499.371 us/op
+Iteration   3: 485.799 us/op
+Iteration   4: 501.343 us/op
+Iteration   5: 499.223 us/op
+
+# Run progress: 8.89% complete, ETA 00:15:04
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:20:10 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+646.250 us/op
+# Warmup Iteration   2: 512.394 us/op
+# Warmup Iteration   3: 517.071 us/op
+# Warmup Iteration   4: 513.936 us/op
+# Warmup Iteration   5: 502.288 us/op
+Iteration   1: 493.610 us/op
+Iteration   2: 500.588 us/op
+Iteration   3: 501.920 us/op
+Iteration   4: 499.299 us/op
+Iteration   5: 500.430 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaClassica":
+  501.444 ±(99.9%) 9.559 us/op [Average]
+  (min, avg, max) = (485.799, 501.444, 527.202), stdev = 8.941
+  CI (99.9%): [491.885, 511.003] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaMlDsa
+# Parameters: (nivel = 128)
+
+# Run progress: 10.00% complete, ETA 00:14:54
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:20:22 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1023.258 us/op
+# Warmup Iteration   2: 876.396 us/op
+# Warmup Iteration   3: 877.307 us/op
+# Warmup Iteration   4: 836.691 us/op
+# Warmup Iteration   5: 857.204 us/op
+Iteration   1: 843.196 us/op
+Iteration   2: 855.434 us/op
+Iteration   3: 833.522 us/op
+Iteration   4: 836.862 us/op
+Iteration   5: 836.182 us/op
+
+# Run progress: 11.11% complete, ETA 00:14:43
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:20:33 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+952.356 us/op
+# Warmup Iteration   2: 744.708 us/op
+# Warmup Iteration   3: 737.865 us/op
+# Warmup Iteration   4: 711.197 us/op
+# Warmup Iteration   5: 732.285 us/op
+Iteration   1: 720.974 us/op
+Iteration   2: 726.715 us/op
+Iteration   3: 716.487 us/op
+Iteration   4: 716.470 us/op
+Iteration   5: 711.959 us/op
+
+# Run progress: 12.22% complete, ETA 00:14:32
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:20:43 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+326.771 us/op
+# Warmup Iteration   2: 280.593 us/op
+# Warmup Iteration   3: 260.882 us/op
+# Warmup Iteration   4: 261.909 us/op
+# Warmup Iteration   5: 261.604 us/op
+Iteration   1: 260.189 us/op
+Iteration   2: 258.872 us/op
+Iteration   3: 264.650 us/op
+Iteration   4: 260.158 us/op
+Iteration   5: 258.496 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaMlDsa":
+  606.678 ±(99.9%) 276.560 us/op [Average]
+  (min, avg, max) = (258.496, 606.678, 855.434), stdev = 258.694
+  CI (99.9%): [330.118, 883.237] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaMlDsa
+# Parameters: (nivel = 192)
+
+# Run progress: 13.33% complete, ETA 00:14:21
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:20:54 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1374.204 us/op
+# Warmup Iteration   2: 1158.069 us/op
+# Warmup Iteration   3: 1156.333 us/op
+# Warmup Iteration   4: 1111.044 us/op
+# Warmup Iteration   5: 1133.378 us/op
+Iteration   1: 1103.883 us/op
+Iteration   2: 1122.555 us/op
+Iteration   3: 1121.818 us/op
+Iteration   4: 1147.811 us/op
+Iteration   5: 1096.439 us/op
+
+# Run progress: 14.44% complete, ETA 00:14:10
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:21:05 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1631.055 us/op
+# Warmup Iteration   2: 1402.106 us/op
+# Warmup Iteration   3: 1393.454 us/op
+# Warmup Iteration   4: 1339.219 us/op
+# Warmup Iteration   5: 1359.501 us/op
+Iteration   1: 1321.674 us/op
+Iteration   2: 1396.690 us/op
+Iteration   3: 1328.590 us/op
+Iteration   4: 1347.908 us/op
+Iteration   5: 1348.860 us/op
+
+# Run progress: 15.56% complete, ETA 00:13:59
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:21:15 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+755.408 us/op
+# Warmup Iteration   2: 644.667 us/op
+# Warmup Iteration   3: 620.069 us/op
+# Warmup Iteration   4: 606.230 us/op
+# Warmup Iteration   5: 602.667 us/op
+Iteration   1: 598.102 us/op
+Iteration   2: 596.251 us/op
+Iteration   3: 596.638 us/op
+Iteration   4: 606.100 us/op
+Iteration   5: 590.161 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaMlDsa":
+  1021.565 ±(99.9%) 348.382 us/op [Average]
+  (min, avg, max) = (590.161, 1021.565, 1396.690), stdev = 325.877
+  CI (99.9%): [673.184, 1369.947] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaMlDsa
+# Parameters: (nivel = 256)
+
+# Run progress: 16.67% complete, ETA 00:13:48
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:21:26 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+746.289 us/op
+# Warmup Iteration   2: 637.391 us/op
+# Warmup Iteration   3: 640.597 us/op
+# Warmup Iteration   4: 621.061 us/op
+# Warmup Iteration   5: 625.422 us/op
+Iteration   1: 611.858 us/op
+Iteration   2: 617.579 us/op
+Iteration   3: 625.129 us/op
+Iteration   4: 614.646 us/op
+Iteration   5: 627.818 us/op
+
+# Run progress: 17.78% complete, ETA 00:13:37
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:21:37 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1188.461 us/op
+# Warmup Iteration   2: 1005.312 us/op
+# Warmup Iteration   3: 1041.200 us/op
+# Warmup Iteration   4: 1053.122 us/op
+# Warmup Iteration   5: 1043.534 us/op
+Iteration   1: 1043.562 us/op
+Iteration   2: 1053.962 us/op
+Iteration   3: 1062.892 us/op
+Iteration   4: 1069.776 us/op
+Iteration   5: 1034.164 us/op
+
+# Run progress: 18.89% complete, ETA 00:13:27
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:21:47 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+446.768 us/op
+# Warmup Iteration   2: 378.447 us/op
+# Warmup Iteration   3: 386.136 us/op
+# Warmup Iteration   4: 392.022 us/op
+# Warmup Iteration   5: 381.591 us/op
+Iteration   1: 393.366 us/op
+Iteration   2: 381.115 us/op
+Iteration   3: 385.315 us/op
+Iteration   4: 375.118 us/op
+Iteration   5: 373.229 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.assinaturaMlDsa":
+  684.635 ±(99.9%) 307.676 us/op [Average]
+  (min, avg, max) = (373.229, 684.635, 1069.776), stdev = 287.800
+  CI (99.9%): [376.960, 992.311] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoClassica
+# Parameters: (nivel = 128)
+
+# Run progress: 20.00% complete, ETA 00:13:16
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:21:58 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+365.317 us/op
+# Warmup Iteration   2: 167.173 us/op
+# Warmup Iteration   3: 127.727 us/op
+# Warmup Iteration   4: 127.082 us/op
+# Warmup Iteration   5: 121.279 us/op
+Iteration   1: 122.142 us/op
+Iteration   2: 125.625 us/op
+Iteration   3: 119.481 us/op
+Iteration   4: 122.821 us/op
+Iteration   5: 123.125 us/op
+
+# Run progress: 21.11% complete, ETA 00:13:05
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:22:09 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+397.832 us/op
+# Warmup Iteration   2: 156.252 us/op
+# Warmup Iteration   3: 129.456 us/op
+# Warmup Iteration   4: 124.191 us/op
+# Warmup Iteration   5: 124.836 us/op
+Iteration   1: 125.601 us/op
+Iteration   2: 123.577 us/op
+Iteration   3: 119.172 us/op
+Iteration   4: 121.517 us/op
+Iteration   5: 123.397 us/op
+
+# Run progress: 22.22% complete, ETA 00:12:54
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:22:19 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+339.625 us/op
+# Warmup Iteration   2: 148.163 us/op
+# Warmup Iteration   3: 129.918 us/op
+# Warmup Iteration   4: 128.222 us/op
+# Warmup Iteration   5: 126.583 us/op
+Iteration   1: 125.208 us/op
+Iteration   2: 127.364 us/op
+Iteration   3: 124.230 us/op
+Iteration   4: 126.757 us/op
+Iteration   5: 124.955 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoClassica":
+  123.665 ±(99.9%) 2.570 us/op [Average]
+  (min, avg, max) = (119.172, 123.665, 127.364), stdev = 2.404
+  CI (99.9%): [121.095, 126.235] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoClassica
+# Parameters: (nivel = 192)
+
+# Run progress: 23.33% complete, ETA 00:12:43
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:22:30 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+618.206 us/op
+# Warmup Iteration   2: 322.526 us/op
+# Warmup Iteration   3: 331.680 us/op
+# Warmup Iteration   4: 327.244 us/op
+# Warmup Iteration   5: 301.219 us/op
+Iteration   1: 307.684 us/op
+Iteration   2: 293.849 us/op
+Iteration   3: 297.242 us/op
+Iteration   4: 301.319 us/op
+Iteration   5: 303.285 us/op
+
+# Run progress: 24.44% complete, ETA 00:12:32
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:22:41 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+647.483 us/op
+# Warmup Iteration   2: 335.254 us/op
+# Warmup Iteration   3: 324.335 us/op
+# Warmup Iteration   4: 316.836 us/op
+# Warmup Iteration   5: 293.990 us/op
+Iteration   1: 295.782 us/op
+Iteration   2: 297.937 us/op
+Iteration   3: 297.438 us/op
+Iteration   4: 290.691 us/op
+Iteration   5: 286.669 us/op
+
+# Run progress: 25.56% complete, ETA 00:12:21
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:22:51 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+755.274 us/op
+# Warmup Iteration   2: 336.034 us/op
+# Warmup Iteration   3: 314.399 us/op
+# Warmup Iteration   4: 318.790 us/op
+# Warmup Iteration   5: 302.467 us/op
+Iteration   1: 303.872 us/op
+Iteration   2: 296.883 us/op
+Iteration   3: 293.034 us/op
+Iteration   4: 293.279 us/op
+Iteration   5: 294.917 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoClassica":
+  296.925 ±(99.9%) 5.803 us/op [Average]
+  (min, avg, max) = (286.669, 296.925, 307.684), stdev = 5.428
+  CI (99.9%): [291.123, 302.728] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoClassica
+# Parameters: (nivel = 256)
+
+# Run progress: 26.67% complete, ETA 00:12:10
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:23:02 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1223.278 us/op
+# Warmup Iteration   2: 664.135 us/op
+# Warmup Iteration   3: 631.787 us/op
+# Warmup Iteration   4: 606.673 us/op
+# Warmup Iteration   5: 595.585 us/op
+Iteration   1: 616.508 us/op
+Iteration   2: 597.555 us/op
+Iteration   3: 592.370 us/op
+Iteration   4: 577.486 us/op
+Iteration   5: 589.894 us/op
+
+# Run progress: 27.78% complete, ETA 00:11:59
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:23:13 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1301.909 us/op
+# Warmup Iteration   2: 655.777 us/op
+# Warmup Iteration   3: 636.811 us/op
+# Warmup Iteration   4: 631.873 us/op
+# Warmup Iteration   5: 603.872 us/op
+Iteration   1: 602.559 us/op
+Iteration   2: 571.891 us/op
+Iteration   3: 582.772 us/op
+Iteration   4: 586.310 us/op
+Iteration   5: 578.138 us/op
+
+# Run progress: 28.89% complete, ETA 00:11:48
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:23:23 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1187.892 us/op
+# Warmup Iteration   2: 656.974 us/op
+# Warmup Iteration   3: 646.788 us/op
+# Warmup Iteration   4: 601.462 us/op
+# Warmup Iteration   5: 629.737 us/op
+Iteration   1: 627.203 us/op
+Iteration   2: 576.397 us/op
+Iteration   3: 586.738 us/op
+Iteration   4: 587.680 us/op
+Iteration   5: 587.603 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoClassica":
+  590.740 ±(99.9%) 16.155 us/op [Average]
+  (min, avg, max) = (571.891, 590.740, 627.203), stdev = 15.111
+  CI (99.9%): [574.585, 606.895] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoHibrida
+# Parameters: (nivel = 128)
+
+# Run progress: 30.00% complete, ETA 00:11:37
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:23:34 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1810.842 us/op
+# Warmup Iteration   2: 540.716 us/op
+# Warmup Iteration   3: 710.092 us/op
+# Warmup Iteration   4: 446.818 us/op
+# Warmup Iteration   5: 463.478 us/op
+Iteration   1: 756.181 us/op
+Iteration   2: 372.143 us/op
+Iteration   3: 471.351 us/op
+Iteration   4: 664.270 us/op
+Iteration   5: 545.345 us/op
+
+# Run progress: 31.11% complete, ETA 00:11:26
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:23:45 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1594.082 us/op
+# Warmup Iteration   2: 616.021 us/op
+# Warmup Iteration   3: 504.356 us/op
+# Warmup Iteration   4: 486.114 us/op
+# Warmup Iteration   5: 555.273 us/op
+Iteration   1: 425.971 us/op
+Iteration   2: 356.576 us/op
+Iteration   3: 461.962 us/op
+Iteration   4: 510.207 us/op
+Iteration   5: 516.674 us/op
+
+# Run progress: 32.22% complete, ETA 00:11:15
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:23:55 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1071.701 us/op
+# Warmup Iteration   2: 614.878 us/op
+# Warmup Iteration   3: 531.593 us/op
+# Warmup Iteration   4: 440.998 us/op
+# Warmup Iteration   5: 463.614 us/op
+Iteration   1: 362.751 us/op
+Iteration   2: 346.446 us/op
+Iteration   3: 516.722 us/op
+Iteration   4: 423.352 us/op
+Iteration   5: 466.151 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoHibrida":
+  479.740 ±(99.9%) 122.319 us/op [Average]
+  (min, avg, max) = (346.446, 479.740, 756.181), stdev = 114.417
+  CI (99.9%): [357.422, 602.059] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoHibrida
+# Parameters: (nivel = 192)
+
+# Run progress: 33.33% complete, ETA 00:11:04
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:24:06 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+2340.377 us/op
+# Warmup Iteration   2: 1260.593 us/op
+# Warmup Iteration   3: 1035.353 us/op
+# Warmup Iteration   4: 965.688 us/op
+# Warmup Iteration   5: 660.302 us/op
+Iteration   1: 909.134 us/op
+Iteration   2: 2190.690 us/op
+Iteration   3: 1119.234 us/op
+Iteration   4: 951.954 us/op
+Iteration   5: 622.026 us/op
+
+# Run progress: 34.44% complete, ETA 00:10:53
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:24:16 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1573.595 us/op
+# Warmup Iteration   2: 897.380 us/op
+# Warmup Iteration   3: 707.786 us/op
+# Warmup Iteration   4: 1212.341 us/op
+# Warmup Iteration   5: 1140.451 us/op
+Iteration   1: 1351.471 us/op
+Iteration   2: 1053.173 us/op
+Iteration   3: 1164.480 us/op
+Iteration   4: 1407.120 us/op
+Iteration   5: 1446.424 us/op
+
+# Run progress: 35.56% complete, ETA 00:10:42
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:24:27 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1689.445 us/op
+# Warmup Iteration   2: 946.627 us/op
+# Warmup Iteration   3: 875.338 us/op
+# Warmup Iteration   4: 835.500 us/op
+# Warmup Iteration   5: 1150.594 us/op
+Iteration   1: 746.107 us/op
+Iteration   2: 947.601 us/op
+Iteration   3: 2086.167 us/op
+Iteration   4: 867.314 us/op
+Iteration   5: 880.829 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoHibrida":
+  1182.915 ±(99.9%) 484.943 us/op [Average]
+  (min, avg, max) = (622.026, 1182.915, 2190.690), stdev = 453.616
+  CI (99.9%): [697.972, 1667.858] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoHibrida
+# Parameters: (nivel = 256)
+
+# Run progress: 36.67% complete, ETA 00:10:31
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:24:38 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+3128.677 us/op
+# Warmup Iteration   2: 1770.207 us/op
+# Warmup Iteration   3: 1214.234 us/op
+# Warmup Iteration   4: 1212.678 us/op
+# Warmup Iteration   5: 1149.496 us/op
+Iteration   1: 1318.303 us/op
+Iteration   2: 1181.198 us/op
+Iteration   3: 1546.057 us/op
+Iteration   4: 1844.122 us/op
+Iteration   5: 1891.153 us/op
+
+# Run progress: 37.78% complete, ETA 00:10:20
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:24:48 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+2594.745 us/op
+# Warmup Iteration   2: 1365.819 us/op
+# Warmup Iteration   3: 1769.423 us/op
+# Warmup Iteration   4: 1807.568 us/op
+# Warmup Iteration   5: 1322.273 us/op
+Iteration   1: 1509.534 us/op
+Iteration   2: 2006.221 us/op
+Iteration   3: 1536.386 us/op
+Iteration   4: 1253.156 us/op
+Iteration   5: 1209.164 us/op
+
+# Run progress: 38.89% complete, ETA 00:10:09
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:25:00 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+2585.958 us/op
+# Warmup Iteration   2: 1295.131 us/op
+# Warmup Iteration   3: 1273.397 us/op
+# Warmup Iteration   4: 1325.801 us/op
+# Warmup Iteration   5: 1329.989 us/op
+Iteration   1: 1318.123 us/op
+Iteration   2: 1531.643 us/op
+Iteration   3: 1653.939 us/op
+Iteration   4: 1177.960 us/op
+Iteration   5: 1290.005 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.emissaoHibrida":
+  1484.464 ±(99.9%) 287.619 us/op [Average]
+  (min, avg, max) = (1177.960, 1484.464, 2006.221), stdev = 269.039
+  CI (99.9%): [1196.845, 1772.083] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesClassica
+# Parameters: (nivel = 128)
+
+# Run progress: 40.00% complete, ETA 00:09:58
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:25:11 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+121.881 us/op
+# Warmup Iteration   2: 90.194 us/op
+# Warmup Iteration   3: 86.708 us/op
+# Warmup Iteration   4: 84.277 us/op
+# Warmup Iteration   5: 84.542 us/op
+Iteration   1: 82.424 us/op
+Iteration   2: 83.432 us/op
+Iteration   3: 82.140 us/op
+Iteration   4: 83.087 us/op
+Iteration   5: 79.938 us/op
+
+# Run progress: 41.11% complete, ETA 00:09:47
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:25:21 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+127.430 us/op
+# Warmup Iteration   2: 87.807 us/op
+# Warmup Iteration   3: 84.207 us/op
+# Warmup Iteration   4: 82.137 us/op
+# Warmup Iteration   5: 80.928 us/op
+Iteration   1: 82.558 us/op
+Iteration   2: 80.280 us/op
+Iteration   3: 80.174 us/op
+Iteration   4: 80.927 us/op
+Iteration   5: 79.671 us/op
+
+# Run progress: 42.22% complete, ETA 00:09:36
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:25:32 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+125.352 us/op
+# Warmup Iteration   2: 88.799 us/op
+# Warmup Iteration   3: 81.556 us/op
+# Warmup Iteration   4: 81.074 us/op
+# Warmup Iteration   5: 83.846 us/op
+Iteration   1: 81.285 us/op
+Iteration   2: 80.744 us/op
+Iteration   3: 85.070 us/op
+Iteration   4: 79.435 us/op
+Iteration   5: 81.875 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesClassica":
+  81.536 ±(99.9%) 1.708 us/op [Average]
+  (min, avg, max) = (79.435, 81.536, 85.070), stdev = 1.598
+  CI (99.9%): [79.828, 83.244] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesClassica
+# Parameters: (nivel = 192)
+
+# Run progress: 43.33% complete, ETA 00:09:25
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:25:43 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+344.659 us/op
+# Warmup Iteration   2: 255.233 us/op
+# Warmup Iteration   3: 254.347 us/op
+# Warmup Iteration   4: 246.446 us/op
+# Warmup Iteration   5: 254.886 us/op
+Iteration   1: 248.857 us/op
+Iteration   2: 243.017 us/op
+Iteration   3: 243.538 us/op
+Iteration   4: 248.100 us/op
+Iteration   5: 241.729 us/op
+
+# Run progress: 44.44% complete, ETA 00:09:14
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:25:53 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+340.037 us/op
+# Warmup Iteration   2: 256.961 us/op
+# Warmup Iteration   3: 263.789 us/op
+# Warmup Iteration   4: 245.350 us/op
+# Warmup Iteration   5: 256.415 us/op
+Iteration   1: 246.079 us/op
+Iteration   2: 243.662 us/op
+Iteration   3: 247.679 us/op
+Iteration   4: 247.049 us/op
+Iteration   5: 245.115 us/op
+
+# Run progress: 45.56% complete, ETA 00:09:03
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:26:04 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+341.822 us/op
+# Warmup Iteration   2: 267.837 us/op
+# Warmup Iteration   3: 256.770 us/op
+# Warmup Iteration   4: 252.971 us/op
+# Warmup Iteration   5: 247.231 us/op
+Iteration   1: 250.729 us/op
+Iteration   2: 249.211 us/op
+Iteration   3: 248.190 us/op
+Iteration   4: 242.698 us/op
+Iteration   5: 243.005 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesClassica":
+  245.911 ±(99.9%) 3.040 us/op [Average]
+  (min, avg, max) = (241.729, 245.911, 250.729), stdev = 2.843
+  CI (99.9%): [242.871, 248.950] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesClassica
+# Parameters: (nivel = 256)
+
+# Run progress: 46.67% complete, ETA 00:08:52
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:26:15 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+707.337 us/op
+# Warmup Iteration   2: 545.145 us/op
+# Warmup Iteration   3: 532.772 us/op
+# Warmup Iteration   4: 543.724 us/op
+# Warmup Iteration   5: 525.194 us/op
+Iteration   1: 514.899 us/op
+Iteration   2: 511.970 us/op
+Iteration   3: 513.575 us/op
+Iteration   4: 498.096 us/op
+Iteration   5: 511.199 us/op
+
+# Run progress: 47.78% complete, ETA 00:08:41
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:26:25 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+723.331 us/op
+# Warmup Iteration   2: 553.711 us/op
+# Warmup Iteration   3: 530.079 us/op
+# Warmup Iteration   4: 554.931 us/op
+# Warmup Iteration   5: 523.904 us/op
+Iteration   1: 536.507 us/op
+Iteration   2: 538.057 us/op
+Iteration   3: 521.987 us/op
+Iteration   4: 528.443 us/op
+Iteration   5: 531.069 us/op
+
+# Run progress: 48.89% complete, ETA 00:08:30
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:26:36 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+705.929 us/op
+# Warmup Iteration   2: 548.423 us/op
+# Warmup Iteration   3: 548.637 us/op
+# Warmup Iteration   4: 549.600 us/op
+# Warmup Iteration   5: 525.150 us/op
+Iteration   1: 536.837 us/op
+Iteration   2: 521.262 us/op
+Iteration   3: 575.438 us/op
+Iteration   4: 576.148 us/op
+Iteration   5: 531.359 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesClassica":
+  529.790 ±(99.9%) 23.366 us/op [Average]
+  (min, avg, max) = (498.096, 529.790, 576.148), stdev = 21.856
+  CI (99.9%): [506.424, 553.156] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesMlDsa
+# Parameters: (nivel = 128)
+
+# Run progress: 50.00% complete, ETA 00:08:19
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:26:47 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+118.325 us/op
+# Warmup Iteration   2: 92.480 us/op
+# Warmup Iteration   3: 91.792 us/op
+# Warmup Iteration   4: 92.292 us/op
+# Warmup Iteration   5: 90.046 us/op
+Iteration   1: 89.487 us/op
+Iteration   2: 91.050 us/op
+Iteration   3: 88.388 us/op
+Iteration   4: 88.542 us/op
+Iteration   5: 89.954 us/op
+
+# Run progress: 51.11% complete, ETA 00:08:08
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:26:57 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+114.911 us/op
+# Warmup Iteration   2: 90.172 us/op
+# Warmup Iteration   3: 89.232 us/op
+# Warmup Iteration   4: 89.911 us/op
+# Warmup Iteration   5: 89.829 us/op
+Iteration   1: 90.756 us/op
+Iteration   2: 89.530 us/op
+Iteration   3: 88.319 us/op
+Iteration   4: 86.709 us/op
+Iteration   5: 86.098 us/op
+
+# Run progress: 52.22% complete, ETA 00:07:56
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:27:08 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+113.413 us/op
+# Warmup Iteration   2: 90.638 us/op
+# Warmup Iteration   3: 90.499 us/op
+# Warmup Iteration   4: 90.406 us/op
+# Warmup Iteration   5: 90.854 us/op
+Iteration   1: 88.982 us/op
+Iteration   2: 92.091 us/op
+Iteration   3: 89.623 us/op
+Iteration   4: 91.260 us/op
+Iteration   5: 90.400 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesMlDsa":
+  89.413 ±(99.9%) 1.759 us/op [Average]
+  (min, avg, max) = (86.098, 89.413, 92.091), stdev = 1.645
+  CI (99.9%): [87.654, 91.171] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesMlDsa
+# Parameters: (nivel = 192)
+
+# Run progress: 53.33% complete, ETA 00:07:45
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:27:19 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+206.821 us/op
+# Warmup Iteration   2: 172.985 us/op
+# Warmup Iteration   3: 166.742 us/op
+# Warmup Iteration   4: 180.218 us/op
+# Warmup Iteration   5: 167.100 us/op
+Iteration   1: 169.841 us/op
+Iteration   2: 167.656 us/op
+Iteration   3: 172.309 us/op
+Iteration   4: 173.163 us/op
+Iteration   5: 168.321 us/op
+
+# Run progress: 54.44% complete, ETA 00:07:34
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:27:29 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+206.168 us/op
+# Warmup Iteration   2: 173.239 us/op
+# Warmup Iteration   3: 174.746 us/op
+# Warmup Iteration   4: 167.207 us/op
+# Warmup Iteration   5: 168.677 us/op
+Iteration   1: 168.156 us/op
+Iteration   2: 171.231 us/op
+Iteration   3: 176.268 us/op
+Iteration   4: 168.234 us/op
+Iteration   5: 165.429 us/op
+
+# Run progress: 55.56% complete, ETA 00:07:23
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:27:40 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+210.935 us/op
+# Warmup Iteration   2: 176.669 us/op
+# Warmup Iteration   3: 168.560 us/op
+# Warmup Iteration   4: 168.865 us/op
+# Warmup Iteration   5: 170.911 us/op
+Iteration   1: 169.789 us/op
+Iteration   2: 180.904 us/op
+Iteration   3: 163.954 us/op
+Iteration   4: 166.470 us/op
+Iteration   5: 163.916 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesMlDsa":
+  169.709 ±(99.9%) 4.912 us/op [Average]
+  (min, avg, max) = (163.916, 169.709, 180.904), stdev = 4.595
+  CI (99.9%): [164.797, 174.622] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesMlDsa
+# Parameters: (nivel = 256)
+
+# Run progress: 56.67% complete, ETA 00:07:12
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:27:51 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+299.507 us/op
+# Warmup Iteration   2: 253.474 us/op
+# Warmup Iteration   3: 243.658 us/op
+# Warmup Iteration   4: 243.511 us/op
+# Warmup Iteration   5: 239.624 us/op
+Iteration   1: 242.938 us/op
+Iteration   2: 240.705 us/op
+Iteration   3: 237.756 us/op
+Iteration   4: 236.714 us/op
+Iteration   5: 242.378 us/op
+
+# Run progress: 57.78% complete, ETA 00:07:01
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:28:01 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+317.335 us/op
+# Warmup Iteration   2: 259.777 us/op
+# Warmup Iteration   3: 257.375 us/op
+# Warmup Iteration   4: 254.337 us/op
+# Warmup Iteration   5: 247.808 us/op
+Iteration   1: 244.340 us/op
+Iteration   2: 245.649 us/op
+Iteration   3: 241.998 us/op
+Iteration   4: 253.505 us/op
+Iteration   5: 248.331 us/op
+
+# Run progress: 58.89% complete, ETA 00:06:50
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:28:12 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+300.920 us/op
+# Warmup Iteration   2: 257.216 us/op
+# Warmup Iteration   3: 252.868 us/op
+# Warmup Iteration   4: 244.428 us/op
+# Warmup Iteration   5: 246.841 us/op
+Iteration   1: 256.254 us/op
+Iteration   2: 241.847 us/op
+Iteration   3: 250.549 us/op
+Iteration   4: 243.629 us/op
+Iteration   5: 248.516 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.geracaoChavesMlDsa":
+  245.007 ±(99.9%) 5.895 us/op [Average]
+  (min, avg, max) = (236.714, 245.007, 256.254), stdev = 5.514
+  CI (99.9%): [239.113, 250.902] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaClassica
+# Parameters: (nivel = 128)
+
+# Run progress: 60.00% complete, ETA 00:06:39
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:28:23 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+177.345 us/op
+# Warmup Iteration   2: 119.091 us/op
+# Warmup Iteration   3: 102.348 us/op
+# Warmup Iteration   4: 99.174 us/op
+# Warmup Iteration   5: 98.002 us/op
+Iteration   1: 97.540 us/op
+Iteration   2: 99.852 us/op
+Iteration   3: 97.704 us/op
+Iteration   4: 95.144 us/op
+Iteration   5: 95.383 us/op
+
+# Run progress: 61.11% complete, ETA 00:06:28
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:28:33 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+194.823 us/op
+# Warmup Iteration   2: 114.433 us/op
+# Warmup Iteration   3: 103.159 us/op
+# Warmup Iteration   4: 104.229 us/op
+# Warmup Iteration   5: 103.605 us/op
+Iteration   1: 100.774 us/op
+Iteration   2: 97.828 us/op
+Iteration   3: 98.017 us/op
+Iteration   4: 95.773 us/op
+Iteration   5: 97.389 us/op
+
+# Run progress: 62.22% complete, ETA 00:06:17
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:28:44 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+225.604 us/op
+# Warmup Iteration   2: 117.464 us/op
+# Warmup Iteration   3: 100.254 us/op
+# Warmup Iteration   4: 98.914 us/op
+# Warmup Iteration   5: 99.376 us/op
+Iteration   1: 95.262 us/op
+Iteration   2: 95.842 us/op
+Iteration   3: 96.414 us/op
+Iteration   4: 94.285 us/op
+Iteration   5: 98.167 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaClassica":
+  97.025 ±(99.9%) 1.938 us/op [Average]
+  (min, avg, max) = (94.285, 97.025, 100.774), stdev = 1.813
+  CI (99.9%): [95.086, 98.963] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaClassica
+# Parameters: (nivel = 192)
+
+# Run progress: 63.33% complete, ETA 00:06:06
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+629.814 us/op
+# Warmup Iteration   2: Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+Oct 07, 2026 6:28:55 PM com.pqc.hybrid.core.certificate.HybridCertificateValidator validateClassicalChain
+WARNING: Classical chain validation failed: Could not validate certificate: certificate not valid till 20261007212856GMT+00:00
+384.501 us/op
+# Warmup Iteration   3: 341.929 us/op
+# Warmup Iteration   4: 334.822 us/op
+# Warmup Iteration   5: 312.482 us/op
+Iteration   1: 319.143 us/op
+Iteration   2: 302.712 us/op
+Iteration   3: 315.945 us/op
+Iteration   4: 318.060 us/op
+Iteration   5: 298.774 us/op
+
+# Run progress: 64.44% complete, ETA 00:05:54
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:29:05 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+530.439 us/op
+# Warmup Iteration   2: 338.737 us/op
+# Warmup Iteration   3: 347.834 us/op
+# Warmup Iteration   4: 315.633 us/op
+# Warmup Iteration   5: 307.289 us/op
+Iteration   1: 297.184 us/op
+Iteration   2: 302.405 us/op
+Iteration   3: 307.706 us/op
+Iteration   4: 298.515 us/op
+Iteration   5: 301.812 us/op
+
+# Run progress: 65.56% complete, ETA 00:05:43
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:29:16 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+509.479 us/op
+# Warmup Iteration   2: 351.615 us/op
+# Warmup Iteration   3: 346.737 us/op
+# Warmup Iteration   4: 330.043 us/op
+# Warmup Iteration   5: 319.111 us/op
+Iteration   1: 311.687 us/op
+Iteration   2: 318.490 us/op
+Iteration   3: 319.152 us/op
+Iteration   4: 310.699 us/op
+Iteration   5: 310.896 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaClassica":
+  308.879 ±(99.9%) 8.715 us/op [Average]
+  (min, avg, max) = (297.184, 308.879, 319.152), stdev = 8.152
+  CI (99.9%): [300.164, 317.593] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaClassica
+# Parameters: (nivel = 256)
+
+# Run progress: 66.67% complete, ETA 00:05:32
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:29:26 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1088.555 us/op
+# Warmup Iteration   2: 757.453 us/op
+# Warmup Iteration   3: 735.729 us/op
+# Warmup Iteration   4: 751.789 us/op
+# Warmup Iteration   5: 744.126 us/op
+Iteration   1: 729.157 us/op
+Iteration   2: 680.408 us/op
+Iteration   3: 677.783 us/op
+Iteration   4: 685.910 us/op
+Iteration   5: 688.923 us/op
+
+# Run progress: 67.78% complete, ETA 00:05:21
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:29:37 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1075.388 us/op
+# Warmup Iteration   2: 762.256 us/op
+# Warmup Iteration   3: 743.996 us/op
+# Warmup Iteration   4: 759.965 us/op
+# Warmup Iteration   5: 730.340 us/op
+Iteration   1: 750.093 us/op
+Iteration   2: 691.117 us/op
+Iteration   3: 685.885 us/op
+Iteration   4: 707.662 us/op
+Iteration   5: 690.641 us/op
+
+# Run progress: 68.89% complete, ETA 00:05:10
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:29:49 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1225.556 us/op
+# Warmup Iteration   2: 769.700 us/op
+# Warmup Iteration   3: 770.631 us/op
+# Warmup Iteration   4: 763.160 us/op
+# Warmup Iteration   5: 726.908 us/op
+Iteration   1: 707.674 us/op
+Iteration   2: 728.261 us/op
+Iteration   3: 690.122 us/op
+Iteration   4: 693.208 us/op
+Iteration   5: 681.601 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaClassica":
+  699.230 ±(99.9%) 22.702 us/op [Average]
+  (min, avg, max) = (677.783, 699.230, 750.093), stdev = 21.236
+  CI (99.9%): [676.527, 721.932] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaHibrida
+# Parameters: (nivel = 128)
+
+# Run progress: 70.00% complete, ETA 00:04:59
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:29:58 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1064.320 us/op
+# Warmup Iteration   2: 508.188 us/op
+# Warmup Iteration   3: 499.181 us/op
+# Warmup Iteration   4: 483.421 us/op
+# Warmup Iteration   5: 454.864 us/op
+Iteration   1: 428.143 us/op
+Iteration   2: 429.989 us/op
+Iteration   3: 405.235 us/op
+Iteration   4: 413.990 us/op
+Iteration   5: 409.391 us/op
+
+# Run progress: 71.11% complete, ETA 00:04:48
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:30:10 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1096.931 us/op
+# Warmup Iteration   2: 491.007 us/op
+# Warmup Iteration   3: 511.393 us/op
+# Warmup Iteration   4: 498.028 us/op
+# Warmup Iteration   5: 467.874 us/op
+Iteration   1: 443.796 us/op
+Iteration   2: 418.934 us/op
+Iteration   3: 422.795 us/op
+Iteration   4: 411.556 us/op
+Iteration   5: 409.896 us/op
+
+# Run progress: 72.22% complete, ETA 00:04:37
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:30:21 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1237.190 us/op
+# Warmup Iteration   2: 498.078 us/op
+# Warmup Iteration   3: 518.509 us/op
+# Warmup Iteration   4: 493.867 us/op
+# Warmup Iteration   5: 474.859 us/op
+Iteration   1: 436.254 us/op
+Iteration   2: 436.087 us/op
+Iteration   3: 424.252 us/op
+Iteration   4: 422.154 us/op
+Iteration   5: 438.222 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaHibrida":
+  423.380 ±(99.9%) 12.738 us/op [Average]
+  (min, avg, max) = (405.235, 423.380, 443.796), stdev = 11.916
+  CI (99.9%): [410.641, 436.118] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaHibrida
+# Parameters: (nivel = 192)
+
+# Run progress: 73.33% complete, ETA 00:04:26
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:30:31 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1747.449 us/op
+# Warmup Iteration   2: 919.083 us/op
+# Warmup Iteration   3: 856.163 us/op
+# Warmup Iteration   4: 891.268 us/op
+# Warmup Iteration   5: 881.968 us/op
+Iteration   1: 887.536 us/op
+Iteration   2: 828.541 us/op
+Iteration   3: 815.312 us/op
+Iteration   4: 796.448 us/op
+Iteration   5: 777.329 us/op
+
+# Run progress: 74.44% complete, ETA 00:04:15
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:30:42 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1764.073 us/op
+# Warmup Iteration   2: 912.714 us/op
+# Warmup Iteration   3: 858.038 us/op
+# Warmup Iteration   4: 915.362 us/op
+# Warmup Iteration   5: 852.896 us/op
+Iteration   1: 823.500 us/op
+Iteration   2: 853.005 us/op
+Iteration   3: 814.728 us/op
+Iteration   4: 769.173 us/op
+Iteration   5: 796.229 us/op
+
+# Run progress: 75.56% complete, ETA 00:04:04
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:30:53 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+1868.206 us/op
+# Warmup Iteration   2: 914.535 us/op
+# Warmup Iteration   3: 835.279 us/op
+# Warmup Iteration   4: 905.182 us/op
+# Warmup Iteration   5: 864.746 us/op
+Iteration   1: 919.964 us/op
+Iteration   2: 809.928 us/op
+Iteration   3: 807.895 us/op
+Iteration   4: 784.365 us/op
+Iteration   5: 774.026 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaHibrida":
+  817.199 ±(99.9%) 45.009 us/op [Average]
+  (min, avg, max) = (769.173, 817.199, 919.964), stdev = 42.102
+  CI (99.9%): [772.189, 862.208] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaHibrida
+# Parameters: (nivel = 256)
+
+# Run progress: 76.67% complete, ETA 00:03:53
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:31:03 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+2838.547 us/op
+# Warmup Iteration   2: 1679.448 us/op
+# Warmup Iteration   3: 1632.668 us/op
+# Warmup Iteration   4: 1573.083 us/op
+# Warmup Iteration   5: 1566.438 us/op
+Iteration   1: 1568.650 us/op
+Iteration   2: 1639.460 us/op
+Iteration   3: 1532.152 us/op
+Iteration   4: 1459.463 us/op
+Iteration   5: 1505.640 us/op
+
+# Run progress: 77.78% complete, ETA 00:03:42
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:31:14 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+3074.370 us/op
+# Warmup Iteration   2: 1715.666 us/op
+# Warmup Iteration   3: 1601.839 us/op
+# Warmup Iteration   4: 1590.799 us/op
+# Warmup Iteration   5: 1563.118 us/op
+Iteration   1: 1569.108 us/op
+Iteration   2: 1548.936 us/op
+Iteration   3: 1528.771 us/op
+Iteration   4: 1489.152 us/op
+Iteration   5: 1513.136 us/op
+
+# Run progress: 78.89% complete, ETA 00:03:30
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:31:25 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+3081.306 us/op
+# Warmup Iteration   2: 1693.339 us/op
+# Warmup Iteration   3: 1576.052 us/op
+# Warmup Iteration   4: 1523.487 us/op
+# Warmup Iteration   5: 1494.514 us/op
+Iteration   1: 1569.862 us/op
+Iteration   2: 1556.017 us/op
+Iteration   3: 1543.959 us/op
+Iteration   4: 1483.949 us/op
+Iteration   5: 1536.077 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.validacaoCadeiaHibrida":
+  1536.289 ±(99.9%) 46.876 us/op [Average]
+  (min, avg, max) = (1459.463, 1536.289, 1639.460), stdev = 43.848
+  CI (99.9%): [1489.413, 1583.165] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoClassica
+# Parameters: (nivel = 128)
+
+# Run progress: 80.00% complete, ETA 00:03:19
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:31:35 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+126.716 us/op
+# Warmup Iteration   2: 95.986 us/op
+# Warmup Iteration   3: 94.843 us/op
+# Warmup Iteration   4: 93.478 us/op
+# Warmup Iteration   5: 92.513 us/op
+Iteration   1: 89.035 us/op
+Iteration   2: 93.109 us/op
+Iteration   3: 91.427 us/op
+Iteration   4: 91.712 us/op
+Iteration   5: 88.844 us/op
+
+# Run progress: 81.11% complete, ETA 00:03:08
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:31:46 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+121.659 us/op
+# Warmup Iteration   2: 91.327 us/op
+# Warmup Iteration   3: 87.756 us/op
+# Warmup Iteration   4: 86.824 us/op
+# Warmup Iteration   5: 88.109 us/op
+Iteration   1: 89.566 us/op
+Iteration   2: 87.312 us/op
+Iteration   3: 88.478 us/op
+Iteration   4: 88.425 us/op
+Iteration   5: 86.523 us/op
+
+# Run progress: 82.22% complete, ETA 00:02:57
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:31:57 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+120.042 us/op
+# Warmup Iteration   2: 92.910 us/op
+# Warmup Iteration   3: 93.398 us/op
+# Warmup Iteration   4: 89.948 us/op
+# Warmup Iteration   5: 91.415 us/op
+Iteration   1: 88.693 us/op
+Iteration   2: 87.906 us/op
+Iteration   3: 87.200 us/op
+Iteration   4: 89.128 us/op
+Iteration   5: 88.581 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoClassica":
+  89.063 ±(99.9%) 1.911 us/op [Average]
+  (min, avg, max) = (86.523, 89.063, 93.109), stdev = 1.787
+  CI (99.9%): [87.152, 90.973] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoClassica
+# Parameters: (nivel = 192)
+
+# Run progress: 83.33% complete, ETA 00:02:46
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:32:07 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+376.668 us/op
+# Warmup Iteration   2: 306.169 us/op
+# Warmup Iteration   3: 296.774 us/op
+# Warmup Iteration   4: 291.233 us/op
+# Warmup Iteration   5: 288.750 us/op
+Iteration   1: 290.989 us/op
+Iteration   2: 290.667 us/op
+Iteration   3: 289.622 us/op
+Iteration   4: 285.595 us/op
+Iteration   5: 277.796 us/op
+
+# Run progress: 84.44% complete, ETA 00:02:35
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:32:18 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+360.716 us/op
+# Warmup Iteration   2: 301.555 us/op
+# Warmup Iteration   3: 297.689 us/op
+# Warmup Iteration   4: 301.996 us/op
+# Warmup Iteration   5: 285.883 us/op
+Iteration   1: 286.176 us/op
+Iteration   2: 289.450 us/op
+Iteration   3: 285.586 us/op
+Iteration   4: 285.201 us/op
+Iteration   5: 286.719 us/op
+
+# Run progress: 85.56% complete, ETA 00:02:24
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:32:29 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+377.745 us/op
+# Warmup Iteration   2: 298.963 us/op
+# Warmup Iteration   3: 296.718 us/op
+# Warmup Iteration   4: 293.174 us/op
+# Warmup Iteration   5: 290.036 us/op
+Iteration   1: 290.897 us/op
+Iteration   2: 278.771 us/op
+Iteration   3: 284.251 us/op
+Iteration   4: 284.441 us/op
+Iteration   5: 286.196 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoClassica":
+  286.157 ±(99.9%) 4.256 us/op [Average]
+  (min, avg, max) = (277.796, 286.157, 290.989), stdev = 3.981
+  CI (99.9%): [281.901, 290.413] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoClassica
+# Parameters: (nivel = 256)
+
+# Run progress: 86.67% complete, ETA 00:02:13
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:32:39 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+852.407 us/op
+# Warmup Iteration   2: 685.691 us/op
+# Warmup Iteration   3: 670.407 us/op
+# Warmup Iteration   4: 666.984 us/op
+# Warmup Iteration   5: 690.550 us/op
+Iteration   1: 659.415 us/op
+Iteration   2: 689.035 us/op
+Iteration   3: 656.509 us/op
+Iteration   4: 654.187 us/op
+Iteration   5: 646.574 us/op
+
+# Run progress: 87.78% complete, ETA 00:02:02
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:32:50 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+829.300 us/op
+# Warmup Iteration   2: 689.984 us/op
+# Warmup Iteration   3: 674.795 us/op
+# Warmup Iteration   4: 685.894 us/op
+# Warmup Iteration   5: 679.986 us/op
+Iteration   1: 661.141 us/op
+Iteration   2: 645.817 us/op
+Iteration   3: 651.168 us/op
+Iteration   4: 661.398 us/op
+Iteration   5: 644.937 us/op
+
+# Run progress: 88.89% complete, ETA 00:01:51
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:33:01 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+853.734 us/op
+# Warmup Iteration   2: 692.929 us/op
+# Warmup Iteration   3: 691.443 us/op
+# Warmup Iteration   4: 672.960 us/op
+# Warmup Iteration   5: 692.009 us/op
+Iteration   1: 667.712 us/op
+Iteration   2: 666.892 us/op
+Iteration   3: 673.082 us/op
+Iteration   4: 673.171 us/op
+Iteration   5: 680.431 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoClassica":
+  662.098 ±(99.9%) 13.944 us/op [Average]
+  (min, avg, max) = (644.937, 662.098, 689.035), stdev = 13.044
+  CI (99.9%): [648.153, 676.042] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoMlDsa
+# Parameters: (nivel = 128)
+
+# Run progress: 90.00% complete, ETA 00:01:39
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:33:11 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+129.365 us/op
+# Warmup Iteration   2: 103.968 us/op
+# Warmup Iteration   3: 103.396 us/op
+# Warmup Iteration   4: 103.567 us/op
+# Warmup Iteration   5: 101.580 us/op
+Iteration   1: 103.743 us/op
+Iteration   2: 103.581 us/op
+Iteration   3: 100.989 us/op
+Iteration   4: 102.366 us/op
+Iteration   5: 101.688 us/op
+
+# Run progress: 91.11% complete, ETA 00:01:28
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:33:22 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+132.021 us/op
+# Warmup Iteration   2: 107.006 us/op
+# Warmup Iteration   3: 100.495 us/op
+# Warmup Iteration   4: 100.604 us/op
+# Warmup Iteration   5: 99.282 us/op
+Iteration   1: 103.363 us/op
+Iteration   2: 98.223 us/op
+Iteration   3: 99.732 us/op
+Iteration   4: 98.179 us/op
+Iteration   5: 99.435 us/op
+
+# Run progress: 92.22% complete, ETA 00:01:17
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:33:34 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+127.158 us/op
+# Warmup Iteration   2: 104.969 us/op
+# Warmup Iteration   3: 101.719 us/op
+# Warmup Iteration   4: 105.457 us/op
+# Warmup Iteration   5: 101.451 us/op
+Iteration   1: 101.487 us/op
+Iteration   2: 97.376 us/op
+Iteration   3: 96.842 us/op
+Iteration   4: 98.718 us/op
+Iteration   5: 101.371 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoMlDsa":
+  100.473 ±(99.9%) 2.453 us/op [Average]
+  (min, avg, max) = (96.842, 100.473, 103.743), stdev = 2.294
+  CI (99.9%): [98.020, 102.925] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoMlDsa
+# Parameters: (nivel = 192)
+
+# Run progress: 93.33% complete, ETA 00:01:06
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:33:43 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+194.941 us/op
+# Warmup Iteration   2: 165.205 us/op
+# Warmup Iteration   3: 155.415 us/op
+# Warmup Iteration   4: 160.441 us/op
+# Warmup Iteration   5: 155.584 us/op
+Iteration   1: 159.022 us/op
+Iteration   2: 154.306 us/op
+Iteration   3: 155.636 us/op
+Iteration   4: 160.027 us/op
+Iteration   5: 154.170 us/op
+
+# Run progress: 94.44% complete, ETA 00:00:55
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:33:54 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+201.537 us/op
+# Warmup Iteration   2: 164.269 us/op
+# Warmup Iteration   3: 162.431 us/op
+# Warmup Iteration   4: 162.803 us/op
+# Warmup Iteration   5: 167.568 us/op
+Iteration   1: 165.009 us/op
+Iteration   2: 172.732 us/op
+Iteration   3: 167.526 us/op
+Iteration   4: 170.806 us/op
+Iteration   5: 175.413 us/op
+
+# Run progress: 95.56% complete, ETA 00:00:44
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:34:06 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+209.887 us/op
+# Warmup Iteration   2: 174.151 us/op
+# Warmup Iteration   3: 163.686 us/op
+# Warmup Iteration   4: 168.157 us/op
+# Warmup Iteration   5: 167.589 us/op
+Iteration   1: 168.486 us/op
+Iteration   2: 164.578 us/op
+Iteration   3: 165.186 us/op
+Iteration   4: 158.587 us/op
+Iteration   5: 159.580 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoMlDsa":
+  163.404 ±(99.9%) 7.187 us/op [Average]
+  (min, avg, max) = (154.170, 163.404, 175.413), stdev = 6.723
+  CI (99.9%): [156.217, 170.592] (assumes normal distribution)
+
+
+# JMH version: 1.36
+# VM version: JDK 21.0.11, OpenJDK 64-Bit Server VM, 21.0.11+10-LTS
+# VM invoker: /home/usuario/.asdf/installs/java/temurin-21.0.11+10.0.LTS/bin/java
+# VM options: -Xms512m -Xmx1024m
+# Blackhole mode: compiler (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 5 iterations, 1 s each
+# Measurement: 5 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoMlDsa
+# Parameters: (nivel = 256)
+
+# Run progress: 96.67% complete, ETA 00:00:33
+# Fork: 1 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:34:16 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+338.911 us/op
+# Warmup Iteration   2: 277.334 us/op
+# Warmup Iteration   3: 281.634 us/op
+# Warmup Iteration   4: 266.052 us/op
+# Warmup Iteration   5: 278.593 us/op
+Iteration   1: 279.566 us/op
+Iteration   2: 281.730 us/op
+Iteration   3: 287.497 us/op
+Iteration   4: 273.336 us/op
+Iteration   5: 278.838 us/op
+
+# Run progress: 97.78% complete, ETA 00:00:22
+# Fork: 2 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:34:27 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+333.296 us/op
+# Warmup Iteration   2: 308.694 us/op
+# Warmup Iteration   3: 287.655 us/op
+# Warmup Iteration   4: 287.865 us/op
+# Warmup Iteration   5: 284.785 us/op
+Iteration   1: 272.100 us/op
+Iteration   2: 281.884 us/op
+Iteration   3: 277.075 us/op
+Iteration   4: 284.611 us/op
+Iteration   5: 280.603 us/op
+
+# Run progress: 98.89% complete, ETA 00:00:11
+# Fork: 3 of 3
+# Warmup Iteration   1: Oct 07, 2026 6:34:38 PM com.pqc.hybrid.core.config.CryptographicProviderFactory initialize
+INFO: BouncyCastle provider initialized
+342.361 us/op
+# Warmup Iteration   2: 288.611 us/op
+# Warmup Iteration   3: 287.824 us/op
+# Warmup Iteration   4: 270.356 us/op
+# Warmup Iteration   5: 278.219 us/op
+Iteration   1: 275.521 us/op
+Iteration   2: 286.869 us/op
+Iteration   3: 274.565 us/op
+Iteration   4: 263.736 us/op
+Iteration   5: 265.391 us/op
+
+
+Result "com.pqc.hybrid.core.benchmark.HybridOperationsBenchmark.verificacaoMlDsa":
+  277.555 ±(99.9%) 7.485 us/op [Average]
+  (min, avg, max) = (263.736, 277.555, 287.497), stdev = 7.002
+  CI (99.9%): [270.070, 285.040] (assumes normal distribution)
+
+
+# Run complete. Total time: 00:16:39
+
+REMEMBER: The numbers below are just data. To gain reusable insights, you need to follow up on
+why the numbers are the way they are. Use profilers (see -prof, -lprof), design factorial
+experiments, perform baseline and negative tests that provide experimental control, make sure
+the benchmarking environment is safe on JVM/OS/HW level, ask for reviews from the domain experts.
+Do not assume the numbers tell you what you want them to tell.
+
+NOTE: Current JVM experimentally supports Compiler Blackholes, and they are in use. Please exercise
+extra caution when trusting the results, look into the generated code to check the benchmark still
+works, and factor in a small probability of new VM bugs. Additionally, while comparisons between
+different JVMs are already problematic, the performance difference caused by different Blackhole
+modes can be very significant. Please make sure you use the consistent Blackhole mode for comparisons.
+
+Benchmark                                          (nivel)  Mode  Cnt     Score     Error  Units
+HybridOperationsBenchmark.assinaturaClassica           128  avgt   15    81.089 ±   1.757  us/op
+HybridOperationsBenchmark.assinaturaClassica           192  avgt   15   235.226 ±   5.065  us/op
+HybridOperationsBenchmark.assinaturaClassica           256  avgt   15   501.444 ±   9.559  us/op
+HybridOperationsBenchmark.assinaturaMlDsa              128  avgt   15   606.678 ± 276.560  us/op
+HybridOperationsBenchmark.assinaturaMlDsa              192  avgt   15  1021.565 ± 348.382  us/op
+HybridOperationsBenchmark.assinaturaMlDsa              256  avgt   15   684.635 ± 307.676  us/op
+HybridOperationsBenchmark.emissaoClassica              128  avgt   15   123.665 ±   2.570  us/op
+HybridOperationsBenchmark.emissaoClassica              192  avgt   15   296.925 ±   5.803  us/op
+HybridOperationsBenchmark.emissaoClassica              256  avgt   15   590.740 ±  16.155  us/op
+HybridOperationsBenchmark.emissaoHibrida               128  avgt   15   479.740 ± 122.319  us/op
+HybridOperationsBenchmark.emissaoHibrida               192  avgt   15  1182.915 ± 484.943  us/op
+HybridOperationsBenchmark.emissaoHibrida               256  avgt   15  1484.464 ± 287.619  us/op
+HybridOperationsBenchmark.geracaoChavesClassica        128  avgt   15    81.536 ±   1.708  us/op
+HybridOperationsBenchmark.geracaoChavesClassica        192  avgt   15   245.911 ±   3.040  us/op
+HybridOperationsBenchmark.geracaoChavesClassica        256  avgt   15   529.790 ±  23.366  us/op
+HybridOperationsBenchmark.geracaoChavesMlDsa           128  avgt   15    89.413 ±   1.759  us/op
+HybridOperationsBenchmark.geracaoChavesMlDsa           192  avgt   15   169.709 ±   4.912  us/op
+HybridOperationsBenchmark.geracaoChavesMlDsa           256  avgt   15   245.007 ±   5.895  us/op
+HybridOperationsBenchmark.validacaoCadeiaClassica      128  avgt   15    97.025 ±   1.938  us/op
+HybridOperationsBenchmark.validacaoCadeiaClassica      192  avgt   15   308.879 ±   8.715  us/op
+HybridOperationsBenchmark.validacaoCadeiaClassica      256  avgt   15   699.230 ±  22.702  us/op
+HybridOperationsBenchmark.validacaoCadeiaHibrida       128  avgt   15   423.380 ±  12.738  us/op
+HybridOperationsBenchmark.validacaoCadeiaHibrida       192  avgt   15   817.199 ±  45.009  us/op
+HybridOperationsBenchmark.validacaoCadeiaHibrida       256  avgt   15  1536.289 ±  46.876  us/op
+HybridOperationsBenchmark.verificacaoClassica          128  avgt   15    89.063 ±   1.911  us/op
+HybridOperationsBenchmark.verificacaoClassica          192  avgt   15   286.157 ±   4.256  us/op
+HybridOperationsBenchmark.verificacaoClassica          256  avgt   15   662.098 ±  13.944  us/op
+HybridOperationsBenchmark.verificacaoMlDsa             128  avgt   15   100.473 ±   2.453  us/op
+HybridOperationsBenchmark.verificacaoMlDsa             192  avgt   15   163.404 ±   7.187  us/op
+HybridOperationsBenchmark.verificacaoMlDsa             256  avgt   15   277.555 ±   7.485  us/op
+
+Benchmark result is saved to /home/usuario/arquivos/projects/tcc/pqc-migration-kit/desempenho/resultados.json

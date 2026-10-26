@@ -17,7 +17,6 @@
 - [Modelos de Dados — `model`](#modelos-de-dados--model)
 - [Exceções — `exception`](#exceções--exception)
 - [Utilitários — `util`](#utilitários--util)
-- [KEM — `kem`](#kem--kem)
 - [Exemplos — `examples`](#exemplos--examples)
 - [Serviços Auxiliares — `migration`](#serviços-auxiliares--migration)
 
@@ -25,9 +24,9 @@
 
 ## Visão Geral
 
-Biblioteca para geração de **certificados digitais X.509v3 com assinatura dupla (híbrida)**: uma assinatura **clássica** (RSA/ECDSA) para compatibilidade retroativa, e uma assinatura **PQC** (ML-DSA/Falcon/SLH-DSA) para resistência quântica. Ambas as assinaturas precisam ser válidas para o certificado ser considerado autêntico (lógica **AND**).
+Biblioteca para geração de **certificados digitais X.509v3 com assinatura dupla (híbrida)**: uma assinatura **clássica** (RSA/ECDSA) para compatibilidade retroativa, e uma assinatura **PQC** (**ML-DSA**) para resistência quântica. Ambas as assinaturas precisam ser válidas para o certificado ser considerado autêntico (lógica **AND**). ML-DSA é o único esquema PQC do módulo; ML-KEM, SLH-DSA e Falcon estão fora do escopo.
 
-Segue os padrões **NIST FIPS 203/204/205** e o rascunho **draft-ietf-lamps-pq-composite-sigs-18**.
+Segue o padrão **NIST FIPS 204** (ML-DSA) e o rascunho **draft-ietf-lamps-pq-composite-sigs-18**.
 
 ```
 ┌────────────────────────────────────────────────────────┐
@@ -54,11 +53,10 @@ Segue os padrões **NIST FIPS 203/204/205** e o rascunho **draft-ietf-lamps-pq-c
 | `com.pqc.hybrid.core.certificate` | Construção e validação de certificados X.509v3 híbridos, CSR |
 | `com.pqc.hybrid.core.certificate.asn1` | Estrutura ASN.1 das extensões PQC |
 | `com.pqc.hybrid.core.common.oid` | Registro centralizado de OIDs |
-| `com.pqc.hybrid.core.model` | Modelos de dados (info do certificado, resultado de KEM) |
-| `com.pqc.hybrid.core.exception` | Hierarquia de exceções (base + 5 especializações) |
+| `com.pqc.hybrid.core.model` | Modelos de dados (info do certificado) |
+| `com.pqc.hybrid.core.exception` | Hierarquia de exceções (base + 4 especializações) |
 | `com.pqc.hybrid.core.util.printer` | Pretty-printers para certificados, chaves e assinaturas |
 | `com.pqc.hybrid.core.util.export` | Exportação de certificados para PEM/DER |
-| `com.pqc.hybrid.core.kem.ml_kem` | ML-KEM encapsulamento/decapsulamento (placeholders) |
 | `com.pqc.hybrid.examples` | Exemplos executáveis |
 | `com.pqc.hybrid.migration` | Serviço de migração de certificados legados para híbridos (**experimental**) |
 
@@ -134,13 +132,10 @@ Métodos úteis:
 - `fromNameAndSize(name, keySize)` — busca por nome e tamanho
 
 ### `PQCAlgorithm` (enum)
-Algoritmos PQC suportados:
-- **ML-KEM** (Key Encapsulation): `ML_KEM_512`, `ML_KEM_768`, `ML_KEM_1024`
+Algoritmo PQC suportado:
 - **ML-DSA** (Digital Signature): `ML_DSA_44`, `ML_DSA_65`, `ML_DSA_87`
-- **SLH-DSA**: 6 variantes (`SHA2_128S` até `SHA2_256F`)
-- **Falcon**: `FALCON_512`, `FALCON_1024`
 
-Cada valor carrega: nome, OID, nível de segurança, tamanho da chave pública (bytes) e categoria (SIGNATURE ou KEY_ENCAPSULATION).
+Cada valor carrega: nome, OID, nível de segurança e tamanho da chave pública (bytes).
 
 ### `HybridAlgorithmPair` (record)
 Par imutável de um algoritmo clássico + um PQC. Valida que o PQC é de assinatura (não KEM). Métodos:
@@ -183,11 +178,6 @@ Contêiner imutável com as 4 chaves:
 - `getLabel()` — ex: `"ECDSA + ML-DSA-65"`
 - `destroy()` — tentativa de destruir chaves privadas via `Destroyable.destroy()`
 - `equals()` / `hashCode()` — baseados nos algoritmos e chaves públicas
-
-### `KeyEncapsulationWrapper`
-Wrapper para operações KEM (ML-KEM):
-- `generateKeyPair(PQCAlgorithm)` — gera par de chaves KEM
-- `encapsulate(...)` / `decapsulate(...)` — **não implementados** (lançam `EncapsulationException`)
 
 ---
 
@@ -268,9 +258,6 @@ Registro central com todos os OIDs NIST e IETF usados no módulo:
 | ML-DSA-44 | `2.16.840.1.101.3.4.3.17` |
 | ML-DSA-65 | `2.16.840.1.101.3.4.3.18` |
 | ML-DSA-87 | `2.16.840.1.101.3.4.3.19` |
-| ML-KEM-512 | `2.16.840.1.101.3.4.4.1` |
-| SLH-DSA-SHA2-128s | `2.16.840.1.101.3.4.3.20` |
-| Falcon-512 | `1.3.9999.3.1` |
 | subjectAltPublicKeyInfo | `2.5.29.72` |
 | altSignatureAlgorithm | `2.5.29.73` |
 | altSignatureValue | `2.5.29.74` |
@@ -290,9 +277,6 @@ Modelo completo de informações de um certificado híbrido. Construído via `Bu
 - `getPQCExtensions()` — estrutura ASN.1 das extensões
 - `hasPQCExtensions()` / `hasPQCSignature()`
 
-### `EncapsulationResult` (record)
-Resultado de KEM: `ciphertext()` + `sharedSecret()`. Métodos para zerar dados sensíveis.
-
 ---
 
 ## Exceções — `exception`
@@ -306,7 +290,6 @@ Todas estendem `RuntimeException` (exceções não verificadas):
 | `InvalidSignatureException` | Falha inesperada na verificação de assinatura |
 | `InvalidKeyException` | Chave inválida (formato, tamanho, tipo) |
 | `AlgorithmNotSupportedException` | Algoritmo solicitado não está disponível |
-| `EncapsulationException` | Falha em operações KEM |
 
 ---
 
@@ -328,13 +311,6 @@ Exibe detalhes de chaves criptográficas: algoritmo, tamanho, formato, preview b
 Exporta certificados para:
 - **PEM**: `exportCertificateToPEM(cert, path)` ou `exportCertificateToPEMString(cert)`
 - **DER**: `exportCertificateToDER(cert, path)` ou `exportCertificateToDERBytes(cert)`
-
----
-
-## KEM — `kem`
-
-### `kem.ml_kem.MLKEMEncapsulator` / `MLKEMDecapsulator`
-Componentes para Key Encapsulation Mechanism (ML-KEM). **Status: placeholder** — os métodos `encapsulate()` e `decapsulate()` lançam `UnsupportedOperationException` pois dependem de API de baixo nível do BouncyCastle ainda não integrada.
 
 ---
 

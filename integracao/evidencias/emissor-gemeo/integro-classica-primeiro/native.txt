@@ -1,0 +1,6 @@
+Folha: integro
+Ordem de importação das raízes: classica-primeiro
+Configuração: native
+Raiz ligada: clássica
+Status: INVALID
+  FAILED: Signature verification successful. Alternative signature verification failed.

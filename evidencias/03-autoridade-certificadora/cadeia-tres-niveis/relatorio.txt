@@ -1,0 +1,22 @@
+Cadeia híbrida raiz → sub-CA → entidade final
+=============================================
+
+Par de algoritmos:                     ECDSA-384 + ML-DSA-65
+Raiz:                                  C=BR,O=TCC,CN=PQC Hybrid Root CA
+Sub-CA:                                C=BR,O=TCC,CN=PQC Hybrid Issuing CA
+Entidade final:                        C=BR,O=TCC,CN=secure.tcc.br
+basicConstraints da raiz:              CA:TRUE, pathLen=1
+basicConstraints da sub-CA:            CA:TRUE, pathLen=0
+Validação clássica (PKIX):             true
+Validação pós-quântica:                true
+openssl verify:                        aceita (exit 0)
+
+Artefatos gravados neste caso:
+  - raiz.der
+  - subca.der
+  - folha.der
+  - raiz.pem
+  - subca.pem
+  - folha.pem
+  - cadeia.pem
+  - openssl-verify.txt

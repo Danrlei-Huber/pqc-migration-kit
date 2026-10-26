@@ -1,0 +1,15 @@
+Conferência isolada da metade clássica
+======================================
+
+Verificação híbrida (E):               VÁLIDA
+Verificação apenas clássica:           VÁLIDA
+Algoritmo clássico:                    ECDSA
+Algoritmo pós-quântico:                ML-DSA-65
+
+verifyClassicalOnly existe para conferir a compatibilidade com a via
+clássica. Note que ela não herda a separação por contexto, que é
+propriedade da metade pós-quântica.
+
+Artefatos gravados neste caso:
+  - assinatura-classica.bin
+  - assinatura-pqc.bin

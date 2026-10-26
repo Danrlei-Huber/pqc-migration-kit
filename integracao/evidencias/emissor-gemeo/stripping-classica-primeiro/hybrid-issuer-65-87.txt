@@ -1,0 +1,6 @@
+Folha: stripping
+Ordem de importação das raízes: classica-primeiro
+Configuração: hybrid-issuer {65,87}
+Raiz ligada: clássica
+Status: VALID
+  VALID: Signature verification successful. Alternative signature not enforced by PQC policy hybrid-issuer.

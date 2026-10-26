@@ -1,0 +1,11 @@
+Signature Statistics
+  Classical Signature:
+    • Size: 104 bytes
+    • Ratio: 3.0% of total
+  PQC Signature:
+    • Size: 3309 bytes
+    • Ratio: 97.0% of total
+  Combined:
+    • Total: 3413 bytes
+    • Total (KB): 3.33 KB
+    • Overhead: 3181.7% vs. classical only

@@ -14,6 +14,14 @@
     <description>Production-ready library for hybrid post-quantum cryptography digital certificates (classical + PQC)</description>
     <url>https://github.com/darlei-/pqc-hybrid-certificates</url>
 
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
@@ -25,6 +33,9 @@
         <jacoco.version>0.8.10</jacoco.version>
         <slf4j.version>2.0.7</slf4j.version>
         <maven.surefire.version>3.0.0</maven.surefire.version>
+        <!-- Sobrepostas pelo profile 'validacao'; vazio = sem filtro por tag. -->
+        <surefire.excludedGroups>validacao</surefire.excludedGroups>
+        <surefire.groups></surefire.groups>
         <maven.failsafe.version>3.0.0</maven.failsafe.version>
         <maven.javadoc.version>3.5.0</maven.javadoc.version>
         <maven.compiler.version>3.11.0</maven.compiler.version>
@@ -131,6 +142,20 @@
 
     <!-- Build Configuration -->
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <!-- A licença Apache 2.0 exige que LICENSE e NOTICE acompanhem o binário distribuído. -->
+            <resource>
+                <directory>${project.basedir}</directory>
+                <targetPath>META-INF</targetPath>
+                <includes>
+                    <include>LICENSE</include>
+                    <include>NOTICE</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <!-- Compiler -->
             <plugin>
@@ -150,12 +175,11 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${maven.jar.version}</version>
                 <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>com.pqc.hybrid.core.PQCHybridCertificateAPI</mainClass>
-                            <addClasspath>true</addClasspath>
-                        </manifest>
-                    </archive>
+                    <!-- Os exemplos rodam de target/classes (run-examples.sh); não fazem parte da biblioteca
+                         distribuída a quem a incorpora. -->
+                    <excludes>
+                        <exclude>com/pqc/hybrid/examples/**</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
 
@@ -169,6 +193,11 @@
                         <include>**/*Test.java</include>
                         <include>**/*Tests.java</include>
                     </includes>
+                    <!-- A campanha de validacao grava artefatos em evidencias/, que e
+                         versionado. Deixa-la no build padrao sujaria a arvore de trabalho a
+                         cada mvn test/verify, entao ela so roda via -Pvalidacao. -->
+                    <excludedGroups>${surefire.excludedGroups}</excludedGroups>
+                    <groups>${surefire.groups}</groups>
                 </configuration>
             </plugin>
 
@@ -183,6 +212,7 @@
                         <include>**/*ITest.java</include>
                         <include>**/*IntegrationTest.java</include>
                     </includes>
+                    <excludedGroups>validacao</excludedGroups>
                 </configuration>
                 <executions>
                     <execution>
@@ -206,12 +236,6 @@
                                 <exclude>**/examples/**</exclude>
                                 <exclude>**/util/printer/**</exclude>
                                 <exclude>**/util/export/**</exclude>
-                                <!-- Experimental components: not wired into the
-                                     production (Catalyst/DualSignature) path -->
-                                <exclude>**/kem/ml_kem/**</exclude>
-                                <exclude>**/keygen/KeyEncapsulationWrapper.*</exclude>
-                                <exclude>**/signature/ml_dsa/**</exclude>
-                                <exclude>**/migration/**</exclude>
                             </excludes>
                             <outputDirectory>target/jacoco-report</outputDirectory>
                         </configuration>
@@ -323,6 +347,17 @@
 
     <!-- Benchmark Profile -->
     <profiles>
+        <!-- Campanha de validacao do modulo: executa somente as classes marcadas com
+             @Tag("validacao"), que gravam evidencia bruta em evidencias/.
+             Uso: mvn test -Pvalidacao -->
+        <profile>
+            <id>validacao</id>
+            <properties>
+                <surefire.excludedGroups></surefire.excludedGroups>
+                <surefire.groups>validacao</surefire.groups>
+            </properties>
+        </profile>
+
         <profile>
             <id>benchmark</id>
             <build>

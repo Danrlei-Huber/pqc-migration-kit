@@ -51,15 +51,15 @@ class HybridKeyGeneratorTest {
     }
 
     @Test
-    @DisplayName("should generate valid FALCON-1024 PQC key pair")
-    void test_generate_pqc_key_pair_falcon_1024() {
-        KeyPair keyPair = HybridKeyGenerator.generatePQCKeyPair(PQCAlgorithm.FALCON_1024);
+    @DisplayName("should generate valid ML-DSA-87 PQC key pair")
+    void test_generate_pqc_key_pair_ml_dsa_87() {
+        KeyPair keyPair = HybridKeyGenerator.generatePQCKeyPair(PQCAlgorithm.ML_DSA_87);
 
         assertThat(keyPair).isNotNull();
         assertThat(keyPair.getPrivate()).isNotNull();
         assertThat(keyPair.getPublic()).isNotNull();
-        assertThat(keyPair.getPrivate().getAlgorithm()).startsWith("FALCON");
-        assertThat(keyPair.getPublic().getAlgorithm()).startsWith("FALCON");
+        assertThat(keyPair.getPrivate().getAlgorithm()).startsWith("ML-DSA");
+        assertThat(keyPair.getPublic().getAlgorithm()).startsWith("ML-DSA");
     }
 
     @Test
@@ -87,6 +87,23 @@ class HybridKeyGeneratorTest {
     @DisplayName("should throw exception when generating PQC key pair with null algorithm")
     void test_generate_pqc_key_pair_null_algorithm() {
         assertThatThrownBy(() -> HybridKeyGenerator.generatePQCKeyPair(null))
+                .isInstanceOf(NullPointerException.class);
+    }
+
+    @Test
+    @DisplayName("should accept a freshly generated hybrid key pair as complete")
+    void test_validate_complete_key_pair() {
+        HybridKeyPair hybridKeyPair = HybridKeyGenerator.generate(
+                new com.pqc.hybrid.core.config.HybridAlgorithmPair(
+                        ClassicalAlgorithm.ECDSA_P256, PQCAlgorithm.ML_DSA_44));
+
+        assertThatCode(() -> HybridKeyGenerator.validate(hybridKeyPair)).doesNotThrowAnyException();
+    }
+
+    @Test
+    @DisplayName("should reject validating a null key pair")
+    void test_validate_null_key_pair() {
+        assertThatThrownBy(() -> HybridKeyGenerator.validate(null))
                 .isInstanceOf(NullPointerException.class);
     }
 }

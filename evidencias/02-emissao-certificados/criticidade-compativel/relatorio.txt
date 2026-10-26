@@ -1,0 +1,11 @@
+Extensões alternativas não críticas
+===================================
+
+altSignatureExtensionsCritical:        false
+Extensões críticas:                    [2.5.29.19, 2.5.29.15]
+Extensões não críticas:                [2.5.29.72, 2.5.29.73, 2.5.29.74, 2.5.29.35, 2.5.29.14, 2.5.29.37]
+Consequência:                          verificador clássico ignora as extensões e aceita pela assinatura clássica
+
+Artefatos gravados neste caso:
+  - certificado.der
+  - certificado.pem
